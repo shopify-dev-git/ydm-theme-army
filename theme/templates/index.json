@@ -1,0 +1,471 @@
+{
+  "sections": {
+    "hero-banner": {
+      "type": "hero-banner",
+      "settings": {
+        "url-image-desktop": "shopify:\/\/shop_images\/banner-desktop-img.jpg",
+        "url-image-mobile": "shopify:\/\/shop_images\/banner-mobile-img.jpg",
+        "background": "linear-gradient(28deg, rgba(90, 90, 90, 0.08) 100%, rgba(33, 249, 150, 1) 100%)",
+        "main_title": "The Art  <br>Of Beautiful <br>Looking Skin",
+        "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus euismod est et hendrerit. <\/p>",
+        "btn_link": "shopify:\/\/collections\/all",
+        "btn_text": "BROWSE PRODUCTS",
+        "stamp_rating": "shopify:\/\/shop_images\/stamp-rating.png",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#ca8685",
+        "section_background_color_scheme": "#fdf9fe",
+        "button_color_scheme": "primary-btn"
+      }
+    },
+    "19ec0894-6384-4491-a992-e965ffbe6db9": {
+      "type": "featured-brands",
+      "blocks": {
+        "6a94382e-57eb-40fe-be3f-4709a8477760": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_46.png"
+          }
+        },
+        "6d3d32e6-fbc2-4313-9fb4-98ff37513faf": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_47.png"
+          }
+        },
+        "63e3f4fd-7cb9-4b27-92e0-c87eae59371c": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_89.png"
+          }
+        },
+        "8cf676c2-0750-483e-8a76-c39e1f23dc23": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_117.png"
+          }
+        }
+      },
+      "block_order": [
+        "6a94382e-57eb-40fe-be3f-4709a8477760",
+        "6d3d32e6-fbc2-4313-9fb4-98ff37513faf",
+        "63e3f4fd-7cb9-4b27-92e0-c87eae59371c",
+        "8cf676c2-0750-483e-8a76-c39e1f23dc23"
+      ],
+      "settings": {
+        "title": "As seen on",
+        "text": ""
+      }
+    },
+    "6d70dfd3-a883-4277-bf90-726606b1fb4a": {
+      "type": "featured-announcement",
+      "blocks": {
+        "ae4b0fca-cfe1-4630-a637-ce2ce4645027": {
+          "type": "announcement",
+          "settings": {
+            "text": "cruelty free",
+            "icon": "shopify:\/\/shop_images\/1.png"
+          }
+        },
+        "6bb17e6e-ff73-4342-b54a-85bbfa875146": {
+          "type": "announcement",
+          "settings": {
+            "text": "VEGAN",
+            "icon": "shopify:\/\/shop_images\/2.png"
+          }
+        },
+        "020fea93-843f-42c2-b3cb-6d9d385e6db4": {
+          "type": "announcement",
+          "settings": {
+            "text": "GLUTEN FREE",
+            "icon": "shopify:\/\/shop_images\/3.png"
+          }
+        },
+        "3324bd09-7c9a-41dc-a5c5-e61101cb21dd": {
+          "type": "announcement",
+          "settings": {
+            "text": "NON-GMO",
+            "icon": "shopify:\/\/shop_images\/4.png"
+          }
+        },
+        "f4e8e2fa-0d77-46c5-b218-4283b05787e4": {
+          "type": "announcement",
+          "settings": {
+            "text": "cruelty free",
+            "icon": "shopify:\/\/shop_images\/1.png"
+          }
+        },
+        "fdc3a139-43b0-4b2a-917b-8bd0c9a647cc": {
+          "type": "announcement",
+          "settings": {
+            "text": "VEgan",
+            "icon": "shopify:\/\/shop_images\/2.png"
+          }
+        },
+        "f83b2717-22aa-4b64-b457-40d502a33fbe": {
+          "type": "announcement",
+          "settings": {
+            "text": "GLUTEN FREE",
+            "icon": "shopify:\/\/shop_images\/3.png"
+          }
+        },
+        "ca5e9fc5-1d78-43a6-b053-8dca8061d289": {
+          "type": "announcement",
+          "settings": {
+            "text": "NON-GMO",
+            "icon": "shopify:\/\/shop_images\/4.png"
+          }
+        }
+      },
+      "block_order": [
+        "ae4b0fca-cfe1-4630-a637-ce2ce4645027",
+        "6bb17e6e-ff73-4342-b54a-85bbfa875146",
+        "020fea93-843f-42c2-b3cb-6d9d385e6db4",
+        "3324bd09-7c9a-41dc-a5c5-e61101cb21dd",
+        "f4e8e2fa-0d77-46c5-b218-4283b05787e4",
+        "fdc3a139-43b0-4b2a-917b-8bd0c9a647cc",
+        "f83b2717-22aa-4b64-b457-40d502a33fbe",
+        "ca5e9fc5-1d78-43a6-b053-8dca8061d289"
+      ],
+      "settings": {
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#ffffff",
+        "section_background_color_scheme": "#4b3b4c"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "collection": "all",
+        "products_to_show": 6,
+        "title": "Featured collection",
+        "slider-layout": true,
+        "btn_text": "ALL PRODUCTS",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#ffffff"
+      }
+    },
+    "d1464e8c-a812-42b5-8c77-246337beeba7": {
+      "type": "quiz-section",
+      "settings": {
+        "quiz-image": "shopify:\/\/shop_images\/dd_1.png",
+        "main_title": "Let us know your skin better.",
+        "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac libero nec felis pretium lobortis nec quis lorem. Pellentesque consequat leo mauris, eget pulvinar magna elementum nec. <\/p>",
+        "btn_link": "#",
+        "btn_text": "TAKE THE QUIZ",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee",
+        "button_color_scheme": "primary-btn",
+        "align_text": "left",
+        "mobile_align_text": "center"
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "1850e384-18ac-4cdd-984f-2bc9173e4fac": {
+          "type": "collec_card_list",
+          "settings": {
+            "collection": "acne"
+          }
+        },
+        "62eff2c4-baa6-450e-9c60-229d91647400": {
+          "type": "collec_card_list",
+          "settings": {
+            "collection": "anti-aging"
+          }
+        },
+        "353a2566-7e27-4566-8265-2e461fb6d5b4": {
+          "type": "collec_card_list",
+          "settings": {
+            "collection": "blackheads"
+          }
+        },
+        "5f286dce-a7cd-4360-b8fa-46d4f640a87b": {
+          "type": "collec_card_list",
+          "settings": {
+            "collection": "dark-spots"
+          }
+        },
+        "0f412dea-3097-464a-aa4a-e54320ce6e21": {
+          "type": "collec_card_list",
+          "settings": {
+            "collection": "dryness"
+          }
+        },
+        "f20dc8c5-3b12-457c-b290-c16f5939b0e6": {
+          "type": "collec_card_list",
+          "settings": {
+            "collection": "oiliness"
+          }
+        },
+        "a2cbd2fd-e3cc-4eea-80d5-565b7fb0d4f7": {
+          "type": "collec_card_list",
+          "settings": {
+            "collection": "pores"
+          }
+        }
+      },
+      "block_order": [
+        "1850e384-18ac-4cdd-984f-2bc9173e4fac",
+        "62eff2c4-baa6-450e-9c60-229d91647400",
+        "353a2566-7e27-4566-8265-2e461fb6d5b4",
+        "5f286dce-a7cd-4360-b8fa-46d4f640a87b",
+        "0f412dea-3097-464a-aa4a-e54320ce6e21",
+        "f20dc8c5-3b12-457c-b290-c16f5939b0e6",
+        "a2cbd2fd-e3cc-4eea-80d5-565b7fb0d4f7"
+      ],
+      "settings": {
+        "title": "Shop by skin concern",
+        "btn_link": "#",
+        "btn_text": "VIEW ALL CONCERNS",
+        "button_color_scheme": "link-btn"
+      }
+    },
+    "9cf1005a-9f66-4f78-85ef-0b2d2bba6930": {
+      "type": "product-offer-section",
+      "blocks": {
+        "c09b0066-b6cd-4cd2-b00f-a7479d1fcb2f": {
+          "type": "product_discount_card",
+          "settings": {
+            "discount_text": "",
+            "discount_img": "shopify:\/\/shop_images\/product-img1.png",
+            "title": "Start your glass skin transformation",
+            "url": "#",
+            "label_text": "Shop Now"
+          }
+        },
+        "63f57b0a-986d-4614-b0a5-be1c6ac99eb5": {
+          "type": "product_discount_card",
+          "settings": {
+            "discount_text": "50% Off",
+            "discount_img": "shopify:\/\/shop_images\/product-img2.jpg",
+            "title": "Shop Black Friday.",
+            "url": "#",
+            "label_text": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "c09b0066-b6cd-4cd2-b00f-a7479d1fcb2f",
+        "63f57b0a-986d-4614-b0a5-be1c6ac99eb5"
+      ],
+      "settings": {
+      }
+    },
+    "c084fc1b-d176-4f47-b414-1520b7f7e085": {
+      "type": "video-section",
+      "settings": {
+        "video_bg_img": "shopify:\/\/shop_images\/Group_48096522.jpg",
+        "title": "Consciously made from <br>start to finish.",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl. Praesent mollis id purus ac vulputate. Maecenas sed eros in nibh mattis eleifend et vel ligula.",
+        "btn_text": "PLAY VIDEO",
+        "video_url": "https:\/\/vimeo.com\/253989945",
+        "align_text": "center",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fdf9fe"
+      }
+    },
+    "79b424ed-3106-48ce-bc84-f847982f63c4": {
+      "type": "product-list",
+      "settings": {
+        "main_image": "shopify:\/\/shop_images\/Rectangle_457.jpg",
+        "main_title": "For a Hydrated Winter",
+        "product_list": [
+          "clarifying-cleanser-1",
+          "copy-of-clarifying-cleanser",
+          "power-calm-hydrating-gel-cleanser"
+        ],
+        "color_scheme": "default",
+        "section_text_color_scheme": "#2536cd",
+        "section_heading_color_scheme": "#2092fb",
+        "section_links_color_scheme": "#2092fb",
+        "section_background_color_scheme": "#e8e9f2",
+        "button_color_scheme": "primary-btn"
+      }
+    },
+    "c6888524-f3a0-47aa-9862-5eade8a705f9": {
+      "type": "testimonials-section",
+      "blocks": {
+        "d7d794bc-1d4e-41b4-9d58-0561c30aa41a": {
+          "type": "testimonials-card",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Vector1.png",
+            "right_img": "shopify:\/\/shop_images\/Rectangle_328.jpg",
+            "content": "With lacking confidence trying all known products, I can come across Perfec-Tone services and products. The friendly staff has boosted my confidence tremendously.",
+            "name": "Christine",
+            "text_2": "Executive, Wife, Mom"
+          }
+        },
+        "9218e3d0-eb76-469d-b819-c6d6751bf093": {
+          "type": "testimonials-card",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Vector1.png",
+            "right_img": "shopify:\/\/shop_images\/Rectangle_328.jpg",
+            "content": "With lacking confidence trying all known products, I can come across Perfec-Tone services and products. The friendly staff has boosted my confidence tremendously.",
+            "name": "Christine",
+            "text_2": "Executive, Wife, Mom"
+          }
+        },
+        "8a2d3107-c822-4334-ba40-8db577bedfd7": {
+          "type": "testimonials-card",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Vector1.png",
+            "right_img": "shopify:\/\/shop_images\/Rectangle_328.jpg",
+            "content": "With lacking confidence trying all known products, I can come across Perfec-Tone services and products. The friendly staff has boosted my confidence tremendously.",
+            "name": "Christine",
+            "text_2": "Executive, Wife, Mom"
+          }
+        },
+        "c36f953f-26d6-4881-9552-f31cb17d6ce6": {
+          "type": "testimonials-card",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Vector1.png",
+            "right_img": "shopify:\/\/shop_images\/Rectangle_328.jpg",
+            "content": "With lacking confidence trying all known products, I can come across Perfec-Tone services and products. The friendly staff has boosted my confidence tremendously.",
+            "name": "Christine",
+            "text_2": "Executive, Wife, Mom"
+          }
+        }
+      },
+      "block_order": [
+        "d7d794bc-1d4e-41b4-9d58-0561c30aa41a",
+        "9218e3d0-eb76-469d-b819-c6d6751bf093",
+        "8a2d3107-c822-4334-ba40-8db577bedfd7",
+        "c36f953f-26d6-4881-9552-f31cb17d6ce6"
+      ],
+      "settings": {
+        "review_img": "shopify:\/\/shop_images\/Vector.png",
+        "title": "Real people. Real stories.",
+        "align_text": "left",
+        "align_text_mobile": "center",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_sub_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#ca8685",
+        "section_background_color_scheme": "#ffffff"
+      }
+    },
+    "b5acb3a2-f0fe-49d8-bf83-7ad2f6b81a7e": {
+      "type": "home-our-story",
+      "settings": {
+        "our_story_img": "shopify:\/\/shop_images\/our-stroy.jpg",
+        "title": "“Beautiful skin is healthy skin, and when you are healthy, you are beautiful.”",
+        "text": "DR. Alexandra",
+        "button_link": "#",
+        "button_label": "OUR STORY",
+        "align_text": "left",
+        "align_text_mobile": "center",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#2092fb",
+        "section_background_color_scheme": "#ffffff",
+        "button_color_scheme": "link-btn"
+      }
+    },
+    "e290845a-044c-41d7-b9b9-c1e7682b4ef0": {
+      "type": "featured-product-announcements",
+      "blocks": {
+        "b76c1265-4fce-465f-bad2-a2d69e470c85": {
+          "type": "announcement",
+          "settings": {
+            "text": "50% OFF BLAck friday collection"
+          }
+        },
+        "fc08185c-09d6-46f5-b75a-7580549a7c37": {
+          "type": "announcement",
+          "settings": {
+            "text": "50% OFF BLAck friday collection"
+          }
+        },
+        "cdbfc053-e9c7-4847-9850-29e58994e359": {
+          "type": "announcement",
+          "settings": {
+            "text": "50% OFF BLAck friday collection"
+          }
+        }
+      },
+      "block_order": [
+        "b76c1265-4fce-465f-bad2-a2d69e470c85",
+        "fc08185c-09d6-46f5-b75a-7580549a7c37",
+        "cdbfc053-e9c7-4847-9850-29e58994e359"
+      ],
+      "settings": {
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#ffffff",
+        "section_background_color_scheme": "#ca8685"
+      }
+    },
+    "1664791229524f97c1": {
+      "type": "featured-blog",
+      "settings": {
+        "title": "Our latest blogs",
+        "button_label": "READ MORE BLOGS",
+        "button_link": "shopify:\/\/blogs\/news",
+        "blog": "news",
+        "post_limit": 3,
+        "show_view_all": true,
+        "color_scheme": "custom",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#ffffff",
+        "button_color_scheme": "primary-btn"
+      }
+    },
+    "instagram-slider": {
+      "type": "instagram-slider",
+      "settings": {
+        "title": "Get social with us",
+        "button_label": "READ MORE BLOGS",
+        "button_link": "#",
+        "button_color_scheme": "primary-btn",
+        "color_scheme": "custom",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    },
+    "products-list": {
+      "type": "products-list",
+      "disabled": true,
+      "settings": {
+        "collection": "all",
+        "products_to_show": 20,
+        "title": "Product List",
+        "slider-layout": false,
+        "btn_text": "SHOP ALL PRODUCTS",
+        "color_scheme": "default",
+        "section_text_color_scheme": "#2536cd",
+        "section_heading_color_scheme": "#2092fb",
+        "section_background_color_scheme": "#e8e9f2"
+      }
+    }
+  },
+  "order": [
+    "hero-banner",
+    "19ec0894-6384-4491-a992-e965ffbe6db9",
+    "6d70dfd3-a883-4277-bf90-726606b1fb4a",
+    "featured-collection",
+    "d1464e8c-a812-42b5-8c77-246337beeba7",
+    "collection-list",
+    "9cf1005a-9f66-4f78-85ef-0b2d2bba6930",
+    "c084fc1b-d176-4f47-b414-1520b7f7e085",
+    "79b424ed-3106-48ce-bc84-f847982f63c4",
+    "c6888524-f3a0-47aa-9862-5eade8a705f9",
+    "b5acb3a2-f0fe-49d8-bf83-7ad2f6b81a7e",
+    "e290845a-044c-41d7-b9b9-c1e7682b4ef0",
+    "1664791229524f97c1",
+    "instagram-slider",
+    "products-list"
+  ]
+}

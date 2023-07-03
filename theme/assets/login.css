@@ -1,0 +1,221 @@
+.login-sec {
+  z-index: 0;
+  outline: 0;
+}
+.login-sec:focus, .login-sec:focus-visible, .login-sec:focus-within {
+  outline: 0 !important;
+  outline-width: 0 !important;
+  border: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.login-sec:-webkit-direct-focus {
+  outline: 0;
+}
+.login-sec .account-top-left-shape {
+  left: 0;
+  z-index: -1;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+.login-sec .account-top-left-shape svg {
+  width: 320px;
+  height: 117px;
+}
+@media (min-width: 1280px) {
+  .login-sec .account-top-left-shape svg {
+    width: 400px;
+    height: 147px;
+  }
+}
+@media (min-width: 1536px) {
+  .login-sec .account-top-left-shape svg {
+    width: 500px;
+    height: 182px;
+  }
+}
+.login-sec .account-bottom-right-shape {
+  right: -30px;
+  z-index: -1;
+  position: absolute;
+  bottom: 0px;
+}
+@media (min-width: 1750px) {
+  .login-sec .account-bottom-right-shape {
+    right: -50px;
+  }
+}
+.login-sec .account-bottom-right-shape svg {
+  width: 300px;
+  height: 80px;
+}
+@media (min-width: 1280px) {
+  .login-sec .account-bottom-right-shape svg {
+    width: 400px;
+    height: 110px;
+  }
+}
+@media (min-width: 1536px) {
+  .login-sec .account-bottom-right-shape svg {
+    width: 500px;
+    height: 139px;
+  }
+}
+@media (min-width: 1750px) {
+  .login-sec .account-bottom-right-shape svg {
+    width: 670px;
+    height: 186px;
+  }
+}
+.login-sec .login-create-box .main-title p {
+  line-height: 20px;
+}
+@media (min-width: 1024px) {
+  .login-sec .login-create-box .main-title p {
+    line-height: 23px;
+  }
+}
+@media (min-width: 1440px) {
+  .login-sec .login-create-box .main-title p {
+    line-height: 26px;
+  }
+}
+.login-sec .login-create-box .form-login {
+  max-width: 437px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .login-sec .login-create-box .form-login {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+.login-sec .login-create-box .hidden.form-login + .account-login-box {
+  display: block;
+}
+.login-sec .login-create-box .signup__sec {
+  max-width: 437px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .login-sec .login-create-box .signup__sec {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+.login-sec .login-create-box .account-login-title {
+  margin-left: auto;
+  margin-right: auto;
+}
+.login-sec .login-create-box .account-login-box {
+  max-width: 462px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+@media (min-width: 1920px) {
+  .login-sec .login-create-box .account-login-box {
+    max-width: 562px;
+  }
+}
+.login-sec .login-create-box .account-login-box .space-line {
+  height: 17px;
+  width: 1px;
+}
+.login-sec .login-create-box .account-login-box .input-box {
+  padding-top: 1.25rem;
+  text-align: right;
+}
+.login-sec .login-create-box .account-login-box .input-box input {
+  box-shadow: 0 0 2px transparent;
+  height: 50px;
+  padding-top: 11px;
+  padding-bottom: 13px;
+  width: 100%;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(134 120 135 / var(--tw-border-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.login-sec .login-create-box .account-login-box .input-box input:focus {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (min-width: 1536px) {
+  .login-sec .login-create-box .account-login-box .input-box input {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+.login-sec .login-create-box .account-login-box .input-box input:focus {
+  box-shadow: 0 0 2px black;
+}
+.login-sec .login-create-box .account-login-box .input-box input::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.login-sec .login-create-box .account-login-box .input-box input:-ms-input-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.login-sec .login-create-box .account-login-box .input-box input::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.login-sec .login-create-box .account-login-box .input-box .blue-btn {
+  width: 100%;
+}
+.login-sec .login-create-box .account-login-box .input-box .padding-t-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.login-sec .login-create-box .primary-btn {
+  height: 56px;
+  width: 100%;
+}
+@media (min-width: 1750px) {
+  .login-sec .login-create-box .primary-btn {
+    height: 64px;
+  }
+}
+.login-sec .left_img_sec .img_wrapper {
+  padding-top: 100%;
+  position: relative;
+}
+@media (min-width: 1440px) {
+  .login-sec .left_img_sec .img_wrapper {
+    padding-top: 94%;
+  }
+}
+
+.form__message a {
+  --tw-text-opacity: 1;
+  color: rgb(220 38 38 / var(--tw-text-opacity));
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}

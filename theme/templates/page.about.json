@@ -1,0 +1,66 @@
+{
+  "sections": {
+    "403e3491-a62f-451a-996c-93c55e71a955": {
+      "type": "ingredients-inner-banner",
+      "settings": {
+        "image_position": "flex-row",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_621_2.png",
+        "main_title": "About us",
+        "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p><p>Nunc id felis sit amet ligula faucibus aliquam non non arcu. Quisque eget consectetur urna, ac ornare felis.<\/p>",
+        "align_text": "left",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    },
+    "about-image-sec": {
+      "type": "about-image-sec",
+      "settings": {
+        "url-image": "shopify:\/\/shop_images\/Rectangle_631_1.png",
+        "url-image2": "shopify:\/\/shop_images\/Rectangle_632.png",
+        "main_title": "We believe that premium products don’t have to come with a premium price tag. We keep our plant-based, totally clean formulas affordable so we can reach more people and make a bigger difference.",
+        "align_text": "center",
+        "color_scheme": "default",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#e8e9f2"
+      }
+    },
+    "87b700f2-254b-4f90-be25-f6db6992d367": {
+      "type": "image-text-full-width",
+      "settings": {
+        "image_position": "flex-row",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_624.png",
+        "main_title": "Wanted to change the world",
+        "content_description": "<p>This is a fake store meant to demonstrate the Stiletto Shopify theme. This page shows how you can use its About page template. We believe that premium products don’t have to come with a premium price tag. We keep our plant-based, totally clean formulas affordable so we can reach more people and make a bigger difference.<\/p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p><p>Nunc id felis sit amet ligula faucibus aliquam non non arcu. Quisque eget consectetur urna, ac ornare felis.<\/p>",
+        "align_text": "left",
+        "color_scheme": "default",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#ffffff"
+      }
+    },
+    "about-founder-sec": {
+      "type": "about-founder-sec",
+      "settings": {
+        "image_position": "flex-row-reverse",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_634.png",
+        "main_title": "Meet the founder",
+        "content_description": "<p>“I spent many years working as an esthetician. Although I had access to the ‘best’ skincare products, I could never seem to manage my own skin struggles: extremely sensitive, reactive and breakout prone. I started creating my own with plant-based formulations and saw a drastic improvement in the health of my skin. Without much consideration, I quit my job, maxed out my credit cards and began a three year journey of intensive study into the world of natural cosmetics. My passion, vision and excitement for green beauty took hold.<\/p>",
+        "name": "– Kari Asselin, Founder",
+        "align_text": "left",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "403e3491-a62f-451a-996c-93c55e71a955",
+    "about-image-sec",
+    "87b700f2-254b-4f90-be25-f6db6992d367",
+    "about-founder-sec"
+  ]
+}

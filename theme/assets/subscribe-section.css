@@ -1,0 +1,96 @@
+.subscribe-form .subscribe-input input {
+  color: #000000;
+  min-height: 47px;
+  outline: none;
+  width: 100%;
+  border-radius: 9999px;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 15px;
+  line-height: 20px;
+}
+@media (min-width: 1024px) {
+  .subscribe-form .subscribe-input input {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .subscribe-form .subscribe-input input {
+    font-size: 15px;
+    line-height: 20px;
+  }
+  .subscribe-form .subscribe-input input {
+    min-height: 50px;
+  }
+}
+@media (min-width: 1536px) {
+  .subscribe-form .subscribe-input input {
+    min-height: 55px;
+  }
+}
+.subscribe-form .subscribe-input input::-moz-placeholder {
+  color: #000000;
+}
+.subscribe-form .subscribe-input input:-ms-input-placeholder {
+  color: #000000;
+}
+.subscribe-form .subscribe-input input::placeholder {
+  color: #000000;
+}
+.subscribe-form .checkbox input {
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  opacity: 0;
+}
+.subscribe-form .checkbox label::after {
+  content: "";
+  border: 1.5px solid #000000;
+  border-radius: 4px;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  left: 0;
+  top: 4px;
+  position: absolute;
+}
+.subscribe-form .checkbox input:checked + label::after {
+  background: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3.76904L3.76929 6.53833' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M3.76953 6.53857L9.0004 1' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: 1px 2px;
+  background-repeat: no-repeat;
+}
+@media (min-width: 1024px) {
+  .subscribe-form .checkbox input:checked + label::after {
+    background-position: center;
+  }
+}
+.subscribe-form .subscribe-btn .primary-btn {
+  width: 100%;
+  min-height: 60px;
+}
+@media (min-width: 1280px) {
+  .subscribe-form .subscribe-btn .primary-btn {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    min-width: 177px;
+  }
+  .subscribe-form .subscribe-btn .primary-btn {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .subscribe-form .subscribe-btn .primary-btn {
+    min-height: 50px;
+  }
+}
+@media (min-width: 1536px) {
+  .subscribe-form .subscribe-btn .primary-btn {
+    min-height: 60px;
+  }
+}

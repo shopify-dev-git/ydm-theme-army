@@ -1,0 +1,66 @@
+.search-drawer {    
+    z-index: 1111;
+    .researchDrawer-bg-overlay {
+        background: rgba(0, 0, 0, 0.8);
+    }
+    .content-drawer-px {
+        @apply px-5 md:px-[15px] md:mx-[10px];
+    }
+
+    .search-bar-drrawer {
+        input {
+            @apply w-full border border-black outline-none py-0 px-p25 text-font14 uppercase text-black rounded-full h-[45px];
+            line-height: 43px !important;            
+        }
+        input[type="search" i]::-webkit-search-cancel-button {
+            @apply mr-10 cursor-pointer;
+            background-image: url("data:image/svg+xml,%3Csvg width='19' height='19' viewBox='0 0 19 19' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0.644068 19C0.483051 19 0.322034 18.9356 0.19322 18.8068C-0.0644068 18.5492 -0.0644068 18.1627 0.19322 17.9051L17.9051 0.19322C18.1627 -0.0644068 18.5492 -0.0644068 18.8068 0.19322C19.0644 0.450847 19.0644 0.837288 18.8068 1.09492L1.09492 18.8068C0.966102 18.9356 0.805085 19 0.644068 19Z' fill='black'%3E%3C/path%3E%3Cpath d='M18.3559 19C18.1949 19 18.0339 18.9356 17.9051 18.8068L0.19322 1.09492C-0.0644068 0.837288 -0.0644068 0.450847 0.19322 0.19322C0.450847 -0.0644068 0.837288 -0.0644068 1.09492 0.19322L18.8068 17.9051C19.0644 18.1627 19.0644 18.5492 18.8068 18.8068C18.678 18.9356 18.5169 19 18.3559 19Z' fill='black'%3E%3C/path%3E%3C/svg%3E");
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-top: 3px;                        
+        }
+        input::-webkit-textfield-decoration-container {
+            position: relative;
+            top: -2px;
+        }
+        .predictive-search__item {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 25px;
+        }
+    }
+    
+    h2 {
+        @apply text-font22 sm:text-font24 md:text-font26 text-black font-light;
+    }
+    .predictive-search__results-list {
+        @apply pb-5 grid grid-cols-1 sm:grid-cols-2 gap-5;
+        .predictive-search__list-item {
+            .product_grid {
+                @apply px-0 pt-0 pb-0;
+                border: 0 !important;
+                .normal_product_view {
+                    .img_wrapper {                        
+                        padding-top: 77%;
+                    }
+                }
+                .hover_poduct_sec {
+                    .primary-btn {
+                        bottom: 11%;
+                        font-size: 14px;
+                        padding-left: 25px;
+                        padding-right: 25px;
+                    }
+                }
+            }
+        }
+    }        
+}
+.search-drawer-open {
+    @apply overflow-hidden;
+}
+

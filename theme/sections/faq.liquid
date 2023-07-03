@@ -1,0 +1,255 @@
+{%- assign href = 'faq-template.css' | asset_url -%}
+{% render 'link', href: href %}
+
+{%- assign categories = section.blocks | where: 'type', 'separator' -%}
+
+
+<section class="pt-[40px] pb-[60px] faq-sec md:pb-20 xl:pt-20 lg:pb-[140px] xl:pb-[170px] 2xl:pb-28">
+    <div class="container">
+      <div class="flex flex-col flex-wrap md:flex-row">
+        <div class="faq-tabs-row sticky top-14 md:static flex flex-col w-full md:w-[180px] lg:w-[200px] 2xl:w-[228px] py-3 md:py-0 mb-[25px] md:mb-0">
+          <nav class="flex flex-row md:flex-col md:sticky md:top-[100px] overflow-x-auto overflow-y-visible md:overflow-visible faq-tabs-nav tabs whitespace-nowrap md:whitespace-wrap space-x-5 sm:space-x-8 md:space-x-0 md:space-y-6 xl:space-y-9">
+            {%- for block in categories -%}
+            <span>
+              <a data-target="panel-{{block.id}}" href="#panel-{{block.id}}" class="faq-tabs-btn{% if forloop.first %} active{% endif %} font-inter font-medium text-blackesh-100 text-font18 lg:text-font20 2xl:text-font25 py-2 md:pb-0 block md:inline-block">
+                  {{ block.settings.title }}
+              </a>
+            </span>
+            {%- endfor -%}
+          </nav>
+        </div>
+
+        <div id="panels" class="faq-tab-content-wrap flex-1 md:border-l md:border-[#E0DCE0] md:ml-[30px] lg:ml-[40px] xl:ml-[67px]">
+            {%- for block in section.blocks -%}
+                {%- if block.type == 'separator' and questions != blank -%}
+                    <div class="panel-{{block.id}} faq-tabs-content relative">
+                        {{ anchor }}
+                        <div class="faq-accordion-item">
+                            {{ heading }}
+                            <div class="accordion-row">{{ questions }}</div>
+                        </div>
+                    </div>
+                    {%- assign last_type = blank -%}
+                    {%- assign questions = blank -%}
+                {%- endif -%}
+
+                {%- if block.type == 'separator' -%}
+                    {%- assign last_type = block.type -%}
+                    {%- capture anchor -%}<span id="panel-{{block.id}}" class="absolute nav-position-set"></span>{%- endcapture -%}
+                    {%- capture heading -%}
+                        <div class=" md:pl-[40px] xl:pl-[67px] 2xl:pl-[77px] mb-[31px] lg:mb-10 2xl:mb-[58px]">
+                          <div class="faq-title mb-3 xl:mb-1">
+                                <h3 class="font-dmserif font-normal text-font27 text-blackesh-100 lg:text-font30 2xl:text-font35">{{ block.settings.title }}</h3>
+                            </div>
+                            <div class="faq-subtitle block w-full">
+                              <h4 class="font-inter font-normal text-font16 text-puce-400">{{ block.settings.sub_title }}</h4>
+                          </div>
+                        </div>
+                    {%- endcapture -%}
+
+                    
+                 
+                {%- endif -%}
+                {%- if block.type == 'question' -%}
+                    {%- capture questions -%}
+                        {{ questions  }}
+                        <div class="accordion-box md:pl-[30px] lg:pl-[40px] xl:pl-[67px] 2xl:pl-[77px]">
+                            <input class="absolute opacity-0" id="tab-faq-{{block.id}}" type="radio" name="accordion-faq">
+                            <label class="accordion-questions-box font-inter text-blackesh-100 font-medium text-font18 lg:text-font20 2xl:text-font22" for="tab-faq-{{block.id}}">
+                                <span class="accordion-btn">
+                                    <svg class="w-[16] h-[16px] lg:w-[23px] lg:h-[23px]" width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.5 23C5.15865 23 0 17.8414 0 11.5C0 5.15865 5.15865 0 11.5 0C17.8414 0 23 5.15865 23 11.5C23 17.8414 17.8414 23 11.5 23ZM11.5 1.4375C5.95127 1.4375 1.4375 5.95127 1.4375 11.5C1.4375 17.0487 5.95127 21.5625 11.5 21.5625C17.0487 21.5625 21.5625 17.0487 21.5625 11.5C21.5625 5.95127 17.0487 1.4375 11.5 1.4375Z" fill="#CA8685"/>
+                                        <path class="h-line" d="M16.5312 12.2188H6.46875C6.072 12.2188 5.75 11.8968 5.75 11.5C5.75 11.1032 6.072 10.7812 6.46875 10.7812H16.5312C16.928 10.7812 17.25 11.1032 17.25 11.5C17.25 11.8968 16.928 12.2188 16.5312 12.2188Z" fill="#CA8685"/>
+                                        <path class="v-line" d="M12.2188 6.46875V16.5312C12.2188 16.928 11.8968 17.25 11.5 17.25C11.1032 17.25 10.7812 16.928 10.7812 16.5312V6.46875C10.7812 6.072 11.1032 5.75 11.5 5.75C11.8968 5.75 12.2188 6.072 12.2188 6.46875Z" fill="#CA8685"/>
+                                    </svg>
+                                </span>
+                                {{ block.settings.title }}
+                            </label>
+                            <div class="overflow-hidden accordion-answers-box md:max-w-[808px]">
+                                {{ block.settings.answer }}
+                            </div>
+                        </div>
+                    {%- endcapture -%}
+                {%- endif -%}
+                
+                {%- if questions != blank and forloop.last -%}
+                    <div class="panel-{{block.id}} faq-tabs-content relative">
+                        {{ anchor }}
+                        <div class="faq-accordion-item">
+                            {{ heading }}
+                            <div class="accordion-row">{{ questions }}</div>
+                        </div>
+                    </div>
+                    {%- assign last_type = blank -%}
+                    {%- assign questions = blank -%}
+                {%- endif -%}
+            {%- endfor -%}
+        </div>
+      </div>
+    </div>
+</section>
+
+
+
+<script>
+    function docReady(fn){
+      // see if DOM is already available
+      if (document.readyState === "complete" || document.readyState === "interactive"){
+      // call on next available tick
+        setTimeout(fn, 1);
+      } else {
+        document.addEventListener("DOMContentLoaded", fn);
+      }
+    }
+    docReady(function(){
+        const tabs = document.querySelectorAll(".tabs");
+        const tab = document.querySelectorAll(".faq-tabs-btn");
+
+        function onTabClick(event) {
+
+            // deactivate existing active tabs and panel
+
+            for (let i = 0; i < tab.length; i++) {
+                tab[i].classList.remove("active");
+            }
+
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+
+            // activate new tabs and panel
+            event.target.classList.add('active');
+
+            try {
+                var selector = '#'.concat(event.target.dataset.target);
+                document.body.querySelector(selector).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            } catch (error) {
+            }
+            event.preventDefault();
+        }
+
+        for (let i = 0; i < tab.length; i++) {
+        tab[i].addEventListener('click', onTabClick, false);
+        }
+
+         /* FAQ  Accordion -> Optional Javascript to close the radio button version by clicking it again */
+        var myfaqradio = document.getElementsByName('accordion-faq');
+        var setCheck;
+        var x = 0;
+    
+        for (x = 0; x < myfaqradio.length; x++) {
+        myfaqradio[x].onclick = function () {
+            if (setCheck != this) {
+            setCheck = this;
+            } else {
+            this.checked = false;
+            setCheck = null;
+            }
+        };
+        } 
+        // Accordion End
+    });
+
+
+    (function(){
+    function TotalOffsetTop(e) {
+        var offset = 0;
+        do 
+          offset += e.offsetTop;
+        while (e = e.offsetParent);
+        return offset;
+      }
+      var faq_tabs_row = document.querySelector('.faq-tabs-nav');
+      var faq_tabs_anchor = document.querySelectorAll('.faq-tabs-btn');
+      var faq_active_tab = null;
+      faq_tabs_anchor.forEach(el => el.addEventListener('click', tab_click.bind(el) ) );
+      tabActive();
+      window.addEventListener('scroll', tabActive );
+      window.addEventListener('resize', tabActive );
+      function tabActive(){
+        faq_tabs_anchor.forEach(target => {
+          faq_tabs_anchor.forEach(el => el.classList.remove('active') );
+            var selector = target.getAttribute('href');
+            var el = null;
+            if (selector.indexOf('#') != -1) {
+              el = getTarget(target.getAttribute('href'));
+            }
+            var mark = 0;
+            if (el) {
+              mark = ( TotalOffsetTop(el)  - faq_tabs_row.clientHeight - TotalOffsetTop(faq_tabs_row)  + 100 );
+            }
+            if (el && ( mark < 1 ) ) {
+              faq_active_tab = target;
+            }
+          } );
+          if (faq_active_tab) {
+            faq_active_tab.classList.add('active');
+          }
+      }
+      function getTarget(selector) {
+          if (!selector) { return null; }
+          var el = null;
+          try {
+            el = document.querySelector(selector);
+          } catch (error) {console.log(error)}
+          return el;
+        }
+        function tab_click( event ) {
+          var target = event.target;
+          var el = getTarget(target.getAttribute('href'));
+          if (el) {
+            window.scrollTo({
+              behavior: 'smooth',
+              top: TotalOffsetTop(el) - faq_tabs_row.clientHeight + 300
+            });
+            event.preventDefault();
+          }
+        }
+    })()
+
+  
+</script>
+  
+{% schema %}
+{
+  "name": "FAQ",
+  "blocks": [
+    {
+      "type": "separator",
+      "name": "Section separator",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "SUb Heading"
+        }
+      ]
+    },
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

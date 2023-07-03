@@ -1,0 +1,280 @@
+{%- assign href = 'contact-us.css' | asset_url -%}
+{% render 'link', href: href %}
+
+
+<section class="contact-us pt-10 pb-12 md:py-16 2xl:py-[90px]">
+    <div class="container">
+        <div class="contact-row md:flex">
+            <div class="contact-right-form md:flex-1 md:pr-[40px] lg:pr-[40px] xl:pr-0">
+                <div class="mx-auto md:m-0 lg:pr-[6%] xl:pr-[12%] 4xl:pr-[13%]">
+                    <div class="contact-title pb-2 xl:pb-4 1440Width:pb-5">
+                        <h2 class="text-black font-helvetica font-light text-font25 lg:text-font35 1440Width:text-font45">{{ 'templates.contact.form.title' | t }}</h2>
+                    </div>
+    
+                    {%- form 'contact', id: 'ContactForm', class: 'contact-form' -%}
+                    {%- if form.posted_successfully? -%}
+                        <p class="form-status form-status-list form__message text-blackesh-100 font-inter font-medium text-font18 outline-none pb-1 mt-[10px] text-left" tabindex="-1" autofocus>
+                            {{ 'templates.contact.form.post_success' | t }}
+                        </p>
+                    {%- elsif form.errors -%}
+    
+                    <div class="form__message">
+                        <p class="form-status caption-large text-body text-red-600 font-inter font-medium text-font18 outline-none pb-1 mt-[10px] text-left" role="alert" tabindex="-1" autofocus>{{ 'templates.contact.form.error_heading' | t }}</p>
+                    </div>
+                    <ul class="form-status-list caption-large" role="list">
+                        <li>
+                            <a href="#ContactForm-email" class="text-red-600 font-inter font-normal text-font16">
+                            {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+                            </a>
+                        </li>
+                    </ul>
+                    {%- endif -%}
+
+                      <div class="md:grid md:grid-cols-2 md:gap-x-[20px] 2xl:gap-x-[30px]">
+                        <div class="contact-input-row input_style">
+                            <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'templates.contact.form.name' | t }}</label>
+
+                            <input class="element_input" autocomplete="name" type="text" id="ContactForm-name" name="contact[{{ 'templates.contact.form.name' | t }}]" placeholder="" value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+                          
+                        </div>
+
+                        <div class="contact-input-row input_style ">
+                          <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'templates.contact.form.email' | t }}</label>
+                            <input
+                                autocomplete="email"
+                                type="email"
+                                id="ContactForm-email"
+                                class="element_input"
+                                name="contact[email]"
+                                spellcheck="false"
+                                autocapitalize="off"
+                                placeholder=""
+                                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                                aria-required="true"
+                                {% if form.errors contains 'email' %}
+                                aria-invalid="true"
+                                aria-describedby="ContactForm-email-error"
+                                {% endif %}
+                            >
+                            
+                            {%- comment -%}
+                            {%- if form.errors contains 'email' -%}
+                                <small class="contact__field-error" id="ContactForm-email-error">
+                                <span class="sr-only">Error</span>
+                                <span class="form__message">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</span>
+                                </small>
+                            {%- endif -%}
+                            {%- endcomment -%}
+                        </div>
+
+                        <div class="contact-input-row input_style col-span-2">
+                          <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'templates.contact.form.comment' | t }}</label>
+                            <textarea
+                                rows="10"
+                                id="ContactForm-body"
+                                class="element_input"
+                                placeholder=""
+                                name="contact[{{ 'templates.contact.form.comment' | t }}]"
+                                >
+                                {{- form.body -}}
+                                </textarea>
+                        </div>
+
+                        <div class="col-span-2 contact_info_sec mt-4 mb-5">
+                            {{ section.settings.contact_info }}
+                        </div>
+
+                        <div class="submit-btn col-span-2">
+                            <!-- <input type="submit" value=" {{ 'templates.contact.form.send' | t }}" class="{{ section.settings.button_color_scheme }} {{ section.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }} "> -->
+
+                            <button type="submit" value=" {{ 'templates.contact.form.send' | t }}"
+                                class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }} btn_style" {{ block.shopify_attributes }}>
+                                {{ section.settings.btn_text | escape }}
+                                {% include 'button-arrow' %}
+                            </button>                    
+                        </div>
+                      </div>
+                    {%- endform -%}
+                </div>
+            </div>
+
+            <div class="contact-left relative md:max-w-[328px] lg:max-w-[400px] xl:max-w-[500px] h-full px-5 md:px-[0] mx-auto md:m-0 mt-[40px] md:mt-0">
+               <div class="contact_info_div flex flex-col-reverse md:flex-col md:mt-[70px]">
+                    <div class="contact-details space-y-9 md:space-y-12 4xl:space-y-14">
+                        <div class="contact-details-card">
+                          <div class="flex flex-wrap flex-col md:flex-row items-center md:items-start">
+                            <div class="icon__sec w-[86px] md:w-[70px] xl:w-[86px] mb-6 md:mb-0">
+                                <div class="bg-[#FFEEE7] border border-[#CA8685] w-[86px] h-[86px] md:w-[70px] md:h-[70px] xl:w-[86px] xl:h-[86px] rounded-full flex items-center justify-center">
+                                    {%- if section.settings.svg_icon != blank -%}
+                                        <span class="flex items-center justify-center icon_sec w-[40px] h-[40px]">{{ section.settings.svg_icon }}</span>
+                                        {%- elsif section.settings.img_icon != blank -%}
+                                        <img class="lazyload w-[40px] h-[40px] object-contain" src="{{ section.settings.img_icon | image_url }}" alt="{{ block.settings.card-img.alt }}">
+                                    {%- endif -%}
+                                </div>
+                            </div>
+                            <div class="right_contact_details flex-1 md:pl-[20px] 2xl:pl-[32px] text-center md:text-left">
+                                <label class="text-[#CA8685] font-inter font-normal text-font16 uppercase mb-1 block">{{section.settings.emailHeading}}</label>
+
+                                <div class="mb-2 xl:mb-4">
+                                    <a href="mailto:{{section.settings.email}}" class="text-blackesh-100 font-inter font-semibold text-font22 xl:text-font24 2xl:text-font27">{{section.settings.email}}</a>
+                                </div>
+
+                                <div class="text-puce-400 font-inter font-normal text-font14 content_description_sec">
+                                    {{ section.settings.content_description }}
+                                </div>
+                            </div>
+                          </div>
+                        </div>                                                
+                        <div class="contact-details-card">
+                            <div class="flex flex-wrap flex-col md:flex-row items-center md:items-start">
+                                <div class="icon__sec w-[86px] md:w-[70px] xl:w-[86px] mb-6 md:mb-0">
+                                    <div class="bg-[#FFEEE7] border border-[#CA8685] w-[86px] h-[86px] md:w-[70px] md:h-[70px] xl:w-[86px] xl:h-[86px] rounded-full flex items-center justify-center">
+                                        {%- if section.settings.svg__icon != blank -%}
+                                            <span class="flex items-center justify-center icon__sec w-[40px] h-[40px]">{{ section.settings.svg__icon }}</span>
+                                            {%- elsif section.settings.img__icon != blank -%}
+                                            <img class="lazyload w-[40px] h-[40px] object-contain" 
+                                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                data-src="{{ section.settings.img__icon | image_url:'30x' }}" 
+                                                alt="{{ block.settings.card-img.alt }}">
+                                        {%- endif -%}
+                                    </div>
+                                </div>                                
+                                <div class="right_contact_details flex-1 md:pl-[20px] 2xl:pl-[32px] text-center md:text-left">
+                                    <label class="text-[#CA8685] font-inter font-normal text-font16 uppercase  mb-1 block">{{section.settings.phoneHeading}}</label>
+
+                                    <div class="mb-2 xl:mb-4">
+                                    <a href="tel:{{section.settings.phone}}" class="text-blackesh-100 font-inter font-semibold text-font22 xl:text-font24 2xl:text-font27">{{section.settings.phone}}</a>
+                                    </div>
+
+                                   <div class="text-puce-400 font-inter font-normal text-font14 content_description_sec">
+                                        {{ section.settings.content_description2 }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function docReady(fn) {
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive") {
+            // call on next available tick
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+    docReady(function(){
+        document.querySelectorAll('.element_input').forEach(el => {
+            el.addEventListener('blur', function(event){
+                event.target.classList.toggle('not-empty', this.value.trim() != '')
+            })
+        })
+    });
+    
+</script>
+
+{% schema %}
+{
+    "name": "Contact Us",
+    "settings": [
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Label"
+        },
+        {
+            "type": "richtext",
+            "id": "contact_info",
+            "label": "Contact Info"
+        },
+        {
+            "type": "header",
+            "content": "Email Details"
+        },
+        {
+            "type": "html",
+            "id": "svg_icon",
+            "label": "SVG markup",
+            "info": "Use SVG instead of icon image"
+        },
+        {
+            "type": "image_picker",
+            "id": "img_icon",
+            "label": "Image"                    
+        },
+        {
+            "type": "text",
+            "id": "emailHeading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "email",
+            "label": "Email"
+        },
+        {
+          "type": "richtext",
+          "id": "content_description",
+          "label": "Content"
+        },
+        {
+            "type": "header",
+            "content": "Phone Details"
+        },
+        {
+            "type": "html",
+            "id": "svg__icon",
+            "label": "SVG markup",
+            "info": "Use SVG instead of icon image"
+        },
+        {
+            "type": "image_picker",
+            "id": "img__icon",
+            "label": "Image"                    
+        },
+        {
+            "type": "text",
+            "id": "phoneHeading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "phone",
+            "label": "Phone"
+        },
+        {
+            "type": "richtext",
+            "id": "content_description2",
+            "label": "Content"
+        },
+        {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "secondary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+        }
+       
+    ]
+}
+{% endschema %}

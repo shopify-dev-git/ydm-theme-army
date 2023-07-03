@@ -1,0 +1,119 @@
+{%- assign announcements = section.blocks | where: 'type', 'announcement' -%}
+{%- if announcements.size > 0 -%}
+{%- assign href = 'marquee.css' | asset_url -%}
+{% render 'link', href: href %}
+    {%- for block in announcements -%}
+    {%- capture announcement -%}
+        {{ announcement }}
+        <div class="marquee_content_item">
+            {%- if block.settings.icon != blank -%}
+            <img class="lazyload" 
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-srcset="{{ block.settings.icon | image_url: width: 28 }} 1x, {{ block.settings.icon | image_url: width: 56 }} 2x"
+                alt="{{ block.settings.icon.alt }}"
+            >
+            {%- endif -%}
+            <h4>{{ block.settings.text }}</h4>
+            <span>
+                <svg class="w-[6px] h-[6px] md:w-[12px] md:h-[12px]" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6" cy="6" r="6" fill="white"/>
+                </svg>
+            </span>
+        </div>
+    {%- endcapture -%}    
+    {%- endfor -%}
+
+    <style>
+        :root .section-{{section.id}}.color-custom {
+            --theme-color:{{ section.settings.section_text_color_scheme }};
+            --theme-background:{{ section.settings.section_background_color_scheme }};
+        }
+    </style>
+    <div class="marquee section-{{section.id}} color-{{ section.settings.color_scheme }} bg-blackesh-100">
+        <div class="marquee__content">
+            {{ announcement }}
+            {%- if announcements.size < 4 -%}
+            {{ announcement }}
+            {%- endif -%}
+        </div>
+        {%- if announcements.size < 12 -%}
+            <div class="marquee__content">
+                {{ announcement }}
+                {%- if announcements.size < 4 -%}
+                    {{ announcement }}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+    </div>
+{%- endif -%}
+
+{% schema %}
+{
+    "name": "Featured Announcement",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+          },                
+          {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Announcement",
+            "type": "announcement",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "icon",
+                    "label": "Icon"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Featured Announcement"
+        }
+    ]    
+}
+{% endschema %}

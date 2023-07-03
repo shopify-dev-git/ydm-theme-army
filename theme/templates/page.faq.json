@@ -1,0 +1,160 @@
+{
+  "sections": {
+    "inner-banner": {
+      "type": "inner-banner",
+      "settings": {
+        "image_position": "flex-row",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_621_3.png",
+        "main_title": "Frequently asked questions",
+        "content_description": "<p>Don't see your question below? Reach out to<br\/><a href=\"mailto:info@demosite.com\" title=\"mailto:info@demosite.com\">info@demosite.com<\/a><\/p>",
+        "align__text": "left",
+        "align__text__mobile": "left",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    },
+    "faq-template": {
+      "type": "faq",
+      "blocks": {
+        "7e959f33-ec05-422d-a7dd-61f62ae3a3ee": {
+          "type": "separator",
+          "settings": {
+            "title": "Orders",
+            "sub_title": "Below are some of are common questions about orders"
+          }
+        },
+        "5ce897fa-1a7f-455f-9049-9f263d57e93d": {
+          "type": "question",
+          "settings": {
+            "title": "How do I make a purchase?",
+            "answer": "<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"
+          }
+        },
+        "cff3ec9f-7c30-41ef-90a4-29f14367b42f": {
+          "type": "question",
+          "settings": {
+            "title": "How do I know if my order is confirmed?",
+            "answer": "<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"
+          }
+        },
+        "dfb0fd43-e13f-4553-9d42-8422dd19291e": {
+          "type": "question",
+          "settings": {
+            "title": "Can I change my shipping address after my order is placed?",
+            "answer": "<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"
+          }
+        },
+        "1136a61a-b3c6-4c53-ba12-4c2fe9d3b8fc": {
+          "type": "separator",
+          "settings": {
+            "title": "Shipping & Returns",
+            "sub_title": "Below are some common questions about shipping, returns, and exchanges"
+          }
+        },
+        "466b0aec-d5a6-438f-af16-c8e6a4e39e26": {
+          "type": "question",
+          "settings": {
+            "title": "Do you ship internationally?",
+            "answer": "<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"
+          }
+        },
+        "ab2c8ccf-8c9e-4c1a-8314-3286317b7df7": {
+          "type": "question",
+          "settings": {
+            "title": "When will my order be shipped?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p>"
+          }
+        },
+        "967b025b-5595-4e11-bf79-10e88d3767b8": {
+          "type": "question",
+          "settings": {
+            "title": "How long will it take until I receive my order?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p>"
+          }
+        },
+        "c45ff8fd-69d3-408d-8a82-088792eb02ab": {
+          "type": "question",
+          "settings": {
+            "title": "What is your return policy?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p>"
+          }
+        },
+        "6474e4ee-4dd2-4e29-879b-3a076a641da2": {
+          "type": "separator",
+          "settings": {
+            "title": "Products",
+            "sub_title": "Below are some common questions about our products"
+          }
+        },
+        "401bbbe8-10ac-4119-bcb4-f417534e60ff": {
+          "type": "question",
+          "settings": {
+            "title": "What size should I order?",
+            "answer": "<p>This is an example of a response that you might give. It's good to be as thorough as possible in responses as that has a tendency to improve trust overall.<\/p>"
+          }
+        },
+        "8a6879a2-9e63-47b1-8ede-03a64bd59ac8": {
+          "type": "question",
+          "settings": {
+            "title": "Where can I find information on sustainability?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p>"
+          }
+        },
+        "f037fed4-7ef5-4396-85f7-0329a8cdb47b": {
+          "type": "question",
+          "settings": {
+            "title": "Do you offer gift cards?",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p>"
+          }
+        },
+        "b8a4cbf9-610c-4a5e-a90b-e0e04eb94563": {
+          "type": "question",
+          "settings": {
+            "title": "This is an example of a question that a customer might ask",
+            "answer": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "7e959f33-ec05-422d-a7dd-61f62ae3a3ee",
+        "5ce897fa-1a7f-455f-9049-9f263d57e93d",
+        "cff3ec9f-7c30-41ef-90a4-29f14367b42f",
+        "dfb0fd43-e13f-4553-9d42-8422dd19291e",
+        "1136a61a-b3c6-4c53-ba12-4c2fe9d3b8fc",
+        "466b0aec-d5a6-438f-af16-c8e6a4e39e26",
+        "ab2c8ccf-8c9e-4c1a-8314-3286317b7df7",
+        "967b025b-5595-4e11-bf79-10e88d3767b8",
+        "c45ff8fd-69d3-408d-8a82-088792eb02ab",
+        "6474e4ee-4dd2-4e29-879b-3a076a641da2",
+        "401bbbe8-10ac-4119-bcb4-f417534e60ff",
+        "8a6879a2-9e63-47b1-8ede-03a64bd59ac8",
+        "f037fed4-7ef5-4396-85f7-0329a8cdb47b",
+        "b8a4cbf9-610c-4a5e-a90b-e0e04eb94563"
+      ],
+      "settings": {
+      }
+    },
+    "10c195a1-b784-41bc-b1f3-d1ddc5e11e28": {
+      "type": "promo-section",
+      "settings": {
+        "url-image1": "shopify:\/\/shop_images\/impressed-surprised-kawaii-asian-girl-orange-hoodie-touching-cheek-awe-smiling-pointing-left-something-amazing-cool-promo-awesome-discount-offer-stand-white-background_1.png",
+        "main-title": "Didn't find your answer?",
+        "content_description_part": "<p>Don't hestitate to contact us<\/p>",
+        "btn__link": "shopify:\/\/pages\/contact",
+        "btn_text": "CONTACT US",
+        "button_color_scheme": "primary-btn",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    }
+  },
+  "order": [
+    "inner-banner",
+    "faq-template",
+    "10c195a1-b784-41bc-b1f3-d1ddc5e11e28"
+  ]
+}

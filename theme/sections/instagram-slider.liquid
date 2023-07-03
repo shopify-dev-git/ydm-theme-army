@@ -1,0 +1,263 @@
+{%- assign href = 'instagram-slider.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<style>  
+  :root .section-{{section.id}}.color-custom {  
+    --theme-heading:{{ section.settings.section_heading_color_scheme }};    
+    --theme-background:{{ section.settings.section_background_color_scheme }};
+  }
+</style>
+
+<section class="bg-primary text-font18 section-{{section.id}} color-{{ section.settings.color_scheme }} py-11 sm:py-14 md:py-16 xl:py-20 2xl:py-p181">
+  <div class="container">
+    <div class="text-center md:text-left pb-[40px] lg:pb-[50px] 2xl:pb-[60px] flex justify-between items-center">
+      <h2>{{ section.settings.title }}</h2>		
+      <div class="hidden md:flex gap-[27px]">
+        <div class="swiper-button-prev-insta swiperArrow">
+          <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.265505 8.82189L8.43292 0.280477C8.7913 -0.0934923 9.37193 -0.0934923 9.73121 0.280477C10.0896 0.654446 10.0896 1.26187 9.73121 1.63584L2.21163 9.49953L9.73031 17.3632C10.0887 17.7372 10.0887 18.3446 9.73031 18.7195C9.37193 19.0935 8.79039 19.0935 8.43201 18.7195L0.2646 10.1781C-0.0883503 9.80801 -0.0883503 9.19104 0.265505 8.82189Z" fill="#4B3B4C"/>
+            </svg>            
+        </div>
+        <div class="swiper-button-next-insta swiperArrow">
+          <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.7345 8.82189L1.56708 0.280477C1.2087 -0.0934923 0.628071 -0.0934923 0.268785 0.280477C-0.0895951 0.654446 -0.0895951 1.26187 0.268785 1.63584L7.78837 9.49953L0.26969 17.3632C-0.08869 17.7372 -0.08869 18.3446 0.26969 18.7195C0.628071 19.0935 1.20961 19.0935 1.56799 18.7195L9.7354 10.1781C10.0884 9.80801 10.0884 9.19104 9.7345 8.82189Z" fill="#4B3B4C"/>
+          </svg>            
+        </div>        
+      </div>
+    </div>
+  </div>
+  <div class="full-container">    
+    <div class="insta-slider-wrapper relative">
+      <div class="swiper instagram-slider overflow-x-hidden">
+        <div class="swiper-wrapper">
+        </div>        
+      </div>
+    </div>    
+  </div>
+  <div class="container">
+    <div class="flex items-center justify-center gap-[27px] md:hidden mt-[40px]">
+      <div class="swiper-button-prev-insta swiperArrow">
+        <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.265505 8.82189L8.43292 0.280477C8.7913 -0.0934923 9.37193 -0.0934923 9.73121 0.280477C10.0896 0.654446 10.0896 1.26187 9.73121 1.63584L2.21163 9.49953L9.73031 17.3632C10.0887 17.7372 10.0887 18.3446 9.73031 18.7195C9.37193 19.0935 8.79039 19.0935 8.43201 18.7195L0.2646 10.1781C-0.0883503 9.80801 -0.0883503 9.19104 0.265505 8.82189Z" fill="#4B3B4C"/>
+          </svg>            
+      </div>
+      <div class="swiper-button-next-insta swiperArrow">
+        <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9.7345 8.82189L1.56708 0.280477C1.2087 -0.0934923 0.628071 -0.0934923 0.268785 0.280477C-0.0895951 0.654446 -0.0895951 1.26187 0.268785 1.63584L7.78837 9.49953L0.26969 17.3632C-0.08869 17.7372 -0.08869 18.3446 0.26969 18.7195C0.628071 19.0935 1.20961 19.0935 1.56799 18.7195L9.7354 10.1781C10.0884 9.80801 10.0884 9.19104 9.7345 8.82189Z" fill="#4B3B4C"/>
+        </svg>            
+      </div>
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <div class="mt-[45px] lg:mt-[65px] flex justify-center">
+          <a {% if section.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link }}"{% endif %} class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}" {{ block.shopify_attributes }}>
+              {{ section.settings.button_label | escape }}
+              {% include 'button-arrow' %}
+          </a>
+      </div>
+    {%- endif -%} 
+  </div>
+</section>
+<!-- <div class="hover__efect flex justify-center items-center">{{- -}}
+  <img class="object-contain" src="{{ 'instagram-svg.svg' | asset_url }}" alt="Image">{{- -}}
+</div>{{- -}} -->
+
+{%- capture slide_template -%}
+<div class="swiper-slide">{{- -}}
+  <div class="insta-item relative rounded-2xl group ">{{- -}}
+    <a href="{url}" target="_blank" class="insta-item-hoverr relative">{{- -}}	  
+      <img class="lazyload w-full lazyload" data-src="{img_src}" alt="">{{- -}}
+    </a>{{- -}}
+  </div>{{- -}}
+</div>
+{%- endcapture -%}
+
+<script>
+
+	function waitFor(variable, callback) {
+		var limit_counter = 1000 * 60 * 5;
+		var interval = setInterval(function() {
+			if (window[variable]) {
+				clearInterval(interval);
+				callback();
+			}
+			if (limit_counter < 0) {
+				clearInterval(interval);
+			}
+			limit_counter = limit_counter - 200;
+		}, 200);
+	}
+
+  function docReady(fn){
+    // see if DOM is already available
+    if (document.readyState === "complete" || document.readyState === "interactive"){
+    // call on next available tick
+      setTimeout(fn, 1);
+    } else {
+      document.addEventListener("DOMContentLoaded", fn);
+    }
+  }
+
+  var slide_template = '{{ slide_template }}';
+  
+  docReady(function(){
+    // instagram__slider
+    waitFor('instafeedApp', function(){
+      var appDomain = "instafeed.nfcube.com";
+      var str =  instafeedApp.toString();
+      if (str.indexOf(appDomain) == -1) {
+        document.querySelector('section-{{section.id}}"').setAttribute('hidden', '');
+      } else if (str.indexOf('apiVersion') != -1) {
+        var properties = str.substring(
+            str.indexOf("Instafeed({") + 11, 
+            str.lastIndexOf("})")
+        );
+        properties = properties.split(',');
+        var options = {};
+        properties.forEach(function(property) {
+            var tup = property.split(':');
+            options[tup[0]] = isNaN(tup[1])? tup[1].replace(/\'/g,'') : tup[1]*1;
+        });
+        var url = "https://"+ appDomain +"/feed/v"+ options.apiVersion +"?charge=" + options.charge + "&fu=0" + "&limit=12&account=" + options.shopOrigin + "&fid=" + options.feedId + "&hash=" + options.hash;
+        fetch(url)
+        .then(response => response.json())
+        .then(response => {
+          var html = '';
+          if (response.data) {
+            response.data.forEach(function(insta){
+              html = html.concat(slide_template.replace('{img_src}', insta.images.standard_resolution.url ).replace('{url}', insta.link));
+            })
+          }
+          if (html != '') {
+            document.querySelector('.section-{{section.id}}').removeAttribute('hidden');
+            document.querySelector('.section-{{section.id}} .insta-slider-wrapper .swiper-wrapper').innerHTML = html;
+            var instagramslider = new Swiper('.section-{{section.id}} .instagram-slider', {
+              slidesPerView: 2,
+              spaceBetween: 10,
+              navigation: {
+                nextEl: ".section-{{section.id}} .swiper-button-next-insta",
+                prevEl: ".section-{{section.id}} .swiper-button-prev-insta",
+              },
+              breakpoints: {
+                760: {
+                  slidesPerView: 3,
+                  spaceBetween: 20,
+                },
+                1100: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+                },
+                1280: {
+                  slidesPerView: 4,
+                  spaceBetween: 30,
+                },
+                1600: {
+                  slidesPerView: 5,
+                  spaceBetween: 30,
+                },
+              },
+            });
+          }
+        });
+      }
+
+    });
+   
+  });
+</script>
+{% schema %} 
+{
+    "name": "Instagram",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "YDM on Instagram"
+      },
+      {        
+        "type": "text",
+        "id": "button_label",
+        "label": "Button Label",
+        "default":"READ MORE BLOGS"
+      },
+      {        
+          "type": "url",
+          "id": "button_link",
+          "label": "URL"        
+      },
+      {
+        "type": "header",
+        "content": "Button style"
+      },
+      {
+        "type": "select",
+        "id": "button_color_scheme",
+        "label":"Button Style",
+        "default": "primary-btn",
+        "options": [
+          {
+            "value": "primary-btn",
+            "label": "Primary Button"
+          },
+          {
+            "value": "secondary-btn",
+            "label": "Secondary Button"
+          },
+          {
+            "value": "link-btn",
+            "label": "Link"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Style"
+      },
+      {
+        "type": "select",
+        "id": "color_scheme",
+        "label":"Color scheme",
+        "default": "default",
+        "options": [
+          {
+            "value": "default",
+            "label": "Default"
+          },
+          {
+            "value": "scheme-1",
+            "label": "scheme 1"
+          },
+          {
+            "value": "scheme-2",
+            "label": "scheme 2"
+          },
+          {
+            "value": "custom",
+            "label": "custom (Set below)"
+          }
+        ]
+      },
+        {
+        "type": "color",
+        "id": "section_heading_color_scheme",
+        "default": "#2092FB",
+        "label": "Custom Heading Color"
+      },             
+      {
+        "type": "color",
+        "id": "section_background_color_scheme",
+        "default": "#E8E9F2",
+        "label": "Custom Background Color"
+      }	  
+    ],
+    "presets": [
+        {
+            "name": "Instagram"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+

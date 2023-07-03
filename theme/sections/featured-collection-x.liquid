@@ -1,0 +1,129 @@
+{%- assign href = 'home-our-best-sellers.css' | asset_url -%}
+{% render 'link', href: href %}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+
+{%- if section.settings.collection != blank -%}
+{%- assign collection = section.settings.collection -%}
+<div class="featured_collection_section py-14 md:py-24">
+    <div class="container">
+        <div class="flex items-center gap-4 mb-9 justify-between flex-wrap">
+            <h2>{{ section.settings.title }}</h2>
+            <a href="{{collection.url}}" class="primary-btn">{{ section.settings.btn_text }}</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {%- if collection.products_count > 0 -%}
+                {%- for product in collection.products limit: section.settings.products_to_show -%}
+                {%- assign current_variant = product.selected_or_first_available_variant -%}
+                    <div class="product-column flex flex-col">
+                        <div class="product-img">
+                            <a href="{{product.url | within: collection }}" class="product-img-sec-new block w-full relative p-5">
+                                <img class="lazyload absolute top-0 left-0 w-full h-full object-cover" src="{{ product | image_url }}" alt="{{ product.title }} image">
+                            </a>
+                        </div>
+                        <div class="text-center p-5 product-block-section flex-1 flex flex-col">
+                            <product-form class="product-content-box-new block h-full" data-type="select">
+                                {%- assign id = 'product-card-' | append: product.id -%}
+                                {% form 'product', product, id: id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}
+                                <a href="{{product.url | within: collection }}" class="mb-3">
+                                    <h3 class="text-font30 font-bold">{{ product.title }}</h3>
+                                </a>
+                                {%- if product.excerpt.size > 0 -%}
+                                    <p class="pb-4">{{ product.excerpt }}</p>
+                                {%- else -%}
+                                    <p class="pb-4">{{ product.content | strip_html | truncate: 150 }}</p>
+                                {%- endif -%}
+                                {%- unless product.has_only_default_variant -%}
+                                    <div class="relative mt-auto{% unless current_variant.available %} hidden{% endunless %}">
+                                        <label for="variants-{{product.id}}" class="primary-btn btn_full_width cursor-pointer text-center flex items-center justify-center relative z-10 pointer-events-none">
+                                            <span>
+                                                {%- if current_variant.available -%}            
+                                                    Add To cart            
+                                                {%- else -%}
+                                                    Sold Out
+                                                {%- endif -%}
+                                            </span>
+                                        </label>
+                                        <select name="id" id="variants-{{product.id}}" class="absolute cursor-pointer top-0 left-0 w-full h-full outline-none rounded-full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                            <option value="" disabled="disabled" selected="selected">
+                                                {%- if product.available -%}            
+                                                    Add To cart            
+                                                {%- else -%}
+                                                        Sold Out
+                                                {%- endif -%}
+                                            </option>
+                                            {%- for variant in product.variants -%}
+                                            <option value="{{ variant.id }}">
+                                                {{- variant.title }} | {{ variant.price | money -}}
+                                            </option>
+                                            {%- endfor -%}
+                                        </select>
+                                    </div>
+                                    <button type="submit" {% unless current_variant.available %} class="primary-btn btn_full_width flex items-center justify-center mt-auto" disabled="disabled"{% else %} class="sr-only"{% endunless %}>
+                                        <span>
+                                            {%- if current_variant.available -%}            
+                                                Add To cart            
+                                            {%- else -%}
+                                                Sold Out
+                                            {%- endif -%}
+                                        </span>
+                                    </button>
+                                {%- else -%}
+                                    <input type="hidden" name="id" value="{{current_variant.id}}">
+                                    <button type="submit" class="primary-btn btn_full_width flex items-center justify-center mt-auto"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                        <span>
+                                            {%- if current_variant.available -%}            
+                                                Add To cart            
+                                            {%- else -%}
+                                                Sold Out
+                                            {%- endif -%}
+                                        </span>
+                                    </button>
+                                {%- endunless -%}
+                                {% endform %}
+                            </product-form>
+                        </div>
+                    </div>
+                {%- endfor -%}
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+{%- endif -%}
+
+
+{% schema %}
+{
+    "name": "Featured Collection",
+    "settings": [
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Featured Collection"
+        },
+        {
+            "type": "range",
+            "id": "products_to_show",
+            "label": "Products to show",
+            "min": 3,
+            "max": 20,
+            "step": 1,
+            "default": 6
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "info": "If empty, will use collection's title."
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Text",
+            "default": "SHOP ALL PRODUCTS"
+        }
+    ]
+}
+{% endschema %}
+
+

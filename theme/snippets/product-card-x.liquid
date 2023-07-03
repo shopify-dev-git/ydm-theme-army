@@ -1,0 +1,116 @@
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+<div class="product-card{% unless current_variant.available %} sold-out-card{% endunless %}">
+    <a href="{{product.url | within: collection }}" class="product-img-sec block">
+        <div class="product-head flex items-center justify-between">
+            <div class="rating-sec md:pt-3">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.6815 4.28914L7.99255 3.7248L6.33906 0.197544C6.21556 -0.0658481 5.78406 -0.0658481 5.66056 0.197544L4.00756 3.7248L0.318574 4.28914C0.0155746 4.33571 -0.105425 4.70476 0.107074 4.92258L2.78707 7.67368L2.15357 11.563C2.10307 11.8719 2.43257 12.1038 2.70507 11.952L6.00006 10.1283L9.29505 11.9525C9.56505 12.1028 9.89755 11.8754 9.84655 11.5635L9.21305 7.67418L11.893 4.92308C12.1055 4.70476 11.984 4.33571 11.6815 4.28914Z" fill="#F93EB5"/>
+                </svg>
+                4.9
+            </div>
+            {%- comment -%}
+            {%- if product.metafields.loox.avg_rating != blank -%}
+            {%- endif -%}
+            {%- endcomment -%}
+            {%- if product.tags contains 'selling fast' -%}
+            <span class="selling-btn">
+                <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.60717 14.5541C1.81464 13.7196 1.02214 12.8517 0.517791 11.8169C0.0134725 10.7153 -0.130633 9.44684 0.121543 8.24512C0.373719 7.04341 0.950074 5.90844 1.77864 4.9404C1.7066 5.77494 2.03081 6.64283 2.6432 7.27708C2.28296 5.67479 2.85934 3.93897 4.01209 2.6705C5.16483 1.40203 6.74989 0.567467 8.40695 0C7.57842 0.801145 7.47035 2.06961 7.79456 3.13783C8.11877 4.20601 8.80323 5.14069 9.41562 6.10873C10.028 7.07677 10.6044 8.0782 10.6404 9.17977C10.9646 8.6123 11.3249 8.04481 11.541 7.41059C11.7572 6.77634 11.8652 6.10873 11.6851 5.47448C12.3336 6.20887 12.6938 6.94323 12.8739 7.87791C13.054 8.81259 13.018 9.78063 12.91 10.7153C12.7658 11.7501 12.4777 12.8183 11.8653 13.6862C11.1448 14.721 9.99204 15.4554 8.73123 15.856C6.49771 16.2232 4.30026 15.9227 2.60717 14.5541Z" fill="#FFD15C"/>
+                    <path d="M5.34497 15.7892C8.29888 16.8574 11.2168 13.6195 9.59573 11.1159C9.59573 11.0825 9.55969 11.0825 9.55969 11.0491C9.7038 12.4177 9.34355 13.4192 8.65909 13.9867C9.01934 13.1855 8.76716 12.2508 8.33488 11.4497C7.9026 10.6819 7.29021 9.98095 6.82189 9.24655C6.35357 8.4788 5.99336 7.61087 6.2095 6.74298C5.34494 7.34383 4.73255 8.24512 4.48037 9.21316C4.22819 10.1812 4.3723 11.2494 4.84062 12.1507C4.30026 11.7835 3.90402 11.1827 3.86798 10.5484C3.29159 11.1827 2.93138 12.0172 2.96738 12.8517C2.96742 14.1536 4.08412 15.3219 5.34497 15.7892Z" fill="#F37121"/>
+                    </svg>
+                Selling fast
+            </span>
+            {%- endif -%}
+        </div>
+        <div class="product-img text-center relative flex justify-center">
+            {%- if image_lazy_off == true -%}
+                <img src="{{ product | image_url: width: 350, format: 'png' }}"
+                    srcset="{{ product | image_url: width: 350, format: 'png' }} 1x, {{ product | image_url: width: 650, format: 'png' }} 2x" alt="{{ product.title }} image">
+            {%- else -%}
+                <img class="lazyload" 
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    data-srcset="{{ product | image_url: width: 350, format: 'png' }} 1x, {{ product | image_url: width: 650, format: 'png' }} 2x" alt="{{ product.title }} image">
+            {%- endif -%}
+        </div>
+        {%- assign product_image_hover = product.featured_image -%}
+        {%- if product.images[1] != blank -%}
+        {%- assign product_image_hover = product.images[1] -%}
+        {%- endif -%}
+        <img class="lazyload product-bg-img absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover" 
+            src="{{product_image_hover | image_url: width: 20, format: 'png' }}" 
+            data-srcset="{{product_image_hover | image_url: width: 350, format: 'png' }} 1x, {{ product_image_hover | image_url: width: 650, format: 'png' }} 2x" 
+            alt="{{product_image_hover.alt }}">
+    </a>
+    <product-form class="product-content-box block" data-type="select">
+        {%- assign id = 'product-card-' | append: product.id -%}
+        {% form 'product', product, id: id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}
+        
+        <h4><a class="font-inter text-blackesh-100 font-semibold text-font18 lg:text-font20" href="{{product.url | within: collection }}">{{ product.title }}</a></h4>
+
+        {%- if product.metafields.descriptors.subtitle != blank -%}
+        <p>{{ product.metafields.descriptors.subtitle }}</p>
+        {%- endif -%}
+
+        <p class="font-inter text-blackesh-200 font-normal text-font15 overflow-hidden text-ellipsis whitespace-nowrap">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        
+        <div class="price-plp xl:hidden text-font11 sm:text-font15 lg:text-font16 text-blackesh-100 pb-2 font-dmserif font-semibold mt-auto sm:pb-3">
+            {% render 'price', product: product %}
+        </div>
+        {%- unless product.has_only_default_variant -%}
+            <div class="relative mt-auto{% unless current_variant.available %} hidden{% endunless %}">
+                <label for="variants-{{product.id}}" class="add-to-card-btn cursor-pointer text-center flex items-center justify-center relative z-10 pointer-events-none">
+                    <span>
+                        {%- if current_variant.available -%}            
+                            {{ 'products.product.add_to_cart' | t }}            
+                        {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                    </span>
+                    <!-- <span class="line-add-to-btn"></span>   -->
+                    {% render 'price', product: product %}
+                </label>
+                <select name="id" id="variants-{{product.id}}" class="absolute cursor-pointer top-0 left-0 w-full h-full outline-none rounded-full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                    <option value="" disabled="disabled" selected="selected">
+                        {%- if product.available -%}            
+                            {{ 'products.product.add_to_cart' | t }}            
+                        {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                    </option>
+                    {%- for variant in product.variants -%}
+                    <option value="{{ variant.id }}">
+                        {{- variant.title }} | {{ variant.price | money -}}
+                    </option>
+                    {%- endfor -%}
+                </select>
+            </div>
+            <button type="submit" {% unless current_variant.available %} class="add-to-card-btn flex items-center justify-center mt-auto" disabled="disabled"{% else %} class="sr-only"{% endunless %}>
+                <span>
+                    {%- if current_variant.available -%}            
+                        {{ 'products.product.add_to_cart' | t }}            
+                    {%- else -%}
+                    {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                </span>
+                <!-- <span class="line-add-to-btn"></span>   -->
+                {% render 'price', product: product %}
+            </button>
+        {%- else -%}
+            <input type="hidden" name="id" value="{{current_variant.id}}">
+            <button type="submit" class="add-to-card-btn flex items-center justify-center mt-auto"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                <span>
+                    {%- if current_variant.available -%}            
+                        {{ 'products.product.add_to_cart' | t }}            
+                    {%- else -%}
+                    {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                </span>
+                <!-- <span class="line-add-to-btn"></span>   -->
+                {% render 'price', product: product %}
+            </button>
+        {%- endunless -%}
+        <button type="button" hidden aria-controls="quick-view-{{product.id}}{{section.id}}" class="quick_shop hidden md:block">Quick Shop</button>  
+        {% endform %}
+    </product-form>
+</div>

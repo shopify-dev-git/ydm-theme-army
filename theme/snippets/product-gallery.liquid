@@ -1,0 +1,186 @@
+{%- capture zoom_button -%}
+    {{ zoom_button }}
+    <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10.3645 7.01868H8.53172V5.18594C8.53172 4.76586 8.19342 4.42757 7.77334 4.42757C7.35326 4.42757 7.01497 4.76586 7.01497 5.18594V7.01868H5.18223C4.76215 7.01868 4.42385 7.35698 4.42385 7.77706C4.42385 8.19714 4.76215 8.53543 5.18223 8.53543H7.01497V10.3682C7.01497 10.7883 7.35326 11.1265 7.77334 11.1265C8.19342 11.1265 8.53172 10.7883 8.53172 10.3682V8.53543H10.3645C10.7845 8.53543 11.1228 8.19714 11.1228 7.77706C11.1228 7.35698 10.7808 7.01868 10.3645 7.01868Z" fill="white"/>
+    <path d="M7.77706 14.0262C4.32348 14.0262 1.52418 11.2306 1.52418 7.77706C1.52418 4.32348 4.32348 1.5279 7.77706 1.5279C11.2306 1.5279 14.0262 4.3272 14.0262 7.77706C14.0262 11.2269 11.2269 14.0262 7.77706 14.0262ZM17.9928 16.9259L13.7809 12.7139C14.885 11.3719 15.5504 9.65069 15.5504 7.77706C15.5504 3.48332 12.0708 0 7.77334 0C3.47588 0 0 3.48332 0 7.77706C0 12.0708 3.4796 15.5541 7.77706 15.5541C9.65069 15.5541 11.3682 14.8924 12.7102 13.7883L16.9222 18.0002C17.1155 18.1973 17.7066 18.2939 17.9965 18.0002C18.2902 17.7028 18.2902 17.2233 17.9928 16.9259Z" fill="white"/>
+    </svg>    
+{%- endcapture -%}
+
+{%- capture best_selling_tag -%}
+    {{ best_selling_tag }}
+    <div class="rating-sec hidden  border border-[#4B3B4C] bg-white lg:flex items-center justify-center font-inter font-medium text-font13 rounded-full pt-[5px] pb-[4px] md:pt-[8px] md:pb-[7px] pr-[15px] pl-[15px]">
+        <span class="font-inter font-medium text-font10 md:text-font13 border-[#4B3B4C]">
+        Best Seller
+        </span>
+        <span class="h-[10px] md:h-[19px] w-[0.9px] block bg-[#4B3B4C] mx-[6px] md:mx-[10px]">
+        </span>
+        <svg class="w-[10px] h-[10px]" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.8209 4.02057L7.56233 3.52208L6.10179 0.406426C5.9927 0.173769 5.61155 0.173769 5.50246 0.406426L4.04236 3.52208L0.78384 4.02057C0.516199 4.0617 0.409318 4.38769 0.597021 4.58009L2.96428 7.01016L2.40471 10.4456C2.3601 10.7185 2.65115 10.9233 2.89185 10.7893L5.80234 9.17838L8.71284 10.7897C8.95133 10.9224 9.24503 10.7216 9.19998 10.446L8.64041 7.0106L11.0077 4.58053C11.1954 4.38769 11.0881 4.0617 10.8209 4.02057Z" fill="#FFB800"></path>
+        </svg>
+        <span class="font-inter font-medium text-font10 md:text-font13 border-[#4B3B4C]">4.9</span> 
+    </div>
+{%- endcapture -%}
+
+{%- capture main_slider -%}
+    {{ main_slider }}
+    {% for media in product.media %}
+        {% case media.media_type %}
+            {% when 'image' %}
+            <div class="swiper-slide">
+                <div class="main_product_img">
+                    <img class="lazyload " src="{{ media | img_url: 'large'}}" alt="{{ media.alt }}">                                
+                </div>                
+            </div>
+            {% when 'external_video' %}
+            <div class="swiper-slide">
+                <div class="main_product_img">
+                    {{ media | external_video_tag }}                
+                </div>                
+            </div>
+            {% when 'video' %}
+            <div class="swiper-slide">
+                <div class="main_product_img">
+                    {{ media | video_tag: controls: true }}                
+                </div>                
+            </div>          
+            {% else %}
+            <div class="swiper-slide">
+                <div class="main_product_img">
+                    {{ media | media_tag }}                
+                </div>                
+            </div>
+        {% endcase %}
+    {% endfor %}
+{%- endcapture -%}
+
+{%- capture thumbs_video_icon -%}
+    {{ thumbs_video_icon }}    
+    <div class="vidoes-icon">
+        <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11.5" cy="11.5" r="11.5" fill="white" fill-opacity="0.56"/>
+            <path d="M9.22834 8.16474C8.54998 7.77835 8 8.09489 8 8.87119V14.5999C8 15.377 8.54998 15.6931 9.22834 15.3071L14.2709 12.4355C14.9495 12.049 14.9495 11.4227 14.2709 11.0363L9.22834 8.16474Z" fill="white"/>
+        </svg>
+    </div>    
+{%- endcapture -%}
+
+{%- capture thumbsSlider -%}
+    {{ thumbsSlider }}
+    {% for media in product.media %}
+        <div class="swiper-slide pdp-thumbsSlider-item">            
+            <span></span>
+            <img class="lazyload " src="{{ media | img_url: 'medium'}}" alt="">
+            {%- if media.media_type == 'external_video' or media.media_type == 'video' -%}
+                {{ thumbs_video_icon }}
+            {%- endif -%}            
+        </div>
+    {% endfor %}
+{%- endcapture -%}
+
+<div class="swiper mySwiper2 overflow-hidden product__main__slider">
+    <div class="swiper-wrapper">
+        {{ main_slider }}
+    </div>
+    <div class="hidden lg:flex">
+        <div class="swiper-button-next-pdp swiperArrow absolute top-[50%] right-[20px] xl:right-[30px] 2xl:right-[50px] 4xl:right-[66px] z-[20]">
+            <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.7345 8.82189L1.56708 0.280477C1.2087 -0.0934923 0.628071 -0.0934923 0.268785 0.280477C-0.0895951 0.654446 -0.0895951 1.26187 0.268785 1.63584L7.78837 9.49953L0.26969 17.3632C-0.08869 17.7372 -0.08869 18.3446 0.26969 18.7195C0.628071 19.0935 1.20961 19.0935 1.56799 18.7195L9.7354 10.1781C10.0884 9.80801 10.0884 9.19104 9.7345 8.82189Z" fill="#4B3B4C"/>
+            </svg>                
+        </div>
+        <div class="swiper-button-prev-pdp swiperArrow absolute top-[50%] left-[20px] xl:left-[30px] 2xl:left-[50px] 4xl:left-[66px] z-[20]">
+            <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0.265505 8.82189L8.43292 0.280477C8.7913 -0.0934923 9.37193 -0.0934923 9.73121 0.280477C10.0896 0.654446 10.0896 1.26187 9.73121 1.63584L2.21163 9.49953L9.73031 17.3632C10.0887 17.7372 10.0887 18.3446 9.73031 18.7195C9.37193 19.0935 8.79039 19.0935 8.43201 18.7195L0.2646 10.1781C-0.0883503 9.80801 -0.0883503 9.19104 0.265505 8.82189Z" fill="#4B3B4C"/>
+            </svg>                
+        </div>    
+    </div>
+    <div class="absolute top-[30px] px-[30px] xl:top-41px xl:px-[40px] 2xl:px-[80px] flex items-center justify-between z-20 left-0 right-0">
+        <button type="button" class="zoom-btn w-[36px] h-[36px] rounded-full bg-puce-100 flex justify-center items-center">
+            {{ zoom_button }}
+        </button>
+        {{ best_selling_tag }}
+    </div>                    
+    <div class="container lg:hidden">
+        <div class="collection-swiper-scrollbar-pdp swiper-scrollbar mt-[30px]"></div>
+    </div>
+</div>
+<div thumbsSlider="" class="swiper mySwiper m-5 mx-auto thumbs_slider_pdp">
+    <div class="swiper-wrapper">
+        {{ thumbsSlider }}        
+    </div>
+</div>
+
+
+<!-- Gallery Popup zoom -->
+<div x-data="{open: false, hidden: false}" >	
+	<div class="relative z-[99999] hidden" :class="{'hidden': hidden}" x-show="open" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+	<!--
+		Background backdrop, show/hide based on modal state.
+		Entering: "ease-out duration-300"
+		From: "opacity-0"
+		To: "opacity-100"
+		Leaving: "ease-in duration-200"
+		From: "opacity-100"
+		To: "opacity-0"
+	-->
+	<div class="fixed inset-0 bg-black transition-opacity bg-opacity-50" 		
+		x-transition:enter="ease-out duration-300"
+		x-transition:enter-start="opacity-0"
+		x-transition:enter-end="opacity-100"
+		x-transition:leave="ease-in duration-200"
+		x-transition:leave-start="ease-in duration-200"
+		x-transition:leave-end="opacity-0"
+	></div>
+
+	<div class="fixed inset-0 z-10 overflow-y-auto">
+		<div class="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
+		<!--
+			Modal panel, show/hide based on modal state.
+
+			Entering: "ease-out duration-300"
+			From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+			To: "opacity-100 translate-y-0 sm:scale-100"
+			Leaving: "ease-in duration-200"
+			From: "opacity-100 translate-y-0 sm:scale-100"
+			To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+		-->
+		<div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full md:max-w-[95%]"
+			x-show="open"
+			x-on:click.away="open = false"
+			x-transition:enter="ease-out duration-300"
+			x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+			x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+			x-transition:leave="ease-in duration-200"
+			x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+			x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+		>
+			<div class="bg-white zoom-pdp-block p-5 md:p-8 xl:py-[40px] xl:px-[60px] relative">
+                <div class="flex items-center justify-between px-[5px] pb-[26px]">
+                    <div class="swiper-pagination-zoom text-font13 font-inter text-blackesh-100 font-medium md:text-fon15"></div>
+                    <button  x-on:click="open = false" type="button" class="ml-auto">
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.76538 8.50001L16.738 1.52741C17.0873 1.17798 17.0873 0.611469 16.738 0.262072C16.3885 -0.0873575 15.822 -0.0873575 15.4726 0.262072L8.49998 7.23467L1.52741 0.262072C1.17798 -0.0873575 0.611467 -0.0873575 0.262072 0.262072C-0.087324 0.611502 -0.0873572 1.17801 0.262072 1.52741L7.23464 8.50001L0.262072 15.4726C-0.0873572 15.822 -0.0873572 16.3885 0.262072 16.7379C0.6115 17.0874 1.17801 17.0873 1.52741 16.7379L8.49998 9.76534L15.4725 16.7379C15.8219 17.0874 16.3885 17.0873 16.7379 16.7379C17.0873 16.3885 17.0873 15.822 16.7379 15.4726L9.76538 8.50001Z" fill="#333333"></path>
+                        </svg>
+                    </button>
+                </div>
+				<div class="swiper zoomSwiper relative overflow-hidden">
+                    <div class="swiper-wrapper">
+                        {{ main_slider }}
+                    </div>                    
+                </div>	
+                <div class="swiper-button-next-zoom swiperArrow absolute top-[50%] right-9 xl:right-[60px] z-[50] cursor-pointer">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.7345 8.82189L1.56708 0.280477C1.2087 -0.0934923 0.628071 -0.0934923 0.268785 0.280477C-0.0895951 0.654446 -0.0895951 1.26187 0.268785 1.63584L7.78837 9.49953L0.26969 17.3632C-0.08869 17.7372 -0.08869 18.3446 0.26969 18.7195C0.628071 19.0935 1.20961 19.0935 1.56799 18.7195L9.7354 10.1781C10.0884 9.80801 10.0884 9.19104 9.7345 8.82189Z" fill="#4B3B4C"/>
+                    </svg>                
+                </div>
+                <div class="swiper-button-prev-zoom swiperArrow absolute top-[50%] left-9 xl:left-[60px] z-[50] cursor-pointer">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.265505 8.82189L8.43292 0.280477C8.7913 -0.0934923 9.37193 -0.0934923 9.73121 0.280477C10.0896 0.654446 10.0896 1.26187 9.73121 1.63584L2.21163 9.49953L9.73031 17.3632C10.0887 17.7372 10.0887 18.3446 9.73031 18.7195C9.37193 19.0935 8.79039 19.0935 8.43201 18.7195L0.2646 10.1781C-0.0883503 9.80801 -0.0883503 9.19104 0.265505 8.82189Z" fill="#4B3B4C"/>
+                    </svg>                
+                </div>				
+			</div>        
+		</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+

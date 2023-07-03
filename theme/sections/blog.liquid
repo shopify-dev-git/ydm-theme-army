@@ -1,0 +1,68 @@
+{%- assign href = 'blog.css' | asset_url -%}
+{% render 'link', href: href %}
+<section class="blog-sec py-7 sm:py-9 md:py-12 lg:py-14 xl:py-16 2xl:py-20 4xl:pb-28">
+    <div class="container">
+        <div class="text-center pb-7 sm:pb-8 md:pb-10 xl:pb-12 2xl:pb-16 4xl:pb-20">
+            <h2>{{ blog.title }}</h2>
+        </div>
+        <div class="blog-first-list pb-7 sm:pb-9 md:pb-10 lg:pb-12 xl:pb-14 2xl:pb-16 mb-7 sm:mb-9 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-16">
+          {%- for article in blog.articles -%}
+          {% for tag in article.tags %}
+          {% if tag contains 'featured-' %}
+          {% assign f_article = articles[article.handle] %}
+          {% break %}
+          {% endif %}
+          {% endfor %}
+          {%- endfor -%}
+          {% if f_article %}
+            <div class="blog-first-row flex flex-col lg:flex-row bg-gray-100 rounded-20 md:rounded-25 overflow-hidden">
+                <div class="blog-first-img lg:w-1/2 xl:w-1/">
+                    {% if f_article.image %}
+                    <img class="lazyload object-cover w-full h-full lazyload" data-src="{{ f_article.image | img_url: '950px' }}" alt="{{ f_article.image.alt }}"> 
+                    {% endif %}
+                </div>
+                <div class="blog-first-content p-4 sm:p-7 md:p-8 xl:p-14 2xl:p-16 4xl:p-20 lg:flex lg:items-center lg:w-1/2">
+                    <div class="">
+                        <h2 class="pb-4 sm:pb-6 md:pb-7 lg:pb-8">{{ f_article.title }}</h2>
+                        {%- if f_article.excerpt != blank -%}
+                        {{ f_article.excerpt }}
+                        {%- else -%}
+                          <p class="pb-4 sm:pb-6 md:pb-7 lg:pb-8 2xl:pb-9">{{ f_article.content | strip_html | truncatewords: 50 }}
+                          </p>
+                        {%- endif -%}
+                        {% if section.settings.readmore != blank %}
+                        <div class="flex">
+                            <a href="{{ f_article.url }}" class="blue-btn">
+                                {{ section.settings.readmore }}
+                                <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.2871 5.91558L11.1961 0.228079C11.0589 0.0800753 10.8752 -0.0018205 10.6845 3.07145e-05C10.4938 0.00188193 10.3114 0.0873319 10.1766 0.237976C10.0417 0.38862 9.96526 0.592405 9.9636 0.80544C9.96195 1.01847 10.0353 1.22371 10.1677 1.37695L14.0172 5.67752H1.22728C1.03439 5.67752 0.849407 5.76312 0.713015 5.91549C0.576624 6.06786 0.5 6.27453 0.5 6.49002C0.5 6.7055 0.576624 6.91217 0.713015 7.06454C0.849407 7.21691 1.03439 7.30252 1.22728 7.30252H14.0172L10.1677 11.6031C10.0983 11.678 10.0429 11.7677 10.0047 11.8668C9.96663 11.9659 9.94657 12.0726 9.94573 12.1804C9.94489 12.2883 9.96329 12.3953 9.99986 12.4952C10.0364 12.595 10.0904 12.6857 10.1587 12.762C10.227 12.8383 10.3082 12.8986 10.3976 12.9395C10.487 12.9804 10.5827 13.0009 10.6793 13C10.7759 12.999 10.8713 12.9766 10.96 12.934C11.0488 12.8915 11.129 12.8296 11.1961 12.752L16.2871 7.06445C16.4234 6.91209 16.5 6.70546 16.5 6.49002C16.5 6.27457 16.4234 6.06795 16.2871 5.91558Z" fill="white"/>
+                                </svg>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% schema %}
+  {
+      "name": "Blog Page",
+      "settings": [
+        {
+            "type": "text",
+            "id": "readmore",
+            "label": "Read more button text",
+            "default": "READ MORE"
+        }
+      ]
+  }
+  {% endschema %}
+
+
+
+
+
+  

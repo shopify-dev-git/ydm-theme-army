@@ -1,0 +1,35 @@
+@media (min-width: 1024px) {
+  .blog-section .blogSwiper {
+    overflow: unset;
+  }
+}
+.blog-section .blogSwiper .swiper-slide {
+  height: auto;
+}
+.blog-section .blogSwiper .swiper-slide .blog-card-home {
+  filter: drop-shadow(0px 5.31818px 37.8182px rgba(0, 0, 0, 0.09));
+  display: flex;
+  flex-direction: column;
+  border-bottom-width: 4px;
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.blog-section .blogSwiper .swiper-slide .blog-card-home:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(202 134 133 / var(--tw-border-opacity));
+}
+@media (min-width: 1024px) {
+  .blog-section .blogSwiper .swiper-slide .blog-card-home {
+    filter: drop-shadow(0px 9px 64px rgba(0, 0, 0, 0.09));
+  }
+}
+.blog-section .blogSwiper .swiper-slide .blog-card-home .blog-content-home {
+  display: flex;
+  flex: 1 1 0%;
+  flex-direction: column;
+}
+.blog-section .blogSwiper .swiper-slide .blog-card-home .blog-content-home button {
+  margin-top: auto;
+}

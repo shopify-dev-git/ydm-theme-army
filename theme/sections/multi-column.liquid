@@ -1,0 +1,175 @@
+{{ 'multi-column.css' | asset_url | stylesheet_tag }}
+
+
+<section class="multi-column-section py-14 md:py-16 bg-slate-200 section-{{section.id}} color-{{ section.settings.color_scheme }}" id="shopify-{{ section.id }}">
+    <div class="container">
+        <div class="main-title pb-9 md:pb-11 text-center">
+            <h2>{{ section.settings.main_title }}</h2>
+        </div>
+        {%- assign multi-column = section.blocks | where: 'type', 'card' -%}
+        {%- if multi-column.size > 0 -%}
+            <div class="multi-column-row multi-column-{{ multi-column.size }}">
+                {%- for block in multi-column  -%}
+                    <div class="multi-column">                
+                        <div class="multi-column-card">
+                            {%- if block.settings.card-img != blank -%}
+                                <div class="multi-column-img">        
+                                    <img class="lazyload w-full h-full object-cover absolute left-0 right-0 top-0 bottom-0" src="{{ block.settings.card-img | image_url }}" alt="{{ block.settings.card-img.alt }}">
+                                </div>    
+                            {%- endif -%}
+                            <div class="multi-column-content {{ section.settings.content-alignment }}">
+                                <h3>{{ block.settings.sub_title }}</h3>
+                                {{ block.settings.content_description }}
+                            </div>                   
+                        </div> 
+                    </div>
+                {%- endfor -%}
+            </div>
+        {%- endif -%}
+        <div class="pt-9 md:pt-11 flex justify-center items-center">
+            {%- if section.settings.btn_link != blank -%}
+                <a href="{{ section.settings.btn_link }}" class="primary-btn">
+                    {{ section.settings.btn_text }}
+                </a>
+            {%- endif -%}
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+{
+    "name": "Multi-column",
+    "blocks": [
+        {
+            "type": "card",
+            "name": "Multi-column",
+            "limit": 4,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "card-img",
+                    "label": "Image"                    
+                },
+                {
+                    "type": "text",
+                    "id": "sub_title",
+                    "label": "Heading",
+                    "default":"Column"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content_description",
+                    "label": "Text"
+                }
+            ]
+        }
+    ], 
+    "settings": [
+        {
+            "type": "text",
+            "id": "main_title",
+            "label": "heading"
+        },
+        {
+            "type": "url",
+            "id": "btn_link",
+            "label": "button Url"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "button text"
+        },
+        {
+            "type": "select",
+            "id": "content-alignment",
+            "label": "card text alignment",
+            "default": "text-left",
+            "options": [
+                {
+                    "value": "text-left",
+                    "label": "Left"
+                },
+                {
+                    "value": "text-center",
+                    "label": "center"
+                },
+                {
+                    "value": "text-right",
+                    "label": "right"
+                }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#847486",
+            "label": "Custom Text Color"
+          },
+          {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#4B3B4C",
+            "label": "Custom Heading Color"
+          },
+          {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Multi-column"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

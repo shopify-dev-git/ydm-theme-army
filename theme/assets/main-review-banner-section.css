@@ -1,0 +1,124 @@
+.main-review-banner-section .stamped-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.main-review-banner-section .stamped-container .stamped-header {
+  margin: 0 !important;
+  display: block;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .summary-overview {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .summary-overview span.stamped-summary-caption.stamped-summary-caption-1 span.stamped-summary-text-1 {
+  order: 1;
+  font-family: DM Serif Display, sans-serif;
+  font-size: 27px;
+  line-height: 32px;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(75 59 76 / var(--tw-text-opacity));
+}
+@media (min-width: 768px) {
+  .main-review-banner-section .stamped-container .stamped-header .stamped-summary .summary-overview span.stamped-summary-caption.stamped-summary-caption-1 span.stamped-summary-text-1 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+}
+@media (min-width: 1024px) {
+  .main-review-banner-section .stamped-container .stamped-header .stamped-summary .summary-overview span.stamped-summary-caption.stamped-summary-caption-1 span.stamped-summary-text-1 {
+    font-size: 35px;
+    line-height: 40px;
+  }
+}
+@media (min-width: 1536px) {
+  .main-review-banner-section .stamped-container .stamped-header .stamped-summary .summary-overview span.stamped-summary-caption.stamped-summary-caption-1 span.stamped-summary-text-1 {
+    font-size: 40px;
+    line-height: 50px;
+  }
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .summary-overview .stamped-starrating {
+  order: 3;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .summary-overview span.stamped-summary-caption.stamped-summary-caption-2 span.stamped-summary-text {
+  order: 2;
+  margin: 0px;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings {
+  border-width: 0px;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings:hover .summary-rating {
+  opacity: 1;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings .summary-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings .summary-rating .summary-rating-title {
+  font-size: 13px !important;
+  width: 40px !important;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings .summary-rating .summary-rating-title::before {
+  content: none !important;
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings .summary-rating .summary-rating-bar {
+  width: 220px;
+  height: 5px !important;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings .summary-rating .summary-rating-bar .summary-rating-bar-content {
+  height: 5px !important;
+  --tw-bg-opacity: 1;
+  background-color: rgb(202 134 133 / var(--tw-bg-opacity));
+}
+.main-review-banner-section .stamped-container .stamped-header .stamped-summary .stamped-summary-ratings .summary-rating .summary-rating-count {
+  font-size: 13px !important;
+  color: #867887 !important;
+  padding-right: 5px !important;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.main-review-banner-section .stamped-container .stamped-content {
+  margin-top: 30px;
+  display: none;
+  border-top-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(200 198 200 / var(--tw-border-opacity));
+  padding-top: 30px;
+}
+@media (min-width: 1536px) {
+  .main-review-banner-section .stamped-container .stamped-content {
+    margin-top: 50px;
+  }
+  .main-review-banner-section .stamped-container .stamped-content {
+    padding-top: 50px;
+  }
+}

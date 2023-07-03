@@ -1,0 +1,36 @@
+{{ 'review.css' | asset_url | stylesheet_tag }}
+
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }    
+</style>
+
+<section class="main-review-section relative overflow-hidden py-[45px] sm:py-10 md:py-12 lg:py-14 xl:py-16 2xl:py-20 section-{{section.id}} color-{{ section.settings.color_scheme }}" data-section-type="collection-section" data-section-id="{{ section.id }}">
+    <div class="container">
+        <div id="stamped-main-widget"></div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Review Section",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Image"
+        }        
+    ],
+    "presets": [
+        {
+            "name": "Review Section"
+        }
+    ]
+}
+{% endschema %}
+

@@ -1,0 +1,41 @@
+<ul>
+  <li>
+       <a class="{% if paginate.previous %} {% else %}disable {% endif %} prev-arrow " {%- if paginate.previous-%} href="{{ paginate.previous.url }}"{%- endif -%}>
+        <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.298666 9.68058L8.63094 0.335485C8.82366 0.11917 9.08091 0 9.35522 0C9.62953 0 9.88679 0.11917 10.0795 0.335485L10.6931 1.02353C11.0924 1.47187 11.0924 2.20054 10.6931 2.6482L3.6963 10.4956L10.7009 18.3518C10.8936 18.5681 11 18.8565 11 19.164C11 19.4718 10.8936 19.7602 10.7009 19.9766L10.0873 20.6645C9.8944 20.8808 9.63729 21 9.36298 21C9.08868 21 8.83142 20.8808 8.6387 20.6645L0.298666 11.3109C0.105494 11.0939 -0.000606051 10.8042 2.84383e-06 10.4962C-0.000606051 10.187 0.105494 9.89741 0.298666 9.68058Z" fill="#4B3B4C"/>
+          </svg>
+          <span class="visually-hidden hidden">page</span>
+       </a>
+     </li>
+
+   {%- for part in paginate.parts -%}
+     {%- if part.is_link -%}
+       <li>
+         <a href="{{ part.url }}">
+           <span class="visually-hidden hidden">page</span> {{ part.title }}
+         </a>
+       </li>
+     {%- else -%}
+       {%- if part.title == paginate.current_page -%}
+         <li class="active" aria-current="page">
+           <a class="active">
+           <span class="visually-hidden hidden">page</span> {{ part.title }}
+           </a>
+         </li>
+       {%- else -%}
+         <li>
+           <span class="visually-hidden hidden">page</span> {{ part.title }}
+         </li>
+       {%- endif -%}
+     {%- endif -%}
+   {%- endfor -%}
+
+     <li>
+       <a class="next-arrow {% if paginate.next %} {% else %}disable{% endif %}" {%- if paginate.next -%} href="{{ paginate.next.url }}" {%- endif -%}>
+          <span class="visually-hidden hidden">page</span>
+          <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.7013 9.68058L2.36906 0.335485C2.17634 0.11917 1.91909 0 1.64478 0C1.37047 0 1.11321 0.11917 0.920498 0.335485L0.306883 1.02353C-0.0923997 1.47187 -0.0923997 2.20054 0.306883 2.6482L7.3037 10.4956L0.29912 18.3518C0.106404 18.5681 0 18.8565 0 19.164C0 19.4718 0.106404 19.7602 0.29912 19.9766L0.912734 20.6645C1.1056 20.8808 1.36271 21 1.63702 21C1.91132 21 2.16858 20.8808 2.3613 20.6645L10.7013 11.3109C10.8945 11.0939 11.0006 10.8042 11 10.4962C11.0006 10.187 10.8945 9.89741 10.7013 9.68058Z" fill="#4B3B4C"/>
+            </svg>            
+       </a>
+     </li>
+   </ul>

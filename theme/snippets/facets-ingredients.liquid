@@ -1,0 +1,402 @@
+{% comment %}
+  Renders facets (filtering and sorting)
+
+  Accepts:
+  - results: {Object} Collection or Search object
+  - enable_filtering: {Boolean} Show filtering when true
+  - enable_sorting: {Boolean} Show sorting when true
+  - filter_type: {String} Type of filter
+
+  Usage:
+  {% render 'facets', results: collection, enable_filtering: true, enable_sorting: true, filter_type: 'vertical' %}
+{% endcomment %}
+
+{% comment %} {{ 'component-show-more.css' | asset_url | stylesheet_tag }} {% endcomment %}
+
+{%- liquid
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  assign total_active_values = 0
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+-%}
+
+
+
+
+{%- capture filter_drawer -%}
+    <facet-filters-form>
+        <form>
+            <div class="mobile-facets__footer">
+                <facet-remove class="mobile-facets__clear-wrapper flex justify-end">
+                    <a href="{{ results_url }}" class="font-inter text-font14 2xl:text-font16 py-2 font-semibold text-[#CA8685] uppercase inline-block hover:text-black tracking-[0.04em]">
+                        {{- 'products.facets.clear_all' | t -}}
+                    </a>
+                </facet-remove>      
+               
+            </div>
+
+            <div id="accordion-open" class="">
+                <div class="accordion_row border-t border-[#C8C6C8]">
+                    <div id="accordion-open-heading-1">
+                        <button type="button" class="flex items-center justify-between w-full py-4 text-left font-inter font-medium text-font13 text-blackesh-100" data-accordion-target="#accordion-open-body-1" aria-expanded="true" aria-controls="accordion-open-body-1">
+                            <span class="flex items-center flex-1">Product Type</span>
+
+                            <div class="right__part">
+                                <div class="font-inter text-[#867887] font-normal text-font12 md:text-font13  flex flex-wrap items-center">
+                                    2 selected
+                                    <a href="" class="px-1">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.2424 1.75758C9.10859 0.623737 7.60354 0 6 0C4.39646 0 2.89141 0.623737 1.75758 1.75758C0.623737 2.89141 0 4.39646 0 6C0 7.60354 0.623737 9.10859 1.75758 10.2424C2.89141 11.3763 4.39646 12 6 12C7.60354 12 9.10859 11.3763 10.2424 10.2424C11.3763 9.10859 12 7.60354 12 6C12 4.39646 11.3763 2.89141 10.2424 1.75758ZM9.7601 9.7601C8.75505 10.7652 7.41919 11.3182 6 11.3182C4.58081 11.3182 3.24495 10.7652 2.2399 9.7601C0.166667 7.68687 0.166667 4.31313 2.2399 2.2399C3.24495 1.23485 4.58081 0.681818 6 0.681818C7.41919 0.681818 8.75505 1.23485 9.7601 2.2399C11.8333 4.31313 11.8333 7.68687 9.7601 9.7601Z" fill="#867887"/>
+                                            <path d="M8.64394 3.35606C8.5101 3.22222 8.29545 3.22222 8.16162 3.35606L6 5.51768L3.83838 3.35606C3.70455 3.22222 3.4899 3.22222 3.35606 3.35606C3.22222 3.4899 3.22222 3.70455 3.35606 3.83838L5.51768 6L3.35606 8.16162C3.22222 8.29545 3.22222 8.5101 3.35606 8.64394C3.42172 8.7096 3.5101 8.74495 3.59596 8.74495C3.68182 8.74495 3.7702 8.71212 3.83586 8.64394L5.99747 6.48232L8.15909 8.64394C8.22475 8.7096 8.31313 8.74495 8.39899 8.74495C8.48737 8.74495 8.57323 8.71212 8.63889 8.64394C8.77273 8.5101 8.77273 8.29545 8.63889 8.16162L6.48232 6L8.64394 3.83838C8.77778 3.70455 8.77778 3.4899 8.64394 3.35606Z" fill="#867887"/>
+                                        </svg>
+                                    </a>
+                                </span>
+
+                                 <!-- rotate-180 -->
+                                <svg class="w-[14px] md:w-[16px] h-[8px] shrink-0  ml-3 md:ml-5" width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.6231 0.215701L8.00076 6.22921L1.37841 0.214977C1.06268 -0.0716591 0.551935 -0.0716591 0.236202 0.214977C-0.0787339 0.501614 -0.0787339 0.96601 0.236202 1.25265L7.4293 7.78502C7.74423 8.07166 8.25577 8.07166 8.5707 7.78502L15.7638 1.25271C16.0787 0.966071 16.0787 0.50095 15.7638 0.214314C15.4497 -0.0709351 14.9381 -0.0709352 14.6231 0.215701Z" fill="#4B3B4C"/>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                        
+                    <div id="accordion-open-body-1" class="pb-4 2xl:pb-5 block" aria-labelledby="accordion-open-heading-1">
+                        <fieldset class="space-y-2">
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="1" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="1" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Formaldehyde (02)</label>
+                                </div>
+                            </div>
+                            
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="2" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="2" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Gluten (05)</label>
+                                </div>
+                            </div>
+                            
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="3" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="3" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Mineral oil (02)</label>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="4" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="4" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Parabens (05)</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="accordion_row border-t border-[#C8C6C8]">
+                    <div id="accordion-open-heading-2">
+                        <button type="button" class="flex items-center justify-between w-full py-4 text-left font-inter font-medium text-font13 text-blackesh-100" data-accordion-target="#accordion-open-body-2" aria-expanded="true" aria-controls="accordion-open-body-2">
+                            <span class="flex items-center flex-1">Shop By Concern</span>
+
+                            <div class="right__part">
+                                <div class="font-inter text-[#867887] font-normal text-font12 md:text-font13  flex flex-wrap items-center">
+                                    2 selected
+                                    <a href="" class="px-1">
+                                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M10.2424 1.75758C9.10859 0.623737 7.60354 0 6 0C4.39646 0 2.89141 0.623737 1.75758 1.75758C0.623737 2.89141 0 4.39646 0 6C0 7.60354 0.623737 9.10859 1.75758 10.2424C2.89141 11.3763 4.39646 12 6 12C7.60354 12 9.10859 11.3763 10.2424 10.2424C11.3763 9.10859 12 7.60354 12 6C12 4.39646 11.3763 2.89141 10.2424 1.75758ZM9.7601 9.7601C8.75505 10.7652 7.41919 11.3182 6 11.3182C4.58081 11.3182 3.24495 10.7652 2.2399 9.7601C0.166667 7.68687 0.166667 4.31313 2.2399 2.2399C3.24495 1.23485 4.58081 0.681818 6 0.681818C7.41919 0.681818 8.75505 1.23485 9.7601 2.2399C11.8333 4.31313 11.8333 7.68687 9.7601 9.7601Z" fill="#867887"/>
+                                            <path d="M8.64394 3.35606C8.5101 3.22222 8.29545 3.22222 8.16162 3.35606L6 5.51768L3.83838 3.35606C3.70455 3.22222 3.4899 3.22222 3.35606 3.35606C3.22222 3.4899 3.22222 3.70455 3.35606 3.83838L5.51768 6L3.35606 8.16162C3.22222 8.29545 3.22222 8.5101 3.35606 8.64394C3.42172 8.7096 3.5101 8.74495 3.59596 8.74495C3.68182 8.74495 3.7702 8.71212 3.83586 8.64394L5.99747 6.48232L8.15909 8.64394C8.22475 8.7096 8.31313 8.74495 8.39899 8.74495C8.48737 8.74495 8.57323 8.71212 8.63889 8.64394C8.77273 8.5101 8.77273 8.29545 8.63889 8.16162L6.48232 6L8.64394 3.83838C8.77778 3.70455 8.77778 3.4899 8.64394 3.35606Z" fill="#867887"/>
+                                        </svg>
+                                    </a>
+                                </span>
+
+                                 <!-- rotate-180 -->
+                                <svg class="w-[14px] md:w-[16px] h-[8px] shrink-0  ml-3 md:ml-5" width="16" height="8" viewBox="0 0 16 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.6231 0.215701L8.00076 6.22921L1.37841 0.214977C1.06268 -0.0716591 0.551935 -0.0716591 0.236202 0.214977C-0.0787339 0.501614 -0.0787339 0.96601 0.236202 1.25265L7.4293 7.78502C7.74423 8.07166 8.25577 8.07166 8.5707 7.78502L15.7638 1.25271C16.0787 0.966071 16.0787 0.50095 15.7638 0.214314C15.4497 -0.0709351 14.9381 -0.0709352 14.6231 0.215701Z" fill="#4B3B4C"/>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <!-- hidden class add for hide and block for show -->
+                    <div id="accordion-open-body-1" class="pb-4 2xl:pb-5 hidden" aria-labelledby="accordion-open-heading-1">
+                        <fieldset class="space-y-2">
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="1" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="1" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Acne (55)</label>
+                                </div>
+                            </div>
+                            
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="2" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="2" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Anti-ageing (05)</label>
+                                </div>
+                            </div>
+                            
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="3" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="3" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Blackheads (02)</label>
+                                </div>
+                            </div>
+
+                            <div class="relative flex items-start">
+                                <div class="flex h-5 items-center mt-[2px]">
+                                    <input id="4" aria-describedby="" name="" type="checkbox" class="h-4 w-4 border-[#867887] text-[#867887] focus:ring-0">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="4" class="font-inter font-medium text-font15 md:text-font16 text-[#867887]">Darkspots (05)</label>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+            <div class="save__sec mt-10">
+                <button type="button"
+                class="no-js-hidden primary-btn uppercase sharp standard mb-1 cart-btn btn_full_width p-[20px] max-w-full mx-auto z-20 w-full min-w-full"
+                onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
+                >
+                    {{ 'products.facets.apply' | t }}
+                    <svg class="" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.7072 7.28071L14.7071 0.280712C14.5185 0.0985542 14.2659 -0.00224062 14.0037 3.78025e-05C13.7415 0.00231622 13.4907 0.107485 13.3053 0.292894C13.1199 0.478302 13.0147 0.729114 13.0125 0.991311C13.0102 1.25351 13.111 1.50611 13.2931 1.69471L18.5862 6.98771H1.00001C0.734791 6.98771 0.480434 7.09307 0.292896 7.28061C0.105358 7.46814 0 7.7225 0 7.98771C0 8.25293 0.105358 8.50728 0.292896 8.69482C0.480434 8.88236 0.734791 8.98771 1.00001 8.98771H18.5862L13.2931 14.2807C13.1976 14.373 13.1214 14.4833 13.069 14.6053C13.0166 14.7273 12.989 14.8585 12.9879 14.9913C12.9867 15.1241 13.012 15.2558 13.0623 15.3787C13.1126 15.5016 13.1868 15.6132 13.2807 15.7071C13.3746 15.801 13.4863 15.8753 13.6092 15.9255C13.7321 15.9758 13.8638 16.0011 13.9965 16C14.1293 15.9988 14.2605 15.9712 14.3825 15.9188C14.5045 15.8664 14.6149 15.7902 14.7071 15.6947L21.7072 8.69471C21.8947 8.50718 22 8.25288 22 7.98771C22 7.72255 21.8947 7.46824 21.7072 7.28071Z" fill="white"></path>
+                        </svg>
+                </button>
+                <noscript
+                ><button class="primary-btn uppercase sharp standard mb-1 cart-btn btn_full_width p-[20px] mx-auto z-20 w-full min-w-full max-w-full">
+                    {{ 'products.facets.apply' | t }}
+                    <svg class="" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.7072 7.28071L14.7071 0.280712C14.5185 0.0985542 14.2659 -0.00224062 14.0037 3.78025e-05C13.7415 0.00231622 13.4907 0.107485 13.3053 0.292894C13.1199 0.478302 13.0147 0.729114 13.0125 0.991311C13.0102 1.25351 13.111 1.50611 13.2931 1.69471L18.5862 6.98771H1.00001C0.734791 6.98771 0.480434 7.09307 0.292896 7.28061C0.105358 7.46814 0 7.7225 0 7.98771C0 8.25293 0.105358 8.50728 0.292896 8.69482C0.480434 8.88236 0.734791 8.98771 1.00001 8.98771H18.5862L13.2931 14.2807C13.1976 14.373 13.1214 14.4833 13.069 14.6053C13.0166 14.7273 12.989 14.8585 12.9879 14.9913C12.9867 15.1241 13.012 15.2558 13.0623 15.3787C13.1126 15.5016 13.1868 15.6132 13.2807 15.7071C13.3746 15.801 13.4863 15.8753 13.6092 15.9255C13.7321 15.9758 13.8638 16.0011 13.9965 16C14.1293 15.9988 14.2605 15.9712 14.3825 15.9188C14.5045 15.8664 14.6149 15.7902 14.7071 15.6947L21.7072 8.69471C21.8947 8.50718 22 8.25288 22 7.98771C22 7.72255 21.8947 7.46824 21.7072 7.28071Z" fill="white"></path>
+                        </svg>
+                </button></noscript
+                >
+            </div>
+        </form>
+    </facet-filters-form>
+    {{ filter_drawer }}
+{%- endcapture -%}
+
+
+<menu-drawer class="mobile-facets__wrapper mobile_sticky" x-data="{open: false, hidden: false}">
+    <div class="mobile_filter md:hidden">
+        <div class="plp-main-list">
+            <div class="plp-left-sidebar  flex flex-wrap justify-center divide-x divide-blackesh-200">
+                <div class="w-[50%]">
+                    <div class="font-inter font-normal text-font15 lg:text-font16 text-blackesh-200">
+                        <button type="button" class="w-full flex justify-center items-center py-3 font-inter font-medium text-font16 lg:text-font16 text-blackesh-100 filter-icon">
+                            <svg class="mr-3 text-blackesh-100 w-[15px] h-auto" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Up_Down"><g id="Path"><path style="fill:blackesh-100;" d="m22.707 15.293a1 1 0 0 0 -1.414 0l-3.293 3.293v-15.586a1 1 0 0 0 -2 0v15.586l-3.293-3.293a1 1 0 0 0 -1.414 1.414l5 5a1 1 0 0 0 1.416 0l5-5a1 1 0 0 0 -.002-1.414z"/><path style="fill:blackesh-100;" d="m12.707 7.293-5-5a.99.99 0 0 0 -.326-.217 1 1 0 0 0 -.764 0 .99.99 0 0 0 -.326.217l-5 5a1 1 0 1 0 1.416 1.414l3.293-3.293v15.586a1 1 0 0 0 2 0v-15.586l3.293 3.293a1 1 0 0 0 1.414-1.414z"/></g></g></svg> Sort
+                        </button>
+                    </div>    
+    
+                    <div class="collection-list active h_commom_customScroll">
+                        <div class="headding absolute top-0 left-0 right-0 w-full flex items-center justify-between md:hidden p-4 px-5">
+                            <div class="text-font16 text-blackesh-100">
+                                <div class="font-inter font-medium text-font16 text-blackesh-100">Sort By</div>
+                            </div>
+                            <button type="button" class="btn-close-filter top-3 right-3">
+                                <svg class="w-4 h-4" width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.9353 12.5L25.5992 2.24619C26.1336 1.73233 26.1336 0.899219 25.5992 0.385401C25.0648 -0.128467 24.1983 -0.128467 23.664 0.385401L13 10.6392L2.33603 0.385401C1.80161 -0.128467 0.935185 -0.128467 0.400815 0.385401C-0.133554 0.899268 -0.133605 1.73237 0.400815 2.24619L11.0647 12.5L0.400815 22.7538C-0.133605 23.2677 -0.133605 24.1008 0.400815 24.6146C0.935236 25.1285 1.80166 25.1284 2.33603 24.6146L13 14.3608L23.6639 24.6146C24.1983 25.1285 25.0648 25.1284 25.5991 24.6146C26.1335 24.1007 26.1335 23.2676 25.5991 22.7538L14.9353 12.5Z" fill="black"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <a href="" class="active product-tabs-list">
+                            All Products
+                        </a>
+    
+                        <!-- Build Tag URL -->
+                        <a href="" data-target="filter-product-1" class="product-tabs-list">
+                            Best selling      
+                        </a>
+                        
+                        <!-- Build Tag URL -->
+                        <a href="" data-target="filter-product-1" class="product-tabs-list">
+                            Low to High      
+                        </a>
+
+                        <!-- Build Tag URL -->
+                        <a href="" data-target="filter-product-1" class="product-tabs-list">
+                           High to Low     
+                        </a>
+                                
+                    </div>
+                </div>
+
+                <div class="w-[50%] left_option flex flex-wrap space-x-6 2xl:space-x-12 items-center">
+                    <button type="button" x-on:click="open = true; scrollbaradd();" class="filter_drawer_btn flex items-center py-3 font-inter font-medium text-font16 lg:text-font16 text-blackesh-100 justify-center w-full min-w-full">
+                        <svg class="mr-3" width="17" height="11" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.407 0H0.593023C0.435744 0 0.284906 0.061384 0.173692 0.170648C0.062479 0.279912 0 0.428105 0 0.582627C0 0.737149 0.062479 0.885343 0.173692 0.994606C0.284906 1.10387 0.435744 1.16525 0.593023 1.16525H16.407C16.5643 1.16525 16.7151 1.10387 16.8263 0.994606C16.9375 0.885343 17 0.737149 17 0.582627C17 0.428105 16.9375 0.279912 16.8263 0.170648C16.7151 0.061384 16.5643 0 16.407 0Z" fill="#4B3B4C"/>
+                        <path d="M14.4302 4.91737H2.56977C2.41249 4.91737 2.26165 4.97876 2.15044 5.08802C2.03922 5.19728 1.97674 5.34548 1.97674 5.5C1.97674 5.65452 2.03922 5.80272 2.15044 5.91198C2.26165 6.02124 2.41249 6.08263 2.56977 6.08263H14.4302C14.5875 6.08263 14.7384 6.02124 14.8496 5.91198C14.9608 5.80272 15.0233 5.65452 15.0233 5.5C15.0233 5.34548 14.9608 5.19728 14.8496 5.08802C14.7384 4.97876 14.5875 4.91737 14.4302 4.91737Z" fill="#4B3B4C"/>
+                        <path d="M12.4535 9.83475H4.54651C4.38923 9.83475 4.23839 9.89613 4.12718 10.0054C4.01597 10.1147 3.95349 10.2629 3.95349 10.4174C3.95349 10.5719 4.01597 10.7201 4.12718 10.8294C4.23839 10.9386 4.38923 11 4.54651 11H12.4535C12.6108 11 12.7616 10.9386 12.8728 10.8294C12.984 10.7201 13.0465 10.5719 13.0465 10.4174C13.0465 10.2629 12.984 10.1147 12.8728 10.0054C12.7616 9.89613 12.6108 9.83475 12.4535 9.83475Z" fill="#4B3B4C"/>
+                        </svg>
+                    Filter
+                    </button> 
+    
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+
+    <div class="flex md:mb-7 justify-between">
+        <div class="left_option flex flex-wrap md:space-x-6 2xl:space-x-12 items-center">
+            <button type="button" x-on:click="open = true; scrollbaradd();" class="filter_drawer_btn  items-center py-2 font-inter font-medium text-font15 lg:text-font16 text-blackesh-100 hidden md:flex">
+                <svg class="mr-3" width="17" height="11" viewBox="0 0 17 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16.407 0H0.593023C0.435744 0 0.284906 0.061384 0.173692 0.170648C0.062479 0.279912 0 0.428105 0 0.582627C0 0.737149 0.062479 0.885343 0.173692 0.994606C0.284906 1.10387 0.435744 1.16525 0.593023 1.16525H16.407C16.5643 1.16525 16.7151 1.10387 16.8263 0.994606C16.9375 0.885343 17 0.737149 17 0.582627C17 0.428105 16.9375 0.279912 16.8263 0.170648C16.7151 0.061384 16.5643 0 16.407 0Z" fill="#4B3B4C"/>
+                <path d="M14.4302 4.91737H2.56977C2.41249 4.91737 2.26165 4.97876 2.15044 5.08802C2.03922 5.19728 1.97674 5.34548 1.97674 5.5C1.97674 5.65452 2.03922 5.80272 2.15044 5.91198C2.26165 6.02124 2.41249 6.08263 2.56977 6.08263H14.4302C14.5875 6.08263 14.7384 6.02124 14.8496 5.91198C14.9608 5.80272 15.0233 5.65452 15.0233 5.5C15.0233 5.34548 14.9608 5.19728 14.8496 5.08802C14.7384 4.97876 14.5875 4.91737 14.4302 4.91737Z" fill="#4B3B4C"/>
+                <path d="M12.4535 9.83475H4.54651C4.38923 9.83475 4.23839 9.89613 4.12718 10.0054C4.01597 10.1147 3.95349 10.2629 3.95349 10.4174C3.95349 10.5719 4.01597 10.7201 4.12718 10.8294C4.23839 10.9386 4.38923 11 4.54651 11H12.4535C12.6108 11 12.7616 10.9386 12.8728 10.8294C12.984 10.7201 13.0465 10.5719 13.0465 10.4174C13.0465 10.2629 12.984 10.1147 12.8728 10.0054C12.7616 9.89613 12.6108 9.83475 12.4535 9.83475Z" fill="#4B3B4C"/>
+                </svg>
+           
+               Filter By
+            </button>
+
+            <div class="font-inter font-normal text-font15 lg:text-font16 text-blackesh-200 hidden md:block">
+                Showing 11 Results
+            </div>
+
+        </div>
+
+        <div class="right_option hidden md:block">
+            <div class="select_sec">
+                <label for="location" class="block font-inter font-medium text-font12 lg:text-font13 text-[#867887] uppercase ">SORT</label>
+                <div class="relative pr-[21px]">
+                    <select id="location" name="location" class="block w-full border-none pr-1 py-1 bg-transparent focus:border-none focus:outline-none focus:ring-none font-inter font-semibold text-font15 lg:text-font16 text-blackesh-100 pl-0 focus:shadow-none focus:border-0 focus:ring-0">
+                        <option>Best selling</option>
+                        <option selected="">Best selling</option>
+                        <option>Best selling</option>
+                    </select>
+    
+                    <svg class="absolute right-0 -translate-y-2/4 top-2/4 -z-10 mt-[2px]" width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.1387 0.425257L6.09433 5.31124L1.04996 0.424669C0.80946 0.191777 0.420419 0.191777 0.179919 0.424669C-0.0599731 0.657561 -0.0599731 1.03488 0.179919 1.26778L5.65903 6.57533C5.89893 6.80822 6.28857 6.80822 6.52847 6.57533L12.0076 1.26782C12.2475 1.03493 12.2475 0.657022 12.0076 0.42413C11.7683 0.192365 11.3786 0.192365 11.1387 0.425257Z" fill="#4B3B4C"/>
+                    </svg>
+                </div>
+                    
+            </div>
+        </div>
+     
+   </div>    
+   <div class="relative z-10 hidden" 
+       :class="{'hidden': hidden}"
+       x-show="open" 
+       aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+
+    <div class="fixed inset-0 ease-in-out duration-500 mini-cart-bg bg-opacity-75 transition-opacity"
+        style="background-color: rgba(75, 59, 76, 0.73);"
+        x-data        
+        x-show="open"
+        x-transition:enter="ease-in-out duration-500"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in-out duration-500"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+    ></div>    
+
+    <div class="fixed inset-0 overflow-hidden">
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+          <!--
+            Slide-over panel, show/hide based on slide-over state.
+
+            Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+              From: "translate-x-full"
+              To: "translate-x-0"
+            Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+              From: "translate-x-0"
+              To: "translate-x-full"
+          -->
+          <div class="pointer-events-auto w-screen max-w-[592px]"
+               x-show="open"
+               x-on:click.away="open = false"
+               x-transition:enter="transform transition ease-in-out duration-300 sm:duration-400"
+               x-transition:enter-start="translate-x-full"
+               x-transition:enter-end="translate-x-0"
+               x-transition:leave="transform transition ease-in-out duration-300 sm:duration-400"
+               x-transition:leave-start="translate-x-0"
+               x-transition:leave-end="translate-x-full">
+            <div class="flex h-full flex-col overflow-auto bg-white pb-6 lg:pb-8 pt-8 md:pt-9 2xl:pt-[40px] shadow-xl">
+              <div class="px-6 md:px-[50px] 2xl:pr-[66px]">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">                        
+                        <h2 class="small-hide text-font27 md:text-font30 font-dmserif text-blackesh-100">
+                            {%- if enable_filtering -%}
+                                {{ 'products.facets.filter_button' | t }}
+                            {%- endif -%}
+                        </h2>
+                        <!-- <p class="mobile-facets__count pl-2 text-font20 uppercase md:text-font22">
+                            {%- if results.results_count -%}
+                                {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
+                            {%- elsif results.products_count == results.all_products_count -%}
+                                {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
+                            {%- else -%}
+                                {{
+                                'products.facets.product_count'
+                                | t: product_count: results.products_count, count: results.all_products_count
+                                }}
+                            {%- endif -%}
+                        </p> -->
+                    </div>
+                    <button type="button" x-on:click="open = false; scrollbarremove();" class="">
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.76538 8.50001L16.738 1.52741C17.0873 1.17798 17.0873 0.611469 16.738 0.262072C16.3885 -0.0873575 15.822 -0.0873575 15.4726 0.262072L8.49998 7.23467L1.52741 0.262072C1.17798 -0.0873575 0.611467 -0.0873575 0.262072 0.262072C-0.087324 0.611502 -0.0873572 1.17801 0.262072 1.52741L7.23464 8.50001L0.262072 15.4726C-0.0873572 15.822 -0.0873572 16.3885 0.262072 16.7379C0.6115 17.0874 1.17801 17.0873 1.52741 16.7379L8.49998 9.76534L15.4725 16.7379C15.8219 17.0874 16.3885 17.0873 16.7379 16.7379C17.0873 16.3885 17.0873 15.822 16.7379 15.4726L9.76538 8.50001Z" fill="#333333"></path>
+                        </svg>    
+                    </button>                    
+                </div>
+              </div>
+              <div class="relative mt-4 flex-1 px-6 md:px-[50px] 2xl:pr-[66px]">
+                {{ filter_drawer }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</menu-drawer>
+
+<script>
+    document.querySelector('.filter-icon').addEventListener('click', function(event) {
+		event.preventDefault();
+        document.body.classList.add('open_plp_filter')
+	});
+    document.querySelector('.btn-close-filter').addEventListener('click', function(event) {
+		event.preventDefault();
+        document.body.classList.remove('open_plp_filter')
+	});
+</script>
+
+<style>
+    .mobile-facets__inner {
+        background-color: #fff !important;
+    }
+</style>
+
+
+
+
+
+
+
+

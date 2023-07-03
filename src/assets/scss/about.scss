@@ -1,0 +1,12 @@
+.about_img_sec {    
+    .main-title {        
+        h2 {
+            @apply font-dmserif font-normal text-blackesh-100 text-font22 md:text-font25 xl:text-font30 2xl:text-font35 4xl:text-font40;
+        }
+    }
+    .container {
+        @media (max-width: 767px){
+           @apply px-[25px]  
+        }
+    }    
+}

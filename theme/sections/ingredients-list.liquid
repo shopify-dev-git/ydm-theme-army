@@ -1,0 +1,389 @@
+{{ 'ingredients-list.css' | asset_url | stylesheet_tag }}
+{% render 'link', href: href %}
+
+{{ 'content-drawer.css' | asset_url | stylesheet_tag }}
+{% render 'link', href: href %}
+
+<style>
+    :root .color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+</style>
+{%- if section.settings.show_desktop and section.settings.show_mobile -%}
+  {% assign classess = 'hiddden' %}
+  {% assign btn_classess = '' %}
+  {%- elsif section.settings.show_desktop == false and section.settings.show_mobile -%}
+  {% assign classess = 'hiddden md:flex' %}
+  {% assign btn_classess = 'md:hidden' %}
+  {%- elsif section.settings.show_desktop == false and section.settings.show_mobile == false -%}
+  {% assign btn_classess = 'hidden' %}
+  {% assign classess = '' %}
+{%- endif -%}
+<section class="ingredients-section pt-9 pb-14 md:py-12 md:pb-14 lg:py-16 xl:py-p70 2xl:py-[90px] 4xl:py-[100px] section-{{section.id}}" id="shopify-{{ section.id }}">
+    <div class="px-5 md:px-12 lg:px-[60px]">
+        <div class="main-title pb-5 md:pb-14 2xl:pb-[70px] 4xl:pb-[85px] text-center text-{{ section.settings.align_text_mobile }} lg:text-{{ section.settings.align_text }}">
+            <h2>{{ section.settings.main_title }}</h2>
+        </div>
+    </div>
+
+  <div class="container">
+    {%- assign ingredients-card = section.blocks | where: 'type', 'ingredients-card' -%}
+    {% assign count = 0 %}
+    {%- if ingredients-card.size > 0 -%}
+      <div class="ingredients-list grid grid-cols-3 lg:grid-cols-4">
+        {%- for block in ingredients-card  -%}
+          {% assign count = count | plus: 1 %}
+          <div class="ingredients-list-card flex {% if count > 6 %}{{classess}}{% endif %}
+            ">
+            {%- if block.settings.ingredients_icon != blank -%}
+              <div class="ingredients-list-img">
+                <img class="lazyload " src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                 data-src="{{ block.settings.ingredients_icon | img_url:'154x' }}" alt="{{ block.settings.ingredients_icon.alt }}">
+              </div>
+            {%- endif -%}
+            <h3>{{ block.settings.title }}</h3>               
+              <a href="javascript:void(0)"  
+                  class="{{ section.settings.button_color_scheme }} {{ section.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}  toggle-ingredients-drawer" {{ block.shopify_attributes }} data-title="{{block.settings.title}}" data-title2="{{block.settings.longtitle}}" data-text="{{block.settings.content}}" data-img1="{{block.settings.Ingredients-drawer-img1 | img_url: '200x' }}">
+                  {{ section.settings.btn_text }}
+                  {% include 'button-arrow' %}
+              </a>                    
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}   
+    <div class="flex justify-center items-center mt-[35px] {% if ingredients-card.size > 6 %}{{btn_classess}}{% endif %}">
+      <a href="#" class="primary-btn view-ingredients">
+        <span class="read-more">
+          {{ section.settings.btn_text1 }}
+        </span>
+        <span class="show-less">
+          {{ section.settings.btn_text_2 }}
+        </span>
+        <svg class="" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.7072 7.28071L14.7071 0.280712C14.5185 0.0985542 14.2659 -0.00224062 14.0037 3.78025e-05C13.7415 0.00231622 13.4907 0.107485 13.3053 0.292894C13.1199 0.478302 13.0147 0.729114 13.0125 0.991311C13.0102 1.25351 13.111 1.50611 13.2931 1.69471L18.5862 6.98771H1.00001C0.734791 6.98771 0.480434 7.09307 0.292896 7.28061C0.105358 7.46814 0 7.7225 0 7.98771C0 8.25293 0.105358 8.50728 0.292896 8.69482C0.480434 8.88236 0.734791 8.98771 1.00001 8.98771H18.5862L13.2931 14.2807C13.1976 14.373 13.1214 14.4833 13.069 14.6053C13.0166 14.7273 12.989 14.8585 12.9879 14.9913C12.9867 15.1241 13.012 15.2558 13.0623 15.3787C13.1126 15.5016 13.1868 15.6132 13.2807 15.7071C13.3746 15.801 13.4863 15.8753 13.6092 15.9255C13.7321 15.9758 13.8638 16.0011 13.9965 16C14.1293 15.9988 14.2605 15.9712 14.3825 15.9188C14.5045 15.8664 14.6149 15.7902 14.7071 15.6947L21.7072 8.69471C21.8947 8.50718 22 8.25288 22 7.98771C22 7.72255 21.8947 7.46824 21.7072 7.28071Z" fill="white"></path>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="relative z-50 research-drawer hidden">
+
+  <div class="fixed inset-0 ease-in-out duration-500 mini-cart-bg bg-opacity-75 close--drawer transition-opacity researchDrawer-bg-overlay" id="researchDrawer-Overlay"></div>
+
+  <div class="fixed top-0 right-0 bottom-0 overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="pointer-events-none fixed inset-y-0 right-0 flex mini-cart-row">
+
+
+        <!-- on click replace to  "translate-x-full to translate-x-0" and body add class to "content-drawer-open"  and remove class hidden from research-drawer -->
+        <div class="pointer-events-auto relative w-screen max-w-[368px] md:max-w-[583px] mini-w-row transform transition ease-in-out duration-300 sm:duration-400 translate-x-0" id="cart-drawer" aria-labelledby="{{ 'templates.cart.cart' | t }}" role="dialog" aria-modal="true">
+          <div class="flex h-full flex-col bg-white ingredients-drawer-list" data-traget="ingredients-drawer-{{forloop.index}}">
+            <div class="flex justify-between items-center content-drawer-header content-drawer-px  border-b border-[#C8C6C8] sticky top-0 pt-9 pb-6 md:pt-[40px] md:pb-[30px] xl:pt-[50px]">
+              <h2 class="drawer-title pr-5">{{ block.settings.title }}</h2>
+              <button type="button" class="mini-cart-close-icon close--drawer">
+                <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.779661 23C0.584746 23 0.38983 22.922 0.233898 22.7661C-0.0779661 22.4542 -0.0779661 21.9864 0.233898 21.6746L21.6746 0.233898C21.9864 -0.0779661 22.4542 -0.0779661 22.7661 0.233898C23.078 0.545763 23.078 1.01356 22.7661 1.32542L1.32542 22.7661C1.16949 22.922 0.974576 23 0.779661 23Z" fill="black"/>
+                  <path d="M22.2203 23C22.0254 23 21.8305 22.922 21.6746 22.7661L0.233898 1.32542C-0.0779661 1.01356 -0.0779661 0.545763 0.233898 0.233898C0.545763 -0.0779661 1.01356 -0.0779661 1.32542 0.233898L22.7661 21.6746C23.078 21.9864 23.078 22.4542 22.7661 22.7661C22.6102 22.922 22.4153 23 22.2203 23Z" fill="black"/>
+                </svg>
+              </button>
+            </div>
+            <div class="content-drawer-body content-drawer-px flex-1 overflow-auto h_commom_customScroll">
+              <div class="content-drawer-body-inr">
+                <div class="grid grid-cols-1 pb-7 md:pb-8">
+                  <img class="lazyload w-full img-1" 
+                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  data-src="{{ block.settings.Ingredients-drawer-img1 | img_url:'451x' }}" 
+                  alt="{{ block.settings.Ingredients-drawer-img1.alt }}">
+                </div>
+                <h2 class="drawer-long-title">{{ block.settings.longtitle }}</h2>
+                <div class="drawer-text"></div>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  {% comment %} .ingredients-list-card.hidden {
+    display: none !important;
+  } {% endcomment %}
+  .view-ingredients.show-less .read-more {
+    display: none;
+  }
+  .view-ingredients.show-less .show-less {
+    display: block;
+  }
+  .view-ingredients .show-less {
+    display: none;
+  }
+  @media (max-width:767px){
+  .hiddden:nth-child(n+7){
+    display: none;}
+  }
+    .hidden_btn{
+    display: none;}
+  @media (min-width:768px){
+    .hiddden:nth-child(n+9){
+    display: none;}
+    {% comment %} .ingredients-list-card.md:flex {
+        display: flex !important;
+    } {% endcomment %}
+  }
+</style>
+
+
+<script>
+  if (document.querySelector('.toggle-ingredients-drawer')) {
+    let toggleDrawerBtn = document
+      .querySelectorAll('.toggle-ingredients-drawer')
+      toggleDrawerBtn
+      .forEach(el => el.addEventListener('click', toggleDrawerContent.bind(this)))
+      document
+      .querySelectorAll('.close--drawer')
+      .forEach(el => el.addEventListener('click', toggleDrawer.bind(this)))
+  }
+  function toggleDrawerContent(event) {
+    event.preventDefault();
+    let target = event.currentTarget;
+    let title = target.getAttribute('data-title')
+    let longtitle = target.getAttribute('data-title2')
+    let text = target.getAttribute('data-text')
+    let img_1_src = target.getAttribute('data-img1')
+    let img_1 = document.querySelector('.img-1')
+    let drawer_title = document.querySelector('.drawer-title')
+    let drawer_longtitle = document.querySelector('.drawer-long-title')
+    let drawer_text = document.querySelector('.drawer-text')
+    if (title != '') {
+      drawer_title.innerHTML = title;
+      drawer_title.classList.remove('hidden')
+    } else {
+      drawer_title.innerHTML = '';
+      drawer_title.classList.add('hidden')
+    }
+    if (longtitle != '') {
+        drawer_longtitle.innerHTML = longtitle;
+      drawer_longtitle.classList.remove('hidden')
+    } else {
+        drawer_longtitle.innerHTML = '';
+        drawer_longtitle.classList.add('hidden')
+    }
+    if (text != '') {
+      drawer_text.innerHTML = text;
+      drawer_text.classList.remove('hidden')
+    } else {
+      drawer_text.innerHTML = '';
+      drawer_text.classList.add('hidden')
+    }
+    if (img_1_src != '') {
+      img_1.setAttribute('src', img_1_src);
+      img_1.classList.remove('hidden')
+    } else {
+      img_1.setAttribute('src', '');
+      img_1.classList.add('hidden')
+    }
+    setTimeout(() => {
+      toggleDrawer()
+    }, "500")
+  }
+  function toggleDrawer() {
+    let drawer_main = document.querySelector('.research-drawer');
+    let drawer = document.querySelector('.mini-w-row')
+    drawer_main.classList.toggle('hidden')
+    document.querySelector('body').classList.toggle('overflow-hidden');
+    if (drawer.classList.contains('translate-x-full')) {
+      drawer
+        .classList
+        .remove('translate-x-full')
+        drawer
+        .classList
+        .add('translate-x-0')
+    } else {
+      drawer
+        .classList
+        .add('translate-x-full')
+        drawer
+        .classList
+        .remove('translate-x-0')
+    }
+  }
+</script>
+<script>
+  if (document.querySelector('.view-ingredients') && document.querySelector('.ingredients-list-card')) {
+    document.querySelector('.view-ingredients').addEventListener('click', function(e) {
+      e.preventDefault();
+      if (document.querySelector('.view-ingredients').classList.contains('show-less')) {
+        document.querySelectorAll('.ingredients-list-card').forEach(function(e, i) {
+          if (i > 5) {
+            e.classList.add('hiddden');
+          }
+        })
+      } else {
+        document.querySelectorAll('.ingredients-list-card').forEach(el => el.classList.remove('hiddden'));
+      }
+      document.querySelector('.view-ingredients').classList.toggle('show-less');
+    })
+  }
+</script>
+{% schema %}
+  {
+    "name": "Ingredients List Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "btn_text1",
+        "label": "Button Text",
+        "default": "Show more"
+      }, {
+        "type": "text",
+        "id": "btn_text_2",
+        "label": "Read Less Text",
+        "default": "VIEW LESS"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_desktop",
+        "label": "Show View All Button On Desktop",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_mobile",
+        "label": "Show View All Button On Mobile",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "main_title",
+        "label": "Heading",
+        "default":"Column"
+    },
+    {
+        "type": "select",
+        "id": "align_text",
+        "label": "Heading alignment Desktop",
+        "default": "center",
+        "options": [
+            {
+                "value": "left",
+                "label": "Left"
+            },
+            {
+                "value": "center",
+                "label": "Centered"
+            },
+            {
+                "value": "right",
+                "label": "Right"
+            }
+        ]
+    },
+    
+    {
+        "type": "select",
+        "id": "align_text_mobile",
+        "label": "Heading Alignment Mobile",
+        "default": "center",
+        "options": [
+            {
+                "value": "left",
+                "label": "Left"
+            },
+            {
+                "value": "center",
+                "label": "Centered"
+            },
+            {
+                "value": "right",
+                "label": "Right"
+            }
+        ]
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label"
+  },
+  {
+    "type": "header",
+    "content": "Button style"
+  },
+  {
+    "type": "select",
+    "id": "button_color_scheme",
+    "label":"Button Style",
+    "default": "link-btn",
+    "options": [
+      {
+        "value": "primary-btn",
+        "label": "Primary Button"
+      },
+      {
+        "value": "secondary-btn",
+        "label": "Secondary Button"
+      },
+      {
+        "value": "link-btn",
+        "label": "Link"
+      }
+    ]
+}
+    ],
+    "blocks": [
+      {
+        "type": "ingredients-card",
+        "name": "Ingredients Card",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "ingredients_icon",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "header",
+            "content": "Ingredients Drawer Details"
+          },
+          {
+            "type": "image_picker",
+            "id": "Ingredients-drawer-img1",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "longtitle",
+            "label": "Heading Row"
+          },
+            {
+            "type": "richtext",
+            "id": "content",
+            "label": "text"
+          }
+         
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Ingredients List Section"
+      }
+    ]
+  }
+{% endschema %}
+
+
+
+
+

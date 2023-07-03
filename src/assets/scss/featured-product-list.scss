@@ -1,0 +1,62 @@
+.home-product-list {
+    .home-product-left {
+        .swiper-pagination-product {
+            @apply flex items-center justify-center gap-[50px];
+            .swiper-pagination-bullet {
+                @apply w-[16px] h-[16px] bg-white rounded-full lg:w-[20px] lg:h-[20px] 2xl:w-[25px] 2xl:h-[25px] opacity-100 absolute left-[10%] bottom-[10%]; 
+                transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
+                transition-duration: .5s;
+                transition-timing-function: cubic-bezier(.4,0,.2,1);               
+                &:hover {
+                    -webkit-animation: pulse-animation 2s infinite;
+                    animation: pulse-animation 2s infinite;
+                    border-radius: 50%;
+                }      
+                &.swiper-pagination-bullet-active {
+                    -webkit-animation: pulse-animation 2s infinite;
+                    animation: pulse-animation 2s infinite;
+                    border-radius: 50%;
+                }                
+            }
+            .swiper-pagination-bullet:nth-child(1){
+                @apply left-[18%] bottom-[10%];
+            }
+            .swiper-pagination-bullet:nth-child(2){
+                @apply left-[47%] bottom-[44%];
+            }
+            .swiper-pagination-bullet:nth-child(3){
+                @apply left-[80%] bottom-[39%];
+            }
+        }
+    }    
+    .home-product-right {
+        .home-product-block {
+            .swiper-button-prev-product {
+                @apply absolute top-[25%] left-[45px] z-20 xl:top-[30%] lg:left-0 xl:-left-12;
+            }
+            .swiper-button-next-product {
+                @apply absolute top-[25%] right-[45px] z-20 xl:top-[30%] lg:right-0 xl:-right-12;
+            }
+        }
+    }
+}
+
+
+@-webkit-keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.4);
+    }
+  
+    100% {
+      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+    }
+  }  
+  @keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.4);
+    }
+  
+    100% {
+      box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+    }
+}

@@ -1,0 +1,38 @@
+.about_img_sec .main-title h2 {
+  font-family: DM Serif Display, sans-serif;
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(75 59 76 / var(--tw-text-opacity))
+}
+@media (min-width: 768px) {
+  .about_img_sec .main-title h2 {
+    font-size: 25px;
+    line-height: 30px
+  }
+}
+@media (min-width: 1280px) {
+  .about_img_sec .main-title h2 {
+    font-size: 30px;
+    line-height: 36px
+  }
+}
+@media (min-width: 1536px) {
+  .about_img_sec .main-title h2 {
+    font-size: 35px;
+    line-height: 40px
+  }
+}
+@media (min-width: 1750px) {
+  .about_img_sec .main-title h2 {
+    font-size: 40px;
+    line-height: 50px
+  }
+}
+@media (max-width: 767px) {
+  .about_img_sec .container {
+    padding-left: 25px;
+    padding-right: 25px
+  }
+}

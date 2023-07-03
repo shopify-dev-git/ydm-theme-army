@@ -1,0 +1,258 @@
+{{ 'ugc-section.css' | asset_url | stylesheet_tag }}
+
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }    
+</style>
+
+<section class="ugc-section relative overflow-hidden py-[45px] sm:py-10 md:py-12 lg:py-14 xl:py-16 section-{{section.id}} color-{{ section.settings.color_scheme }}" data-section-type="collection-section" data-section-id="{{ section.id }}">
+    <div class="container">
+        <div class="text-center mb-[40px] 2xl:mb-[50px]">
+            <div class="flex flex-col gap-[10px] sm:gap-[15px] justify-center items-center sm:flex-row pb-[20px]">
+                <svg class="order-1 sm:order-2" width="118" height="19" viewBox="0 0 118 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.8837 6.79113L12.2361 5.89759L9.70471 0.312778C9.51563 -0.104259 8.85504 -0.104259 8.66597 0.312778L6.13533 5.89759L0.487717 6.79113C0.0238437 6.86487 -0.161399 7.4492 0.163924 7.79408L4.26683 12.15L3.29698 18.308C3.21967 18.7972 3.72411 19.1643 4.14129 18.9241L9.18572 16.0365L14.2301 18.9249C14.6435 19.1627 15.1525 18.8028 15.0745 18.3088L14.1046 12.1508L18.2075 7.79488C18.5328 7.4492 18.3468 6.86487 17.8837 6.79113Z" fill="#CA8685"/>
+                    <path d="M43.3208 6.79113L37.6732 5.89759L35.1418 0.312778C34.9528 -0.104259 34.2922 -0.104259 34.1031 0.312778L31.5725 5.89759L25.9248 6.79113C25.461 6.86487 25.2757 7.4492 25.601 7.79408L29.704 12.15L28.7341 18.308C28.6568 18.7972 29.1612 19.1643 29.5784 18.9241L34.6228 16.0365L39.6673 18.9249C40.0806 19.1627 40.5897 18.8028 40.5116 18.3088L39.5417 12.1508L43.6446 7.79488C43.97 7.4492 43.784 6.86487 43.3208 6.79113Z" fill="#CA8685"/>
+                    <path d="M66.6382 6.79113L60.9906 5.89759L58.4592 0.312778C58.2701 -0.104259 57.6095 -0.104259 57.4205 0.312778L54.8898 5.89759L49.2422 6.79113C48.7783 6.86487 48.5931 7.4492 48.9184 7.79408L53.0213 12.15L52.0515 18.308C51.9742 18.7972 52.4786 19.1643 52.8958 18.9241L57.9402 16.0365L62.9846 18.9249C63.398 19.1627 63.907 18.8028 63.8289 18.3088L62.8591 12.1508L66.962 7.79488C67.2873 7.4492 67.1013 6.86487 66.6382 6.79113Z" fill="#CA8685"/>
+                    <path d="M92.0753 6.79113L86.4277 5.89759L83.8963 0.312778C83.7072 -0.104259 83.0466 -0.104259 82.8576 0.312778L80.3269 5.89759L74.6793 6.79113C74.2155 6.86487 74.0302 7.4492 74.3555 7.79408L78.4584 12.15L77.4886 18.308C77.4113 18.7972 77.9157 19.1643 78.3329 18.9241L83.3773 16.0365L88.4218 18.9249C88.8351 19.1627 89.3441 18.8028 89.2661 18.3088L88.2962 12.1508L92.3991 7.79488C92.7244 7.4492 92.5384 6.86487 92.0753 6.79113Z" fill="#CA8685"/>
+                    <path d="M117.512 6.79113L114.689 6.34436L111.865 5.89759L110.599 3.10519L109.333 0.312778C109.144 -0.104259 108.484 -0.104259 108.295 0.312778L105.764 5.89759L100.116 6.79113C99.6526 6.86487 99.4673 7.4492 99.7927 7.79408L103.896 12.15L102.926 18.308C102.848 18.7972 103.353 19.1643 103.77 18.9241L106.292 17.4803L108.814 16.0365L111.337 17.4807L113.859 18.9249C114.272 19.1627 114.781 18.8028 114.703 18.3088L114.218 15.2298L113.733 12.1508L115.785 9.97283L117.836 7.79488C118.162 7.4492 117.976 6.86487 117.512 6.79113Z" fill="#CA8685"/>
+                </svg>
+                <p class="order-2 sm:order-1">
+                    {{ section.settings.rated_text }}
+                </p>                
+                <p class="order-2 sm:order-1">
+                    {{ section.settings.rated_text_customers }}
+                </p>                
+            </div>                       
+                <h2 class="mb-[30px]">
+                    {{ section.settings.Heading }}
+                </h2>
+                <div class="inline-block max-w-[954px]">
+                    <p>{{ section.settings.sub_text }}</p>
+                </div>
+        </div>
+    </div>
+    <div class="pl-5 md:pl-[30px] lg:px-[50px] 4xl:px-[65px] max-w-[2100px] mx-auto">
+        {%- assign ugc-card = section.blocks | where: 'type', 'ugc-card' -%}
+        {%- if ugc-card.size > 0 -%}
+            <div class="Ugc-row swiper ugc-card-{{ ugc-card.size }} overflow-hidden pb-[34px] lg:pb[43px]">    
+                <div class="swiper-wrapper">
+                    {%- for block in ugc-card  -%}
+                        <div class="swiper-slide">
+                            <div class="Ugc-card">
+                                {%- if block.settings.card-img != blank -%}
+                                    <div class="Ugc-img">
+                                        <img
+                                            class="lazyload"
+                                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+                                            data-src="{{ block.settings.card-img | img_url:'400x' }}" alt="{{ block.settings.card-img.alt }}">
+                                    </div>
+                                {%- endif -%}
+                                <div class="ugc-content">
+                                    <div class="flex items-center justify-between pb-[20px]">
+                                        <div class="text-font10 font-medium uppercase">
+                                            {{ block.settings.sub_title }}
+                                        </div>
+                                        {% render 'instagram-icon' %}
+                                    </div>
+                                    {{ block.settings.content_description }}
+                                    <button class="share-btn" type="button">
+                                        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12.8559 4.59094L7.84963 0.109716C7.78734 0.0541802 7.71034 0.0178475 7.6279 0.0050883C7.54547 -0.00767089 7.46111 0.00368693 7.38497 0.0377954C7.30883 0.0719039 7.24415 0.12731 7.19872 0.197349C7.15329 0.267389 7.12904 0.349078 7.12889 0.432589V2.56486C2.74166 2.58002 -0.675922 7.7655 0.114082 12.704C0.132153 12.7581 0.160733 12.8081 0.198179 12.8512C0.235625 12.8943 0.281199 12.9295 0.332284 12.9549C0.383369 12.9802 0.438957 12.9952 0.495856 12.999C0.552755 13.0028 0.609842 12.9953 0.663839 12.977C0.730732 12.9539 0.790962 12.9148 0.83926 12.8631C0.887557 12.8113 0.922449 12.7485 0.940881 12.6801C1.82612 9.41021 4.30652 7.21943 7.12889 7.26277V9.38854C7.12904 9.47205 7.15329 9.55374 7.19872 9.62378C7.24415 9.69382 7.30883 9.74922 7.38497 9.78333C7.46111 9.81744 7.54547 9.8288 7.6279 9.81604C7.71034 9.80328 7.78734 9.76695 7.84963 9.71141L12.8559 5.23669C12.9012 5.19604 12.9375 5.14627 12.9623 5.09064C12.9872 5.035 13 4.97475 13 4.91381C13 4.85288 12.9872 4.79262 12.9623 4.73699C12.9375 4.68136 12.9012 4.63159 12.8559 4.59094ZM7.99465 8.42642V6.85972C7.99344 6.79974 7.98016 6.74062 7.95562 6.68589C7.93108 6.63116 7.89577 6.58194 7.8518 6.54118C7.78182 6.47843 7.69407 6.43905 7.60073 6.4285C4.85194 6.17714 2.34557 7.75467 0.927895 10.381C1.31316 6.37216 4.13769 3.27994 7.55311 3.43163C7.66792 3.43163 7.77802 3.38597 7.8592 3.30469C7.94038 3.22342 7.98599 3.11318 7.98599 2.99824V1.40121L11.9187 4.91381L7.99465 8.42642Z" fill="#4B3B4C"/>
+                                        </svg>                                                                               
+                                        {{ 'general.share.share_text' | t }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    {%- endfor -%}
+                </div>
+            </div>
+        {%- endif -%}
+        <div class="flex items-center justify-center gap-[16px] lg:gap-[25px]">
+            <div class="swiper-button-prev-ugc swiperArrow">
+                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.265505 8.82189L8.43292 0.280477C8.7913 -0.0934923 9.37193 -0.0934923 9.73121 0.280477C10.0896 0.654446 10.0896 1.26187 9.73121 1.63584L2.21163 9.49953L9.73031 17.3632C10.0887 17.7372 10.0887 18.3446 9.73031 18.7195C9.37193 19.0935 8.79039 19.0935 8.43201 18.7195L0.2646 10.1781C-0.0883503 9.80801 -0.0883503 9.19104 0.265505 8.82189Z" fill="#4B3B4C"/>
+                  </svg>            
+            </div>
+            <div class="swiper-button-next-ugc swiperArrow">
+                <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.7345 8.82189L1.56708 0.280477C1.2087 -0.0934923 0.628071 -0.0934923 0.268785 0.280477C-0.0895951 0.654446 -0.0895951 1.26187 0.268785 1.63584L7.78837 9.49953L0.26969 17.3632C-0.08869 17.7372 -0.08869 18.3446 0.26969 18.7195C0.628071 19.0935 1.20961 19.0935 1.56799 18.7195L9.7354 10.1781C10.0884 9.80801 10.0884 9.19104 9.7345 8.82189Z" fill="#4B3B4C"/>
+                </svg>            
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function docReady(fn){
+      if (document.readyState === "complete" || document.readyState === "interactive"){
+        setTimeout(fn, 1);
+      } else {
+        document.addEventListener("DOMContentLoaded", fn);
+      }
+    }
+    docReady(function(){
+        var swiper = new Swiper(".Ugc-row", {
+            loop: false,     
+            spaceBetween: 20,      
+            navigation: {
+                nextEl: ".swiper-button-next-ugc",
+                prevEl: ".swiper-button-prev-ugc",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1.1,
+                    spaceBetween: 15,
+                },
+                600: {
+                    slidesPerView: 1.4,
+                    spaceBetween: 15,
+                },
+                767: {
+                    slidesPerView: 2,
+                    spaceBetween: 15,
+                },
+                1023: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 15,
+                },
+                1279: {
+                    slidesPerView: 3,
+                    spaceBetween: 15,
+                },
+                1439: {
+                    slidesPerView: 4,
+                    spaceBetween: 15,
+                },
+                1650: {
+                    slidesPerView: 5,
+                    spaceBetween: 15,
+                },
+            }            
+        });
+    })
+</script>
+
+
+{% schema %}
+{
+    "name": "Ugc Section",
+    "settings": [  
+        {
+            "type": "text",
+            "id": "rated_text",
+            "label": "Rated Stars",
+            "default":"Rated 4.7 Stars"
+        }, 
+        {
+            "type": "text",
+            "id": "rated_text_customers",
+            "label": "By Customers",
+            "default":"By 1000 Customers"
+        }, 
+        {
+            "type": "text",
+            "id": "Heading",
+            "label": "Heading",
+            "default":"See why people love our brand"
+        }, 
+        {
+            "type": "text",
+            "id": "sub_text",
+            "label": "Text",
+            "default":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus euismod est et hendrerit. Ut rhoncus ligula in fringilla luctus.Pellentesque dapibus augue eu odio facilisis congue. Maecenas porttitor porta neque, eget tristique neque iaculis ut. Donec tincidunt odio a magna suscipit, non ornare libero molestie."
+        },                
+        {
+            "type": "header",
+            "content": "Style"
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+        "options": [
+            {
+                "value": "default",
+                "label": "Default"
+            },
+            {
+                "value": "scheme-1",
+                "label": "scheme 1"
+            },
+            {
+                "value": "scheme-2",
+                "label": "scheme 2"
+            },
+            {
+                "value": "custom",
+                "label": "custom (Set below)"
+            }
+        ]
+        },
+        {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#847486",
+            "label": "Custom Text Color"
+        },
+        {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#4B3B4C",
+            "label": "Custom Heading Color"
+        },
+        {
+            "type": "color",
+            "id": "section_links_color_scheme",
+            "default": "#4B3B4C",
+            "label": "Custom Link Color"
+        },        
+        {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        }      
+    ],
+    "blocks": [
+        {
+            "type": "ugc-card",
+            "name": "Ugc Card",
+            "limit": 15,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "card-img",
+                    "label": "Image"                    
+                },
+                {
+                    "type": "text",
+                    "id": "sub_title",
+                    "label": "Text",
+                    "default":"I DAY AGO"
+                },                
+                {
+                    "type": "richtext",
+                    "id": "content_description",
+                    "label": "Text",
+                    "default":"<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.</p>"
+                }                               
+            ]
+        }
+    ], 
+    "presets": [
+        {
+            "name": "Ugc Section"
+        }
+    ]
+}
+{% endschema %}
+

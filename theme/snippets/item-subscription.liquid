@@ -1,0 +1,92 @@
+{% if item.selling_plan_allocation == blank and item.product.selling_plan_groups.size > 0 %}
+    {%- assign current_variant = item.product.selected_or_first_available_variant -%}
+    <cart-subscription class="subscription-cart-box pt-[5px] w-full">
+        <input type="hidden" name="selling_plans" value="">
+            <input type="hidden" name="qty" value="{{item.quantity}}">
+            {%- for group in item.product.selling_plan_groups -%}
+                {%- assign downcase_group_name = group.name | downcase | handleize -%}
+                {%- if downcase_group_name contains 'subscribe-' -%}
+                {%- liquid
+                    assign selected_selling_plan = current_variant.selling_plan_allocations.first.selling_plan
+                    assign price_adjustment = selected_selling_plan.price_adjustments.first
+                    assign group = item.product.selling_plan_groups | where: 'id', selected_selling_plan.group_id | first
+                    case price_adjustment.value_type	
+                    when 'percentage'	
+                        assign discount_percent = price_adjustment.value | round
+                        assign discount_absolute = current_variant.price | times: price_adjustment.value | divided_by: 100.0	
+                    when 'fixed_amount'	
+                        assign discount_percent = price_adjustment.value | times: 1.0 | divided_by: current_variant.price | times: 100.0 | round
+                        assign discount_absolute = price_adjustment.value	
+                    when 'price'	
+                        assign discount_percent = current_variant.price | minus: price_adjustment.value | times: 1.0 | divided_by: current_variant.price | times: 100.0	| round
+                        assign discount_absolute = current_variant.price | minus: price_adjustment.value	
+                    endcase	
+                    if discount_percent == 0	
+                    assign discount_text = ''	
+                    elsif discount_format == 'percent' or discount_format == blank	
+                    assign discount_text = discount_percent | append: '%'	
+                    else	
+                    assign discount_text = discount_absolute | money	
+                    endif	
+                -%}
+        <div class="flex items-center text-fon13 text-blackesh-100 font-medium font-inter">
+            <input id="subscription--group-{{forloop.index}}" 
+                type="checkbox" 
+                class="absolute w-0 z-0 opacity-0"
+                name="subscriptions-{{item.product.id}}" 
+                value="subscribe"
+                data-price="{{  current_variant.price | minus: discount_absolute | money }}"
+                data-price_adjustment='{{ price_adjustment | json }}'
+                data-quantity="{{item.quantity}}" data-index="{{ item.index | plus: 1 }}"
+                data-subscribe-submit
+                >
+            <div class="w-[13px] h-[13px] mr-[9px] relative check-mark cursor-pointer">
+                <label for="subscription--group-{{forloop.index}}" class="cursor-pointer absolute inset-0 w-full h-full flex items-center justify-center border border-blackesh-100">
+                    <svg  class="hidden" width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6.99791 0L2.97574 4.00459L1.00209 2.03964L0 3.0372L2.97574 6L8 0.997561L6.99791 0Z" fill="white"/>
+                    </svg>                                    
+                </label>                                                  
+            </div>
+            <label for="subscription--group-{{forloop.index}}" class="text-font13 md:text-fon14 text-blackesh-100 font-medium font-inter cursor-pointer" for="subscription">
+                Subscribe & save <span class="text-puce-100 mr-[6px]">{{discount_text}}</span>
+            </label>
+            <div class="relative">                         
+                <button class="info-button">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C4.81331 0 3.65328 0.351894 2.66658 1.01118C1.67989 1.67047 0.910851 2.60754 0.456725 3.7039C0.0025997 4.80025 -0.11622 6.00665 0.115291 7.17054C0.346802 8.33443 0.918247 9.40352 1.75736 10.2426C2.59648 11.0818 3.66557 11.6532 4.82946 11.8847C5.99335 12.1162 7.19975 11.9974 8.2961 11.5433C9.39246 11.0891 10.3295 10.3201 10.9888 9.33342C11.6481 8.34672 12 7.18669 12 6C11.9981 4.40928 11.3653 2.88427 10.2405 1.75946C9.11573 0.634658 7.59072 0.00190543 6 0ZM6 9.6C5.88133 9.6 5.76533 9.56481 5.66666 9.49888C5.56799 9.43295 5.49109 9.33924 5.44567 9.22961C5.40026 9.11997 5.38838 8.99933 5.41153 8.88294C5.43468 8.76655 5.49183 8.65964 5.57574 8.57573C5.65965 8.49182 5.76656 8.43468 5.88295 8.41153C5.99934 8.38838 6.11998 8.40026 6.22961 8.44567C6.33925 8.49108 6.43295 8.56799 6.49888 8.66665C6.56481 8.76532 6.6 8.88133 6.6 9C6.6 9.15913 6.53679 9.31174 6.42427 9.42426C6.31174 9.53678 6.15913 9.6 6 9.6ZM7.1226 6.2748C6.97138 6.35898 6.84407 6.48025 6.75265 6.6272C6.66122 6.77415 6.60869 6.94195 6.6 7.1148V7.2C6.6 7.35913 6.53679 7.51174 6.42427 7.62426C6.31174 7.73678 6.15913 7.8 6 7.8C5.84087 7.8 5.68826 7.73678 5.57574 7.62426C5.46322 7.51174 5.4 7.35913 5.4 7.2V7.1154C5.40857 6.74018 5.51213 6.37325 5.701 6.04892C5.88987 5.72459 6.15789 5.45343 6.48 5.2608C6.64466 5.15632 6.77125 5.00153 6.84096 4.8194C6.91068 4.63727 6.91981 4.43752 6.867 4.2498C6.8264 4.10215 6.74815 3.96758 6.63993 3.85925C6.53171 3.75092 6.39721 3.67255 6.2496 3.6318C6.11338 3.59374 5.97017 3.58797 5.83133 3.61494C5.69249 3.64192 5.56186 3.7009 5.4498 3.7872C5.34056 3.87107 5.25216 3.97903 5.19149 4.10266C5.13082 4.2263 5.09951 4.36228 5.1 4.5C5.1 4.65913 5.03679 4.81174 4.92427 4.92426C4.81174 5.03678 4.65913 5.1 4.5 5.1C4.34087 5.1 4.18826 5.03678 4.07574 4.92426C3.96322 4.81174 3.9 4.65913 3.9 4.5C3.89782 3.98949 4.08167 3.49568 4.41718 3.1109C4.75269 2.72612 5.21687 2.47673 5.72291 2.40938C6.22896 2.34202 6.74221 2.46131 7.16669 2.74494C7.59116 3.02856 7.89778 3.4571 8.0292 3.9504C8.14452 4.3839 8.11881 4.84286 7.95581 5.26078C7.79281 5.67869 7.50098 6.03385 7.1226 6.2748Z" fill="#4B3B4C"/>
+                    </svg>                            
+                    <div class="details-info  p-[18px] bg-white absolute min-w-[214px]" >
+                        <svg class="info_arrow_btn" width="23" height="12" viewBox="0 0 23 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.5 12L0 0H23L11.5 12Z" fill="white"/>
+                        </svg>                                    
+                        <div class="text-font16 font-semibold text-blackesh-100 pb-[15px] font-inter">
+                            Subscribe & Save {{discount_text}}
+                        </div>
+                        <div class="list-block">
+                            <ul>
+                                <li>Get {{discount_text}} off</li>
+                                <li>Delivers monthly</li>
+                                <li>No commitment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </button>                            
+            </div>
+        </div>                    
+        <select class="subscription-selling-plan select">
+            {% for plan in group.selling_plans %}
+            {% liquid 
+                assign selected = false
+                if forloop.first
+                assign selected = true
+                endif
+            %}
+            <option value="{{ plan.id }}" {% if selected %}selected{% endif %}>
+                Delivery {{ plan.options[0].value | downcase }}
+            </option>
+            {% endfor %}
+        </select>
+    {%- endif -%}
+{%- endfor -%}
+    </cart-subscription>
+{% endif %}

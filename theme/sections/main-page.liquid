@@ -1,0 +1,27 @@
+{%- assign href = 'section-main-page.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<div class="prose prose-slate">
+  <h1>{{ page.title | escape }}</h1>
+  <div class="">
+    {{ page.content }}
+  </div>
+</div>
+
+
+<div class="inner-banner py-9 sm:py-12 md:py-24 bg-gray-400">
+    <div class="max-[1174px] px-5 md:px-[30px] xl:px-[50px]">
+        <div class="text-center">
+            <h2>{{ page.title }}</h2>
+        </div>
+    </div>
+</div>
+
+
+<section class="content-page-sec pt-14 md:pt-16 lg:pt-20 2xl:pt-p85 pb-16 md:pb-20 xl:pb-28 2xl:pb-32">
+    <div class="max-[1174px] px-5 md:px-[30px] xl:px-[50px]">
+        <div class="content-page-row">{{ page.content }}</div>
+  </div>
+</section>
+
+

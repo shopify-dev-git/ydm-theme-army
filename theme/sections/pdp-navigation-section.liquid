@@ -1,0 +1,102 @@
+{%- assign href = 'pdp-navigation-bar.css' | asset_url -%}
+{% render 'link', href: href %}
+<product-tabs class="pdp-navigation-bar bg-gray-900 hidden lg:block">
+    <div class="pdp-navigation-inr">
+        <div class="container">
+            <ul>
+              {%- if product.metafields.tab_title.ydm != blank -%}
+                <li><a class="active" href="#details-section">{{product.metafields.tab_title.ydm}}</a></li>
+              {%- endif -%}
+              {%- if product.metafields.promise_tab.title != blank -%}
+                <li><a href="#promise">{{product.metafields.promise_tab.title}}</a></li>
+              {%- endif -%}
+              {%- if product.metafields.result_tab.ydm != blank -%}
+                <li><a href="#real-result">{{product.metafields.result_tab.ydm}}</a></li>
+              {%- endif -%}
+              {%- if product.metafields.promise_tab.title != blank -%}
+              {%- endif -%}
+                <li><a href="#faq-section">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+</product-tabs>
+<script>
+    if (!customElements.get('product-tabs')) {
+        class ProductTabs extends HTMLElement {
+            constructor() {
+              super();
+              if(! this.querySelector('.pdp-navigation-inr a')){
+                return;
+              }
+              this.tabs_row = this.querySelector('.pdp-navigation-inr');
+              this.tabs_anchor = this.querySelectorAll('.pdp-navigation-inr a');
+              this.active_tab = null;
+              this.tabs_anchor.forEach(el => el.addEventListener('click', this.tab_click.bind(this) ) );
+              window.addEventListener('scroll', this.tabActive.bind(this) );
+              window.addEventListener('resize', this.tabActive.bind(this) );
+              this.tabActive();
+            }
+            tabActive() {
+                this.tabs_anchor.forEach(target => {
+                  this.active_tab && target.classList.remove('active');
+                  var selector = target.getAttribute('href');
+                  var el = null;
+                  if (selector.indexOf('#') != -1) {
+                    el = this.getTarget(target.getAttribute('href'));
+                  }
+                  var mark = 0;
+                  if (el) {
+                    mark = ( _TotalOffsetTop(el)  - this.tabs_row.clientHeight - _TotalOffsetTop(this.tabs_row)  - 10 );
+                  }
+                  if (el && ( mark < 1 ) ) {
+                    this.active_tab = target;
+                  }
+                } );
+                if (this.active_tab) {
+                  this.active_tab.classList.add('active');
+                }
+            }
+            tab_click( event ) {
+                var target = event.currentTarget;
+                var el = this.getTarget(target.getAttribute('href'));
+                if (el) {
+                  window.scrollTo({
+                    behavior: 'smooth',
+                    top: _TotalOffsetTop(el) - this.tabs_row.clientHeight - 70
+                  });
+                  event.preventDefault();
+                }
+            }
+            getTarget(selector) {
+                if (!selector) { return null; }
+                var el = null;
+                try {
+                  el = document.querySelector(selector);
+                } catch (error) {console.log(error)}
+                return el;
+            }
+        }
+        customElements.define('product-tabs', ProductTabs);
+    }
+    var _TotalOffsetTop = function (e) {
+        var offset = 0;
+        do 
+          offset += e.offsetTop;
+        while (e = e.offsetParent);
+        return offset;
+      }
+</script>
+{% schema %}
+{
+    "name": "Product Navigation",
+    "class": "shopify-section-navigation-pdp sticky  z-50",
+    "settings": [                       
+    ],       
+    "presets": [
+        {
+            "name": "Product Navigation"
+        }
+    ]
+}
+{% endschema %}
+

@@ -1,0 +1,175 @@
+
+<div class="collection_list py-p60 md:py-16 2xl:py-[75px] bg-white">
+    <div class="container-custom">
+        <div class="main-title text-center pb-9 lg:pb-12 2xl:pb-p60">
+            <h2 class="pb-4 xl:pb-6 2xl:pb-7">{{ section.settings.title }} </h2>
+            <div class="inline-block">
+                {%- if section.settings.btn_link != blank -%}                    
+                    <a {% if section.settings.btn_link == blank %} role="link" aria-disabled="true"{% else %} 
+                        href="{{ section.settings.btn_link }}"{% endif %} 
+                        class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}" {{ block.shopify_attributes }}>
+                        {{ section.settings.btn_text | escape }}
+                        {% include 'button-arrow' %}
+                    </a>                    
+                {%- endif -%}
+            </div>  
+        </div>                              
+        {%- assign collectionlist = section.blocks | where: 'type', 'collec_card_list' -%}
+        {%- if collectionlist.size > 0 -%}
+            {% comment %} Collection Desktop {% endcomment %}
+            <div class="collection-row grid grid-cols-7 collection-column-{{ collectionlist.size }} hidden xl:grid">
+                {%- for block in collectionlist  -%}
+                    {%- assign collection = block.settings.collection -%}
+                    <a href="{{ collection.url }}" class="collection-card text-center">
+                        <div class="collection-img flex justify-center">                           
+                            <img class="lazyload " src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                 data-src="{{ collection.image | img_url:'157x' }}" alt="">
+                        </div>
+                        <h3 class="mt-[10px] md:mt-[13px] text-font14 md:text-font16 xl:text-font18 2xl:text-font20 font-inter font-semibold">
+                            {{ block.settings.collection.title }}
+                            <span class="text-font11 md:text-font13 lg:text-font14 xl:text-font15 text-puce-400 ml-[5px] font-medium">                                
+                                ({{ collection.all_products_count }})
+                            </span>
+                        </h3>
+                    </a>    
+                {%- endfor -%}
+            </div>
+            {% comment %} Collection Mobile {% endcomment %}
+            <div class="swiper CollectionSwiper xl:hidden overflow-hidden">
+                <div class="swiper-wrapper">
+                    {%- for block in collectionlist  -%}
+                        {%- assign collection = block.settings.collection -%}
+                        <div class="swiper-slide">
+                            <a href="{{ collection.url }}" class="collection-card text-center">
+                                <div class="collection-img flex justify-center">                                    
+                                    <img class="lazyload " src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                         data-src="{{ collection.image | img_url:'100x' }}" alt="">
+                                </div>                                
+                                <h3 class="mt-[10px] md:mt-[13px] text-font14 md:text-font16 xl:text-font20 font-inter font-semibold whitespace-nowrap">
+                                    {{ block.settings.collection.title }}
+                                    <span class="text-font11 md:text-font13 lg:text-font14 xl:text-font15 text-puce-400 ml-[5px] font-medium">                                        
+                                        ({{ collection.all_products_count }})
+                                    </span>
+                                </h3>
+                            </a> 
+                        </div>
+                    {%- endfor -%}                    
+                </div>                
+                <div class="collection-swiper-scrollbar swiper-scrollbar mt-[30px]"></div>
+            </div>
+        {%- endif -%}       
+    </div>
+</div>
+
+
+<script>
+    function docReady(fn){
+      if (document.readyState === "complete" || document.readyState === "interactive"){
+        setTimeout(fn, 1);
+      } else {
+        document.addEventListener("DOMContentLoaded", fn);
+      }
+    }
+    docReady(function(){
+        var swiper = new Swiper(".CollectionSwiper", {
+            loop: false,            
+            breakpoints: {
+                0: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                414: {
+                    spaceBetween: 25,
+                },
+                500: {
+                    slidesPerView: 4,
+                },                
+                767: {
+                    slidesPerView: 5,
+                },
+                850: {
+                    slidesPerView: 6,
+                }
+            },
+            scrollbar: {
+                el: ".collection-swiper-scrollbar",
+                draggable: true
+            },
+        });
+    })
+</script>
+
+{% schema %}
+{
+    "name": "Collection List",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+        },
+        {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Label"
+        },
+        {
+            "type": "header",
+            "content": "Button style"
+        },
+        {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "primary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "type": "collec_card_list",
+            "name": "Collection List",
+            "settings": [
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Featured Collection"
+                }
+            ]
+        }
+    ],     
+    "presets": [
+        {
+            "name": "Collection List"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,265 @@
+<style>
+    :root .section-{{section.id}}.color-custom {
+        --theme-color:{{ section.settings.section_text_color_scheme }};
+        --theme-heading:{{ section.settings.section_heading_color_scheme }};
+        --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+        --theme-link-color:{{ section.settings.section_links_color_scheme }};
+        --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+  </style>
+
+
+<section class="testimonials-section section-{{section.id}} color-{{ section.settings.color_scheme }} py-[40px] lg:py-[83px]">
+    <div class="container">
+        <div class="main_title flex flex-col items-center justify-center pb-[40px] 2xl:pb-[125px]">
+            <div class="review_img pb-5 md:pb-6 xl:pb-7">
+                {%- if section.settings.review_img != blank -%}                           
+                    <img class="lazyload " src="{{ section.settings.review_img | image_url }}" alt="{{ section.settings.review_img.alt }}">   
+                {%- endif -%}
+            </div>
+            <h2>{{ section.settings.title }}</h2>
+        </div>
+
+        <div class="testimonial-main-row overflow-hidden lg:flex lg:flex-row-reverse lg:items-center">
+            {%- assign testimonials-card = section.blocks | where: 'type', 'testimonials-card' -%}
+            <div thumbsSlider="" class="swiper mySwipertestimonials px-[30px] mb-[33px] md:mb-[50px] sm:w-[90%] sm:mx-auto lg:w-[50%] lg:px-[60px]">                
+                <div class="swiper-wrapper">
+                    {%- for block in testimonials-card  -%}
+                        <div class="swiper-slide">
+                            {%- if block.settings.right_img != blank -%}                                
+                                <img class="lazyload " 
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                    data-src="{{ block.settings.right_img | img_url:'642x' }}" 
+                                    alt="{{ block.settings.right_img.alt }}">                                
+                            {%- endif -%}
+                        </div>                  
+                    {%- endfor -%}
+                </div>                        
+            </div>
+            <div class="lg:w-[50%] text-{{ section.settings.align_text_mobile }} lg:text-{{ section.settings.align_text }}">
+                <div class="swiper mySwiper2testimonials overflow-hidden lg:max-w-[610px] lg:ml-0">
+                    <div class="swiper-wrapper">
+                        {%- for block in testimonials-card  -%}
+                            <div class="swiper-slide">
+                                <div class="testimonial-content-card">
+                                    <div class="testimonial-icon inline-block pb-7 lg:pb-8 2xl:pb-12">
+                                        {%- if block.settings.icon != blank -%}                                
+                                            <img class="lazyload " 
+                                                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                data-src="{{ block.settings.icon | img_url:'56x' }}" 
+                                                alt="{{ block.settings.icon.alt }}">                                
+                                        {%- endif -%}
+                                    </div>
+                                    <h3 class="pb-7 lg:pb-8 2xl:pb-12 text-font20 font-medium font-inter italic md:text-font22 lg:text-font25 xl:text-font27 2xl:text-font30">{{ block.settings.content }}</h3>                                
+                                    <div class="description">
+                                        <h5 class="name text-font18 md:text-font19 lg:text-font20 2xl:text-font22 font-medium font-inter pb-[10px]">
+                                            {{ block.settings.name }}
+                                        </h5>
+                                        <div class="definition text-font14 md:text-font16 lg:text-font16  font-normal">
+                                            {{ block.settings.text_2 }}
+                                        </div>
+                                    </div>    
+                                </div>                                                    
+                            </div>              
+                        {%- endfor -%}
+                    </div>                
+                </div>                    
+                <div class="inline-block mt-[25px]">
+                    <div class="flex gap-[17px]">
+                        <div class="swiper-button-prev-test swiperArrow">
+                            <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.265505 8.82189L8.43292 0.280477C8.7913 -0.0934923 9.37193 -0.0934923 9.73121 0.280477C10.0896 0.654446 10.0896 1.26187 9.73121 1.63584L2.21163 9.49953L9.73031 17.3632C10.0887 17.7372 10.0887 18.3446 9.73031 18.7195C9.37193 19.0935 8.79039 19.0935 8.43201 18.7195L0.2646 10.1781C-0.0883503 9.80801 -0.0883503 9.19104 0.265505 8.82189Z" fill="#4B3B4C"/>
+                            </svg>                        
+                        </div>
+                        <div class="swiper-button-next-test swiperArrow">
+                            <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9.7345 8.82189L1.56708 0.280477C1.2087 -0.0934923 0.628071 -0.0934923 0.268785 0.280477C-0.0895951 0.654446 -0.0895951 1.26187 0.268785 1.63584L7.78837 9.49953L0.26969 17.3632C-0.08869 17.7372 -0.08869 18.3446 0.26969 18.7195C0.628071 19.0935 1.20961 19.0935 1.56799 18.7195L9.7354 10.1781C10.0884 9.80801 10.0884 9.19104 9.7345 8.82189Z" fill="#4B3B4C"/>
+                            </svg>                    
+                        </div>                        
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</section>
+
+<script>    
+    docReady(function(){
+        var swiper = new Swiper(".mySwipertestimonials", {
+            effect: "cards",
+            grabCursor: true                    
+        });
+        var swiper2 = new Swiper(".mySwiper2testimonials", {       
+            loop: false,
+            spaceBetween: 30,
+            slidesPerView: 1,   
+            navigation: {
+                nextEl: ".swiper-button-next-test",
+                prevEl: ".swiper-button-prev-test",
+            }, 
+            thumbs: {
+                swiper: swiper,
+            }                             
+        });     
+    })
+</script>
+
+
+
+{% schema %}
+{
+    "name": "Testimonials Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "review_img",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Real people. Real stories."
+        },                    
+        {
+            "type": "header",
+            "content": "Style"
+        },
+        {
+            "type": "select",
+            "id": "align_text",
+            "label": "Text alignment Desktop",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "align_text_mobile",
+            "label": "Text Alignment Mobile",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+        },
+        {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Heading Color"
+        },
+        {
+            "type": "color",
+            "id": "section_sub_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Sub Heading Color"
+          },
+        {
+            "type": "color",
+            "id": "section_links_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Link Color"
+        },        
+        {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        }        
+    ],
+    "blocks": [
+        {
+            "type": "testimonials-card",
+            "name": "Testimonials card",
+            "settings":[
+                {
+                    "type": "image_picker",
+                    "id": "icon",
+                    "label": "icon"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "right_img",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "content",
+                    "label": "Text",
+                    "default":"With lacking confidence trying all known products, I can come across Perfec-Tone services and products. The friendly staff has boosted my confidence tremendously."
+                },
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "name",
+                    "default":"Christine"
+                },
+                {
+                    "type": "text",
+                    "id": "text_2",
+                    "label": "text",
+                    "default":"Executive, Wife, Mom"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Testimonials Section"
+        }
+    ]
+}
+{% endschema %}

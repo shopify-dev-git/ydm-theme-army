@@ -1,0 +1,231 @@
+<style>
+    :root .color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+</style>
+  
+  <section class="image_text_section image-text-fullWidth section-{{section.id}} relative color-{{ section.settings.color_scheme }}" id="shopify-{{ section.id }}">
+      <div class="container mobile_custom">
+          <div class="image_text_row flex flex-col {{section.settings.image_position}}">
+              <div class="image_panel lg:w-1/2 lg:absolute lg:top-0 lg:bottom-0">
+                  <div class="relative image_ratio w-full h-full">
+                    {%- if section.settings.url-image != blank -%}
+                      <img class="lazyload w-full h-full object-cover" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                       data-src="{{ section.settings.url-image | img_url:'960x' }}" alt="{{ section.settings.url-image.alt }}">
+                    {%- endif -%}
+                  </div>
+              </div>
+              <div class="text-black-box flex items-center px-[25px] md:px-0 py-[42px] lg:pt-[10%] lg:pb-[10%]  4xl:pt-[10%] 4xl:pb-[10%] lg:w-1/2">
+                  <div class="text-{{ section.settings.align___text___mobile }} md:text-{{ section.settings.align___text }} w-full lg:max-w-[571px]">
+                      <h2 class="pb-5 md:pb-6 font-dmserif font-normal text-font27 md:text-font30 lg:text-font40">
+                          {{ section.settings.main_title }}
+                      </h2>
+                      <div class="space-y-5 xl:space-y-9 pb-1 font-inter font-normal text-font14 md:text-font16">
+                          {{ section.settings.content_description }}
+                      </div>
+                  </div>
+              </div>  
+          </div>
+      </div>
+  </section>
+  
+  
+  <style>
+        
+        .image_text_section.image-text-fullWidth .flex-col {
+          flex-direction: column !important;
+          @apply px-5 sm:px-6 md:px-10;
+        }
+        @media (min-width: 1024px) {
+          .image_text_section.image-text-fullWidth .flex-row {
+              flex-direction: row !important;
+            }
+            .image_text_section.image-text-fullWidth .flex-row .image_panel {
+              left: auto;
+              right: 0;
+            }
+            .image_text_section.image-text-fullWidth .flex-row .text-black-box {
+                padding-right: 50px;
+            }
+
+            .image_text_section.image-text-fullWidth .flex-row-reverse {
+              flex-direction: row-reverse !important;
+            }
+            .image_text_section.image-text-fullWidth .flex-row-reverse .image_panel {
+              right: auto;
+              left: 0;
+            }
+
+            .image_text_section.image-text-fullWidth .flex-row-reverse .text-black-box {
+                padding-left: 50px;
+            }
+       }
+       @media (min-width: 1440px) {
+            .image_text_section.image-text-fullWidth .flex-row .text-black-box {
+                padding-right: 70px;
+            }
+            .image_text_section.image-text-fullWidth .flex-row-reverse .text-black-box {
+                padding-left: 70px;
+            }
+       }
+  </style>
+  
+  
+  {% schema %}
+  {
+      "name": "Text Image full width",
+      "settings": [
+          {
+              "type": "header",
+              "content": "Image"
+          },
+
+          {
+              "type": "select",
+              "id": "image_position",
+              "label": "Image position (desktop)",
+              "default": "flex-row",
+              "options": [
+                  {
+                      "value": "flex-row",
+                      "label": "Right"
+                  },
+                  {
+                      "value": "flex-row-reverse",
+                      "label": "Left"
+                  }
+              ]
+          },
+          {
+              "type": "image_picker",
+              "id": "url-image",
+              "label": "image"
+          },
+          {
+              "type": "header",
+              "content": "text"
+          },
+          {
+              "type": "text",
+              "id": "main_title",
+              "label": "Heading"
+          },
+          {
+              "type": "richtext",
+              "id": "content_description",
+              "label": "Text"
+          },
+          {
+            "type": "header",
+            "content": "Heading text"
+        },
+        {
+          "type": "select",
+          "id": "align___text",
+          "label": "Text alignment Desktop",
+          "default": "left",
+          "options": [
+              {
+                  "value": "left",
+                  "label": "Left"
+              },
+              {
+                  "value": "center",
+                  "label": "Centered"
+              },
+              {
+                  "value": "right",
+                  "label": "Right"
+              }
+          ]
+        },
+        {
+            "type": "select",
+            "id": "align___text___mobile",
+            "label": "Text Alignment Mobile",
+            "default": "left",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+          {
+              "type": "header",
+              "content": "Style"
+            },
+            {
+              "type": "select",
+              "id": "color_scheme",
+              "label":"Color scheme",
+              "default": "default",
+              "options": [
+                {
+                  "value": "default",
+                  "label": "Default"
+                },
+                {
+                  "value": "scheme-1",
+                  "label": "scheme 1"
+                },
+                {
+                  "value": "scheme-2",
+                  "label": "scheme 2"
+                },
+                {
+                  "value": "custom",
+                  "label": "custom (Set below)"
+                }
+              ]
+          },
+          {
+              "type": "color",
+              "id": "section_text_color_scheme",
+              "default": "#847486",
+              "label": "Custom Text Color"
+          },
+          {
+              "type": "color",
+              "id": "section_heading_color_scheme",
+              "default": "#4B3B4C",
+              "label": "Custom Heading Color"
+          },
+          {
+              "type": "color",
+              "id": "section_background_color_scheme",
+              "default": "#FFF3EE",
+              "label": "Custom Background Color"
+          }
+      ],
+      "presets": [
+          {
+              "name": "Text Image full width"
+          }
+      ]
+  }
+  {% endschema %}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

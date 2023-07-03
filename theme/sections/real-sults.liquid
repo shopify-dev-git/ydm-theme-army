@@ -1,0 +1,59 @@
+{%- if product.metafields.result_tab.ydm != blank -%}
+<section class="real-result-section bg-puce-100 py-[60px] xl:py-[77px] 2xl:py-[100px] 4xl:py-[136px]" id="real-result">
+    <div class="container">
+        <div class="flex flex-col lg:flex-row 2xl:items-center">
+            <div class="details-img w-full lg:w-1/2 2xl:w-[60%] grid grid-cols-2 gap-[5px]">
+                {%- for item in product.metafields.result_image.ydm -%}
+                    {%- assign tag = product.metafields.result_image_tag.ydm -%}
+                    <div class="relative">
+                        {%- if item -%}
+                        <img class="lazyload w-full h-full object-cover" src="{{ item }}" alt="{{item.alt}}">
+                        {%- endif -%}
+                        {%- if tag[forloop.index0] != blank -%}
+                            <div class="h-[27px] px-[20px] bg-white rounded-full border-blackesh-100 absolute left-[14px] top-[14px] text-fon11 font-inter text-blackesh-100 flex justify-center items-center xl:h-[39px] xl:px-[31px] xl:text-fon14 border">
+                                {{tag[forloop.index0]}}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                {%- endfor -%}
+            </div>
+            <div class="details-content mt-[40px] lg:mt-0 flex-1 lg:pl-8 xl:pl-[50px] 2xl:pl-[60px] 4xl:pl-[81px]">
+                <div class="lid-text text-white">{{product.metafields.result_tab.ydm}}</div>
+                <h2 class="title_main text-white">
+                    {{product.metafields.result_section_title.ydm}}
+                </h2>
+                {%- if product.metafields.result_text.ydm != blank -%}
+                    <div class="content-block">
+                        {{product.metafields.result_text.ydm | replace: '<p>', '<p class="text-white">' }}
+                    </div>
+                {%- endif -%}
+                {%- if product.metafields.sub_text.result != blank or product.metafields.bottom_text.ydm != blank -%}
+                <div class="list-block">
+                    <div class="list-title text-white">
+                        {{product.metafields.sub_text.result}}
+                    </div>
+                    {{product.metafields.bottom_text.ydm | replace: '<p>', '<p class="text-white">' }}
+                </div>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+    "name": "Real Sults",    
+    "settings": [ 
+        {
+            "type": "header",
+            "content": "See Metafield app for section content"
+        }                      
+    ],     
+    "presets": [
+        {
+            "name": "Real Sults"
+        }
+    ]
+}
+{% endschema %}
+

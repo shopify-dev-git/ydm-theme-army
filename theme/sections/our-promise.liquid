@@ -1,0 +1,56 @@
+{%- if product.metafields.promise_tab.title != blank -%}
+<section class="our-promise-section bg-white py-[60px] xl:pb-[77px] lg:pt-0" id="promise">
+    <div class="container-custom">
+        <div class="flex flex-col lg:flex-row-reverse 2xl:items-center lg:justify-start">
+            <div class="details-img w-full lg:w-1/2">
+                {%- if product.metafields.right_image.ydm != blank -%}
+                <img class="lazyload w-full h-full object-cover" data-src="{{product.metafields.right_image.ydm}}" alt="{{product.metafields.right_image.ydm.alt}}">
+                {%- endif -%}
+            </div>
+            <div class="details-content mt-[40px] lg:mt-0 flex-1 lg:pr-8 xl:pr-[50px] 2xl:pr-[60px] 4xl:pr-[81px] lg:pt-5 lg:max-w-[749px] 4xl:pt-0">
+                {%- if product.metafields.promise_tab.title != blank -%}
+                <div class="lid-text">{{product.metafields.promise_tab.title}}</div>
+                {%- endif -%}
+                {%- if product.metafields.promise_title.ydm != blank -%}
+                    <h2 class="title_main">
+                        {{product.metafields.promise_title.ydm}}
+                    </h2>               
+                {%- endif -%}
+                {%- if product.metafields.promise.list != blank -%}
+                <div class="list-block grid grid-cols-1">
+                    <div>
+                        {%- if product.metafields.promise_list.ydm != blank -%}
+                            <div class="list-title">
+                                {{product.metafields.promise_list.ydm}}
+                            </div>
+                        {%- endif -%}
+                        <ul>
+                            {%- for item in product.metafields.promise.list -%}
+                                <li>{{item}}</li>
+                            {%- endfor -%}
+                        </ul>
+                    </div>                    
+                </div>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+    "name": "Our Promise",    
+    "settings": [                       
+        {
+            "type": "header",
+            "content": "See Metafield app for section content"
+        } 
+    ],       
+    "presets": [
+        { 
+            "name": "Our Promise"
+        }
+    ]
+}
+{% endschema %}
+

@@ -1,0 +1,207 @@
+.contact-us .contact-row .contact-left .contact-details {
+  position: relative;
+}
+.contact-us .contact-row .contact-left .contact-details .contact-details-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  row-gap: 1rem;
+}
+@media (min-width: 640px) {
+  .contact-us .contact-row .contact-left .contact-details .contact-details-card {
+    flex-direction: column;
+  }
+  .contact-us .contact-row .contact-left .contact-details .contact-details-card {
+    align-items: flex-start;
+  }
+  .contact-us .contact-row .contact-left .contact-details .contact-details-card {
+    justify-content: flex-start;
+  }
+}
+@media (min-width: 768px) {
+  .contact-us .contact-row .contact-left .contact-details .contact-details-card {
+    row-gap: 0.25rem;
+  }
+}
+.contact-us .contact-row .contact-right-form .contact-form .contact-input-row {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-top: 1.25rem;
+}
+.contact-us .contact-row .contact-right-form .contact-form .contact-input-row input::-webkit-outer-spin-button,
+.contact-us .contact-row .contact-right-form .contact-form .contact-input-row input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.contact-us .contact-row .contact-right-form .contact-form .contact-input-row input[type=number] {
+  -moz-appearance: textfield;
+}
+.contact-us .contact-row .contact-right-form .contact-form .submit-btn {
+  margin-top: 10px;
+}
+@media (min-width: 1280px) {
+  .contact-us .contact-row .contact-right-form .contact-form .submit-btn {
+    margin-top: 20px;
+  }
+}
+@media (min-width: 1440px) {
+  .contact-us .contact-row .contact-right-form .contact-form .submit-btn {
+    margin-top: 24px;
+  }
+}
+@media (max-width: 767px) {
+  .contact-us .contact-row .contact-right-form .contact-form .submit-btn .btn_style {
+    width: 100%;
+  }
+}
+.contact-us .contact-input-row {
+  padding-top: 1rem;
+  text-align: right;
+}
+@media (min-width: 1280px) {
+  .contact-us .contact-input-row {
+    padding-top: 1.25rem;
+  }
+}
+.contact-us .contact-input-row input {
+  box-shadow: 0 0 2px transparent;
+  height: 50px;
+  padding-top: 11px;
+  padding-bottom: 13px;
+  width: 100%;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(134 120 135 / var(--tw-border-opacity));
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.contact-us .contact-input-row input:focus {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (min-width: 1536px) {
+  .contact-us .contact-input-row input {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+.contact-us .contact-input-row input:focus {
+  box-shadow: 0 0 2px black;
+}
+.contact-us .contact-input-row input::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.contact-us .contact-input-row input:-ms-input-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.contact-us .contact-input-row input::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.contact-us .contact-input-row textarea {
+  box-shadow: 0 0 2px transparent;
+  height: 140px;
+  padding-top: 11px;
+  padding-bottom: 13px;
+  width: 100%;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(134 120 135 / var(--tw-border-opacity));
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.contact-us .contact-input-row textarea:focus {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+@media (min-width: 1536px) {
+  .contact-us .contact-input-row textarea {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+.contact-us .contact-input-row textarea:focus {
+  box-shadow: 0 0 2px black;
+}
+.contact-us .contact-input-row textarea::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.contact-us .contact-input-row textarea:-ms-input-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+.contact-us .contact-input-row textarea::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+@media (min-width: 1536px) {
+  .contact-us .contact-input-row textarea {
+    height: 161px;
+  }
+}
+.contact-us .contact-input-row .blue-btn {
+  width: 100%;
+}
+.contact-us .right_contact_details .content_description_sec p {
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(134 120 135 / var(--tw-text-opacity));
+}
+
+.contact_info_sec p {
+  color: #867887;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+}
+.contact_info_sec p a {
+  --tw-text-opacity: 1;
+  color: rgb(202 134 133 / var(--tw-text-opacity));
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+.contact_info_sec p a:hover {
+  --tw-text-opacity: 1;
+  color: rgb(75 59 76 / var(--tw-text-opacity));
+}

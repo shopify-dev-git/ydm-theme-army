@@ -1,0 +1,71 @@
+{%- if product.metafields.tab_title.ydm != blank -%}
+<section class="pdp-details-section bg-gray-900 py-[60px] xl:py-[77px]" id="details-section">
+    <div class="container">
+        <div class="flex flex-col lg:flex-row">
+            <div class="details-img w-full lg:w-1/2">
+                {%- if product.metafields.details_section_imag.ydm != blank -%}
+                <img class="lazyload w-full h-full object-cover" data-src="{{product.metafields.details_section_imag.ydm}}" alt="{{product.metafields.details_section_imag.ydm.alt}}">
+                {%- endif -%}
+            </div>
+            <div class="details-content mt-[40px] lg:mt-0 flex-1 lg:pl-8 xl:pl-[50px] 2xl:pl-[60px] 4xl:pl-[81px]">
+                <div class="lid-text">{{product.metafields.tab_title.ydm}}</div>
+                {%- if product.metafields.details_title.ydm != blank -%}
+                    <h2 class="title_main">
+                        {{product.metafields.details_title.ydm}}
+                    </h2>
+                {%- endif -%}
+                <div class="content-block">
+                    {{product.metafields.details_text.ydm}}
+                </div>
+                <div class="list-block grid grid-cols-2">
+                    {%- if product.metafields.list_1.ydm != blank -%}
+                        <div>
+                            {%- if product.metafields.list_1_title.ydm != blank -%}
+                                <div class="list-title">
+                                    {{product.metafields.list_1_title.ydm}}
+                                </div>
+                            {%- endif -%}
+                            <ul>
+                                {%- for item in product.metafields.list_1.ydm -%}
+                                    <li>{{item}}</li>
+                                {%- endfor -%}
+                            </ul>
+                        </div>
+                    {%- endif -%}
+                    {%- if product.metafields.details_list_2.ydm != blank -%}
+                        <div>
+                            {%- if product.metafields.list_2_title.ydm != blank -%}
+                                <div class="list-title">
+                                    {{product.metafields.list_2_title.ydm}}
+                                </div>
+                            {%- endif -%}
+                            <ul>
+                                {%- for item in product.metafields.details_list_2.ydm -%}
+                                    <li>{{item}}</li>
+                                {%- endfor -%}
+                            </ul>
+                        </div>
+                    {%- endif -%}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%- endif -%}
+{% schema %}
+{
+    "name": "PDP Details Section",    
+    "settings": [
+        {
+            "type": "header",
+            "content": "See Metafield app for section content"
+        }                    
+    ],       
+    "presets": [
+        {
+            "name": "PDP Details Section"
+        }
+    ]
+}
+{% endschema %}
+

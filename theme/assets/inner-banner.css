@@ -1,0 +1,6 @@
+.inner-banner .text-black-box a {
+    --tw-text-opacity: 1;
+    color: rgb(75 59 76 / var(--tw-text-opacity));
+    -webkit-text-decoration-line: underline;
+            text-decoration-line: underline
+}

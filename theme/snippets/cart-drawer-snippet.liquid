@@ -1,0 +1,427 @@
+<style>
+    .mini-cart-sec {
+      visibility: hidden;
+    }
+</style>
+{%- assign href = 'mini-cart.css' | asset_url -%}
+{% render 'link', href: href %}
+{%- assign shipping_messaging = section.blocks | where: 'type', 'shipping_messaging' | first -%}
+{%- unless shipping_messaging.settings.enabled == true -%}
+    {%- assign shipping_messaging = blank -%}
+{%- endunless -%}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<cart-drawer class="relative z-50 mini-cart-sec hidden" x-data="{hidden: false}" x-show="$store.cartopen" :class="{'hidden': hidden}">
+    <!--
+        Background backdrop, show/hide based on slide-over state.
+
+        Entering: "ease-in-out duration-500"
+        From: "opacity-0"
+        To: "opacity-100"
+        Leaving: "ease-in-out duration-500"
+        From: "opacity-100"
+        To: "opacity-0"
+    -->
+    <!-- Backdrop -->    
+    <div class="fixed inset-0 ease-in-out duration-500 mini-cart-bg bg-opacity-75 transition-opacity" id="CartDrawer-Overlay" 
+        x-data
+        @click="$store.cartopen = !$store.cartopen" 
+        x-show="$store.cartopen"               
+        x-transition:enter="ease-in-out duration-500"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="ease-in-out duration-500"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+    ></div>
+    <!-- Backdrop -->
+    <div class="fixed top-0 right-0 bottom-0 overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="pointer-events-none fixed inset-y-0 right-0 flex mini-cart-row">
+                <!--
+          Slide-over panel, show/hide based on slide-over state.
+
+          Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+            From: "translate-x-full"
+            To: "translate-x-0"
+          Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+            From: "translate-x-0"
+            To: "translate-x-full" -->
+            <div class="pointer-events-auto relative max-w-[1330px] shadow-xl mini-w-row w-fit" 
+                id="cart-drawer" 
+                    x-show="$store.cartopen"
+                    x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
+                    x-transition:enter-start="translate-x-full"
+                    x-transition:enter-end="translate-x-0"
+                    x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
+                    x-transition:leave-start="translate-x-0"
+                    x-transition:leave-end="translate-x-full"
+                >
+                    <div class="cart-content flex h-full bg-white w-fit">
+                        {%- for item in cart.items -%}
+                            {%- comment -%} Cart upsells {%- endcomment -%}                                
+                            {%- liquid 
+                                assign upsells = item.product.metafields.ydm.upsell.value | map: 'handle'
+                                for upsell_item in upsells 
+                                    if upsell_handles
+                                        assign upsell_handles = upsell_handles | append: ',' | append: upsell_item
+                                    else
+                                        assign upsell_handles = upsell_item
+                                    endif
+                                endfor
+                            -%}
+                            {%- endfor -%}
+                            {%- if upsell_handles -%}
+                                {%- assign upsell_handles = upsell_handles | split: ',' | uniq -%}
+                                {%- assign upsell_handles = upsell_handles | join: '|,|' | prepend: '|' | append: '|' -%}
+                                {%- for item in cart.items -%}
+                                    {%- assign replace_handle = item.product.handle | append: '|' | prepend: '|' -%}
+                                    {%- assign upsell_handles = upsell_handles | replace: replace_handle, '' -%}
+                                {%- endfor -%}
+                                
+                                {%- assign upsell_handles = upsell_handles | split: ',' | uniq -%}
+                                {%- assign found_items = 0 -%}
+                                {%- for product_handle in upsell_handles-%}
+                                    {%- assign handle = product_handle | replace: '|', '' -%}
+                                    {%- if product_handle != empty and all_products[handle].available and found_items < 3 -%}
+                                        {%- assign found = all_products[handle] -%}
+                                        {%- assign found_items = found_items | plus: 1 -%}
+                                        {%- capture upsell_items -%}
+                                            {{ upsell_items }}
+                                            {%- assign found_variant = found.selected_or_first_available_variant -%}
+                                            <div class="upsell-list-col flex items-center p-[15px] 2xl:px-[20px] 2xl:py-[13px] mb-[20px] 2xl:mb-[30px] bg-white">
+                                                <div class="max-w-[100px]">
+                                                    {%- if template == 'cart' -%}
+                                                        <img class="" src="{{ found | image_url: width: 150 }}" alt="{{ found.title }}">
+                                                    {%- else -%}
+                                                        <img class="lazyload" 
+                                                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                            data-src="{{ found | image_url: width: 150 }}" alt="{{ found.title }}">
+                                                    {%- endif -%}
+                                                </div>
+                                                <div class="cart-upsell-content flex flex-col flex-1 pl-5 xl:pl[23px]">
+                                                    <h2 class="text-fon17 xl:text-font18 pb-[10px]">
+                                                        {{ found.title }}
+                                                    </h2>
+                                                <product-form data-type="select">
+                                                    {%- assign old_product = product -%}
+                                                    {%- assign product = found -%}
+                                                    {%- assign id = 'product-upsell-' | append: product.id -%}
+                                                    {% form 'product', product, id: id, class: 'product-content-box', data-product-form: '', data-product-handle: product.handle %}
+                                                    <div class="text-font16 text-blackesh-100 font-semibold font-inter">
+                                                        {% render 'price', product: found %}
+                                                    </div>
+                                                    <div class="flex items-center justify-end mt-[10px]">
+                                                        {%- unless found.has_only_default_variant -%}
+                                                            <div class="relative flex items-center justify-end">
+                                                                <label for="variants-{{product.id}}" class="relative z-10 pointer-events-none text-font12 md:text-font14">
+                                                                    Select
+                                                                </label>
+                                                                <select id="variants-{{product.id}}" name="id" class="border-0 selectBox max-w-[90px] mr-[20px] outline-none rounded-full">
+                                                                    <option value="" disabled="disabled" selected="selected" >{{ 'general.add' | t }}</option>
+                                                                    {%- for variant in found.variants -%}
+                                                                    <option value="{{ variant.id }}">
+                                                                        {{- variant.title }} - {{ variant.price | money -}}
+                                                                    </option>
+                                                                    {%- endfor -%}
+                                                                </select>
+                                                            </div>
+                                                            <button type="submit" class="ml-[10px] bg-puce-100 flex justify-center items-center w-[93px] min-h-[34px] text-font14 xl:text-font15 font-semibold capitalize text-white">
+                                                                {{ 'general.add' | t }}
+                                                            </button>
+                                                        {%- else -%}                                                    
+                                                        <input type="hidden" name="id" value="{{found_variant.id}}">
+                                                        <button type="submit" class="ml-[10px] bg-puce-100 flex justify-center items-center w-[93px] min-h-[34px] text-font14 xl:text-font15 font-semibold capitalize text-white">
+                                                            {{ 'general.add' | t }}
+                                                        </button>
+                                                        {%- endunless -%}
+                                                    </div> 
+                                                    {% endform %}
+                                                    </product-form>
+                                                </div>
+                                            </div>
+                                        {%- endcapture -%}
+                                      
+                                        {%- capture mobileUpsell -%}
+                                        {{mobileUpsell}}
+                                        {%- assign found_variant = found.selected_or_first_available_variant -%}
+                                        <div class="swiper-slide">
+                                            <product-form data-type="select">
+                                                {%- assign old_product = product -%}
+                                                {%- assign product = found -%}
+                                                {%- assign id = 'product-upsell-' | append: product.id -%}
+                                                {% form 'product', product, id: id, class: 'product-content-box', data-product-form: '', data-product-handle: product.handle %}
+                                            <div class="upsell-img-cart relative">
+                                                {%- if template == 'cart' -%}
+                                                    <img class="w-full" src="{{ found | image_url: width: 150 }}" alt="{{ found.title }}">
+                                                {%- else -%}
+                                                    <img class="lazyload w-full" 
+                                                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                        data-src="{{ found | image_url: width: 150 }}" alt="{{ found.title }}">
+                                                {%- endif -%}
+                                                <input type="hidden" name="id" value="{{found_variant.id}}">
+                                                <div class="absolute right-[5px] top-[5px]">
+                                                    <button type="submit">
+                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="12.4682" cy="12.4682" r="12.2671" fill="#CA8685" stroke="#CA8685" stroke-width="0.4022"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M17.9324 8.76605C17.8954 8.12213 17.3995 7.61999 16.8004 7.61999C15.1479 7.61999 10.5942 7.61999 8.94165 7.61999C8.34261 7.61999 7.84666 8.12213 7.8097 8.76605C7.69625 10.7174 7.36172 16.4833 7.24243 18.5436C7.22298 18.8802 7.3332 19.2105 7.54779 19.4564C7.76238 19.7022 8.06124 19.8419 8.37438 19.8419H17.3677C17.6808 19.8419 17.9797 19.7022 18.1943 19.4564C18.4089 19.2105 18.5191 18.8802 18.4996 18.5436L17.9324 8.76605ZM16.9618 8.831L17.5291 18.6085C17.5317 18.6567 17.5162 18.7042 17.4857 18.7391C17.4552 18.774 17.4124 18.7943 17.3677 18.7943H8.37438C8.32964 18.7943 8.28686 18.774 8.25639 18.7391C8.22591 18.7042 8.21036 18.6567 8.21295 18.6085L8.78022 8.831C8.7854 8.73952 8.85607 8.66758 8.94165 8.66758H16.8004C16.886 8.66758 16.9567 8.73952 16.9618 8.831Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.95365 8.66758H15.7884L15.8092 8.66549C15.9025 8.65291 16.2746 8.57609 16.2746 8.14379C16.2746 6.3119 14.8957 4.82642 13.1952 4.82642C12.9799 4.82642 12.7621 4.82642 12.5469 4.82642C10.8464 4.82642 9.46742 6.3119 9.46742 8.14379C9.46742 8.28277 9.51864 8.41616 9.61005 8.51393C9.70081 8.61241 9.82464 8.66758 9.95365 8.66758ZM15.2458 7.61999H10.4963C10.7154 6.61919 11.5504 5.87401 12.5469 5.87401H13.1952C14.1916 5.87401 15.0267 6.61919 15.2458 7.61999Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3848 11.6358V15.8261C12.3848 16.1153 12.6026 16.3499 12.871 16.3499C13.1394 16.3499 13.3573 16.1153 13.3573 15.8261V11.6358C13.3573 11.3466 13.1394 11.112 12.871 11.112C12.6026 11.112 12.3848 11.3466 12.3848 11.6358Z" fill="white"/>
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9261 14.2547H14.816C15.0844 14.2547 15.3022 14.0201 15.3022 13.7309C15.3022 13.4418 15.0844 13.2071 14.816 13.2071H10.9261C10.6577 13.2071 10.4399 13.4418 10.4399 13.7309C10.4399 14.0201 10.6577 14.2547 10.9261 14.2547Z" fill="white"/>
+                                                    </svg>
+                                                    </button>
+                                                </div>                                            
+                                            </div>
+                                            <div class="upsell-content-cart pt-[12px] text-center">
+                                                <h5 class="text-font12 text-blackesh-100 font-medium pb-[5px] font-inter">
+                                                    {{ found.title }}
+                                                </h5>
+                                                <div class="price-box text-font10   text-blackesh-200">
+                                                    {% render 'price', product: found %}
+                                                </div>
+                                            </div>
+                                        {% endform %}
+                                    </product-form>
+                                        </div>
+                                        {%- endcapture -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                                {%- assign product = old_product -%}
+                            {%- endif -%}                     
+                    <div class="upsells-desktop w-[50%] max-w-[562px] bg-puce-800 hidden lg:flex flex-col px-[30px] py-[30px] 2xl:py-[50px] {% if upsell_items == blank %} d-none{% endif %}">
+                        <div class="">
+                            <h3 class="text-font30 text-blackesh-100 pb-[30px] text-center">
+                                {{ section.settings.title }}
+                            </h3>
+                            <div class="upsell_list">
+                                {{ upsell_items }}
+                            </div>
+                        </div>
+                    </div> 
+                        <div class="flex-1 flex flex-col max-w-[820px] ml-auto">
+                            <!-- cart Header  -->
+                            <div class="flex justify-between items-center px-mini-cart py-3 sm:py-5 md:py-6 mini-cart-header md:border-b md:border-gray-1000 xl:py-4 relative flex-wrap">
+                                <h2 class="xl:text-font35 flex-1 text-center sm:text-left m-0 sm:flex-none -mr-2" id="slide-over-title">
+                                    {{ section.settings.cart_title }}
+                                </h2>
+                                <div class="items-center justify-center hidden p-3 sm:flex">                                
+                                    <p class="text-font14 font-medium px-2 md:px-1 text-blackesh-100">
+                                        {{ section.settings.reserve_text }}                                    
+                                    </p>                              
+                                </div>
+                                <button type="button" class="mini-cart-close-icon" x-data @click="$store.cartopen = !$store.cartopen">
+                                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.76538 8.50001L16.738 1.52741C17.0873 1.17798 17.0873 0.611469 16.738 0.262072C16.3885 -0.0873575 15.822 -0.0873575 15.4726 0.262072L8.49998 7.23467L1.52741 0.262072C1.17798 -0.0873575 0.611467 -0.0873575 0.262072 0.262072C-0.087324 0.611502 -0.0873572 1.17801 0.262072 1.52741L7.23464 8.50001L0.262072 15.4726C-0.0873572 15.822 -0.0873572 16.3885 0.262072 16.7379C0.6115 17.0874 1.17801 17.0873 1.52741 16.7379L8.49998 9.76534L15.4725 16.7379C15.8219 17.0874 16.3885 17.0873 16.7379 16.7379C17.0873 16.3885 17.0873 15.822 16.7379 15.4726L9.76538 8.50001Z" fill="#333333" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-font12 font-medium md:text-font14 px-2 md:px-1 text-center text-blackesh-100 pt-[6px] bordxer-b border-gray-1000 pb-[15px] sm:hidden">
+                                {{ section.settings.reserve_text }}                            
+                            </p>                        
+                            <!-- sub navbar -->
+                                {%- if shipping_messaging != blank -%}
+                                    {%- assign has_found_matching_threshold = false -%}
+                                    {%- assign target_prices = shipping_messaging.settings.target_price | split: ',' -%}
+                                    {%- if target_prices.size > 1 -%}
+                                        {%- for threshold in target_prices -%}
+                                            {%- assign threshold_parts = threshold | split: ':' -%}
+                                            {%- assign currency_code = threshold_parts | first | upcase -%}
+                                
+                                            {%- if currency_code == cart.currency.iso_code -%}
+                                                {%- assign threshold = threshold_parts | last  -%}
+                                                {%- assign has_found_matching_threshold = true -%}
+                                                {%- break -%}
+                                            {%- endif -%}
+                                        {%- endfor -%}
+                                    {%- else -%}
+                                        {%- assign threshold = shipping_messaging.settings.target_price -%}
+                                        {%- assign has_found_matching_threshold = true -%}
+                                    {%- endif -%}
+                                    {%- assign target_price = threshold | times: 100 -%}
+                                    {%- if has_found_matching_threshold -%}
+                                        {%- assign total_required_for_free_shipping =  target_price | minus: cart.total_price -%}
+                                <div class="shipping--msg flex items-center justify-center px-mini-cart flex-wrap py-[20px] border-t border-gray-1000">
+                                    <span class="flex justify-center items-center w-[27px] h-[27px] sm:w-8 sm:h-8 bg-puce-700 rounded-full mr-3 order-title">
+                                        <svg width="19" height="13" viewBox="0 0 19 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14.3498 8.27271C13.0292 8.27271 11.9548 9.33302 11.9548 10.6364C11.9548 11.9397 13.0292 13 14.3498 13C15.6706 13 16.7448 11.9397 16.7448 10.6364C16.7448 9.33302 15.6704 8.27271 14.3498 8.27271ZM14.3498 11.8182C13.6894 11.8182 13.1523 11.2881 13.1523 10.6364C13.1523 9.9846 13.6894 9.45454 14.3498 9.45454C15.0102 9.45454 15.5473 9.9846 15.5473 10.6364C15.5473 11.2882 15.0102 11.8182 14.3498 11.8182Z" fill="#CA8685"/>
+                                            <path d="M6.16702 8.27271C4.84641 8.27271 3.77206 9.33302 3.77206 10.6364C3.77206 11.9397 4.84641 13 6.16702 13C7.48763 13 8.56199 11.9397 8.56199 10.6364C8.56199 9.33302 7.48763 8.27271 6.16702 8.27271ZM6.16702 11.8182C5.50662 11.8182 4.96954 11.2881 4.96954 10.6364C4.96954 9.9846 5.50662 9.45454 6.16702 9.45454C6.82723 9.45454 7.3645 9.9846 7.3645 10.6364C7.3645 11.2882 6.82742 11.8182 6.16702 11.8182Z" fill="#CA8685"/>
+                                            <path d="M15.9626 1.50723C15.8608 1.3077 15.6538 1.18182 15.4275 1.18182H12.2741V2.36364H15.0583L16.6886 5.564L17.7588 5.03295L15.9626 1.50723Z" fill="#CA8685"/>
+                                            <path d="M12.5536 10.0652H8.02312V11.247H12.5536V10.0652Z" fill="#CA8685"/>
+                                            <path d="M4.37078 10.0652H2.29518C1.96446 10.0652 1.69646 10.3297 1.69646 10.6561C1.69646 10.9825 1.9645 11.247 2.29518 11.247H4.37082C4.70154 11.247 4.96954 10.9824 4.96954 10.6561C4.96954 10.3297 4.7015 10.0652 4.37078 10.0652Z" fill="#CA8685"/>
+                                            <path d="M18.8743 6.45272L17.6966 4.95575C17.5834 4.81156 17.4088 4.72725 17.2238 4.72725H12.8729V0.590892C12.8729 0.264499 12.6049 0 12.2742 0H2.29518C1.96446 0 1.69646 0.264535 1.69646 0.590892C1.69646 0.917249 1.9645 1.18178 2.29518 1.18178H11.6754V5.31814C11.6754 5.64454 11.9435 5.90903 12.2741 5.90903H16.9306L17.8025 7.01757V10.0651H16.146C15.8153 10.0651 15.5473 10.3296 15.5473 10.656C15.5473 10.9824 15.8153 11.2469 16.146 11.2469H18.4012C18.732 11.2469 19 10.9823 19 10.656V6.81515C19 6.68396 18.9557 6.55633 18.8743 6.45272Z" fill="#CA8685"/>
+                                            <path d="M4.33089 7.07123H1.57667C1.24595 7.07123 0.977943 7.33576 0.977943 7.66212C0.977943 7.98851 1.24598 8.25301 1.57667 8.25301H4.33085C4.66157 8.25301 4.92957 7.98847 4.92957 7.66212C4.92961 7.33576 4.66157 7.07123 4.33089 7.07123Z" fill="#CA8685"/>
+                                            <path d="M5.70798 4.74695H0.598723C0.268041 4.74695 0 5.01149 0 5.33788C0 5.66428 0.268041 5.92877 0.598723 5.92877H5.70798C6.0387 5.92877 6.3067 5.66424 6.3067 5.33788C6.3067 5.01152 6.0387 4.74695 5.70798 4.74695Z" fill="#CA8685"/>
+                                            <path d="M6.68592 2.42272H1.57667C1.24595 2.42272 0.977943 2.68725 0.977943 3.01361C0.977943 3.34 1.24598 3.6045 1.57667 3.6045H6.68592C7.01664 3.6045 7.28464 3.33997 7.28464 3.01361C7.28468 2.68725 7.01664 2.42272 6.68592 2.42272Z" fill="#CA8685"/>
+                                        </svg>                                   
+                                    </span>
+                                    <div class="text-font13 md:text-fon15 lg:text-font16 font-medium text-blackesh-100 delivery_text">
+                                        {%- if total_required_for_free_shipping > 0 -%}
+                                            {%- assign percent_required = total_required_for_free_shipping | divided_by: threshold  -%}
+                                            {%- assign percent_required = 100 | minus: percent_required -%}
+                                            {%- assign replace_text = '{price}' -%}
+                                            {%- assign total_required_for_free_shipping = total_required_for_free_shipping | money -%}
+                                            {%- assign total_required_for_free_shipping = total_required_for_free_shipping | prepend: '<span class="text-puce-100 font-semibold">' | append: '</span>' -%}                                        
+                                            {{shipping_messaging.settings.msg | replace: replace_text, total_required_for_free_shipping }}
+                                        {%- else -%}
+                                            {{shipping_messaging.settings.free_msg}}
+                                            {%- assign percent_required = 100  -%}
+                                        {%- endif -%}
+                                    </div>
+                                    <div class="w-full h-[5px] bg-puce-400 relative mt-[12px]">
+                                        <div class="w-[33.33%] bg-puce-100 absolute top-0 bottom-0 left-0 h-full" style="width: {{percent_required}}%"></div>
+                                    </div>
+                                </div>
+                            {%- endif -%}                                       
+                            {%- endif -%}                                       
+                            <!-- Cart drawer Item -->
+                            <div class="cart-item-list relative flex-1 mx-mini-cart pr-5  mini-cart-body overflow-auto h_commom_customScroll">
+                                <div class="mini-product-list ">
+                                    <!-- {% include 'snippet' 'cart-drawer-item' %} -->
+                                    <!-- {% include 'cart-drawer-item' %} -->
+                                    <form action="{{ routes.cart_url }}" id="CartDrawer-Form" class="cart__contents cart-drawer__form" method="post">
+                                        {%- for item in cart.items -%}
+                                            {% include 'cart-drawer-item' %}
+                                        {%- endfor -%}
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- Checkout Section -->
+                            <div class="mini-cart-checkout mt-3">
+                                <div class="px-mini-cart bg-puce-200 py-[8px]">
+                                    <div class="pdp-stock-message  pdp-stock-sec text-font13 md:text-font14 font-inter text-blackesh-100 font-semibold flex items-center justify-center">
+                                        <span class="mr-3 lg:mr-4 sm:mt-0"></span>
+                                        <random-watching class="block" data-text="RANDOM people are currently looking at this product" data-number="268-319">
+                                            {{ section.settings.people_count }} {{ section.settings.people_text }}
+                                        </random-watching>
+                                    </div>
+                                </div>
+                                <div class="mini-cart-checkout-row text-center bg-puce-700 py-5 sm:pt-7 px-mini-cart">                                
+                                    <div class="cart-footer-top">                                    
+                                        <div class="flex items-center justify-between pb-[15px] md:pb-[20px]">
+                                            <div class="text-fon14 font-medium text-blackesh-100 sm:text-fon19 md:text-font20">
+                                                {{ 'cartdrawer.sub_total' | t }}
+                                            </div>
+                                            <div class="text-fon14 font-medium text-blackesh-100 sm:text-fon19 md:text-font20">
+                                                <span class="cart-subtotal">
+                                                    {%- if cart.total_discount > 0 -%}
+                                                        <span class="line-through text-gray-600">{{ cart.original_total_price | money }}</span>
+                                                    {% endif %}
+                                                    {{ cart.total_price | money }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <div class="text-fon14 font-medium text-blackesh-100 sm:text-fon19 md:text-font20">
+                                                {{ 'cartdrawer.shipping' | t }}
+                                            </div>
+                                            <div class="text-fon14 font-medium text-blackesh-100 sm:text-fon19 md:text-font20">
+                                                {{ 'cartdrawer.free' | t }}
+                                            </div>
+                                        </div>                                                                        
+                                    </div>
+                                    <button type="submit" 
+                                        form="CartDrawer-Form" 
+                                        name="checkout" 
+                                        value="Checkout" 
+                                        class="primary-btn mt-5"{% if cart.item_count < 1 %} disabled="disabled"{% endif %}>                                        
+                                        {{ 'cartdrawer.checkout' | t }}
+                                        <svg class="ml-5" width="25" height="14" viewBox="0 0 25 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0 6.88731H24M23.917 7.08451C22.2561 7.59155 18.8346 9.48451 18.436 13M23.917 6.91549C22.2561 6.40845 18.8346 4.51549 18.436 1" stroke="white" stroke-width="2"/>
+                                        </svg>
+                                    </button>                             
+                                    <div class="text-center text-puce-400 text-font13 sm:text-font15 lg:text-fon16 font-medium pt-[10px]">
+                                        {{ section.settings.expected_title }}                                        
+                                    </div>                               
+                                </div>                            
+                            </div>
+                            <!-- Checkout Section -->
+                            <!-- Customers also bought these -->
+                            <div class="customers-also pt-[20px] pb-[10px] px-mini-cart lg:hidden {% if mobileUpsell == blank %} d-none{% endif %}">
+                                <h4 class="pb-[20px] text-center">
+                                   {{ section.settings.title }}
+                                </h4>
+                                <div class="swiper cartSlider">
+                                    <div class="swiper-wrapper">
+                                        {{ mobileUpsell }}                                 
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination pt-6">
+
+                                </div>
+                                <script>
+                                    function docReady(fn){
+                                      if (document.readyState === "complete" || document.readyState === "interactive"){
+                                        setTimeout(fn, 1);
+                                      } else {
+                                        document.addEventListener("DOMContentLoaded", fn);
+                                      }
+                                    }
+                                    docReady(function(){
+                                        var swiper = new Swiper(".cartSlider", {
+                                            loop: false,           
+                                            spaceBetween: 11,
+                                            breakpoints: {
+                                                0: {
+                                                    slidesPerView: 3,
+                                                    spaceBetween: 11,
+                                                },
+                                                649: {
+                                                    slidesPerView: 5,
+                                                    spaceBetween: 11,
+                                                }, 
+                                                768: {
+                                                    slidesPerView: 8,
+                                                    spaceBetween: 11,
+                                                }                
+                                            },
+                                            pagination: {
+                                                el: ".swiper-pagination",
+                                                clickable: true,
+                                            },
+                                        });
+                                    })
+                                </script>
+                            </div>
+                            <!-- Customers also bought these -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</cart-drawer>
+
+
+<style>
+    .d-none{
+    display: none !important;}
+</style>
+
+<script>
+    let sellingPlanSelectors = document.querySelectorAll('[name="selling-plan"]');
+
+sellingPlanSelectors.forEach(function(element, index) {
+  element.addEventListener('change', function(e) {
+    let data = {
+      'line': e.target.dataset.line,
+      'quantity': e.target.dataset.quantity,
+      'id': e.target.value
+    }
+
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      // Refresh page, or re-render cart
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  });
+});
+
+</script>

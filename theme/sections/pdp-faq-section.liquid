@@ -1,0 +1,94 @@
+{%- capture faq_content -%}
+{{ faq_content }}
+{% for block in section.blocks %}
+<div class="pdp-question-inr">
+    <input class="absolute opacity-0 pdp-question" id="new-question-{{forloop.index}}" type="radio" name="pdp-question-item-new">
+    <label for="new-question-{{forloop.index}}" class="pdp-title-question">
+        {{ block.settings.title }}
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="plus-icon" d="M22 9H0V12H22V9Z" fill="#4B3B4C"/>
+            <path class="minus-icon" d="M10 -2.38419e-07L10 22L13 22L13 -3.69553e-07L10 -2.38419e-07Z" fill="#4B3B4C"/>
+        </svg>                                                                               
+    </label>
+    <div class="pdp-ans-content body_para">
+        {{ block.settings.text }}
+    </div>
+</div>   
+{% endfor %}
+{%- endcapture -%}
+<section class="pdp-faq-section bg-white py-[60px] xl:py-[76px]" id="faq-section">
+    <div class="container">
+        <div class="pb-[40px] lg:pb-[50px] 2xl:pb-[60px] 4xl:pb-[80px] text-center">
+            <h2>{{ section.settings.title }}</h2>
+        </div>
+        <div class="flex flex-col lg:flex-row-reverse 2xl:items-center">
+            <div class="details-img w-full lg:w-[35%] lg:max-w-[543px] 2xl:w-[50%] hidden lg:block">
+                {% if section.settings.image != blank %}
+                <img class="lazyload w-full h-full object-cover lazyload" data-src="{{ section.settings.image | img_url: '500x' }}" alt="{{section.settings.image.alt}}">
+                {% endif %}
+            </div>
+            <div class="details-content lg:mt-0 flex-1 lg:pr-8 xl:pr-[50px] 2xl:pr-[60px] 4xl:pr-[76px]">
+                <div class="pdp-faq-block">
+                    {{ faq_content }}                 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var myRadios = document.getElementsByName('pdp-question-item-new');
+    var setCheck;
+    var x = 0;
+    for(x = 0; x < myRadios.length; x++){
+        myRadios[x].onclick = function(){
+            if(setCheck != this){
+                 setCheck = this;
+            }else{
+                this.checked = false;
+                setCheck = null;
+        }
+        };
+    }
+</script>
+
+{% schema %}
+{
+    "name": "FAQ Section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Frequently asked <br>questions",
+            "default": "Frequently asked questions"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        }
+    ],
+    "blocks": [
+        {
+            "name": "FAQ Item",
+            "type": "faq",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Question"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+
+
+

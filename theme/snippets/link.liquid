@@ -1,0 +1,6 @@
+{%- if href != blank -%}
+
+<link rel="stylesheet" href="{{ href }}" rel="preload" as="style"  onload="this.onload=null;this.rel='stylesheet'" >
+<noscript><link rel="stylesheet" href="{{ href }}" ></noscript>
+
+{%- endif -%}

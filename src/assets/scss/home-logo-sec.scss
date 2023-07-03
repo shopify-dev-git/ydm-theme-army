@@ -1,0 +1,41 @@
+.home-logo-sec {
+    .logoSwiper {
+        .home-logo {
+            min-height: 67px;
+            @apply flex items-center justify-center;
+            img {
+                min-width: 133px;
+            }
+        }
+    }
+}
+
+.home-title-sec {
+    .title-caption {
+        @apply -mx-5 sm:mx-0 md:mx-auto;
+        max-width: 836px;
+        line-height: 1.5 !important;
+        @screen 2xl {
+            max-width: 976px;
+        }
+        span {
+            display: inline-block;
+            font-style: italic;
+            @apply font-bold relative;
+            line-height: 1 !important;
+            &::after {
+                background: linear-gradient(90deg,#FDA7E4 17.27%,#F93EB5 100%);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                content: "";
+                height: 3px;
+                display: block;
+                position: absolute;
+                @screen xl {
+                    bottom: 2px;
+                }
+            }
+        }
+    }    
+}

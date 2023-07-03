@@ -1,0 +1,209 @@
+{
+  "current": {
+    "social_facebook_link": "https:\/\/www.facebook.com\/",
+    "social_instagram_link": "https:\/\/www.instagram.com\/",
+    "social_youtube_link": "https:\/\/www.youtube.com\/",
+    "theme_text_color": "#847486",
+    "theme_heading_color": "#4b3b4c",
+    "theme_sub_heading_color": "#4b3b4c",
+    "theme_links_color": "#ca8685",
+    "theme_background_color": "#ffffff",
+    "header_background": "#ffffff",
+    "header_text": "#453847",
+    "theme_text_color_scheme1": "#ffffff",
+    "theme_heading_color_scheme1": "#ffffff",
+    "theme_links_color_scheme1": "#ffffff",
+    "theme_sub_heading_color_scheme1": "#ffffff",
+    "theme_background_color_scheme1": "#131212",
+    "theme_text_color_scheme2": "#faf9fa",
+    "theme_links_color_scheme2": "#fafafa",
+    "theme_heading_color_scheme2": "#d6e4f1",
+    "theme_sub_heading_color_scheme2": "#ffffff",
+    "theme_background_color_scheme2": "#19965e",
+    "theme_primary_button_background": "#ca8685",
+    "theme_primary_button_border_color": "#ca8685",
+    "theme_secondary_button_background": "#ffffff",
+    "theme_secondary_button_text": "#ca8685",
+    "theme_secondary_button_border_color": "#ca8685",
+    "button_corner_scheme": "sharp",
+    "predictive_search_enabled": false,
+    "predictive_search_show_vendor": false,
+    "predictive_search_show_price": false,
+    "show_secondary_image": true,
+    "show_rating": true,
+    "colors_accent_1": "#ff0000",
+    "sections": {
+      "announcement": {
+        "type": "announcement",
+        "settings": {
+          "enable_bar": true,
+          "home_page_only": false,
+          "background": "#ca8685",
+          "text_color": "#ffffff",
+          "content": "FREE SHIPPING OVER $50",
+          "link": ""
+        }
+      },
+      "header": {
+        "type": "header",
+        "blocks": {
+          "7076653c-e9fe-4f4a-9f0d-52a2e6cbc07d": {
+            "type": "mega_menu",
+            "settings": {
+              "title": "SHOP",
+              "link_list_1": "product-menu",
+              "view_all_1": "View All",
+              "view_all_link_1": "shopify:\/\/collections\/all",
+              "link_list_2": "solutions-for",
+              "view_all_2": "Solutions For",
+              "view_all_link_2": "",
+              "link_list_3": "what-s-new",
+              "view_all_3": "",
+              "view_all_link_3": "",
+              "product_list": [
+                "copy-of-clarifying-cleanser",
+                "copy-of-copy-of-clarifying-cleanser"
+              ]
+            }
+          }
+        },
+        "block_order": [
+          "7076653c-e9fe-4f4a-9f0d-52a2e6cbc07d"
+        ],
+        "settings": {
+          "logo": "shopify:\/\/shop_images\/logo.png",
+          "navigation_menu": "main-menu",
+          "navigation_menu_2": "header-2"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "51860a37-35cc-48fa-a1cf-5c53fadc323c": {
+            "type": "image",
+            "settings": {
+              "social-media-item-url": "#"
+            }
+          },
+          "7009e05a-598d-4d49-a30c-9f571be82c2e": {
+            "type": "image",
+            "settings": {
+              "social-media-item-url": "#"
+            }
+          },
+          "fc1168c9-6572-4650-8ff7-874fecb85c7b": {
+            "type": "image",
+            "settings": {
+              "social-media-item-url": "#"
+            }
+          }
+        },
+        "block_order": [
+          "51860a37-35cc-48fa-a1cf-5c53fadc323c",
+          "7009e05a-598d-4d49-a30c-9f571be82c2e",
+          "fc1168c9-6572-4650-8ff7-874fecb85c7b"
+        ],
+        "settings": {
+          "Show-newsletter-sign-up": true,
+          "subscribe-title": "Sign up for 10% off your first orderand discover the best new beauty first.",
+          "product_title": "Products",
+          "products_menu": "product-menu",
+          "about_heading": "About",
+          "navigation_menu": "footer",
+          "help_heading": "HELP",
+          "help_menu": "help-menu",
+          "Copy_right_text": "© 2022 YDM Themes",
+          "Copy_right_text_sub": "Designed by",
+          "your_digital_media_url": "#",
+          "your_digital_media_text": "Your Digital Media",
+          "color_scheme": "custom",
+          "section_text_color_scheme": "#dad7da",
+          "section_heading_color_scheme": "#ffffff",
+          "section_sub_heading_color_scheme": "#ffffff",
+          "section_links_color_scheme": "#b5afb5",
+          "section_background_color_scheme": "#453847"
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "blocks": {
+          "2b28a350-4f0a-4c6f-b790-6a3f88d17f6f": {
+            "type": "shipping_messaging",
+            "settings": {
+              "enabled": true,
+              "target_price": "150",
+              "free_msg": "<p>You've qualified for <strong>express shipping!<\/strong><\/p>",
+              "msg": "<p>Spend {price} more to get a <strong>express delivery<\/strong>!<\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "2b28a350-4f0a-4c6f-b790-6a3f88d17f6f"
+        ],
+        "settings": {
+          "cart_title": "Your Cart",
+          "reserve_text": "If you order in next 12 minutes, the order will be shipped today",
+          "people_count": "235 people",
+          "people_text": "235 people are checking out now",
+          "expected_title": "Expected Delivery: Mon 21 Dec",
+          "title": "Customers also bought these"
+        }
+      },
+      "subscribe-modal": {
+        "type": "subscribe-modal",
+        "settings": {
+          "enable_bar": false,
+          "delay_popup_secounds": 3,
+          "image": "shopify:\/\/shop_images\/Rectangle_635.jpg",
+          "webcome_text": "WELCOME",
+          "title": "Enjoy 10% off your first purchase",
+          "submit_btn_text": "UNLOCK 10% OFF",
+          "label_sub": "When you join the list",
+          "info_text": "*Not valid with other codes and limited time promotions. By completing this form, you are signing up to receive our emails and can unsubscribe at any time",
+          "button_color_scheme": "primary-btn"
+        }
+      },
+      "product-sticky-atc": {
+        "type": "product-sticky-atc",
+        "settings": {}
+      },
+      "customers-login": {
+        "type": "customers-login",
+        "settings": {
+          "login_image": "shopify:\/\/shop_images\/login_c8166206-b30c-4ea4-a02c-5766b5302765.jpg",
+          "register_image": "shopify:\/\/shop_images\/register_2529ccd3-cc0b-4ac9-b11a-54b66528cf5b.jpg"
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "7612553728132747764": {
+        "type": "shopify:\/\/apps\/stamped-product-reviews-ugc\/blocks\/net-promoter-score-form-modal\/a103faaf-2125-4b0e-89fa-de5149736723",
+        "disabled": true,
+        "settings": {
+          "email": "",
+          "name": "",
+          "title": "",
+          "message": "Enable advanced features and increase your monthly order limit to match your business's needs.",
+          "reason": "",
+          "thank_you": "",
+          "label_name": "",
+          "label_email": ""
+        }
+      },
+      "5822432907971180753": {
+        "type": "shopify:\/\/apps\/bundle-bear-volume-discounts\/blocks\/widget\/8301eac6-7eb6-487c-92f6-ccde92f1db50",
+        "disabled": false,
+        "settings": {}
+      },
+      "8257630261509358238": {
+        "type": "shopify:\/\/apps\/yotpo-subscriptions\/blocks\/app-embed-block\/ef25e582-ada5-4bb0-b4e7-f94e97ab1bb4",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {}
+  }
+}

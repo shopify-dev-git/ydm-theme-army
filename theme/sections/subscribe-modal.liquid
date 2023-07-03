@@ -1,0 +1,282 @@
+{%- capture subscribe_modal_popup -%}
+<newsletter-popup class="" x-data="{open: false, hidden: false}"
+	x-init="setTimeout(()=>{open = true;},{{ section.settings.delay_popup_secounds | times: 1000 }})"
+>	
+	<div class="relative z-[99999] hidden" :class="{'hidden': hidden}" x-show="open" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+	<!--
+		Background backdrop, show/hide based on modal state.
+		Entering: "ease-out duration-300"
+		From: "opacity-0"
+		To: "opacity-100"
+		Leaving: "ease-in duration-200"
+		From: "opacity-100"
+		To: "opacity-0"
+	-->
+	<div class="popup-overlay fixed inset-0 bg-black transition-opacity bg-opacity-50" 		
+		x-transition:enter="ease-out duration-300"
+		x-transition:enter-start="opacity-0"
+		x-transition:enter-end="opacity-100"
+		x-transition:leave="ease-in duration-200"
+		x-transition:leave-start="ease-in duration-200"
+		x-transition:leave-end="opacity-0"
+	></div>
+
+	<div class="fixed inset-0 z-10 overflow-y-auto">
+		<div class="flex min-h-full items-end justify-center text-center md:items-center md:p-4">
+		<!--
+			Modal panel, show/hide based on modal state.
+
+			Entering: "ease-out duration-300"
+			From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+			To: "opacity-100 translate-y-0 sm:scale-100"
+			Leaving: "ease-in duration-200"
+			From: "opacity-100 translate-y-0 sm:scale-100"
+			To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+		-->
+		<div class="popup-container relative transform overflow-hidden bg-white text-left shadow-xl transition-all md:my-8 sm:w-full max-w-[851px]"
+			x-show="open"
+			x-on:click.away="open = false"
+			x-transition:enter="ease-out duration-300"
+			x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+			x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+			x-transition:leave="ease-in duration-200"
+			x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+			x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+		>
+			<div class="bg-puce-300 md:bg-white">
+				<div class="flex md:flex-row">
+					<div class="img-col w-full md:max-w-[367px] md:w-[40%] lg:w-auto hidden md:block">						
+						{%- if section.settings.image != blank -%}           
+						<!-- Desktop Img -->
+							<img 
+								class="lazyload w-full h-full" 
+								src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+								data-src="{{ section.settings.image | img_url: '600x' }}" 
+								alt="{{ section.settings.image.alt }}">  
+						{%- endif -%}
+					</div>
+					<div class="p-5 md:px-8 md:py-7 lg:px-[47px] flex flex-col md:flex-1">
+						<div class="flex">
+							<button  type="button" class="ml-auto" data-close-popup>
+								<svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M9.76538 8.50001L16.738 1.52741C17.0873 1.17798 17.0873 0.611469 16.738 0.262072C16.3885 -0.0873575 15.822 -0.0873575 15.4726 0.262072L8.49998 7.23467L1.52741 0.262072C1.17798 -0.0873575 0.611467 -0.0873575 0.262072 0.262072C-0.087324 0.611502 -0.0873572 1.17801 0.262072 1.52741L7.23464 8.50001L0.262072 15.4726C-0.0873572 15.822 -0.0873572 16.3885 0.262072 16.7379C0.6115 17.0874 1.17801 17.0873 1.52741 16.7379L8.49998 9.76534L15.4725 16.7379C15.8219 17.0874 16.3885 17.0873 16.7379 16.7379C17.0873 16.3885 17.0873 15.822 16.7379 15.4726L9.76538 8.50001Z" fill="#333333"></path>
+								</svg>
+							</button>
+						</div>							
+						<div class="text-center md:text-left">
+							<h5 class="text-font16 text-puce-400 font-normal pb-[20px] md:pb-[15px]">
+								{{ section.settings.webcome_text }}
+							</h5>
+							<h2 class="lg:text-font35 pb-[40px]">
+								{{ section.settings.title }}
+							</h2>
+						</div>												
+						<h6 class="text-font16 font-normal text-puce-400 pb-4 font-inter">
+							{{ section.settings.label_sub }}
+						</h6>
+
+						{%- assign formId = section.id | prepend: 'ContactForm' -%}
+						{% form 'customer', id: formId, class: 'contact-form' %}
+						<input type="hidden" name="contact[tags]" value="newsletter">
+							<div class="mb-3 w-full">
+								<!-- {{ 'subscribe.email' | t }} -->
+								<input 
+									type="email" 
+									name="contact[email]" 
+									class="w-full border border-black bg-white text-black text-font14 min-h-[42px] black_placeholder px-5"
+									id="subscribe-email--{{ section.id }}" 
+									value="{{ form.email }}"
+									placeholder="EMAIL"
+									value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+									aria-required="true"
+									{% if form.errors contains 'email' %}
+									aria-invalid="true"
+									aria-describedby="{{ formId }}-email-error"
+									{% else %}
+									{%- endif -%}
+									required/>
+							</div>
+						
+							<div class="contact-btn flex">
+								<!-- {{ 'submit.button_label' | t }} -->
+								<input type="submit" value="{{ 'templates.contact.form.subscribe' | t }}" class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }} w__full__btn" data-submit-form>
+							</div>
+						{% endform %}
+
+						{% comment %} <h2>{{ customer.accepts_marketing | json }}</h2> {% endcomment %}
+						<div class="text-center md:text-left">
+							<div class="inline-block">
+								<button type="button" class="link-btn uppercase sharp standard text-font12 mt-[16px] md:mb-[30px]" data-close-popup>
+									{{ 'templates.contact.form.no_thanks' | t }}
+								</button>
+							</div>						
+							<div class="mt-auto pt-[29px]">
+								<p class="text-font12">
+									{{ section.settings.info_text }}
+								</p>
+							</div>
+						</div>
+					</div>										
+				</div>					
+			</div>        
+		</div>
+		</div>
+	</div>
+	</div>
+</newsletter-popup>
+{%- endcapture -%}
+
+{%- if section.settings.enable_bar -%}
+	{%- if customer -%}
+		{%- if customer.accepts_marketing -%}
+			{%- else -%}
+			{{ subscribe_modal_popup }}
+		{%- endif -%}
+	{%- else  -%}
+	{%- if customer.accepts_marketing -%}
+		{%- else -%}
+		{{ subscribe_modal_popup }}
+	{%- endif -%}
+	{%- endif -%}
+{%- endif -%}
+<script>
+	if (!customElements.get('newsletter-popup')) {
+		class CustomPopup extends HTMLElement {
+			constructor() {
+			super();
+				this.popup = this.querySelector('.popup-container');
+				if(!this.popup){
+					return;
+				}
+				this.popupOverlay = this.querySelector('.popup-overlay');
+				if(!this.popupOverlay){
+					return;
+				}
+				this.querySelectorAll('[data-close-popup]').forEach(
+					(button) => button.addEventListener('click', this.onClick.bind(this))
+				);
+				this.form = this.querySelector('form');
+				this.btn = this.querySelector('[data-submit-form]');
+				this.btn.addEventListener('click', this.submitForm.bind(this));
+				const expirationDuration = 1000 * 60; // 12 hours
+				const prevCustomer = localStorage.getItem("customer");
+				const currentTime = new Date().getTime();
+				const notCustomer = prevCustomer == undefined;
+				const prevCustomerExpired = prevCustomer != undefined && currentTime - prevCustomer > expirationDuration;
+				if (notCustomer || prevCustomerExpired) {
+				} else {
+					this.classList.add('hidden')
+				}
+			}
+			submitForm(event){
+				event.preventDefault();
+				const currentTime = new Date().getTime();
+				localStorage.setItem("customer", currentTime);
+				this.form.submit();
+			}
+			onClick(event) {
+				event.preventDefault();
+				const currentTime = new Date().getTime();
+				localStorage.setItem("customer", currentTime);
+				this.popupOverlay.classList.add('opacity-0');
+				this.popup.classList.add('ease-in', 'duration-200', 'opacity-0', 'translate-y-4', 'sm:translate-y-0', 'sm:scale-95')
+				setTimeout(() => {
+				this.classList.add('ease-in', 'duration-200', 'hidden');
+				}, 500);
+			}
+		}
+		customElements.define('newsletter-popup', CustomPopup);
+	}
+</script>
+{% schema %}
+{
+  "name": "Subscribe Popup",
+  "class": "shopify-section-announcement",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_bar",
+      "label": "Enable Popup",
+      "default": true
+    },
+	{
+		"type": "range",
+		"id": "delay_popup_secounds",
+		"label": "Delay popup (seconds)",
+		"min": 1,
+		"max": 60,
+		"step": 1,
+		"default": 1,
+		"info":"Delay is disabled in theme editor for visibility"
+	},
+	{
+		"type": "header",
+		"content": "text"
+	},
+	{
+		"type": "image_picker",
+		"id": "image",
+		"label": "Image"
+	},
+	{
+		"type": "text",
+		"id": "webcome_text",
+		"label": "Text",
+		"default":"WELCOME"
+	},
+	{
+		"type": "text",
+		"id": "title",
+		"label": "Heading",
+		"default":"Enjoy 10% off your first purchase"
+	},
+	{
+		"type": "text",
+		"id": "submit_btn_text",
+		"label": "Button Text",
+		"default":"UNLOCK 10% OFF"
+	},	
+	{
+		"type": "text",
+		"id": "label_sub",
+		"label": "Text",
+		"default":"When you join the list"
+	},
+	{
+		"type": "text",
+		"id": "info_text",
+		"label": "Text",
+		"default":"*Not valid with other codes and limited time promotions. By completing this form, you are signing up to receive our emails and can unsubscribe at any time"
+	},
+	{
+		"type": "header",
+		"content": "Button style"
+	  },
+	  {
+		"type": "select",
+		"id": "button_color_scheme",
+		"label":"Button Style",
+		"default": "primary-btn",
+		"options": [
+		  {
+			"value": "primary-btn",
+			"label": "Primary Button"
+		  },
+		  {
+			"value": "secondary-btn",
+			"label": "Secondary Button"
+		  },
+		  {
+			"value": "link-btn",
+			"label": "Link"
+		  }
+		]
+	  }	
+  ]
+}
+{% endschema %}
+
+
+
+
+

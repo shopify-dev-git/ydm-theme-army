@@ -1,0 +1,246 @@
+{{ 'slideshow.css' | asset_url | stylesheet_tag }}
+
+<section class="Slideshow" id="shopify-{{section.id}}">
+    <div class="swiper slidershow relative overflow-hidden">
+        {%- assign slider-show = section.blocks | where: 'type', 'slider-show' -%}
+        {%- if slider-show.size > 0 -%}
+            <div class="swiper-wrapper slider-show-{{ slider-show.size }}">
+                {%- for block in slider-show  -%}
+                    {%- if block.settings.content-alignment == 'top-left' -%}
+                            {%- assign classes = 'justify-start items-start' -%}
+                        {%- elsif block.settings.content-alignment == 'top-center' -%}
+                            {%- assign classes = 'justify-start items-center' -%}       
+                        {%- elsif block.settings.content-alignment == 'top-right' -%}
+                            {%- assign classes = 'justify-start items-end' -%} 
+                            
+                        {%- elsif block.settings.content-alignment == 'middle-left' -%}
+                            {%- assign classes = 'justify-center items-start' -%}     
+                        {%- elsif block.settings.content-alignment == 'middle-center' -%}
+                            {%- assign classes = 'justify-center items-center' -%}       
+                        {%- elsif block.settings.content-alignment == 'middle-right' -%}
+                            {%- assign classes = 'justify-center items-end' -%} 
+
+                        {%- elsif block.settings.content-alignment == 'bottom-left' -%}
+                            {%- assign classes = 'justify-end items-start' -%}     
+                        {%- elsif block.settings.content-alignment == 'bottom-center' -%}
+                            {%- assign classes = 'justify-end items-center' -%}       
+                        {%- elsif block.settings.content-alignment == 'bottom-right' -%}
+                            {%- assign classes = 'justify-end items-end' -%} 
+                      {%- endif -%}
+                      {% comment %} id="template--15846084968605__Slideshow/{{ block.id }}" {% endcomment %}
+                    <div class="Slideshow_column swiper-slide" {{ block.shopify_attributes }}  data-slide="{{forloop.index0}}">
+                        <div class="container">
+                            <div class="slider_img absolute left-0 right-0 top-0 bottom-0 z-0">
+                                {%- if block.settings.desktop-image != blank -%}
+                                    <img src="{{ block.settings.desktop-image | image_url }}" class="w-full h-full object-cover desktop_image hidden md:block" alt="{{ block.settings.desktop-image.alt }}">
+                                {%- endif -%}
+                                {%- if block.settings.mobile-image != blank -%}
+                                    <img src="{{ block.settings.mobile-image | image_url }}" class="w-full h-full object-cover mobile_image md:hidden" alt="{{ block.settings.mobile-image.alt }}">
+                                {%- endif -%}
+                            </div>
+                            <div class="Slide-caption relative z-10 flex flex-col {{classes}}">
+                                <h2 class="pb-5">
+                                    {{ block.settings.sub_title }}
+                                </h2>
+                                <div class="pb-5">
+                                    {{ block.settings.content_description }}
+                                </div>
+                                {% comment %} <div class="dbl_btn pb-5">
+                                    {%- if block.settings.button_label_see_more != blank -%}
+                                            <a {% if block.settings.button_link_see_more == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_see_more }}"{% endif %} class="primary-btn white-btn" {{ block.shopify_attributes }}>
+                                                {{ block.settings.button_label_see_more | escape }}
+                                            </a>
+                                    {%- endif -%}
+                                    {%- if block.settings.button_label_shop_now != blank -%}
+                                        <a {% if block.settings.button_link_shop_now == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.button_link_shop_now }}"{% endif %} class="primary-btn white-btn" {{ block.shopify_attributes }}>
+                                            {{ block.settings.button_label_shop_now | escape }}
+                                        </a>
+                                    {%- endif -%}
+                                </div> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                {%- endfor -%}
+            </div>
+        {%- endif -%}
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>
+
+
+
+<script>
+    if (Shopify.designMode) {        
+        document.addEventListener('shopify:block:select', function(event) {
+            {% comment %} console.log('target test', event.target) {% endcomment %}
+            var swiperEl = event.target.closest('.slidershow');
+            var index = event.target.dataset.slide;
+            swiperEl.swiper.slideTo(index)
+        });
+    }
+</script>
+
+<script>
+    function docReady(fn){
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive"){
+        // call on next available tick
+        setTimeout(fn, 1);
+        } else {
+        document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+    docReady(function(){
+        var swiper = new Swiper("#shopify-{{section.id}} .slidershow", {
+            slidesPerView: 1,
+            slideToClickedSlide:true,
+            navigation: {
+                nextEl: "#shopify-{{section.id}} .swiper-button-next",
+                prevEl: "#shopify-{{section.id}} .swiper-button-prev",
+            }
+        });    
+    });
+</script>
+
+
+<script></script>
+
+
+{% schema %}
+{
+    "name": "Slide Show",
+    "blocks": [
+        {
+            "type": "slider-show",
+            "name": "slide-show",
+            "limit": 4,
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "desktop-image",
+                    "label": "Desktop Image"                    
+                },
+                {
+                    "type": "image_picker",
+                    "id": "mobile-image",
+                    "label": "Mobile Image"                    
+                },
+                {
+                    "type": "header",
+                    "content": "Slider Caption"
+                },
+                {
+                    "type": "select",
+                    "id": "content-alignment",
+                    "label": "Text position",
+                    "default": "top-left",
+                    "options": [
+                        {
+                            "value": "top-left",
+                            "label": "top-left"
+                        },
+                        {
+                            "value": "top-center",
+                            "label": "top-center"
+                        },
+                        {
+                            "value": "top-right",
+                            "label": "top-right"
+                        },
+                        {
+                            "value": "middle-left",
+                            "label": "middle-left"
+                        },
+                        {
+                            "value": "middle-center",
+                            "label": "middle-center"
+                        },
+                        {
+                            "value": "middle-right",
+                            "label": "middle-right"
+                        },
+                        {
+                            "value": "bottom-left",
+                            "label": "bottom-left"
+                        },
+                        {
+                            "value": "bottom-center",
+                            "label": "bottom-center"
+                        },
+                        {
+                            "value": "bottom-right",
+                            "label": "bottom-right"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "sub_title",
+                    "label": "Heading",
+                    "default":"Slider Show"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content_description",
+                    "default": "<p>Pair text with an image to tell a story</p>",
+                    "label": "Text"
+                },
+                {
+                    "type": "text",
+                    "id": "button_label_see_more",
+                    "default": "Button label",
+                    "label": "Button Label"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link_see_more",
+                    "label": "Button Link"
+                },
+                {
+                    "type": "text",
+                    "id": "button_label_shop_now",
+                    "default": "Shop Now",
+                    "label": "Button Label"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link_shop_now",
+                    "label": "Button Link"
+                }
+            ]
+        }
+    ], 
+    "presets": [
+        {
+            "name": "Slide Show",
+            "blocks": [
+                {
+                  "type": "slider-show"
+                },
+                {
+                  "type": "slider-show"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

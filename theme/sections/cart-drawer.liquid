@@ -1,0 +1,92 @@
+{% include 'cart-drawer-snippet' %}
+
+{% schema %}
+{
+    "name": "Cart Drawer",
+    "settings": [
+        {
+            "type": "text",
+            "id": "cart_title",
+            "label": "Cart Title",
+            "default": "Your Cart"
+        },
+        {
+            "type": "header",
+            "content": "Reserve Headline"
+        },
+        {
+            "type": "text",
+            "id": "reserve_text",
+            "label": "Text counter",
+            "default": "<p>🔥Item in your cart is reserved for TIMER_HERE🔥</p>",
+            "info": "TIMER_HERE will be replaced with a real timer"
+        },                
+        {
+            "type": "header",
+            "content": "People Headline"
+        },
+        {
+            "type": "text",
+            "id": "people_count",
+            "label": "People Number",
+            "default": "235 people"
+        },
+        {
+            "type": "text",
+            "id": "people_text",
+            "label": "People Text",
+            "default": "are checking out now"
+        },
+        {
+            "type": "text",
+            "id": "expected_title",
+            "label": "Expected Title",
+            "default": "Expected Delivery: Mon 21 Dec"
+        },
+        {
+            "type": "header",
+            "content": "Customers also bought these"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Customers also bought these"
+        }        
+    ],
+    "blocks": [
+        {
+            "name": "Shipping Messaging",
+            "type": "shipping_messaging",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "enabled",
+                    "label": "Enabled",
+                    "default": true
+                },
+                {
+                    "type": "text",
+                    "id": "target_price",
+                    "label": "Free shipping minimum amount",
+                    "info": "Enter amount using number only. If using multiple currencies, separate each currency code with its amount (eg.: USD:50,EUR:60,CAD:50)"
+                },
+                {
+                    "type": "richtext",
+                    "id": "free_msg",
+                    "label": "Free shipping text",
+                    "default": "<p>You've qualified for <strong>express shipping!</strong></p>"
+                },
+                {
+                    "type": "richtext",
+                    "id": "msg",
+                    "label": "Shipping text",
+                    "default": "<p>Spend {price} more to get a <strong>express delivery</strong>!</p>",
+                    "info": "Available tag: {price}"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,245 @@
+{
+  "sections": {
+    "ingredients-banner": {
+      "type": "ingredients-inner-banner",
+      "settings": {
+        "image_position": "flex-row",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_621_1.png",
+        "main_title": "Everything you need, nothing you don't",
+        "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.<\/p><p>Nunc id felis sit amet ligula faucibus aliquam non non arcu. Quisque eget consectetur urna, ac ornare felis.<\/p><p><\/p>",
+        "align_text": "left",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#4b3b4c",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    },
+    "5f5922a4-2dae-46d8-8ee1-47ed7b5b80c6": {
+      "type": "ingredients-list",
+      "blocks": {
+        "3f038e9a-8eab-4da9-9c83-598823f2f370": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87.png",
+            "title": "Agave Extract",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_652.png",
+            "longtitle": "Preserving Apples: How to Make Homemade Apple Cider Vinegar",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices cursus ultrices. <\/p><p>Maecenas ac luctus purus. Pellentesque vitae venenatis libero. Fusce risus sem, tincidunt ut pretium id, pharetra et velit. Nunc ullamcorper libero non dictum luctus. Integer pulvinar, nulla sed consectetur vehicula, velit lacus dapibus ipsum, quis finibus lorem turpis vel justo. Morbi id elit non augue laoreet convallis a at eros. Phasellus malesuada vehicula neque, sed blandit sapien volutpat ac. In consectetur dolor eu nibh mattis, at sodales nunc volutpat. Aenean nulla felis, fermentum ut dui sed, finibus euismod ex.<\/p>"
+          }
+        },
+        "2bdd96a6-0493-4712-9639-8e5569ede06b": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_1.png",
+            "title": "Aloe Vera",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_652.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus sapien, varius a diam id, semper pellentesque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam consequat, ligula id consequat interdum, tellus lorem dictum ligula, nec pretium odio ante ut eros. Donec convallis venenatis libero. Praesent lectus purus, interdum id fringilla vel, aliquet quis lacus. Nam facilisis ipsum id risus condimentum tempor. Donec venenatis velit eros, eget efficitur eros ultricies et. Mauris urna lorem, bibendum sed ipsum vel, convallis lobortis turpis. Nullam ante augue, vulputate nec purus quis, dapibus vehicula erat.<\/p><p>Suspendisse placerat rhoncus nunc, ut sollicitudin est ultricies eu. Nulla pulvinar molestie purus. Suspendisse tincidunt magna sit amet nisl eleifend sagittis.<\/p>"
+          }
+        },
+        "50f5256d-0eeb-4483-89b1-118d2c114b66": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_2.png",
+            "title": "Apple Cider Vinegar",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_652.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices cursus ultrices. Maecenas ac luctus purus. Pellentesque vitae venenatis libero. Fusce risus sem, tincidunt ut pretium id, pharetra et velit. Nunc ullamcorper libero non dictum luctus. Integer pulvinar, nulla sed consectetur vehicula, velit lacus dapibus ipsum, quis finibus lorem turpis vel justo. Morbi id elit non augue laoreet convallis a at eros. Phasellus malesuada vehicula neque, sed blandit sapien volutpat ac. In consectetur dolor eu nibh mattis, at sodales nunc volutpat. Aenean nulla felis, fermentum ut dui sed, finibus euismod ex.<\/p>"
+          }
+        },
+        "0a37e57a-f8bc-423a-981d-daa7d22ff40a": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_3.png",
+            "title": "Bergamot",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_621.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices cursus ultrices. Maecenas ac luctus purus. Pellentesque vitae venenatis libero. Fusce risus sem, tincidunt ut pretium id, pharetra et velit. Nunc ullamcorper libero non dictum luctus. Integer pulvinar, nulla sed consectetur vehicula, velit lacus dapibus ipsum, quis finibus lorem turpis vel justo. Morbi id elit non augue laoreet convallis a at eros. Phasellus malesuada vehicula neque, sed blandit sapien volutpat ac. In consectetur dolor eu nibh mattis, at sodales nunc volutpat. Aenean nulla felis, fermentum ut dui sed, finibus euismod ex.<\/p>"
+          }
+        },
+        "03b576df-df7c-459e-b9f7-e09eab797985": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_4.png",
+            "title": "Boric Acid",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_621.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus sapien, varius a diam id, semper pellentesque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam consequat, ligula id consequat interdum, tellus lorem dictum ligula, nec pretium odio ante ut eros. Donec convallis venenatis libero. Praesent lectus purus, interdum id fringilla vel, aliquet quis lacus. Nam facilisis ipsum id risus condimentum tempor. Donec venenatis velit eros, eget efficitur eros ultricies et. Mauris urna lorem, bibendum sed ipsum vel, convallis lobortis turpis. Nullam ante augue, vulputate nec purus quis, dapibus vehicula erat.<\/p><p>Suspendisse placerat rhoncus nunc, ut sollicitudin est ultricies eu. Nulla pulvinar molestie purus. Suspendisse tincidunt magna sit amet nisl eleifend sagittis.<\/p>"
+          }
+        },
+        "14ba013c-0998-4dee-b518-e265d9815022": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_5.png",
+            "title": "Borneol",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_652.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices cursus ultrices. Maecenas ac luctus purus. Pellentesque vitae venenatis libero. Fusce risus sem, tincidunt ut pretium id, pharetra et velit. Nunc ullamcorper libero non dictum luctus. Integer pulvinar, nulla sed consectetur vehicula, velit lacus dapibus ipsum, quis finibus lorem turpis vel justo. Morbi id elit non augue laoreet convallis a at eros. Phasellus malesuada vehicula neque, sed blandit sapien volutpat ac. In consectetur dolor eu nibh mattis, at sodales nunc volutpat. Aenean nulla felis, fermentum ut dui sed, finibus euismod ex.<\/p>"
+          }
+        },
+        "0da7e675-d464-450a-bb59-71ddf12ca75d": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_6.png",
+            "title": "Calcium",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_621_1.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus sapien, varius a diam id, semper pellentesque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam consequat, ligula id consequat interdum, tellus lorem dictum ligula, nec pretium odio ante ut eros. Donec convallis venenatis libero. Praesent lectus purus, interdum id fringilla vel, aliquet quis lacus. Nam facilisis ipsum id risus condimentum tempor. Donec venenatis velit eros, eget efficitur eros ultricies et. Mauris urna lorem, bibendum sed ipsum vel, convallis lobortis turpis. Nullam ante augue, vulputate nec purus quis, dapibus vehicula erat.<\/p><p>Suspendisse placerat rhoncus nunc, ut sollicitudin est ultricies eu. Nulla pulvinar molestie purus. Suspendisse tincidunt magna sit amet nisl eleifend sagittis.<\/p>"
+          }
+        },
+        "eee3decf-cda4-4bf8-b50a-8dd415a6be91": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_7.png",
+            "title": "Citric Acid",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_621.png",
+            "longtitle": "Preserving Apples: How to Make Homemade Apple Cider Vinegar",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ultrices cursus ultrices. Maecenas ac luctus purus. Pellentesque vitae venenatis libero. Fusce risus sem, tincidunt ut pretium id, pharetra et velit. Nunc ullamcorper libero non dictum luctus. Integer pulvinar, nulla sed consectetur vehicula, velit lacus dapibus ipsum, quis finibus lorem turpis vel justo. Morbi id elit non augue laoreet convallis a at eros. Phasellus malesuada vehicula neque, sed blandit sapien volutpat ac. In consectetur dolor eu nibh mattis, at sodales nunc volutpat. Aenean nulla felis, fermentum ut dui sed, finibus euismod ex.<\/p>"
+          }
+        },
+        "02ba8b94-9e12-4927-952a-bbc1d4ef7917": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_8.png",
+            "title": "Coco Glucoside",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_652.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus sapien, varius a diam id, semper pellentesque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam consequat, ligula id consequat interdum, tellus lorem dictum ligula, nec pretium odio ante ut eros. Donec convallis venenatis libero. Praesent lectus purus, interdum id fringilla vel, aliquet quis lacus. Nam facilisis ipsum id risus condimentum tempor. Donec venenatis velit eros, eget efficitur eros ultricies et. Mauris urna lorem, bibendum sed ipsum vel, convallis lobortis turpis. Nullam ante augue, vulputate nec purus quis, dapibus vehicula erat.<\/p><p>Suspendisse placerat rhoncus nunc, ut sollicitudin est ultricies eu. Nulla pulvinar molestie purus. Suspendisse tincidunt magna sit amet nisl eleifend sagittis.<\/p>"
+          }
+        },
+        "bb66e7e1-9d1a-4c41-a8f7-d084d60a74f1": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_9.png",
+            "title": "Cranberry",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_621.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus sapien, varius a diam id, semper pellentesque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam consequat, ligula id consequat interdum, tellus lorem dictum ligula, nec pretium odio ante ut eros. Donec convallis venenatis libero. Praesent lectus purus, interdum id fringilla vel, aliquet quis lacus. Nam facilisis ipsum id risus condimentum tempor. Donec venenatis velit eros, eget efficitur eros ultricies et. Mauris urna lorem, bibendum sed ipsum vel, convallis lobortis turpis. Nullam ante augue, vulputate nec purus quis, dapibus vehicula erat.<\/p><p>Suspendisse placerat rhoncus nunc, ut sollicitudin est ultricies eu. Nulla pulvinar molestie purus. Suspendisse tincidunt magna sit amet nisl eleifend sagittis.<\/p>"
+          }
+        },
+        "8032bc8a-636e-424e-b6fc-16939683bd86": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_10.png",
+            "title": "Cucumber",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_621.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus sapien, varius a diam id, semper pellentesque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam consequat, ligula id consequat interdum, tellus lorem dictum ligula, nec pretium odio ante ut eros. Donec convallis venenatis libero. Praesent lectus purus, interdum id fringilla vel, aliquet quis lacus. Nam facilisis ipsum id risus condimentum tempor. Donec venenatis velit eros, eget efficitur eros ultricies et. Mauris urna lorem, bibendum sed ipsum vel, convallis lobortis turpis. Nullam ante augue, vulputate nec purus quis, dapibus vehicula erat.<\/p><p>Suspendisse placerat rhoncus nunc, ut sollicitudin est ultricies eu. Nulla pulvinar molestie purus. Suspendisse tincidunt magna sit amet nisl eleifend sagittis.<\/p>"
+          }
+        },
+        "44954c97-33be-47ea-a68b-9ca43db9bb43": {
+          "type": "ingredients-card",
+          "settings": {
+            "ingredients_icon": "shopify:\/\/shop_images\/Ellipse_87_11.png",
+            "title": "Glycerin",
+            "Ingredients-drawer-img1": "shopify:\/\/shop_images\/Rectangle_621.png",
+            "longtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In metus sapien, varius a diam id, semper pellentesque dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam consequat, ligula id consequat interdum, tellus lorem dictum ligula, nec pretium odio ante ut eros. Donec convallis venenatis libero. Praesent lectus purus, interdum id fringilla vel, aliquet quis lacus. Nam facilisis ipsum id risus condimentum tempor. Donec venenatis velit eros, eget efficitur eros ultricies et. Mauris urna lorem, bibendum sed ipsum vel, convallis lobortis turpis. Nullam ante augue, vulputate nec purus quis, dapibus vehicula erat.<\/p><p>Suspendisse placerat rhoncus nunc, ut sollicitudin est ultricies eu. Nulla pulvinar molestie purus. Suspendisse tincidunt magna sit amet nisl eleifend sagittis.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "3f038e9a-8eab-4da9-9c83-598823f2f370",
+        "2bdd96a6-0493-4712-9639-8e5569ede06b",
+        "50f5256d-0eeb-4483-89b1-118d2c114b66",
+        "0a37e57a-f8bc-423a-981d-daa7d22ff40a",
+        "03b576df-df7c-459e-b9f7-e09eab797985",
+        "14ba013c-0998-4dee-b518-e265d9815022",
+        "0da7e675-d464-450a-bb59-71ddf12ca75d",
+        "eee3decf-cda4-4bf8-b50a-8dd415a6be91",
+        "02ba8b94-9e12-4927-952a-bbc1d4ef7917",
+        "bb66e7e1-9d1a-4c41-a8f7-d084d60a74f1",
+        "8032bc8a-636e-424e-b6fc-16939683bd86",
+        "44954c97-33be-47ea-a68b-9ca43db9bb43"
+      ],
+      "settings": {
+        "btn_text1": "Show more",
+        "btn_text_2": "VIEW LESS",
+        "show_desktop": true,
+        "show_mobile": true,
+        "limit": 4,
+        "main_title": "Our freshly-pressed products are 100% gluten-free, vegan, and cruelty-free — without any harsh chemicals. Here's what we put inside to give you a healthier, brighter smile.",
+        "align_text": "center",
+        "align_text_mobile": "center",
+        "btn_text": "MORE INGREDIENTS",
+        "button_color_scheme": "link-btn"
+      }
+    },
+    "c3c738ff-c9ea-4871-be84-7ad360bde6dd": {
+      "type": "ingredients-features-sec",
+      "blocks": {
+        "5404afea-3c6c-498b-b664-b1ef7e7590b5": {
+          "type": "card",
+          "settings": {
+            "svg_icon": "<svg width=\"43\" height=\"38\" viewbox=\"0 0 43 38\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M2.28945 7.4197C0.0207756 11.8421 0.745728 17.3938 4.46448 21.0945L19.5248 36.0819C20.4457 36.9984 21.9389 36.9984 22.8597 36.0819L37.9202 21.0945C42.5394 16.4976 42.5394 9.04457 37.9202 4.44767C33.301 -0.149224 25.8115 -0.149224 21.1923 4.44767C17.4735 0.746859 11.8945 0.0254999 7.45047 2.28343M19.2958 14.7231C19.0733 13.7655 18.6838 12.6951 18.1368 11.6126C16.5913 8.55354 14.3747 6.55585 13.1859 7.1506C11.9972 7.74543 12.2865 10.7074 13.8321 13.7665C14.5918 15.2702 15.5137 16.5175 16.3959 17.3264M23.0902 14.7172C23.3129 13.7611 23.702 12.6929 24.2478 11.6126C25.7934 8.55351 28.0099 6.55583 29.1987 7.15066C30.3874 7.7454 30.0981 10.7075 28.5526 13.7665C27.7928 15.2702 26.871 16.5175 25.9887 17.3264M21.1923 25.6098V26.8915M22.5494 24.3228L21.1923 25.6734L19.8352 24.3228M26.5214 20.2175C26.5351 20.0638 26.5443 19.9087 26.5443 19.7514C26.5443 16.8099 24.1482 14.4253 21.1923 14.4253C18.2364 14.4253 15.8403 16.8099 15.8403 19.7514C15.8403 19.9088 15.8495 20.0638 15.8633 20.2175C14.8571 20.9991 14.2095 22.2165 14.2095 23.585C14.2095 25.9436 16.1307 27.8556 18.5007 27.8556C19.5202 27.8556 20.4561 27.5011 21.1923 26.9102C21.9285 27.5011 22.8644 27.8556 23.8839 27.8556C26.2539 27.8556 28.1752 25.9436 28.1752 23.585C28.1752 22.2165 27.5275 20.9991 26.5214 20.2175Z\" stroke=\"#CA8685\" stroke-width=\"1.73077\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+            "sub_title": "Cruelty free",
+            "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor<\/p>"
+          }
+        },
+        "89391c9e-6581-4643-b186-7f2b520861ea": {
+          "type": "card",
+          "settings": {
+            "svg_icon": "<svg width=\"42\" height=\"37\" viewbox=\"0 0 42 37\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M16.8067 3.96181C13.2548 0.411663 6.30401 0 1.38404 0C0.874504 0 0.460938 0.41348 0.460938 0.923018C0.460938 5.84299 0.870783 12.7938 4.42275 16.3458C5.92186 17.8449 8.22032 18.5151 10.4984 18.5151C12.9741 18.5151 15.4277 17.7231 16.8067 16.344C19.4523 13.6984 19.9379 7.09104 16.8067 3.96181ZM15.5016 15.0405C13.5262 17.0141 8.04127 17.3519 5.72991 15.0405C2.86281 12.1735 2.36617 6.34889 2.3126 1.85166C6.80983 1.90523 12.6345 2.40179 15.5015 5.26889C17.8129 7.58024 17.4751 13.067 15.5016 15.0405Z\" fill=\"#CA8685\"><\/path>\n<path d=\"M40.1956 3.65166C35.2757 3.65166 28.3249 4.06151 24.7729 7.61347C21.6418 10.7427 22.1273 17.3501 24.7729 19.9956C26.1519 21.3729 28.6037 22.1649 31.0793 22.1649C33.3575 22.1649 35.6541 21.4966 37.1569 19.9976C40.707 16.4456 41.1187 9.49482 41.1187 4.57477C41.1188 4.06523 40.7052 3.65166 40.1956 3.65166ZM35.848 18.6904C33.5366 21.0017 28.0498 20.6639 26.0763 18.6904C24.1028 16.7169 23.7649 11.2301 26.0763 8.91873C28.9434 6.05163 34.768 5.55507 39.2652 5.50151C39.2117 10.0005 38.7151 15.8252 35.848 18.6904Z\" fill=\"#CA8685\"><\/path>\n<path d=\"M33.5292 11.6418C33.3114 11.1784 32.6874 11.0197 32.2277 11.2338C25.1477 14.5624 21.6696 20.3667 20.0892 26.3335C18.1342 13.6467 12.4794 9.77901 10.0812 8.13781C9.78216 7.93289 9.54955 7.78335 9.42034 7.65596C9.06034 7.29597 8.47509 7.29597 8.11509 7.65596C7.75509 8.01596 7.75509 8.60122 8.11509 8.96122C8.29785 9.14218 8.61355 9.36925 9.04001 9.66089C11.7428 11.5089 18.9224 16.4215 18.9224 36C18.9224 36.5095 19.336 36.9231 19.8455 36.9231C20.3551 36.9231 20.7686 36.5095 20.7686 36.0019C20.7686 28.0911 22.8936 17.6622 33.0142 12.9065C33.0142 12.9047 33.1637 12.8345 33.1637 12.8345C33.6234 12.6166 33.7471 12.1033 33.5292 11.6418Z\" fill=\"#CA8685\"><\/path>\n<\/svg>",
+            "sub_title": "Vegan",
+            "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet.<\/p>"
+          }
+        },
+        "3e6b700c-649c-425e-b314-5087d217ab43": {
+          "type": "card",
+          "settings": {
+            "svg_icon": "<svg width=\"36\" height=\"39\" viewbox=\"0 0 36 39\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M0.653071 2.10022C0.56801 2.18525 0.500533 2.2862 0.454497 2.39731C0.40846 2.50843 0.384766 2.62752 0.384766 2.74779C0.384766 2.86806 0.40846 2.98716 0.454497 3.09827C0.500533 3.20938 0.56801 3.31033 0.653071 3.39536L10.7892 13.5315C8.3843 12.6927 5.78 12.6115 3.32757 13.2991C3.17609 13.3415 3.03808 13.4222 2.92685 13.5334C2.81562 13.6447 2.7349 13.7827 2.69249 13.9342C2.09084 16.0065 2.0504 18.2014 2.57532 20.2945C3.10023 22.3876 4.17166 24.3036 5.68003 25.8468C7.94268 28.0806 10.9998 29.3245 14.1793 29.3048C15.0857 29.2945 15.9883 29.1869 16.8717 28.9839V37.5537C16.8717 37.7966 16.9682 38.0296 17.14 38.2014C17.3118 38.3731 17.5447 38.4696 17.7877 38.4696C18.0306 38.4696 18.2636 38.3731 18.4353 38.2014C18.6071 38.0296 18.7036 37.7966 18.7036 37.5537V28.9839C19.5969 29.1894 20.5098 29.2982 21.4264 29.3084C22.9088 29.3069 24.3785 29.0349 25.7633 28.5056L33.6271 36.3694C33.7998 36.5363 34.0312 36.6286 34.2713 36.6265C34.5115 36.6244 34.7412 36.5281 34.911 36.3583C35.0809 36.1884 35.1772 35.9587 35.1793 35.7186C35.1814 35.4784 35.089 35.247 34.9222 35.0743L1.94822 2.10029C1.86319 2.01523 1.76224 1.94774 1.65113 1.9017C1.54002 1.85566 1.42093 1.83196 1.30066 1.83195C1.18039 1.83194 1.06129 1.85563 0.950176 1.90166C0.839062 1.94769 0.738104 2.01516 0.653071 2.10022ZM19.1313 21.8737L24.3087 27.0511C22.5744 27.5501 20.7419 27.6011 18.9826 27.1992C18.5812 25.44 18.6323 23.6078 19.1313 21.8737ZM16.8717 24.4745C16.836 25.3877 16.7428 26.2978 16.5927 27.1992C14.8976 27.6287 13.12 27.6104 11.4341 27.1463C9.74817 26.6821 8.21172 25.788 6.97525 24.5516C5.73878 23.3151 4.84468 21.7787 4.38055 20.0927C3.91642 18.4068 3.89817 16.6293 4.32758 14.9342C6.02299 14.5108 7.79897 14.532 9.48377 14.9958C11.1686 15.4596 12.7052 16.3504 13.945 17.5818C15.7765 19.4136 16.8258 21.8846 16.8717 24.4745ZM24.1993 10.0754C24.1963 11.458 23.9298 12.8274 23.4143 14.1104C26.1576 12.7586 29.3041 12.4696 32.2478 13.2991C32.3993 13.3415 32.5373 13.4222 32.6485 13.5334C32.7597 13.6447 32.8404 13.7827 32.8828 13.9342C33.4845 16.0065 33.5249 18.2014 33 20.2945C32.4751 22.3876 31.4037 24.3036 29.8953 25.8468C29.8424 25.8996 29.781 25.9418 29.7273 25.9936L28.4313 24.6976C28.4855 24.6457 28.5469 24.603 28.6001 24.5498C29.83 23.3094 30.7198 21.773 31.1835 20.0888C31.6472 18.4047 31.6694 16.6294 31.2478 14.9342C29.5522 14.5138 27.777 14.5366 26.0928 15.0002C24.4085 15.4639 22.8718 16.3529 21.6303 17.5819C21.5775 17.6349 21.5351 17.6959 21.4835 17.7499L20.0025 16.2689C21.5226 14.5636 22.3641 12.3598 22.3674 10.0754C22.3605 8.44719 21.9358 6.84803 21.1339 5.43097C20.332 4.01391 19.1799 2.82639 17.7877 1.9821C16.481 2.77938 15.3858 3.87996 14.5949 5.19054C13.804 6.50111 13.3408 7.98305 13.2444 9.51074L11.6231 7.88939C11.9641 6.26045 12.6508 4.7237 13.6369 3.38301C14.6229 2.04231 15.8853 0.928915 17.3386 0.11806C17.4756 0.0406686 17.6303 0 17.7877 0C17.945 0 18.0997 0.0406686 18.2367 0.11806C20.0231 1.10134 21.5164 2.54128 22.564 4.29073C23.6116 6.04017 24.1759 8.03639 24.1993 10.0754Z\" fill=\"#CA8685\"><\/path>\n<\/svg>",
+            "sub_title": "Gluten free",
+            "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet.<\/p>"
+          }
+        },
+        "82658bca-d523-4ae0-8c4e-1e0dfc8768bc": {
+          "type": "card",
+          "settings": {
+            "svg_icon": "<svg width=\"40\" height=\"39\" viewbox=\"0 0 40 39\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M32.7463 32.5158L6.63775 6.40728M32.1505 14.5865C27.8171 18.9198 20.2337 11.3365 15.9003 15.6698C11.5669 20.0032 19.1503 27.5866 14.817 31.92M24.567 7.00308C20.2337 11.3365 27.817 18.9198 23.4837 23.2532C19.1503 27.5866 11.5669 20.0032 7.23358 24.3365M38.1535 19.4615C38.1535 29.6576 29.8881 37.9231 19.692 37.9231C9.49595 37.9231 1.23047 29.6576 1.23047 19.4615C1.23047 9.26548 9.49595 1 19.692 1C29.8881 1 38.1535 9.26548 38.1535 19.4615Z\" stroke=\"#CA8685\" stroke-width=\"1.73077\" stroke-miterlimit=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><\/path>\n<\/svg>",
+            "sub_title": "Non GMO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "5404afea-3c6c-498b-b664-b1ef7e7590b5",
+        "89391c9e-6581-4643-b186-7f2b520861ea",
+        "3e6b700c-649c-425e-b314-5087d217ab43",
+        "82658bca-d523-4ae0-8c4e-1e0dfc8768bc"
+      ],
+      "settings": {
+        "align__text": "left",
+        "image__position": "flex-row-reverse",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_630.png",
+        "color_scheme": "default",
+        "section_text_color_scheme": "#2536cd",
+        "section_heading_color_scheme": "#2092fb",
+        "section_background_color_scheme": "#e8e9f2"
+      }
+    },
+    "home-our-story": {
+      "type": "home-our-story",
+      "settings": {
+        "our_story_img": "shopify:\/\/shop_images\/Rectangle_459.png",
+        "title": "“Beautiful skin is healthy skin, and when you are healthy, you are beautiful.”",
+        "text": "DR. Alexandra",
+        "button_link": "",
+        "button_label": "OUR STORY",
+        "align_text": "left",
+        "align_text_mobile": "center",
+        "color_scheme": "default",
+        "section_text_color_scheme": "#2536cd",
+        "section_heading_color_scheme": "#2092fb",
+        "section_links_color_scheme": "#2092fb",
+        "section_background_color_scheme": "#e8e9f2",
+        "button_color_scheme": "link-btn"
+      }
+    }
+  },
+  "order": [
+    "ingredients-banner",
+    "5f5922a4-2dae-46d8-8ee1-47ed7b5b80c6",
+    "c3c738ff-c9ea-4871-be84-7ad360bde6dd",
+    "home-our-story"
+  ]
+}

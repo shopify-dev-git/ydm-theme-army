@@ -1,0 +1,365 @@
+{%- capture menu_item -%}
+  {{ menu_item }}
+  {%- if section.settings.navigation_menu != blank -%}
+    {%- assign navigation_menu = linklists[section.settings.navigation_menu] -%}
+    {%- for link in navigation_menu.links -%}
+      <li class="menu_li">
+        <a href="/{{ link.title | handleize }}" aria-haspopup="menu" aria-controls="menu-{{ link.title | handleize }}-{{forloop.index}}" aria-expanded="false" {%- if link.current %}class="link__style block lg:inline-block pr-2 lg:pr-4 font-normal text-font14 lg:text-font10 tracking-widest transition ease-in-out duration-500 text-black hover:text-black/70 py-3 lg: lg:py-p26  font-helvetica uppercase  menu_item_active"{% endif %}>
+          {{ link.title }}
+        </a>
+      </li>
+    {%- endfor -%}
+  {% endif %}
+{%- endcapture -%}
+
+
+
+{%- assign megaMenu = section.blocks | where: 'type', 'mega_menu' -%}
+{%- capture menu_item_list -%}
+{{ menu_item_list }}
+{% assign count = 0 %}
+  {% for link in linklists[section.settings.navigation_menu].links %}
+    {% assign count = count | plus: 1 %}
+    {% for block in megaMenu %}
+      {% if block.settings.title == link.title %}
+        {% assign mega_menu = true %}
+        {% break %}
+      {% else %}
+        {% assign mega_menu = false %}
+      {% endif %}
+    {% endfor %}
+    {% if mega_menu %}
+      {%- for block in megaMenu -%}
+        {%- if block.settings.title == link.title -%}
+          <li>
+            <div class="flow-root dropdown_btn_hover" x-data="{open: false, hidden: false}">
+              <div class="flex dropdown_menu mega_menu_sec dropdown__sec w-full flex-col">
+                <div class="relative flex w-full" x-on:click="open = true">
+                  <a href="#." class="show-mega-menu w-full lg:w-auto flex pl-0 pr-2 lg:px-2 py-3 lg:py-p26 font-normal text-font14 lg:text-font10 tracking-widest text-black hover:text-black/70 transition ease-in-out duration-500 items-center focus:outline-none  focus:ring-0 focus:ring-transparent group font-helvetica uppercase justify-between lg:justify-start" aria-expanded="false">
+                    {{link.title}}
+                    <span class="ml-2">
+                      <svg class="w-10 h-h5" width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.59642 0.161776L5.2505 4.67191L0.904581 0.161233C0.697381 -0.0537443 0.362207 -0.0537443 0.155007 0.161233C-0.0516692 0.37621 -0.0516692 0.724508 0.155007 0.939485L4.87547 5.83877C5.08215 6.05374 5.41785 6.05374 5.62453 5.83877L10.345 0.93953C10.5517 0.724553 10.5517 0.375713 10.345 0.160735C10.1388 -0.0532013 9.8031 -0.0532014 9.59642 0.161776Z" fill="black"></path>
+                    </svg>
+                  </span>
+                </a>
+              </div>
+
+              <!--
+              flyout menu, show/hide based on flyout menu state.-0 -z-10  inset-x-0 top-full transform invisible bg-white text-sm text-black ease-in-out delay-150 duration-300 mb-9 show border-b
+
+              Entering: "transition ease-out duration-200"
+              From: "opacity-0 -translate-y-1"
+              To: "opacity-100"
+              Leaving: "transition ease-in duration-150"
+              From: "opacity-100 translate-y-0"
+              To"opacity-0"
+              -->
+              <!-- Mega Menu Dropdown -->
+              <div class="lg:absolute lg:top-[100%] inset-x-0 z-10 transform lg:shadow-lg hidden dropdown_hover_content"
+                    :class="{ 'hidden': hidden }"
+                    x-show="open"
+                    x-on:click.away="open = false"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-1"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-1"
+                >
+                <span class="absolute left-0 right-0 top-[100%] h-[130%] pointer-events-none bg-blackesh-100 opacity-70 hidden lg:block"></span>
+                <div class="absolute inset-0  hidden lg:flex" aria-hidden="true">
+                    <div class="w-[57%] bg-white"></div>
+                    <div class="w-[43%] lg:bg-white xl:bg-gray-50"></div>
+                </div>
+              <div class="relative mx-auto grid grid-cols-1 xl:flex lg:px-[30px] 4xl:px-[65px] lg:max-w-[2100px]">
+                <nav class="grid gap-y-10 lg:flex lg:justify-between lg:items-start py-5 sm:gap-x-8 p-0 lg:py-12 lg:pr-8 xl:pr-12 xl:w-[57%]" aria-labelledby="solutions-heading">
+                    {% assign link_lists = linklists[block.settings.link_list_1] %}                     
+                    {% assign link_lists_1 = linklists[block.settings.link_list_2] %}
+                    {% assign link_lists_2 = linklists[block.settings.link_list_3] %}
+                    {% if link_lists %}
+                    <div class="menu-lists lg:w-[26%] lg:max-w-[165px]">
+                        <h3 class="hidden lg:block text-font18 xl:text-font25 capitalize font-normal font-dmserif text-blackesh-100 mb-[20px] xl:mb-[30px] 2xl:mb-[40px] 4xl:mb-[45px]">
+                            {{ link_lists.title }}
+                        </h3>
+                        <ul class="mb-0 lg:mb-3">
+                        {% for sub_link in link_lists.links %}
+                            <li class="lg:mb-3 megaSubmenu">
+                                <a href="{{ sub_link.url }}" class="uppercase text-font12 font-normal font-helvetica tracking-widest text-black mb-0 py-2 block hover:text-black/70">{{sub_link.title}}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        {% if block.settings.view_all_link_1 != blank and block.settings.view_all_1 != blank %}
+                        <a href="{{block.settings.view_all_link_1}}" class="link-btn uppercase sharp standard">{{ block.settings.view_all_1 }}</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}                          
+                    {% if link_lists_1 %}
+                    <div class="menu-lists flex-1 lg:px-[50px]">
+                        <h3 class="hidden lg:block text-font18 xl:text-font25 capitalize font-normal font-dmserif text-blackesh-100 mb-[20px] xl:mb-[30px] 2xl:mb-[40px] 4xl:mb-[45px]">
+                          {{ link_lists_1.title }}
+                        </h3>
+                        <ul class="mb-0 lg:mb-3 w-full 2xl:grid 2xl:grid-cols-2 lg:max-w-[470px]">
+                          {% for sub_link in link_lists_1.links %}
+                            <li class="lg:mb-3 megaSubmenu">
+                                <a href="{{ sub_link.url }}" class="uppercase text-font12 font-normal font-helvetica tracking-widest text-black mb-0 py-2 block hover:text-black/70">{{sub_link.title}}</a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                        {% if block.settings.view_all_link_2 != blank and block.settings.view_all_2 != blank %}
+                          <a href="{{block.settings.view_all_link_2}}" class="link-btn uppercase sharp standard">{{ block.settings.view_all_2 }}</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% if link_lists_2 %}
+                      <div class="menu-lists lg:w-[26%] lg:max-w-[210px]">
+                          <h3 class="hidden lg:block text-font18 xl:text-font25 capitalize font-normal font-dmserif text-blackesh-100 mb-[20px] xl:mb-[30px] 2xl:mb-[40px] 4xl:mb-[45px]">
+                            {{ link_lists_2.title }}
+                          </h3>
+                          <ul class="mb-0 lg:mb-3">
+                            {% for sub_link in link_lists_2.links %}
+                              <li class="lg:mb-3 megaSubmenu">
+                                  <a href="{{ sub_link.url }}" class="uppercase text-font12 font-normal font-helvetica tracking-widest text-black mb-0 py-2 block hover:text-black/70">{{sub_link.title}}</a>
+                              </li>
+                          {% endfor %}
+                          </ul>
+                          {% if block.settings.view_all_link_3 != blank and block.settings.view_all_3 != blank %}
+                            <a href="{{block.settings.view_all_link_3}}" class="link-btn uppercase sharp standard">{{ block.settings.view_all_3 }}</a>
+                          {% endif %}
+                      </div>
+                      {% endif %}
+                </nav>               
+                  <div class="bg-gray-50 pl-4 py-8 sm:py-12 sm:pl-6 lg:pl-8 xl:pl-12 hidden xl:grid grid-cols-2 gap-4 2xl:gap-8 xl:w-[43%]">
+                    {%- for product in block.settings.product_list -%}
+                      <a href="{{ product.url }}" class="flex flex-col">
+                        <div class="menu-product-img relative pt-[92%] mb-[20px]">
+                          <img class="lazyload absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover" 
+                          src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                          data-src="{{ product.featured_media.preview_image | img_url:'400x' }}" alt="">
+                        </div> 
+                        <div class="menu-product-content flex-1">
+                          <h4 class="text-font16 xl:text-fon18 text-blackesh-100 font-inter pb-[15px] xl:pb-[20px]">
+                            {{ product.title }}
+                          </h4>
+                          <div class="flex w-fit text-font16 font-semibold text-puce-100 tracking-4 uppercase">
+                            {{ 'general.shop_now' | t }}
+                            <svg class="ml-[12px]" width="23" height="17" viewBox="0 0 23 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M22.2989 8.01293L15.2102 0.827691C15.0192 0.640713 14.7634 0.537251 14.4979 0.53959C14.2324 0.541928 13.9784 0.649881 13.7906 0.840195C13.6029 1.03051 13.4964 1.28796 13.4941 1.55709C13.4918 1.82623 13.5938 2.08552 13.7783 2.27911L19.1383 7.71217H1.32956C1.06099 7.71217 0.80341 7.82032 0.613498 8.01282C0.423586 8.20532 0.316895 8.4664 0.316895 8.73864C0.316895 9.01087 0.423586 9.27196 0.613498 9.46446C0.80341 9.65695 1.06099 9.7651 1.32956 9.7651H19.1383L13.7783 15.1982C13.6816 15.2929 13.6044 15.4061 13.5513 15.5314C13.4983 15.6566 13.4703 15.7913 13.4692 15.9276C13.468 16.0639 13.4936 16.199 13.5445 16.3252C13.5955 16.4513 13.6707 16.5659 13.7657 16.6623C13.8608 16.7587 13.9739 16.8349 14.0983 16.8865C14.2228 16.9381 14.3561 16.9641 14.4906 16.9629C14.6251 16.9617 14.7579 16.9334 14.8815 16.8796C15.005 16.8258 15.1168 16.7476 15.2102 16.6496L22.2989 9.46434C22.4887 9.27186 22.5954 9.01082 22.5954 8.73864C22.5954 8.46646 22.4887 8.20542 22.2989 8.01293Z" fill="#CA8685"/>
+                            </svg>                              
+                          </div>
+                        </div>
+                      </a>
+                    {%- endfor -%}                    
+                  </div>
+                </div>
+              </div>
+              </div>
+              {% for link in linklists[section.settings.navigation_menu_2].links %}
+                {% if link.links != blank %}
+                    <div class="relative hidden lg:inline-block text-left dropdown__sec">
+                        <a href="#" id="" class="flex px-2 py-5 lg:py-p26 font-normal text-font10 tracking-widest text-black hover:text-black/70 transition ease-in-out duration-500 items-center focus:outline-none  focus:ring-0 focus:ring-transparent group font-helvetica uppercase" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                            {{ link.title }}
+                            <span class="ml-2">
+                                <svg class="w-10 h-h5 mobile-arrow-svg" width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9.59642 0.161776L5.2505 4.67191L0.904581 0.161233C0.697381 -0.0537443 0.362207 -0.0537443 0.155007 0.161233C-0.0516692 0.37621 -0.0516692 0.724508 0.155007 0.939485L4.87547 5.83877C5.08215 6.05374 5.41785 6.05374 5.62453 5.83877L10.345 0.93953C10.5517 0.724553 10.5517 0.375713 10.345 0.160735C10.1388 -0.0532013 9.8031 -0.0532014 9.59642 0.161776Z" fill="black"/>
+                                </svg>
+                            </span>                     
+                        </a>                  
+                        <!--
+                        Dropdown menu, show/hide based on menu state.
+                    
+                        Entering: "transition ease-out duration-100"
+                            From: "transform opacity-0 scale-95"
+                            To: "transform opacity-100 scale-100"
+                        Leaving: "transition ease-in duration-75"
+                            From: "transform opacity-100 scale-100"
+                            To: "transform opacity-0 scale-95"
+                        -->
+                        <div class="absolute -right-8 z-10 origin-top-right border border-black bg-white ring-0 ring-transparent ring-opacity-5 focus:outline-none dropdown_menu w-163 hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                        <div class="py-3 space-y-1" role="none">
+                            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                            {% for childlink in link.links %}
+                            <a href="{{childlink.url}}" class="text-black text-font12 font-normal tracking-widest uppercase block px-4 py-1  font-helvetica hover:text-black/70 transition ease-in-out duration-500 active" role="menuitem" tabindex="-1" id="menu-item-0">
+                                {{childlink.title}}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        </div>
+                    </div> 
+                {% comment %} {% else %}
+                    <a href="{{link.url}}" id="" class="hidden lg:inline-block px-2 font-normal text-font10 tracking-widest text-black hover:text-black/70 transition ease-in-out duration-500 py-5 lg:py-p26  font-helvetica" >
+                        {{ link.title }}
+                    </a> {% endcomment %}
+                {% endif %}
+            {% endfor %}
+            </li>
+          {% endif %}
+        {% endfor %}      
+        {% elsif link.links != blank %}
+        <!-- down 3 items Only for Mobile menu -->
+        <li class="dropdown_btn_hover" x-data="{open: false, hidden: false}">
+          <div class="dropdown-box block lg:inline-block text-left dropdown__sec">
+            <a href="#." x-on:click="open = true" id="" class="toggle-dropdown w-full lg:w-auto flex pr-2 lg:px-2 py-3 lg:py-p26 font-normal text-font14 lg:text-font10  tracking-widest text-black hover:text-black/70 transition ease-in-out duration-500 items-center focus:outline-none  focus:ring-0 focus:ring-transparent group font-helvetica uppercase justify-between lg:justify-start" id="menu-button" aria-expanded="true" aria-haspopup="true">
+              {{ link.title }}
+              <span class="ml-2">
+                <svg class="w-10 h-h5" width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.59642 0.161776L5.2505 4.67191L0.904581 0.161233C0.697381 -0.0537443 0.362207 -0.0537443 0.155007 0.161233C-0.0516692 0.37621 -0.0516692 0.724508 0.155007 0.939485L4.87547 5.83877C5.08215 6.05374 5.41785 6.05374 5.62453 5.83877L10.345 0.93953C10.5517 0.724553 10.5517 0.375713 10.345 0.160735C10.1388 -0.0532013 9.8031 -0.0532014 9.59642 0.161776Z" fill="black"/>
+                </svg>
+              </span>
+            </a>
+            <!--
+            Dropdown menu, show/hide based on menu state.
+
+            Entering: "transition ease-out duration-100"
+            From: "transform opacity-0 scale-95"
+            To: "transform opacity-100 scale-100"
+            Leaving: "transition ease-in duration-75"
+            From: "transform opacity-100 scale-100"
+            To: "transform opacity-0 scale-95"
+            -->
+            <div class="dropdown-menu lg:absolute z-10 origin-top-right lg:border-y lg:border-black bg-white ring-0 ring-transparent ring-opacity-5 focus:outline-none dropdown_menu p-5 lg:p-0 lg:my-0 hidden top-[100%]" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1" 
+                :class="{ 'hidden': hidden }"
+                x-show="open"
+                x-on:click.away="open = false"
+                x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-1000"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+            >              
+              <div class="lg:py-3 lg:space-y-1" role="none">
+                {% for childlink in link.links %}
+                <a href="{{childlink.url}}" class=" text-black text-font12 font-normal tracking-widest uppercase block px-4 py-1  font-helvetica hover:text-black/70 transition ease-in-out duration-500 active" role="menuitem" tabindex="-1" id="menu-item-0">{{childlink.title}}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </li>
+      {% else %}
+        <li class=" {% if count > 3 %}lg:hidden {% endif %}">
+        <a href="{{link.url}}" id="" class="w-full block lg:w-auto px-0  lg:px-2 font-normal text-font14 lg:text-font10 tracking-widest text-black hover:text-black/70 transition ease-in-out duration-500 py-3 lg:py-p26  font-helvetica">
+          {{ link.title }}
+        </a>
+      </li>
+      {% endif %}
+    {% endfor %}    
+{%- endcapture -%}
+
+
+<div class="relative z-10 hidden lg:block lg__block lg:static" :class="{'hidden': hidden}" x-show="open" aria-labelledby="mobile-menu"
+    role="dialog" aria-modal="true">
+    <!-- Background backdrop, show/hide based on slide-over state. -->
+    <div class="fixed inset-0 bg-black/60 lg:hidden" x-show="open;" x-on:click="scrollbarremove();"></div>
+
+    <div class="fixed inset-0 left-auto overflow-hidden lg:static">
+        <div class="absolute inset-0 left-auto overflow-hidden lg:static overflow__none">
+            <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 lg:p-0 lg:static">
+                <!--
+                    Slide-over panel, show/hide based on slide-over state.
+                    Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+                    From: "translate-x-full"
+                    To: "translate-x-0"
+                    Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+                    From: "translate-x-0"
+                    To: "translate-x-full"
+                -->
+                <div class="pointer-events-auto w-screen max-w-md lg:max-w-none lg__block lg:w-auto" x-show="open" x-on:click.away="open = false;"
+                    x-transition:enter="transform transition ease-in-out duration-300 sm:duration-400"
+                    x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0"
+                    x-transition:leave="transform transition ease-in-out duration-300 sm:duration-400"
+                    x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full">
+                    <div class="flex h-full flex-col bg-white shadow-xl lg:shadow-none">
+                        <div class="menu__px menu__header py-4 lg:hidden">
+                            <div class="flex items-center justify-between">
+                                <a href="{{ routes.root_url }}">
+                                    <img class="lazyload max-w-[130px]" src="{{ section.settings.logo | image_url }}" alt="{{ shop.name }}">
+                                </a>
+                                <div class="ml-3 flex h-7 items-center">
+                                    <button class="menu__close_icon"  x-on:click="open = false">
+                                        <svg class="close_icon" width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M8.74761 7.50012L14.7413 1.50637C15.0862 1.16137 15.0862 0.603743 14.7413 0.258747C14.3963 -0.086249 13.8386 -0.086249 13.4937 0.258747L7.50001 6.2525L1.50634 0.258747C1.16135 -0.086249 0.603732 -0.086249 0.258742 0.258747C-0.0862475 0.603743 -0.0862475 1.16137 0.258742 1.50637L6.25239 7.50012L0.258742 13.4939C-0.0862475 13.8389 -0.0862475 14.3965 0.258742 14.7415C0.430798 14.9135 0.65667 15 0.882542 15C1.10841 15 1.33429 14.9135 1.50634 14.7415L7.49998 8.74774L13.4936 14.7415C13.6657 14.9135 13.8916 15 14.1174 15C14.3433 15 14.5692 14.9135 14.7412 14.7415C15.0862 14.3965 15.0862 13.8389 14.7412 13.4939L8.74761 7.50012Z"
+                                                fill="black"></path>
+                                        </svg>
+                                    </button>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative lg:static flex-1 menu__body overflow-auto h_commom_customScroll">
+                            <nav>                                
+                                <ul class="lg:flex items-center justify-center lg:space-x-5 2xl:space-x-12">
+                                    {{ menu_item_list }}
+                                </ul>
+                                <div class="menu-footer"></div>
+                            </nav>
+                        </div>
+                        <div class="menu-footer">
+                            <div class="currency_picker lg:hidden flex justify-center mx-[25px]">
+                              {% if localization.available_countries.size > 1 %}
+                                      <localization-form>
+                                      {% form 'localization' %}
+                                          <div class="disclosure relative">
+                                          <button type="button" class="disclosure__button px-[10px] min-h-[60px] min-w-[190px] text-font14 text-blackesh-100 py-[5px] flex items-center font-inter justify-center border-t border-gray-1000" aria-expanded="false" aria-controls="CountryList">
+                                            <div class="mr-[10px]">
+                                              <img src="https://cdn.shopify.com/static/images/flags/{{ localization.country.iso_code | downcase }}.svg" alt="{{ localization.country.iso_code | downcase }}">
+                                            </div>
+                                              <span class="mx-[5px]">                                            
+                                                  {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+                                              </span>                            
+                                              <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.8563 0.170556C10.6578 -0.0487102 10.3257 -0.0568752 10.1162 0.149283L5.49973 4.70297L0.883814 0.149305C0.674282 -0.0574119 0.342699 -0.048688 0.143651 0.170579C-0.0553967 0.389286 -0.0465024 0.734538 0.163567 0.941792L5.13988 5.85055C5.24044 5.94983 5.37036 6 5.49973 6C5.62911 6 5.75954 5.94983 5.86012 5.85055L10.8364 0.941792C11.0465 0.734515 11.0554 0.389286 10.8563 0.170556Z" fill="#4B3B4C"/>
+                                              </svg>                                                                                            
+                                          </button>                            
+                                          <ul id="CountryList" role="list" class="disclosure__list h_commom_customScroll" hidden>
+                                              {% for country in localization.available_countries %}
+                                                  <li class="disclosure__item" tabindex="-1">
+                                                      <a href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} data-value="{{ country.iso_code }}">                                            
+                                                      <img src="https://cdn.shopify.com/static/images/flags/{{ country.iso_code | downcase }}.svg" alt="{{ country.iso_code | downcase }}">
+                                                      {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                                                      </a>
+                                                  </li>
+                                              {% endfor %}
+                                          </ul>
+                                  
+                                          <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+                                          </div>
+                                      {% endform %}
+                                      </localization-form>
+                                  {% endif %}
+                                  {% if localization.available_languages.size > 1 %}
+                                      <localization-form>
+                                      {% form 'localization' %}
+                                          <div class="disclosure">
+                                          <button type="button" class="disclosure__button" aria-expanded="false" aria-controls="LanguageList">
+                                              {{ localization.language.endonym_name | capitalize }}
+                                  
+                                              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+                                              <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                              </svg>
+                                          </button>
+                                  
+                                          <ul id="LanguageList" role="list" class="disclosure__list" hidden>
+                                              {% for language in localization.available_languages %}
+                                              <li class="disclosure__item" tabindex="-1">
+                                                  <a href="#"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}" data-value="{{ language.iso_code }}">
+                                                  {{ language.endonym_name | capitalize }}
+                                                  </a>
+                                              </li>
+                                              {% endfor %}
+                                          </ul>
+                                  
+                                          <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+                                          </div>
+                                      {% endform %}
+                                      </localization-form>
+                                  {% endif %}
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

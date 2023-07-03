@@ -1,0 +1,23 @@
+.instagram-slider {
+    .insta-item-hoverr {
+        .hover__efect {
+            @apply absolute top-0 bottom-0 left-0 right-0 opacity-0 transition duration-500 ease-in-out bg-black;
+            // background: linear-gradient(180deg, rgba(245, 127, 41, 0) 0%, #F57F29 100%);
+            img {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+                transition: all 300ms 0ms cubic-bezier(0.6, -0.28, 0.735, 0.045);
+            }
+        }
+        &:hover {
+            .hover__efect {
+                @apply opacity-100 transition duration-500 ease-in-out;
+                img {
+                    -webkit-transform: scale(1);
+                    transform: scale(1);
+                    transition: all 300ms 100ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                }
+            }
+        }
+    }
+}

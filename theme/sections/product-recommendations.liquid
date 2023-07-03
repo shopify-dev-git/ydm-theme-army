@@ -1,0 +1,86 @@
+{%- assign href = 'product-recommendations.css' | asset_url -%}
+{% render 'link', href: href %}
+
+{% assign p_limit = 3 %}
+{%- if recommendations.products_count > 0 -%}
+{%- capture product_cards -%}
+    {%- for product in recommendations.products -%}
+      <div class="frequently-col product-recommendations-item relative">
+        {% include 'product-card', product: product %}
+      </div>
+    {%- endfor -%}
+    {%- endcapture -%}
+    {%- else -%}
+    {%- capture product_cards -%}
+    {%- for product in collection.products limit: p_limit -%}
+      <div class="frequently-col product-recommendations-item relative">
+        {% include 'product-card', product: product %}
+      </div>
+    {%- endfor -%}
+    {%- endcapture -%}
+  {%- endif -%}
+{%- unless template -%}
+  {{ product_cards }}
+{%- else -%}
+  <product-recommendations
+    class="product-recommendations hidden"
+    data-section-type="product-recommendations"
+    data-section-id="{{ section.id }}"
+    data-base-url="{{ routes.product_recommendations_url }}"
+    data-product-id="{{ product.id }}"
+    data-limit="{{ p_limit | json }}">
+    <div class="product-recommendations py-14 md:py-20 lg:py-28">
+      <div class="container">
+        <div class="text-center pb-5 md:pb-6">
+          <h2>{{ section.settings.title }}</h2>
+        </div>
+        <div class="row frequently-row-d grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-9">
+          {{ product_cards }}
+        </div>
+      </div>
+    </div>
+  </product-recommendations>
+{% endunless %}
+
+<script>
+  if (!customElements.get('product-recommendations')) {
+    class Recommensations extends HTMLElement {
+      constructor() {
+        super();
+        var baseUrl = this.dataset.baseUrl;
+        var productId = this.dataset.productId;
+        var limit = this.dataset.limit;
+        var requestUrl = "".concat(baseUrl, "?section_id=product-recommendations&product_id=", productId, "&limit=", limit);
+        if (productId) {
+          fetch(requestUrl).then(response => {
+            return response.text();
+          }).then(data => {
+            var container = document.createElement("div");
+            container.innerHTML = data;
+            var products = container.querySelectorAll(".shopify-section .product-recommendations-item");
+            if (products) {
+              this.querySelector('.frequently-row-d').innerHTML = container.querySelector(".shopify-section").innerHTML;
+              this.classList.remove('hidden');
+            }
+          }).catch(console.log);
+        }
+      }
+    }
+    customElements.define('product-recommendations', Recommensations);
+  }
+</script>
+
+
+{% schema %}
+  {
+    "name": "Product Recommendations",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "You may also like"
+      }
+    ]
+  }
+{% endschema %}

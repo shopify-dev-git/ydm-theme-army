@@ -1,0 +1,134 @@
+{%- assign href = 'login.css' | asset_url -%}
+{% render 'link', href: href %}
+
+    {%- form 'recover_customer_password' -%}
+        {%- if form.errors or form.posted_successfully? -%}
+            {%- assign is_recover_active = true -%}
+        {%- endif -%}
+    {%- endform -%}
+    {%- if is_recover_active -%}
+            {%- assign recover_form_hidden = '' -%}
+            {%- assign login_form_hidden = ' hidden ' -%}
+        {%- else -%}    
+            {%- assign recover_form_hidden = ' hidden ' -%}
+            {%- assign login_form_hidden = '' -%}
+    {%- endif -%}
+
+<section class="login-sec loginpage" data-section-id="{{ section.id }}" data-section-type="login-section">
+    <!-- Login Page -->
+    {%- if template == 'customers/login' -%}
+    <div class="w-full">
+        <div class="md:grid md:grid-cols-2">
+            <div class="left_img_sec hidden md:block">
+                <div class="img_wrapper relative h-full">
+                    {%- if template == 'customers/login' -%}
+                        {% if section.settings.login_image != blank %}
+                        <img class="lazyload object-cover absolute top-0 bottoms-0 left-0 right-0 w-full h-full" 
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+                        data-src="{{ section.settings.login_image | img_url: '1000x' }}" alt="{{ section.settings.login_image.alt }}">
+                        {% endif %}
+                    {%- endif -%}
+                </div>
+            </div>
+
+           
+            {%- assign login_form_class = login_form_hidden | append: ' form-login' -%}
+            <div class="login-create-box px-6 md:pl-[9%] lg:pl-[8%] xl:pl-[14%] py-[64px] bg-white sm:py-8 md:py-14 2xl:py-20 4xl:py-28 flex items-center">
+                <div class="{{ login_form_class }}">
+                    <div class="account-login-title pb-3 lg:pb-5 text-center md:text-left">
+                        <h2 class="font-normal font-dmserif text-font27 lg:text-font30 2xl:text-font40 pb-4 md:pb-5 lg:pb-5">{{ 'customer.login.title' | t }}</h2>
+                        <p>{{ 'customer.login.subtext' | t }}</p>
+                    </div>
+
+                    <div class="account-login-box">
+                        {%- form 'customer_login', name: 'login', class: '' -%}
+                        {%- if form.errors -%}
+                        <p class="alert error-text mb-2 text-center text-red-600 bg-[#FFF3EE] p-2 lg:p-3 my-[10px]">{{ form.errors.messages['form'] }}</p>
+                        {%- endif -%}
+                        <div class="input-box text-left">
+                            <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'customer.login.email' | t }}</label>
+                            <input
+                            class=""
+                            type="email" name="customer[email]" id="CustomerEmail" autocomplete="email" autocorrect="off"
+                            autocapitalize="off" {% if form.errors contains 'form' %} aria-invalid="true" {% endif %}
+                            placeholder="" required />
+                        </div>
+
+                        <div class="input-box text-left">
+                        {%- if form.password_needed -%}
+                        <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'customer.login.password' | t }}</label>
+                            <input
+                            class=""
+                            type="password" value="" name="customer[password]" id="CustomerPassword"
+                            autocomplete="current-password" {% if form.errors contains 'form' %} aria-invalid="true"
+                            {% endif %} placeholder="" required />
+                        {%- endif -%}
+                        </div>
+                        <div class="flex text-right items-center justify-end mt-2">
+                            <a href="#recover" class="forgt-password font-inter text-darkblue-100 text-font16 font-normal 
+                            text-[#867887] hover:text-black  pt-1 pb-1"> {{ 'customer.login.lost_password' | t }}</a>
+                        </div>
+
+                        <div class="input-box">
+                            <button type="submit" class="primary-btn btn_full_width">
+                                {{ 'customer.login.submit' | t }}
+                                {% include 'button-arrow' %}
+                            </button>
+                        </div>
+                        <div class="flex justify-center items-center pt-4">
+                        <span class="font-inter text-puce-400 text-font16 font-normal">
+                            {{ 'customer.login.new_customer' | t }}  <a href="{{ routes.account_register_url }}" class="font-inter text-puce-100 text-font16 font-normal hover:text-puce-400 underline">{{ 'customer.login.create_your_account' | t }}
+                                </a>
+                            </span>
+                        </div>
+                        {%- endform -%}
+                    </div>
+                </div>
+                {%- assign recover_form_class = recover_form_hidden | append: ' form-reset' -%}
+                <div class="account-login-box hidden {{ recover_form_class }}">
+                    <div class="heading-row mx-0 text-left">
+                        <h1 class="font-normal font-dmserif text-font27 lg:text-font30 2xl:text-font40 pb-4 md:pb-5 lg:pb-5">
+                            {{ 'customer.recover_password.title' | t }}
+                        </h1>                        
+                        {%- if form.posted_successfully? -%}
+                            <p>{{ 'customer.recover_password.description' | t }}</p>                            
+                            {%- else -%}                            
+                        {%- endif -%}                        
+                    </div>                    
+                    {%- form 'recover_customer_password', name: 'recover', class: 'custome_form' -%}
+                        {%- if form.errors -%}
+                            <p class="alert text-red-600 error-text mb-6">{{ form.errors.messages['form'] }}</p>
+                        {%- endif -%}
+                        {%- if form.posted_successfully? -%}
+                            <p class="py-4 font-secondaryregular text-blackesh-100">{{ 'customer.recover_password.success' | t }}</p>
+                            <div class="text-left">
+                                <p class="text-center mt-2 font-secondaryregular text-blackesh-100">
+                                    <a href="#login" class="sign-in text-purple underline font-medium">{{ 'customer.recover_password.back_to_login' | t }}</a>
+                                </p>
+                            </div>
+                        {%- else -%}
+                            <div class="input-box">
+                                <input type="email" class="test" placeholder="{{ 'customer.recover_password.email' | t }}" name="email" id="email" 
+                                {{ 'customer.login.email' | t }} />
+                            </div>                            
+                            <div class="input-box">
+                                <input type="submit" class="primary-btn padding-t-0 btn_full_width" value="{{ 'customer.recover_password.submit' | t }}">                                                                    
+                                <div class="relative z-0 w-full mb-6 text-center mt-4 md:mt-6">
+                                    <a href="#login" class="sign-in font-inter text-puce-100 text-font16 font-normal hover:text-puce-400 underline transition duration-500 ease-in-out px-1">{{ 'customer.recover_password.back_to_login' | t }}</a>
+                                </div>
+                            </div>
+                        {%- endif -%}
+                    {%- endform -%}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    {%- endif -%}
+    
+    {%- if template == 'customers/register' -%}
+        {% include 'customer-register' %}
+    {%- endif -%}
+</section>
+
+

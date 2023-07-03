@@ -1,0 +1,218 @@
+{
+  "sections": {
+    "d8409446-b084-4f25-b70b-42651cce8629": {
+      "type": "review-banner",
+      "blocks": {
+        "5d5455a8-fc7b-4cc6-ab2e-b8c7725a8485": {
+          "type": "shopify:\/\/apps\/stamped-product-reviews-ugc\/blocks\/main-widget\/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": true,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": true,
+            "use_metafields": true,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "5d5455a8-fc7b-4cc6-ab2e-b8c7725a8485"
+      ],
+      "settings": {
+        "revire_hero_img": "shopify:\/\/shop_images\/review-banner-img.png"
+      }
+    },
+    "19ec0894-6384-4491-a992-e965ffbe6db9": {
+      "type": "featured-brands",
+      "blocks": {
+        "6a94382e-57eb-40fe-be3f-4709a8477760": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_46.png"
+          }
+        },
+        "6d3d32e6-fbc2-4313-9fb4-98ff37513faf": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_47.png"
+          }
+        },
+        "63e3f4fd-7cb9-4b27-92e0-c87eae59371c": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_89.png"
+          }
+        },
+        "8cf676c2-0750-483e-8a76-c39e1f23dc23": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/image_117.png"
+          }
+        }
+      },
+      "block_order": [
+        "6a94382e-57eb-40fe-be3f-4709a8477760",
+        "6d3d32e6-fbc2-4313-9fb4-98ff37513faf",
+        "63e3f4fd-7cb9-4b27-92e0-c87eae59371c",
+        "8cf676c2-0750-483e-8a76-c39e1f23dc23"
+      ],
+      "settings": {
+        "title": "As seen on",
+        "text": ""
+      }
+    },
+    "8a11c2ee-7833-4296-aee5-e3d9e1b24620": {
+      "type": "ugc-section",
+      "blocks": {
+        "c3dc39ff-186c-4d7e-b96a-538ac9b2bf5c": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        },
+        "af88168e-08c1-475a-b34a-4ba26a7e51b9": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333-1.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        },
+        "d5ed84aa-b310-4415-8c5e-bab613369a2b": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333-2_c2593a9b-f8a5-4e98-aa94-8075cd3e58a5.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        },
+        "bd4d8272-3ba4-45ae-81d7-8d9dfe9d0a48": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333-3_2491cb61-eeea-44d5-b3ca-955c161f09d9.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        },
+        "040d97dc-8863-4ba1-9d34-81ff976cba54": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333-4.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        },
+        "36a51d2c-251b-4a87-a9c2-4f6ceab83b5d": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333_5f988b35-23bf-43e7-964b-f15552c98d28.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        },
+        "c1685aa5-d13f-4eec-a51c-7052187e42eb": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333-1_bc2ff3c4-1a96-459f-a17e-b134bb5203dc.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        },
+        "0739402d-c5df-44b4-9ea2-f226508b01ac": {
+          "type": "ugc-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/Rectangle_333-2_6041642a-d9d5-429f-9e81-088b6d365b16.jpg",
+            "sub_title": "I DAY AGO",
+            "content_description": "<p>Lorem ipsum dolor sit amet, 😘consectetur adipiscing elit. Praesent non eros nec metus volutpat malesuada et nec erat. Morbi id gravida mauris, at egestas ante.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "c3dc39ff-186c-4d7e-b96a-538ac9b2bf5c",
+        "af88168e-08c1-475a-b34a-4ba26a7e51b9",
+        "d5ed84aa-b310-4415-8c5e-bab613369a2b",
+        "bd4d8272-3ba4-45ae-81d7-8d9dfe9d0a48",
+        "040d97dc-8863-4ba1-9d34-81ff976cba54",
+        "36a51d2c-251b-4a87-a9c2-4f6ceab83b5d",
+        "c1685aa5-d13f-4eec-a51c-7052187e42eb",
+        "0739402d-c5df-44b4-9ea2-f226508b01ac"
+      ],
+      "settings": {
+        "rated_text": "Rated 4.7 Stars",
+        "rated_text_customers": "By 1000 Customers",
+        "Heading": "See why people love our brand",
+        "sub_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus euismod est et hendrerit. Ut rhoncus ligula in fringilla luctus.Pellentesque dapibus augue eu odio facilisis congue. Maecenas porttitor porta neque, eget tristique neque iaculis ut. Donec tincidunt odio a magna suscipit, non ornare libero molestie.",
+        "color_scheme": "default",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#e8e9f2"
+      }
+    },
+    "main-review-section": {
+      "type": "main-review-section",
+      "settings": {}
+    },
+    "78200072-ecea-46fb-bbb0-8d94a6088d62": {
+      "type": "real-people",
+      "blocks": {
+        "92f15399-a344-4fc6-9660-9874c7ede603": {
+          "type": "information-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/msg-icon.png",
+            "sub_title": "Email us",
+            "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus<\/p>",
+            "btn_link": "#",
+            "btn_text": "MAIL US"
+          }
+        },
+        "79a7b0c1-11e2-4898-a2de-568394a9ef56": {
+          "type": "information-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/call-icon.png",
+            "sub_title": "Call us",
+            "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus<\/p>",
+            "btn_link": "tel:888-848-0248",
+            "btn_text": "888-848-0248"
+          }
+        },
+        "a33ccb17-6a26-46bd-8109-3996d84c24ea": {
+          "type": "information-card",
+          "settings": {
+            "card-img": "shopify:\/\/shop_images\/chats-icon.png",
+            "sub_title": "Chat with us",
+            "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus<\/p>",
+            "btn_link": "#",
+            "btn_text": "CHAT NOW"
+          }
+        }
+      },
+      "block_order": [
+        "92f15399-a344-4fc6-9660-9874c7ede603",
+        "79a7b0c1-11e2-4898-a2de-568394a9ef56",
+        "a33ccb17-6a26-46bd-8109-3996d84c24ea"
+      ],
+      "settings": {
+        "main_title": "Real People, Not Robots",
+        "align_text": "center",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#867887",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_sub_heading_color_scheme": "#4b3b4c",
+        "section_links_color_scheme": "#ca8685",
+        "section_background_color_scheme": "#fdf9fe",
+        "button_color_scheme": "link-btn"
+      }
+    }
+  },
+  "order": [
+    "d8409446-b084-4f25-b70b-42651cce8629",
+    "19ec0894-6384-4491-a992-e965ffbe6db9",
+    "8a11c2ee-7833-4296-aee5-e3d9e1b24620",
+    "main-review-section",
+    "78200072-ecea-46fb-bbb0-8d94a6088d62"
+  ]
+}

@@ -1,0 +1,22 @@
+@media (max-width: 767px) {
+  .multi-column {
+    border-right: 1px solid #C9C2C9;
+    border-bottom: 1px solid #C9C2C9;
+    padding-bottom: 20px;
+    padding-top: 20px;
+  }
+  .multi-column:nth-child(even) {
+    border-right-width: 0px;
+  }
+  .multi-column:last-child {
+    border-bottom-width: 0px;
+  }
+  .multi-column:nth-child(2n+3) {
+    border-bottom-width: 0px;
+  }
+}
+
+.icon_sec svg {
+  height: 100%;
+  width: 100%;
+}

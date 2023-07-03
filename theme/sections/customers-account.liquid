@@ -1,0 +1,313 @@
+{%- assign href = 'account.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<section class="pt-6 md:pt-14 lg:pt-20 2xl:pt-24 pb-12 md:pb-14 xl:pb-28 account-page relative bg-gray-200"
+data-section-type="account-section" 
+data-section-id="{{ section.id }}">
+  <!-- account-section Start -->
+  <div class="account-section relative">
+      <div class="container">
+          <div class="text-center pb-5 wow fadeInUp lg:pb-9 xl:pb-20 capitalize">
+              <h2>{{ 'customer.general.my_account' | t }}      </h2>
+          </div>
+          <div class="pt-4 md:pt-6 xl:pt-14 account-pg top-gap">
+              <div class="account-details-wrap mb-5 mt-0 md:mt-5">
+                  <div class="row md:flex items-start">
+                      <div class="md:flex-shrink-0 left-menu-clm pr-sm-0 md:w-1/4 lg:w-1/5 xl:w-1/5">
+                          <div class="">
+                              <div class="left-top-bar mb-4 md:mb-8 xl:mb-12 pr-sm-0 align-self-center heading_text_sec">
+                                  <h3 class="font-markpro font-bold text-font20 lg:text-font25 2xl:text-font31">
+                                    {{ 'customer.general.hello' | t: name: customer.first_name }}
+                                  </h3>
+                              </div>
+                          </div>
+                          <!-- "stickytop"- class for fixed at top on mobile -->
+                          <div class="menu-list sub-menu-list account-menu-list pr-0 commom_customScroll account-tabs-scroll">
+                            <a href="{{ routes.account_addresses_url }}" class="tab-link {% if template.name == 'addresses' %} active {% endif %} addresses-link flex flex-wrap items-center">
+                              <span class="mx-auto mb-1 md:mb-0 md:ml-0 md:mr-3 2xl:mr-4 icon d-none md:block">
+                                <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.50002 9.01216C2.66358 9.01216 0 11.2864 0 15.4161C0 15.7386 0.262985 16 0.587463 16H14.4125C14.737 16 15 15.7386 15 15.4161C15 11.2866 12.3365 9.01216 7.50002 9.01216ZM1.19631 14.8321C1.42738 11.7444 3.54518 10.1801 7.50002 10.1801C11.4548 10.1801 13.5727 11.7444 13.8039 14.8321H1.19631Z" fill="#03506F"/>
+                                    <path d="M7.50002 0C5.2784 0 3.60316 1.69869 3.60316 3.95116C3.60316 6.26959 5.35127 8.15553 7.50002 8.15553C9.64876 8.15553 11.3969 6.26959 11.3969 3.95134C11.3969 1.69869 9.72163 0 7.50002 0ZM7.50002 6.98784C5.99904 6.98784 4.77808 5.62569 4.77808 3.95134C4.77808 2.3385 5.92286 1.16788 7.50002 1.16788C9.05192 1.16788 10.2219 2.36438 10.2219 3.95134C10.2219 5.62569 9.00099 6.98784 7.50002 6.98784Z" fill="#03506F"/>
+                                </svg>
+                            </span>
+                              <span class="flex-1"> {{ 'customer.account.title' | t }}</span>
+                            </a>
+                            
+                            <a href="{{ routes.account_url }}" class="tab-link {% if template.name == 'account' %} active {% endif %} order-link flex flex-wrap items-center">
+                              <span class="mx-auto mb-1 md:mb-0 md:ml-0 md:mr-3 2xl:mr-4 icon d-none md:block">
+                                <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.9943 16.1904L13.9879 4.38465C13.9601 4.05855 13.6731 3.80738 13.3284 3.80738H11.3528V3.65586C11.3528 1.64009 9.62448 0 7.50003 0C5.37557 0 3.64724 1.64009 3.64724 3.65608V3.8076H1.67167C1.32695 3.8076 1.03997 4.05876 1.01217 4.38487L0.00572621 16.1904C-0.0339711 16.6552 0.134109 17.1182 0.467159 17.4606C0.80044 17.8034 1.27331 18 1.7645 18H13.2356C13.727 18 14.1997 17.8034 14.5329 17.4606C14.8659 17.118 15.0338 16.655 14.9943 16.1904ZM4.97061 3.65608C4.97061 2.33266 6.1054 1.25581 7.50003 1.25581C8.89465 1.25581 10.0294 2.33266 10.0294 3.65608V3.8076H4.97061V3.65608ZM13.56 16.6092C13.5111 16.6598 13.4038 16.7442 13.2356 16.7442H1.7645C1.59623 16.7442 1.489 16.6599 1.44005 16.6092C1.3911 16.5589 1.31124 16.4507 1.32491 16.2917L2.28214 5.06323H3.6472V8.17597C3.6472 8.5228 3.94344 8.80387 4.30889 8.80387C4.67434 8.80387 4.97057 8.52276 4.97057 8.17597V5.06323H10.0294V8.17597C10.0294 8.5228 10.3256 8.80387 10.6911 8.80387C11.0566 8.80387 11.3528 8.52276 11.3528 8.17597V5.06323H12.7178L13.6751 16.2919C13.6888 16.451 13.6088 16.5589 13.56 16.6092Z" fill="#03506F
+                                    "/>
+                                </svg>
+                            </span>
+                              <span class="flex-1">{{ 'customer.order.title' | t }}</span>
+                            </a>
+        
+                            <a href="{{ routes.account_logout_url }}" class="tab-link logout-link flex flex-wrap items-center">
+                              <span class="mx-auto mb-1 md:mb-0 md:ml-0 md:mr-3 2xl:mr-4 icon d-none md:block">
+                                <svg width="15" height="16" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.50002 9.01216C2.66358 9.01216 0 11.2864 0 15.4161C0 15.7386 0.262985 16 0.587463 16H14.4125C14.737 16 15 15.7386 15 15.4161C15 11.2866 12.3365 9.01216 7.50002 9.01216ZM1.19631 14.8321C1.42738 11.7444 3.54518 10.1801 7.50002 10.1801C11.4548 10.1801 13.5727 11.7444 13.8039 14.8321H1.19631Z" fill="#03506F"/>
+                                    <path d="M7.50002 0C5.2784 0 3.60316 1.69869 3.60316 3.95116C3.60316 6.26959 5.35127 8.15553 7.50002 8.15553C9.64876 8.15553 11.3969 6.26959 11.3969 3.95134C11.3969 1.69869 9.72163 0 7.50002 0ZM7.50002 6.98784C5.99904 6.98784 4.77808 5.62569 4.77808 3.95134C4.77808 2.3385 5.92286 1.16788 7.50002 1.16788C9.05192 1.16788 10.2219 2.36438 10.2219 3.95134C10.2219 5.62569 9.00099 6.98784 7.50002 6.98784Z" fill="#03506F"/>
+                                </svg>
+                            </span>
+                              <span class="flex-1">{{ 'customer.general.logout' | t }}</span>
+                            </a>
+                        </div>
+                      </div>
+                      <!-- left-menu-clm End -->
+
+                      <div class="md:w-3/4 lg:w-4/5 xl:w-4/5 right-details-clm mt-3">
+                          <div class="tab-content" id="v-pills-tabContent">
+                              <!-- Tabs Accounts -->
+                              {%- if template.name == 'account' -%}
+                              <div class="tab-pane active">
+                                {%- if customer.orders.size != 0 -%}
+                                  <div class="product__table">
+                                      <div class="overflow-hidden lg:overflow-auto xl:overflow-hidden">
+                                          <table class="min-w-full product-table-row h_commom_customScroll">
+                                            <thead class="d__hidden">
+                                              <tr class="">
+                                                <th scope="col" class="pl-3 pr-0 pb-4 text-left text-font14 2xl:text-font16 4xl:text-font18 uppercase text-blackesh-100 font-inter font-semibold">
+                                                  {{ 'customer.order.product' | t }}
+                                                </th>
+                                                <th scope="col" class="px-3 2xl:px-6 pb-4 text-center text-font14 2xl:text-font16 4xl:text-font18 uppercase text-blackesh-100 font-inter font-semibold">
+                                                  {{ 'customer.orders.order_number' | t }}
+                                                </th>
+                                                <th scope="col" class="pl-3 pb-4 text-center text-font14 2xl:text-font16 4xl:text-font18 uppercase text-blackesh-100 font-inter font-semibold">
+                                                  {{ 'customer.orders.date' | t }}
+                                                </th>
+                  
+                                                <th scope="col" class="pl-3 pb-4 text-center text-font14 2xl:text-font16 4xl:text-font18 uppercase text-blackesh-100 font-inter font-semibold">
+                                                  {{ 'customer.orders.payment_status' | t }}
+                                                </th>
+                  
+                                                <th scope="col" class="pl-3 pb-4 text-center text-font14 2xl:text-font16 4xl:text-font18 uppercase text-blackesh-100 font-inter font-semibold">
+                                                  {{ 'customer.orders.fulfillment_status' | t }}
+                                                </th>
+                  
+                                                <th scope="col" class="pl-3 pb-4 2xl:pl-6 4xl:pl-8 text-left text-font14 2xl:text-font16 4xl:text-font18 uppercase text-blackesh-100 font-inter font-semibold">
+                                                  {{ 'customer.orders.total' | t }}
+                                                </th>
+                  
+                                                <th scope="col" class="pl-3 pb-4 text-left uppercase text-font14 2xl:text-font16 4xl:text-font18 text-blackesh-100 font-inter font-semibold">
+                                                </th>
+                                              </tr>
+                                            </thead>
+                                              <tbody class="">
+                                                  <tr class="d__hidden"
+                                                      style="border-top: 0;height: 0px; border:none!important;box-shadow: none!important;height: 32px; ">
+                                                  </tr>
+                                                  <!-- Need this emplty tr -->
+                                                  {% paginate customer.orders by 20 %}
+                                                  {% for order in customer.orders %}
+                                                  <tr>
+                                                      <td class="pr-0 py-1 lg:py-3 relative pl-6">
+                                                          <div class="img_sec">
+                                                            {%- assign num_total_orders = blank -%}
+                                                            {%- if order.line_items.size > 1 -%}
+                                                                {%- assign num_total_orders = order.line_items.size | minus: 1 -%}
+                                                                {%- if num_total_orders < 10 -%}
+                                                                    {%- assign num_total_orders = num_total_orders | prepend: '0' -%}
+                                                                {%- endif -%}
+                                                            {%- endif -%}
+                                                            {%- assign counter = 0 -%}
+                                                            {%- for line_item in order.line_items -%}
+                                                                {%- assign counter = counter | plus: 1 -%}
+                                                                {%- if  counter > 1 -%}
+                                                                {% break %}
+                                                                {%- else -%}
+                                                                <a href="{{line_item.url}}">
+                                                                    <img class="lazyload object-cover lazyload" data-src="{{ line_item.image | img_url: '200x' }}" alt="{{line_item.title}}">
+                                                                    {%- if num_total_orders -%}
+                                                                    <!-- <span class="count-product text-xs lg:text-lg">+ {{num_total_orders}}</span> -->
+                                                                    {%- endif -%}
+                                                                </a>
+                                                                {%- endif -%}
+                                                            {%- endfor -%}
+                                                        </div>
+                                                      </td>
+
+                                                      <td class="px-1 2xl:px-6 py-1 lg:py-3  lg:text-center">
+                                                          <div
+                                                              class="product_info_text flex blatext-blackesh-100 font-inter font-semibold text-font14 xl:text-font16 text-darkblue-100">
+                                                              <span
+                                                                  class="label lg:hidden uppercase text-darkblue-100 pr-2">{{ 'customer.orders.order_number' | t }}:</span>
+                                                                  #{{order.order_number}}
+                                                          </div>
+                                                      </td>
+
+                                                      <td class="px-1 py-1 lg:py-3  lg:text-center">
+                                                          <div
+                                                              class="product_info_text flex blatext-blackesh-100 font-inter font-semibold text-font14 xl:text-font16 text-darkblue-100">
+                                                              <span
+                                                                  class="label lg:hidden uppercase pr-2 text-darkblue-100">{{ 'customer.orders.date' | t }}:</span>
+                                                                  {{ order.created_at | date: "%B %d, %Y" }}
+                                                          </div>
+                                                      </td>
+
+                                                      <td class="px-1 py-1 lg:py-3  lg:text-center">
+                                                          <div
+                                                              class="product_info_text flex blatext-blackesh-100 font-inter font-semibold text-font14 xl:text-font16 text-darkblue-100">
+                                                              <span
+                                                                  class="label lg:hidden uppercase pr-2 text-darkblue-100">
+                                                                  {{ 'customer.orders.payment_status' | t }}:</span> {{order.financial_status}}
+                                                          </div>
+                                                      </td>
+
+                                                      <td class="px-1 py-1 lg:py-3 lg:text-center">
+                                                          <div
+                                                              class="product_info_text flex blatext-blackesh-100 font-inter font-semibold text-font14 xl:text-font16 text-darkblue-100">
+                                                              <span
+                                                                  class="label lg:hidden uppercase pr-2 text-darkblue-100">
+                                                                  {{ 'customer.orders.fulfillment_status' | t }}:</span>
+                                                                  {{ order.fulfillment_status }}
+                                                          </div>
+                                                      </td>
+
+                                                      <td
+                                                          class="px-1 py-1 2xl:pl-6 4xl:pl-8 lg:py-3 lg:pr-0  lg:text-left">
+                                                          <div
+                                                              class="product_info_text flex blatext-blackesh-100 font-inter font-semibold text-font14 xl:text-font16 text-darkblue-100">
+                                                              <div class="flex lg:inline-block pb-3 lg:pb-0">
+                                                                  <span
+                                                                      class="label lg:hidden uppercase pr-2 text-darkblue-100">{{ 'customer.orders.total' | t }}</span>
+                                                                  <span class="lg:mt-1 pr-4 4xl:pr-6">{{ order.total_price | money }}</span>
+                                                              </div>
+                                                          </div>
+                                                      </td>
+
+                                                      <td class="px-1 py-1 lg:py-3 pl-0 lg:pr-3 lg:text-left">
+                                                          <div class="flex">
+                                                              <a href="{{ order.order_status_url }}" class="blue-btn small-btn">
+                                                                {{ 'customer.order.view_order' | t }}
+                                                                  <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                      <path d="M12.0266 4.58732L8.433 0.572618C8.33618 0.468145 8.2065 0.410336 8.0719 0.411643C7.93729 0.41295 7.80853 0.473267 7.71335 0.579604C7.61816 0.685941 7.56417 0.829789 7.563 0.980167C7.56183 1.13054 7.61358 1.27542 7.70709 1.38359L10.4244 4.41928H1.39619C1.26003 4.41928 1.12945 4.4797 1.03318 4.58726C0.9369 4.69482 0.882813 4.8407 0.882812 4.99281C0.882813 5.14492 0.9369 5.2908 1.03318 5.39836C1.12945 5.50591 1.26003 5.56634 1.39619 5.56634H10.4244L7.70709 8.60203C7.65806 8.65493 7.61895 8.71822 7.59204 8.78819C7.56514 8.85817 7.55098 8.93342 7.55038 9.00958C7.54979 9.08573 7.56278 9.16125 7.58859 9.23174C7.61441 9.30222 7.65253 9.36626 7.70073 9.42011C7.74893 9.47396 7.80625 9.51655 7.86934 9.54538C7.93243 9.57422 8.00003 9.58873 8.0682 9.58807C8.13637 9.58741 8.20373 9.57159 8.26636 9.54153C8.329 9.51147 8.38565 9.46778 8.433 9.413L12.0266 5.39829C12.1229 5.29074 12.1769 5.14489 12.1769 4.99281C12.1769 4.84073 12.1229 4.69488 12.0266 4.58732Z" fill="white"/>
+                                                                  </svg>
+                                                              </a>
+                                                          </div>
+                                                      </td>
+                                                  </tr>
+                                                  <!-- items... -->
+                                                  {% endfor %}
+                                                  {% endpaginate %}
+                                              </tbody>
+                                          </table>
+                                      </div>
+                                  </div>
+                                  {%- else -%}
+                                    <div class="text-fon20 font-inter text-blackesh-100 w-full text-center font-semibold">
+                                        {{ 'general.no_order' | t }}
+                                    </div>
+                                {%- endif -%}
+                              </div>
+                              {%- endif -%}
+                              <!-- Tabs My Orders -->
+                              {%- if template.name == 'addresses' -%}
+                              <div class="tab-pane active">
+                                  <div class="order-hisroty-details addressForm-sec">
+                                      <div class="mb-3 2xl:mb-6">
+                                          <div
+                                              class="address-section mb-4 section-header addressForm-heading md:flex padding_right">
+                                              <div class="w-full mb-6">
+                                                  <h1>{{ 'customer.addresses.title' | t }}</h1>
+                                                  <button type="button" id="AddressNewButton" data-target="AddressForm" class="blue-btn mt-8">
+                                                    {%- if customer.addresses.size > 0 -%}
+                                                        {{ 'customer.addresses.add_address' | t }}
+                                                    {%- else -%}
+                                                        {{ 'customer.addresses.no_addresses_button' | t }}
+                                                    {%- endif -%}
+                
+                                                </button>
+                                              </div>
+                                            </div>
+                                          <div id="AddressForm" class="hidden form-vertical addressForm-wrapper address-section">
+                                            {% render 'customers-address-form', address: customer.new_address, id: 'new_address_form' %}
+                                          </div>
+                                      </div>
+                                      {%- if customer.addresses.size > 0 -%}                                
+                                      <div class="address-section default-address-sec">
+                                          <div class="mb-0 section-header addressForm-heading d-md-flex justify-content-md-between">
+                                              <div class="left-address-sec mb-8">
+                                                  <h1>{{ 'customer.addresses.default_address' | t }}</h1>
+                                              </div>
+                                            </div>
+                                          {%- assign default_address = customer.default_address | format_address | split: '<br>' -%}
+                                          <ul class="default-address-list list-group p-6 bg-white">
+                                              {% for item in default_address %}
+                                                  <li class="mb-4 list-group-item text-blackesh-200 font-semibold font-proximaRg text-font14 xl:text-font15">{{item}}</li>
+                                              {% endfor %}
+                                          </ul>
+
+                                          {%- assign form_id = 'edit_address_form-' | append: customer.default_address.id -%}
+                                          {% render 'customers-address-form', address: customer.default_address, id: form_id, edit: true %}
+                                          <div class="mb-4 mb-md-4 pb-3 btn-row flex flex-wrap mt-8 xl:mt-12">
+                                              <button type="button" data-target="{{form_id}}" class="mb-5 md:mb-0 btn-edit-address primary-btn m-0 blue-border-btn w-full md:w-auto">
+                                                  {{ 'customer.addresses.edit' | t }}
+                                              </button>
+                                              <form
+                                                  class="address-delete-form inline-block mr-auto w-full md:w-auto"
+                                                  method="post"
+                                                  action="/account/addresses/{{ customer.default_address.id }}"
+                                                  data-confirm-message="{{ 'customer.addresses.confirm_delete' | t }}"
+                                                  >
+                                                  <input type="hidden" name="_method" value="delete" />
+                                                  <button type="submit" class="blue-btn md:mx-auto px-3 sm:px-5 w-full md:ml-10  md:w-auto primary-btn">{{ 'customer.addresses.delete' | t }}</button>
+                                              </form>
+                                          </div>
+                                      </div>
+                                      {% endif %}
+                                      {% paginate customer.addresses by 5 %}
+                                        {%- if customer.addresses.size > 1 -%}
+                                            <div class="address-list flex flex-wrap mt-8 lg:mt-10">
+                                                {%- for address in customer.addresses -%}
+                                                    {%- unless address == customer.default_address -%}
+                                                    {%- assign form_id = 'edit_address_form-' | append: address.id -%}
+                                                    {% render 'customers-address-form', address: address, id: form_id, edit: true %}
+                                                    <div class="w-full">
+                                                        <div class="address-section default-address-sec">
+                                                            {%- assign my_address = address | format_address | split: '<br>' -%}
+                                                            {%- if my_address.size > 0 -%}
+                                                                <ul class="default-address-list list-group p-6 bg-white">
+                                                                {% for item in my_address %}
+                                                                    <li class="mb-4 list-group-item text-blackesh-200 font-semibold font-proximaRg text-font14 xl:text-font15">{{item}}</li>
+                                                                {% endfor %}
+                                                                </ul>
+
+                                                                <div class="mb-4 mb-md-4 pb-3 btn-row flex flex-wrap mt-8 xl:mt-12">
+                                                                    <button type="button" data-target="{{form_id}}" class="mb-5 md:mb-0 btn-edit-address primary-btn m-0 blue-border-btn px-3 sm:px-5 w-full md:w-auto">
+                                                                        {{ 'customer.addresses.edit' | t }}
+                                                                    </button>
+                                                                    <form
+                                                                        class="address-delete-form inline-block mr-auto w-full md:w-auto"
+                                                                        method="post"
+                                                                        action="/account/addresses/{{ address.id }}"
+                                                                        data-confirm-message="Are you sure you wish to delete this address?"
+                                                                        >
+                                                                        <input type="hidden" name="_method" value="delete" />
+                                                                        <button type="submit" class="blue-btn md:mx-auto px-3 sm:px-5 w-full primary-btn md:ml-10  md:w-auto">
+                                                                            {{ 'customer.addresses.delete' | t }}
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            {%- endif -%}
+                                                        </div>
+                                                    </div>
+                                                    {%- endunless -%}
+                                                {%- endfor -%}
+                                            </div>
+                                        {%- endif -%}
+                                    {% endpaginate %}
+                                  </div>
+                              </div>
+                              {%- endif -%}
+                          </div>
+                      </div>
+                      <!-- right-details-clm End -->
+                  </div>
+              </div>
+              <!-- account-details -->
+          </div>
+      </div>
+  </div>
+  <!-- account-section End -->
+</section>

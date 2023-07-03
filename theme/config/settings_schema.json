@@ -1,0 +1,566 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "YDM theme",
+    "theme_version": "3.0.1",
+    "theme_author": "Your Digital Media",
+    "theme_documentation_url": "https:\/\/github.com\/Your-Digital-Media\/ydm-starter-theme",
+    "theme_support_url": "https:\/\/github.com\/Your-Digital-Media\/ydm-starter-theme\/issues"
+  },
+  {
+    "name": {
+      "cs": "Favikona",
+      "da": "Favoritikon",
+      "de": "Favicon",
+      "en": "Favicon",
+      "es": "Favicon",
+      "fi": "Favicon",
+      "fr": "Favicon",
+      "hi": "Favicon",
+      "it": "Favicon",
+      "ja": "ファビコン",
+      "ko": "Favicon",
+      "nb": "Favicon",
+      "nl": "Favicon",
+      "pl": "Ikona Favicon",
+      "pt-BR": "Favicon",
+      "pt-PT": "Favicon",
+      "sv": "Favicon",
+      "th": "Favicon",
+      "tr": "Favicon",
+      "vi": "Biểu tượng trang web",
+      "zh-CN": "网站图标",
+      "zh-TW": "Favicon"
+    },
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": {
+          "cs": "Obrázek favikony",
+          "da": "Billede for favoritikon",
+          "de": "Favicon-Bild",
+          "en": "Favicon image",
+          "es": "Imagen de favicon",
+          "fi": "Favicon-kuva",
+          "fr": "Image favicon",
+          "hi": "favicon इमेज",
+          "it": "Immagine favicon",
+          "ja": "ファビコン画像",
+          "ko": "파비콘 이미지",
+          "nb": "Favicon-bilde",
+          "nl": "Favicon-afbeelding",
+          "pl": "Obraz ikony Favicon",
+          "pt-BR": "Imagem favicon",
+          "pt-PT": "Imagem Favicon",
+          "sv": "Favicon-bild",
+          "th": "รูปภาพ Favicon",
+          "tr": "Favicon görseli",
+          "vi": "Hình ảnh biểu tượng trang web",
+          "zh-CN": "网站图标图片",
+          "zh-TW": "Favicon 圖片"
+        },
+        "info": {
+          "cs": "Dojde ke zmenšení na 32 × 32 px",
+          "da": "Skaleres ned til 32 x 32 px",
+          "de": "Wird auf 32 x 32 Pixel verkleinert",
+          "en": "Will be scaled down to 32 x 32px",
+          "es": "Se reducirá a 32 x 32px",
+          "fi": "Skaalataan 32 x 32 pikseliin",
+          "fr": "Sera réduite à 32 x 32 px",
+          "hi": "32 x 32 पिक्सेल के आकार का कर दिया जाएगा",
+          "it": "Verrà ridimensionata a 32 x 32 pixel.",
+          "ja": "32×32ピクセルに縮小されます。",
+          "ko": "32x32 픽셀로 축소됩니다.",
+          "nb": "Vil skaleres ned til 32 x 32 px",
+          "nl": "Wordt verkleind tot 32x32 pixels",
+          "pl": "Zostanie zmniejszony do rozmiaru 32 x 32 px",
+          "pt-BR": "Será reduzida para 32 x 32 pixels",
+          "pt-PT": "Será reduzida para 32 x 32 px",
+          "sv": "Kommer skalas ned till 32 x 32 px",
+          "th": "จะถูกลดขนาดลงเป็น 32 x 32 พิกเซล",
+          "tr": "Ölçeği 32 x 32 piksele düşürülür",
+          "vi": "Sẽ được thu nhỏ xuống 32 x 32px",
+          "zh-CN": "将缩小到 32 x 32px",
+          "zh-TW": "將會縮小為 32 x 32 像素"
+        }
+      }
+    ]
+  },
+  {
+    "name": {
+      "cs": "Sociální sítě",
+      "da": "Sociale medier",
+      "de": "Social Media",
+      "en": "Social media",
+      "es": "Redes sociales",
+      "fi": "Some",
+      "fr": "Médias sociaux",
+      "it": "Social media",
+      "ja": "SNS",
+      "ko": "소셜 미디어",
+      "nb": "Sosiale medier",
+      "nl": "Social media",
+      "pl": "Media społecznościowe",
+      "pt-BR": "Redes sociais",
+      "pt-PT": "Redes sociais",
+      "sv": "Sociala medier",
+      "th": "โซเชียลมีเดีย",
+      "tr": "Sosyal medya",
+      "vi": "Truyền thông xã hội",
+      "zh-CN": "社交媒体",
+      "zh-TW": "社交媒體"
+    },
+    "settings": [
+      {
+        "type": "header",
+        "content": {
+          "cs": "Účty na sociálních sítích",
+          "da": "SoMe-konti",
+          "de": "Social Media",
+          "en": "Social accounts",
+          "es": "Cuentas de redes sociales",
+          "fi": "Sosiaalisen median tilit",
+          "fr": "Médias sociaux",
+          "it": "Account social",
+          "ja": "SNSアカウント",
+          "ko": "소셜 계정",
+          "nb": "Sosiale kontoer",
+          "nl": "Socialmedia-accounts",
+          "pl": "Konta społecznościowe",
+          "pt-BR": "Contas de redes sociais",
+          "pt-PT": "Contas de redes sociais",
+          "sv": "Sociala konton",
+          "th": "บัญชีโซเชียลมีเดีย",
+          "tr": "Sosyal medya hesapları",
+          "vi": "Tài khoản mạng xã hội",
+          "zh-CN": "社交媒体账户",
+          "zh-TW": "社群帳戶"
+        }
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": {
+          "cs": "Facebook",
+          "da": "Facebook",
+          "de": "Facebook",
+          "en": "Facebook",
+          "es": "Facebook",
+          "fi": "Facebook",
+          "fr": "Facebook",
+          "it": "Facebook",
+          "ja": "Facebook",
+          "ko": "Facebook",
+          "nb": "Facebook",
+          "nl": "Facebook",
+          "pl": "Facebook",
+          "pt-BR": "Facebook",
+          "pt-PT": "Facebook",
+          "sv": "Facebook",
+          "th": "Facebook",
+          "tr": "Facebook",
+          "vi": "Facebook",
+          "zh-CN": "Facebook",
+          "zh-TW": "Facebook"
+        },
+        "info": {
+          "cs": "https:\/\/facebook.com\/shopify",
+          "da": "https:\/\/facebook.com\/shopify",
+          "de": "https:\/\/facebook.com\/shopify",
+          "en": "https:\/\/facebook.com\/shopify",
+          "es": "https:\/\/www.facebook.com\/ShopifyES\/",
+          "fi": "https:\/\/facebook.com\/shopify",
+          "fr": "https:\/\/facebook.com\/shopify",
+          "it": "https:\/\/facebook.com\/shopify",
+          "ja": "https:\/\/facebook.com\/shopify",
+          "ko": "https:\/\/facebook.com\/shopify",
+          "nb": "https:\/\/facebook.com\/shopify",
+          "nl": "https:\/\/facebook.com\/shopify",
+          "pl": "https:\/\/facebook.com\/shopify",
+          "pt-BR": "https:\/\/facebook.com\/shopify",
+          "pt-PT": "https:\/\/facebook.com\/shopify",
+          "sv": "https:\/\/www.facebook.com\/shopify",
+          "th": "https:\/\/facebook.com\/shopify",
+          "tr": "https:\/\/facebook.com\/shopify",
+          "vi": "https:\/\/facebook.com\/shopify",
+          "zh-CN": "https:\/\/facebook.com\/shopify",
+          "zh-TW": "https:\/\/facebook.com\/shopify"
+        }
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": {
+          "cs": "Instagram",
+          "da": "Instagram",
+          "de": "Instagram",
+          "en": "Instagram",
+          "es": "Instagram",
+          "fi": "Instagram",
+          "fr": "Instagram",
+          "it": "Instagram",
+          "ja": "Instagram",
+          "ko": "Instagram",
+          "nb": "Instagram",
+          "nl": "Instagram",
+          "pl": "Instagram",
+          "pt-BR": "Instagram",
+          "pt-PT": "Instagram",
+          "sv": "Instagram",
+          "th": "Instagram",
+          "tr": "Instagram",
+          "vi": "Instagram",
+          "zh-CN": "Instagram",
+          "zh-TW": "Instagram"
+        },
+        "info": {
+          "cs": "http:\/\/instagram.com\/shopify",
+          "da": "http:\/\/instagram.com\/shopify",
+          "de": "http:\/\/instagram.com\/shopify",
+          "en": "http:\/\/instagram.com\/shopify",
+          "es": "http:\/\/instagram.com\/shopify",
+          "fi": "https:\/\/instagram.com\/shopify",
+          "fr": "http:\/\/instagram.com\/shopify",
+          "it": "http:\/\/instagram.com\/shopify",
+          "ja": "http:\/\/instagram.com\/shopify",
+          "ko": "http:\/\/instagram.com\/shopify",
+          "nb": "http:\/\/instagram.com\/shopify",
+          "nl": "http:\/\/instagram.com\/shopify",
+          "pl": "http:\/\/instagram.com\/shopify",
+          "pt-BR": "http:\/\/instagram.com\/shopify",
+          "pt-PT": "http:\/\/instagram.com\/shopify",
+          "sv": "https:\/\/instagram.com\/shopify",
+          "th": "http:\/\/instagram.com\/shopify",
+          "tr": "http:\/\/instagram.com\/shopify",
+          "vi": "http:\/\/instagram.com\/shopify",
+          "zh-CN": "http:\/\/instagram.com\/shopify",
+          "zh-TW": "http:\/\/instagram.com\/shopify"
+        }
+      },
+      {
+        "type": "text",
+        "id": "social_youtube_link",
+        "label": {
+          "cs": "YouTube",
+          "da": "YouTube",
+          "de": "YouTube",
+          "en": "YouTube",
+          "es": "Youtube",
+          "fi": "YouTube",
+          "fr": "YouTube",
+          "it": "YouTube",
+          "ja": "YouTube",
+          "ko": "YouTube",
+          "nb": "YouTube",
+          "nl": "YouTube",
+          "pl": "Youtube",
+          "pt-BR": "YouTube",
+          "pt-PT": "YouTube",
+          "sv": "YouTube",
+          "th": "YouTube",
+          "tr": "YouTube",
+          "vi": "YouTube",
+          "zh-CN": "YouTube",
+          "zh-TW": "YouTube"
+        },
+        "info": {
+          "cs": "https:\/\/www.youtube.com\/shopify",
+          "da": "https:\/\/www.youtube.com\/shopify",
+          "de": "https:\/\/www.youtube.com\/shopify",
+          "en": "https:\/\/www.youtube.com\/shopify",
+          "es": "https:\/\/www.youtube.com\/shopify",
+          "fi": "https:\/\/facebook.com\/shopify",
+          "fr": "https:\/\/www.youtube.com\/shopify",
+          "it": "https:\/\/www.youtube.com\/shopify",
+          "ja": "https:\/\/www.youtube.com\/shopify",
+          "ko": "https:\/\/www.youtube.com\/shopify",
+          "nb": "https:\/\/www.youtube.com\/shopify",
+          "nl": "https:\/\/www.youtube.com\/shopify",
+          "pl": "https:\/\/www.youtube.com\/shopify",
+          "pt-BR": "https:\/\/www.youtube.com\/shopify",
+          "pt-PT": "https:\/\/www.youtube.com\/shopify",
+          "sv": "https:\/\/www.youtube.com\/user\/shopify",
+          "th": "https:\/\/www.youtube.com\/shopify",
+          "tr": "https:\/\/www.youtube.com\/shopify",
+          "vi": "https:\/\/www.youtube.com\/shopify",
+          "zh-CN": "https:\/\/www.youtube.com\/shopify",
+          "zh-TW": "https:\/\/www.youtube.com\/shopify"
+        }
+      }
+    ]
+  },
+  {
+    "name": "color",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Base"
+      },
+      {
+        "type": "color",
+        "id": "theme_text_color",
+        "default": "#000",
+        "label": "text"
+      },
+      {
+        "type": "color",
+        "id": "theme_heading_color",
+        "default": "#000",
+        "label": "Headings"
+      },
+      {
+        "type": "color",
+        "id": "theme_sub_heading_color",
+        "default": "#000",
+        "label": "Sub Heading"
+      },
+      {
+        "type": "color",
+        "id": "theme_links_color",
+        "default": "#000",
+        "label": "Links"
+      },
+      {
+        "type": "color",
+        "id": "theme_background_color",
+        "default": "#fff",
+        "label": "Background"
+      },
+      {
+        "type": "header",
+        "content": "Header"
+      },
+      {
+        "type": "color",
+        "id": "header_background",
+        "default": "#fff",
+        "label": "Header Background"
+      },
+      {
+        "type": "color",
+        "id": "header_text",
+        "default": "#000",
+        "label": "Text"
+      },
+      {
+        "type": "header",
+        "content": "Sections (color scheme 1)",
+        "info": "Can be applied to any section with a color scheme setting"
+      },
+      {
+        "type": "color",
+        "id": "theme_text_color_scheme1",
+        "default": "#FF0000",
+        "label": "text"
+      },
+      {
+        "type": "color",
+        "id": "theme_heading_color_scheme1",
+        "default": "#D9A3A3",
+        "label": "Heading"
+      },
+      {
+        "type": "color",
+        "id": "theme_links_color_scheme1",
+        "default": "#D9A3A3",
+        "label": "Links"
+      },
+      {
+        "type": "color",
+        "id": "theme_sub_heading_color_scheme1",
+        "default": "#20855B",
+        "label": "Sub Heading"
+      },
+      {
+        "type": "color",
+        "id": "theme_background_color_scheme1",
+        "default": "#E9DFE7",
+        "label": "Background"
+      },
+      {
+        "type": "header",
+        "content": "Sections (color scheme 2)",
+        "info": "Can be applied to any section with a color scheme setting"
+      },
+      {
+        "type": "color",
+        "id": "theme_text_color_scheme2",
+        "default": "#847486",
+        "label": "text"
+      },
+      {
+        "type": "color",
+        "id": "theme_links_color_scheme2",
+        "default": "#847486",
+        "label": "Links"
+      },
+      {
+        "type": "color",
+        "id": "theme_heading_color_scheme2",
+        "default": "#4B3B4C",
+        "label": "Heading"
+      },
+      {
+        "type": "color",
+        "id": "theme_sub_heading_color_scheme2",
+        "default": "#20925B",
+        "label": "Sub Heading"
+      },
+      {
+        "type": "color",
+        "id": "theme_background_color_scheme2",
+        "default": "#E8E9F2",
+        "label": "Background"
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Primary Button Color"
+      },
+      {
+        "type": "color",
+        "id": "theme_primary_button_background",
+        "default": "#000",
+        "label": "Background"
+      },
+      {
+        "type": "color",
+        "id": "theme_primary_button_text",
+        "default": "#fff",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "theme_primary_button_border_color",
+        "default": "#fff",
+        "label": "Border Color"
+      },
+      {
+        "type": "header",
+        "content": "Secondary Button Color"
+      },
+      {
+        "type": "color",
+        "id": "theme_secondary_button_background",
+        "default": "#000",
+        "label": "Background"
+      },
+      {
+        "type": "color",
+        "id": "theme_secondary_button_text",
+        "default": "#fff",
+        "label": "Text"
+      },
+      {
+        "type": "color",
+        "id": "theme_secondary_button_border_color",
+        "default": "#fff",
+        "label": "Border Color"
+      },
+      {
+        "type": "select",
+        "id": "button_text_scheme",
+        "label": "Text",
+        "default": "uppercase",
+        "options": [
+          {
+            "value": "uppercase",
+            "label": "Uppercase"
+          },
+          {
+            "value": "normal",
+            "label": "normal"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_corner_scheme",
+        "label": "Corner",
+        "default": "roundded",
+        "options": [
+          {
+            "value": "sharp",
+            "label": "Sharp"
+          },
+          {
+            "value": "slightly-roundded",
+            "label": "Slightly Roundded"
+          },
+          {
+            "value": "roundded",
+            "label": "Roundded"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "button_border_width_scheme",
+        "label": "Corner",
+        "default": "standard",
+        "options": [
+          {
+            "value": "thick",
+            "label": "Thick"
+          },
+          {
+            "value": "standard",
+            "label": "Standard"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Header Search",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Search"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_enabled",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_enabled.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_vendor",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_vendor.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_vendor.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_price",
+        "default": true,
+        "label": "t:settings_schema.search_input.settings.predictive_search_show_price.label",
+        "info": "t:settings_schema.search_input.settings.predictive_search_show_price.info"
+      }
+    ]
+  },
+  {
+    "name": "t:sections.main-collection-product-grid.settings.header__3.content",
+    "settings":[
+      {
+        "type": "checkbox",
+        "id": "show_secondary_image",
+        "default": false,
+        "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_rating",
+        "default": false,
+        "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
+        "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+      }
+    ]    
+  }  
+]

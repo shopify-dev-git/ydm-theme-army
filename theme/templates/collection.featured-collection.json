@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "d8de5ecb-3187-4f07-b6e0-3008f0b2ae49": {
+      "type": "inner-banner",
+      "settings": {
+        "image_position": "flex-row",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_621.png",
+        "main_title": "Water Cleanser",
+        "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vulputate lorem in neque eleifend imperdiet. Vestibulum eu tortor diam. Donec luctus diam quis lacus egestas porta. In facilisis laoreet arcu ac lobortis.Nunc id felis sit amet ligula faucibus aliquam non non arcu. Quisque eget consectetur urna, ac ornare felis.<\/p>",
+        "align_text": "left",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#000000",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 4,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "76ea7ce5-eca2-4599-9dcf-f67490f27734": {
+      "type": "promo-section",
+      "settings": {
+        "image-position": "flex-row",
+        "url-image1": "shopify:\/\/shop_images\/impressed-surprised-kawaii-asian-girl-orange-hoodie-touching-cheek-awe-smiling-pointing-left-something-amazing-cool-promo-awesome-discount-offer-stand-white-background_1.png",
+        "main-title": "Buy One, Get One 15% Off",
+        "content_description_part": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisi dui, pulvinar non convallis vel, commodo ut velit. Nunc nisi diam, elementum nec metus id<\/p>",
+        "btn__link": "shopify:\/\/collections",
+        "btn_text": "BROWSE PRODUCTS",
+        "align_text": "left",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#2536cd",
+        "section_heading_color_scheme": "#2092fb",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    }
+  },
+  "order": [
+    "d8de5ecb-3187-4f07-b6e0-3008f0b2ae49",
+    "product-grid",
+    "76ea7ce5-eca2-4599-9dcf-f67490f27734"
+  ]
+}

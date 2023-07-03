@@ -1,0 +1,186 @@
+{%- assign href = 'promo-sec.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<style>
+    :root .color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+</style>
+
+<section class="image_text_section promo-sec py-10 pb-12 md:pb-0 md:py-0 lg:mt-10 section-{{section.id}} color-{{ section.settings.color_scheme }}" id="shopify-{{ section.id }}">
+    <div class="container-custom">
+        <div class="image_text_row flex flex-row xl:pl-[8%] 5xl:pl-[15%]">
+            <div class="image_panel w-[269px] relative hidden lg:block">
+                {%- if section.settings.url-image1 != blank -%}
+                    <img class="lazyload w-full object-contain absolute bottom-0 h-auto left-0" src="{{ section.settings.url-image1 | image_url }}" alt="{{ section.settings.url-image1.alt }}">
+                {%- endif -%}
+            </div>
+            <div class="text-black-box flex items-center md:px-[20px] md:py-[40px] lg:p-[50px] lg:pb-[60px] flex-1">
+                <div class="items-center w-full lg:flex lg:flex-wrap">
+                    <div class="left_content text-center lg:text-left flex-1 lg:pr-8">
+                       <div class="max-w-[592px] mx-auto lg:mx-0">
+                        <h2 class="pb-4 md:pb-5 font-dmserif text-font27 lg:text-font30 2xl:text-font35 font-normal">
+                            {{ section.settings.main-title }}
+                        </h2>
+                        <div class="">
+                            {{ section.settings.content_description_part }}
+                        </div>
+                       </div>
+                    </div>
+                    <div class="flex justify-center text-center lg:inline-block mt-7 lg:mt-0">
+                        <!-- {%- if section.settings.btn__link != blank -%}
+                            <a href="{{ section.settings.btn__link }}" class="primary-btn">
+                                {{ section.settings.btn_text }}
+                                <svg class="" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21.7072 7.28071L14.7071 0.280712C14.5185 0.0985542 14.2659 -0.00224062 14.0037 3.78025e-05C13.7415 0.00231622 13.4907 0.107485 13.3053 0.292894C13.1199 0.478302 13.0147 0.729114 13.0125 0.991311C13.0102 1.25351 13.111 1.50611 13.2931 1.69471L18.5862 6.98771H1.00001C0.734791 6.98771 0.480434 7.09307 0.292896 7.28061C0.105358 7.46814 0 7.7225 0 7.98771C0 8.25293 0.105358 8.50728 0.292896 8.69482C0.480434 8.88236 0.734791 8.98771 1.00001 8.98771H18.5862L13.2931 14.2807C13.1976 14.373 13.1214 14.4833 13.069 14.6053C13.0166 14.7273 12.989 14.8585 12.9879 14.9913C12.9867 15.1241 13.012 15.2558 13.0623 15.3787C13.1126 15.5016 13.1868 15.6132 13.2807 15.7071C13.3746 15.801 13.4863 15.8753 13.6092 15.9255C13.7321 15.9758 13.8638 16.0011 13.9965 16C14.1293 15.9988 14.2605 15.9712 14.3825 15.9188C14.5045 15.8664 14.6149 15.7902 14.7071 15.6947L21.7072 8.69471C21.8947 8.50718 22 8.25288 22 7.98771C22 7.72255 21.8947 7.46824 21.7072 7.28071Z" fill="white"></path>
+                                </svg>
+                            </a>
+                        {%- endif -%} -->
+
+                        {%- if section.settings.btn__link != blank -%}                    
+                            <a {% if section.settings.btn__link == blank %} role="link" aria-disabled="true"{% else %} 
+                                href="{{ section.settings.btn__link }}"{% endif %} 
+                                class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}" {{ block.shopify_attributes }}>
+                                {{ section.settings.btn_text | escape }}
+                                {% include 'button-arrow' %}
+                            </a>                    
+                        {%- endif -%} 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% schema %}
+{
+    "name": "Promo section",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "url-image1",
+            "label": "image"
+        },
+        {
+            "type": "header",
+            "content": "text"
+        },
+        {
+            "type": "text",
+            "id": "main-title",
+            "label": "Heading"
+        },
+        {
+            "type": "richtext",
+            "id": "content_description_part",
+            "label": "Text"
+        },
+        {
+            "type": "url",
+            "id": "btn__link",
+            "label": "Button Link"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Label"
+        },
+        {
+            "type": "header",
+            "content": "Button style"
+          },
+          {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "primary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#847486",
+            "label": "Custom Text Color"
+        },
+        {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#4B3B4C",
+            "label": "Custom Heading Color"
+        },
+        {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Promo section"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+

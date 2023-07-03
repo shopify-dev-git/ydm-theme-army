@@ -1,0 +1,219 @@
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};      
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+  </style>
+
+<section class="video-section relative md:py-[80px] xl:py-[100px] 4xl:py-[141px]"  x-data="{open: false, hidden: false}">
+    {%- if section.settings.video_bg_img != blank -%}   
+        <img class="lazyload md:absolute md:left-0 md:right-0 md:top-0 md:bottom-0 w-full h-full z-0 object-cover min-h-[389px]" 
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-src="{{ section.settings.video_bg_img | img_url:'1920x' }}" 
+            alt="{{ section.settings.video_bg_img.alt }}">
+    {%- endif -%} 
+    <div class="mx-auto w-full max-w-[1416px]">
+        <div class="video-section-row px-6 py-10 section-{{section.id}} color-{{ section.settings.color_scheme }} text-{{ section.settings.align_text }} relative z[1] max-w-[654px] mx-auto lg:ml-auto lg:mr-0 md:py-10 xl:px-10 shadow-shadow-header">
+            <h2 class="pb-6 lg:pb-7 2xl:pb-8">
+                {{ section.settings.title }}
+            </h2>
+            <p class="pb-6 lg:pb-7 2xl:pb-8">
+                {{ section.settings.text }}
+            </p>
+            <div class="inline-block">
+                <button type="button" class="tracking-4 font-semibold underline underline-offset-2 uppercase w-fit flex items-center" x-on:click="open = true; scrollbaradd()">
+                    <svg class="mr-4" width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="19.5" cy="19.5" r="19.5" fill="#FED0BA"/>
+                        <path d="M25.6317 18.846L14.0761 12.096C13.8522 11.9655 13.5792 11.9685 13.3582 12.102C13.1358 12.237 13 12.483 13 12.75V26.25C13 26.517 13.1358 26.763 13.3582 26.898C13.4709 26.9655 13.5966 27 13.7222 27C13.8436 27 13.9663 26.9685 14.0761 26.904L25.6317 20.154C25.8584 20.0205 26 19.7715 26 19.5C26 19.2285 25.8584 18.9795 25.6317 18.846Z" fill="#CA8685"/>
+                    </svg>
+                    {{ section.settings.btn_text }}             
+                </button>                
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+	<div class="relative z-[99999] hidden" :class="{'hidden': hidden}" x-show="open" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+	<!--
+		Background backdrop, show/hide based on modal state.
+		Entering: "ease-out duration-300"
+		From: "opacity-0"
+		To: "opacity-100"
+		Leaving: "ease-in duration-200"
+		From: "opacity-100"
+		To: "opacity-0"
+	-->
+	<div class="fixed inset-0 bg-black transition-opacity bg-opacity-50" 		
+        x-on:click="open = false;scrollbarremove()"
+		x-transition:enter="ease-out duration-300"
+		x-transition:enter-start="opacity-0"
+		x-transition:enter-end="opacity-100"
+		x-transition:leave="ease-in duration-200"
+		x-transition:leave-start="ease-in duration-200"
+		x-transition:leave-end="opacity-0"
+	></div>
+
+	<div class="fixed inset-0 z-10 overflow-y-auto">
+		<div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+		<!--
+			Modal panel, show/hide based on modal state.
+
+			Entering: "ease-out duration-300"
+			From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+			To: "opacity-100 translate-y-0 sm:scale-100"
+			Leaving: "ease-in duration-200"
+			From: "opacity-100 translate-y-0 sm:scale-100"
+			To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+		-->
+        <button  x-on:click="open = false;scrollbarremove()" type="button" class="ml-auto absolute top-4 right-4">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.76538 8.50001L16.738 1.52741C17.0873 1.17798 17.0873 0.611469 16.738 0.262072C16.3885 -0.0873575 15.822 -0.0873575 15.4726 0.262072L8.49998 7.23467L1.52741 0.262072C1.17798 -0.0873575 0.611467 -0.0873575 0.262072 0.262072C-0.087324 0.611502 -0.0873572 1.17801 0.262072 1.52741L7.23464 8.50001L0.262072 15.4726C-0.0873572 15.822 -0.0873572 16.3885 0.262072 16.7379C0.6115 17.0874 1.17801 17.0873 1.52741 16.7379L8.49998 9.76534L15.4725 16.7379C15.8219 17.0874 16.3885 17.0873 16.7379 16.7379C17.0873 16.3885 17.0873 15.822 16.7379 15.4726L9.76538 8.50001Z" fill="#ffffff"></path>
+            </svg>
+        </button>
+		<div class="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all  sm:w-full max-w-[100%]"
+			x-show="open"
+			x-on:click.away="open = false"
+			x-transition:enter="ease-out duration-300"
+			x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+			x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+			x-transition:leave="ease-in duration-200"
+			x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+			x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+		>            
+			{% if section.settings.video_url.id == blank %}
+                <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" class="w-full h-[80vh]" frameborder="0" allowfullscreen autoplay></iframe>
+              {% else %}
+                {% if section.settings.video_url.type == "youtube" %}
+                  <iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?vq=720" class="w-full  h-[80vh]" frameborder="0" allowfullscreen autoplay></iframe>
+                {% elsif section.settings.video_url.type == "vimeo" %}
+                  <iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?byline=0&portrait=0&badge=0" class="w-full h-full h-[80vh]" autoplay frameborder="0" allowfullscreen></iframe>                          
+            {% endif %}
+            {% endif %}									      
+		</div>
+		</div>
+	</div>
+</div>
+
+
+</section>
+
+
+
+{% schema %}
+{
+    "name": "Video Section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "video_bg_img",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Consciously made from start to finish."
+        },
+        {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl. Praesent mollis id purus ac vulputate. Maecenas sed eros in nibh mattis eleifend et vel ligula."
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Label",
+            "default":"PLAY VIDEO"
+        }, 
+        {
+            "type": "video_url",
+            "id": "video_url",
+            "label": "Video URL",
+            "accept": ["youtube", "vimeo"]
+        },       
+        {
+            "type": "header",
+            "content": "Style"
+        },
+        {
+            "type": "select",
+            "id": "align_text",
+            "label": "Text alignment",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+        },
+        {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Heading Color"
+        },
+        {
+            "type": "color",
+            "id": "section_links_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Link Color"
+        },        
+        {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        }
+    ],   
+    "presets": [
+        {
+            "name": "Video Section"
+        }
+    ]
+}
+{% endschema %}

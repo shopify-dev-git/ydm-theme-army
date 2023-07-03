@@ -1,0 +1,407 @@
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+{%- if section.settings.collection != blank -%}
+{%- assign collection = section.settings.collection -%}
+<div class="featured_collection_section pt-14 md:pt-24 section-{{section.id}} overflow-hidden">
+    <div class="container">
+        <div class="flex items-center gap-4 justify-between flex-col md:flex-row">
+            <h2>{{ section.settings.title }}</h2>
+            <a href="{{collection.url}}" class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }} hidden md:flex">
+                {{ section.settings.btn_text }}
+            </a>
+        </div>        
+    </div>
+        {%- if section.settings.slider-layout -%}
+            <div class="swiper mySwiper overflow-hidden relative pb-14 md:pb-24 pt-9">
+                <div class="swiper-wrapper">
+                    {%- if collection.products_count > 0 -%}
+                        {%- for product in collection.products limit: section.settings.products_to_show -%}
+                        {%- assign current_variant = product.selected_or_first_available_variant -%}
+                            <div class="swiper-slide product-column flex flex-col">                                                                
+                                {% comment %} <div class="product-img">
+                                    <a href="{{product.url | within: collection }}" class="product-img-sec-new block w-full relative p-5">
+                                        <img class="lazyload absolute top-0 left-0 w-full h-full object-cover" src="{{ product | image_url }}" alt="{{ product.title }} image">
+                                    </a>
+                                </div>
+                                <div class="text-center p-5 product-block-section flex-1 flex flex-col">
+                                    <product-form class="product-content-box-new block h-full" data-type="select">
+                                        {%- assign form_id = 'product-sticky-' | append: product.id -%}
+                                        {%- assign current_variant = product.selected_or_first_available_variant -%}
+                                        {% form 'product', product, id: id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}                                            
+                                        <input type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">    
+                                        <a href="{{product.url | within: collection }}" class="mb-3">
+                                            <h3 class="text-font30 font-bold">{{ product.title }}</h3>
+                                        </a>
+                                        {%- if product.excerpt.size > 0 -%}
+                                            <p class="pb-4">{{ product.excerpt }}</p>
+                                        {%- else -%}
+                                            <p class="pb-4">{{ product.content | strip_html | truncate: 50 }}</p>
+                                        {%- endif -%}                                        
+                                        {%- unless product.has_only_default_variant -%}
+                                            <div class="pdp-variant flex items-center pb-4">
+                                                {%- for option in product.options_with_values -%}
+                                                {% assign option___name = option.name | downcase | handleize | append: '-' | append: forloop.index %}
+                                                {%- assign downcase_name = option.name | downcase -%}
+                                                {%- if downcase_name contains 'color' -%}
+                                                <color-option class="color-variant pdp-variant-item flex gap-4 items-center justify-center w-full">
+                                                    <label for="">{{option.name}}: <span class="selected">{{option.selected_value}}</span></label>
+                                                    <div class="select-color">
+                                                        {%- for value in option.values -%}
+                                                        {%- assign bg_color = 'transparent' -%}
+                                                        {%- if product.metafields.custom.variants_option_color != blank -%}
+                                                            {%- for option_color_pdp  in product.metafields.custom.testinfo.value -%}
+                                                                {%- assign color = option_color_pdp | split: ':' -%}
+                                                                {{ color }}
+                                                            {%- endfor -%}
+                                                            {% comment %} {%- for option_color in product.metafields.custom.variants_option_color.value -%}
+                                                                {%- assign color = option_color | split: ':' -%}
+                                                                {%- if color.size == 2 and color.first == value -%}
+                                                                    {%- assign bg_color = color.last -%}
+                                                                {%- endif -%}
+                                                            {%- endfor -%} {% endcomment %}
+                                                        {%- endif -%}
+                                                        <input class="changeable-option " 
+                                                            data-option-index="Option--{{ option.position }}-{{option.name | handleize }} {{value | handleize }}" type="radio" name="options[{{ option.name | escape }}]" 
+                                                            id="Option{{ option.position }}-{{option.name}}{{value}}-{{section.id}}" 
+                                                            value="{{ value | escape }}"{% if option.selected_value == value %} 
+                                                            checked="checked"{% endif %}>
+                                                        <label 
+                                                            class="color-item cursor-pointer Option--{{ option.position }}-{{option.name | handleize }} {{value | handleize }}" style="background:{{value | handleize }};" 
+                                                            for="Option{{ option.position }}-{{option.name}}{{value}}-{{section.id}}">
+                                                            <span class="sr-only">
+                                                                {{- value -}}
+                                                            </span>
+                                                        </label>
+                                                    {%- endfor -%}
+                                                    </div>
+                                                </color-option>
+                                                {%- else -%}
+                                                <div class="size-select-box pdp-variant-item flex w-full items-center flex-col">
+                                                    <div class="flex justify-between">
+                                                    <label for="Option{{ option.position }}{{section.id}}">{{ option.name }}:</label>
+                                                    {%- if downcase_name contains 'size' -%}
+                                                    {%- if section.settings.title != blank -%}
+                                                    <h3 class="ml-auto"><a class="size-chart-popup" href="#" onclick="toggleSidebar()"> {{section.settings.title}}</a></h3>
+                                                    {%- endif -%}
+                                                    {%- endif -%}
+                                                    </div>
+                                                    {% if option.values.size == 1 %}
+                                                    <label>{{option.values[0]}}</label>
+                                                    {% else %}
+                                                    <select class="{{option___name}} default--options flex-1 mt-3" id="Option{{ option.position }}{{section.id}}" name="options[{{ option.name | escape }}]">
+                                                        {%- for value in option.values -%}
+                                                            <option data-target-select="{{option___name}}" value="{{ value | escape }}" data-option-index="Option--{{ option.position }}-{{option.name | handleize }}{{value | handleize }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                                                {{- value -}}
+                                                            </option>
+                                                        {%- endfor -%}
+                                                    </select>
+                                                    {% endif %}
+                                                </div>
+                                                {%- endif -%}
+                                                {%- endfor -%}
+                                            </div>
+                                        {%- endunless -%}
+                                            <button type="submit" class="primary-btn btn_full_width mb-1 cart-btn mt-auto" x-data @click="$store.cartopen = !$store.cartopen" {% unless current_variant.available %} disabled="disabled"{% endunless %}>                                            
+                                            {%- if current_variant.available -%}
+                                                <div class="flex">
+                                                    {{ 'products.product.add_to_cart' | t }}
+                                                </div>
+                                                {%- else -%}
+                                                {{ 'products.product.sold_out' | t }}
+                                            {%- endif -%}                                            
+                                        </button>
+
+                                        {% comment %} {%- unless product.has_only_default_variant -%}
+                                            <div class="relative mt-auto{% unless current_variant.available %} hidden{% endunless %}">
+                                                <label for="variants-{{product.id}}" class="primary-btn btn_full_width cursor-pointer text-center flex items-center justify-center relative z-10 pointer-events-none">
+                                                    <span>
+                                                        {%- if current_variant.available -%}            
+                                                            Add To cart            
+                                                        {%- else -%}
+                                                            Sold Out
+                                                        {%- endif -%}
+                                                    </span>
+                                                </label>
+                                                <select name="id" id="variants-{{product.id}}" class="absolute cursor-pointer top-0 left-0 w-full h-full outline-none rounded-full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                    <option value="" disabled="disabled" selected="selected" x-data @click="$store.cartopen = !$store.cartopen">
+                                                        {%- if product.available -%}            
+                                                            Add To cart            
+                                                        {%- else -%}
+                                                                Sold Out
+                                                        {%- endif -%}
+                                                    </option>
+                                                    {%- for variant in product.variants -%}
+                                                        <option value="{{ variant.id }}" x-data @click="$store.cartopen = !$store.cartopen">
+                                                            {{- variant.title }} | {{ variant.price | money -}}
+                                                        </option>
+                                                    {%- endfor -%}
+                                                </select>
+                                            </div>
+                                            <button type="submit" {% unless current_variant.available %} class="primary-btn btn_full_width flex items-center justify-center mt-auto" disabled="disabled"{% else %} class="sr-only"{% endunless %}>
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </button>
+                                        {%- else -%}
+                                            <input type="hidden" name="id" value="{{current_variant.id}}">
+                                            <button type="submit" class="primary-btn btn_full_width flex items-center justify-center mt-auto"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </button>
+                                        {%- endunless -%}  {% endcomment %}
+
+                                        {% endform %}
+                                    </product-form>
+                                </div> {% endcomment %}
+                                {% comment %} {% render 'product-card' %} {% endcomment %}
+                            </div>                            
+                        {%- endfor -%}
+                    {%- endif -%}
+                </div>
+                <div class="swiper-button-next swiper-button-next-featured right-0 swiperArrow z-10"></div>
+                <div class="swiper-button-next swiper-button-prev-featured left-0 swiperArrow z-10"></div>
+            </div>
+            {%- else -%}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {%- if collection.products_count > 0 -%}
+                    {%- for product in collection.products limit: section.settings.products_to_show -%}
+                    {%- assign current_variant = product.selected_or_first_available_variant -%}
+                        <div class="product-column flex flex-col">
+                            <div class="product-img">
+                                <a href="{{product.url | within: collection }}" class="product-img-sec-new block w-full relative p-5">
+                                    <img class="lazyload absolute top-0 left-0 w-full h-full object-cover" src="{{ product | image_url }}" alt="{{ product.title }} image">
+                                </a>
+                            </div>
+                            <div class="text-center p-5 product-block-section flex-1 flex flex-col">
+                                <product-form class="product-content-box-new block h-full" data-type="select">
+                                    {%- assign id = 'product-card-' | append: product.id -%}
+                                    {% form 'product', product, id: id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}
+                                    <a href="{{product.url | within: collection }}" class="mb-3">
+                                        <h3 class="text-font30 font-bold">{{ product.title }}</h3>
+                                    </a>
+                                    {%- if product.excerpt.size > 0 -%}
+                                        <p class="pb-4">{{ product.excerpt }}</p>
+                                    {%- else -%}
+                                        <p class="pb-4">{{ product.content | strip_html | truncate: 150 }}</p>
+                                    {%- endif -%}
+                                    {%- unless product.has_only_default_variant -%}
+                                        <div class="relative mt-auto{% unless current_variant.available %} hidden{% endunless %}">
+                                            <label for="variants-{{product.id}}" class="primary-btn btn_full_width cursor-pointer text-center flex items-center justify-center relative z-10 pointer-events-none">
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </label>
+                                            <select name="id" id="variants-{{product.id}}" class="absolute cursor-pointer top-0 left-0 w-full h-full outline-none rounded-full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                <option value="" disabled="disabled" selected="selected">
+                                                    {%- if product.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                            Sold Out
+                                                    {%- endif -%}
+                                                </option>
+                                                {%- for variant in product.variants -%}
+                                                <option value="{{ variant.id }}">
+                                                    {{- variant.title }} | {{ variant.price | money -}}
+                                                </option>
+                                                {%- endfor -%}
+                                            </select>
+                                        </div>
+                                        <button type="submit" {% unless current_variant.available %} class="primary-btn btn_full_width flex items-center justify-center mt-auto" disabled="disabled"{% else %} class="sr-only"{% endunless %}>
+                                            <span>
+                                                {%- if current_variant.available -%}            
+                                                    Add To cart            
+                                                {%- else -%}
+                                                    Sold Out
+                                                {%- endif -%}
+                                            </span>
+                                        </button>
+                                    {%- else -%}
+                                        <input type="hidden" name="id" value="{{current_variant.id}}">
+                                        <button type="submit" class="primary-btn btn_full_width flex items-center justify-center mt-auto"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                            <span>
+                                                {%- if current_variant.available -%}            
+                                                    Add To cart            
+                                                {%- else -%}
+                                                    Sold Out
+                                                {%- endif -%}
+                                            </span>
+                                        </button>
+                                    {%- endunless -%}
+                                    {% endform %}
+                                </product-form>
+                            </div>
+                        </div>
+                    {%- endfor -%}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        <div class="container">
+            <div class="flex justify-center mt-[50px] md:hidden">
+                <a href="{{collection.url}}" class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }} hidden md:flex">
+                    {{ section.settings.btn_text }}
+                </a>
+            </div>
+        </div>
+</div>
+{%- endif -%}
+
+<script>
+    function docReady(fn){
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive"){
+        // call on next available tick
+        setTimeout(fn, 1);
+        } else {
+        document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+    docReady(function(){
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1.3,
+                    spaceBetween: 30,
+                },
+                767: {
+                    slidesPerView: 1.5,
+                },
+                1024: {
+                    slidesPerView: 3,
+                }
+            },
+        });
+    });
+  </script>
+
+{% schema %}
+{
+    "name": "Featured Collection",
+    "settings": [
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Featured Collection"
+        },
+        {
+            "type": "range",
+            "id": "products_to_show",
+            "label": "Products to show",
+            "min": 3,
+            "max": 20,
+            "step": 1,
+            "default": 6
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "info": "If empty, will use collection's title."
+        },
+        {
+            "type": "checkbox",
+            "id": "slider-layout",
+            "label": "Slider Layout",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Text",
+            "default": "SHOP ALL PRODUCTS"
+        },
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+          },
+          {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Heading Color"
+          },
+          {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        },
+        {
+            "type": "header",
+            "content": "Button style"
+        },
+        {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "primary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Featured Collection"
+        }
+    ]
+}
+{% endschema %}

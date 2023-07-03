@@ -1,0 +1,69 @@
+{{ 'search-drawer.css' | asset_url | stylesheet_tag }}
+<div class="relative z-50 search--main search-drawer hidden" x-data="{hidden: false}" x-show="$store.searchopen" :class="{'hidden': hidden}">
+  <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+  <div class="fixed inset-0 ease-in-out duration-500 mini-cart-bg bg-opacity-75 bg-blackesh-100 transition-opacity" id="CartDrawer-Overlay" 
+    x-data
+    @click="$store.searchopen = !$store.searchopen" 
+    x-show="$store.searchopen"               
+    x-transition:enter="ease-in-out duration-500"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="ease-in-out duration-500"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0">
+  </div>
+  <div class="fixed top-0 right-0 bottom-0 overflow-hidden w-full max-w-[720px]">         
+        <!-- on click replace to  "translate-x-full to translate-x-0" and body add class to "search-drawer-open"  and remove class hidden from search-bar -->
+    <div class="pointer-events-auto relative shadow-xl max-w-[720px] search-drawer-row w-full h-full" id="cart-drawer" 
+        x-show="$store.searchopen"
+        x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
+        x-transition:enter-start="translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="translate-x-full"
+    >        
+      <div class="flex h-full flex-col bg-white research-drawer-list" data-traget="research-drawer-{{forloop.index}}">
+        <predictive-search class="h-full">
+          <form action="{{ routes.search_url }}" class="head_search_box flex flex-col h-full" method="get" role="search">
+            <div class="flex justify-between py-5 content-drawer-px">
+              <button class="search_close_icon ml-auto">
+                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.644068 19C0.483051 19 0.322034 18.9356 0.19322 18.8068C-0.0644068 18.5492 -0.0644068 18.1627 0.19322 17.9051L17.9051 0.19322C18.1627 -0.0644068 18.5492 -0.0644068 18.8068 0.19322C19.0644 0.450847 19.0644 0.837288 18.8068 1.09492L1.09492 18.8068C0.966102 18.9356 0.805085 19 0.644068 19Z" fill="black"/>
+                  <path d="M18.3559 19C18.1949 19 18.0339 18.9356 17.9051 18.8068L0.19322 1.09492C-0.0644068 0.837288 -0.0644068 0.450847 0.19322 0.19322C0.450847 -0.0644068 0.837288 -0.0644068 1.09492 0.19322L18.8068 17.9051C19.0644 18.1627 19.0644 18.5492 18.8068 18.8068C18.678 18.9356 18.5169 19 18.3559 19Z" fill="black"/>
+                </svg>
+              </button>
+            </div>
+            <div class="search-bar-drrawer mb-5 content-drawer-px">
+              <label for="Search" class="block text-font16 md:text-font18 pb-[13px] font-helvetica text-black">Search</label>
+              <div class="relative">
+                <input id="Search" type="search" name="q" value="{{ search.terms | escape }}" role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+                <input name="options[prefix]" type="hidden" value="last">
+                <button type="submit" class="predictive-search__item" tabindex="1">
+                  <svg width="19" height="24" viewBox="0 0 19 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.959 17.5405L16.9911 23.5887" stroke="black" stroke-width="1.00802"/>
+                    <circle cx="9.43146" cy="9.98029" r="8.56818" stroke="black" stroke-width="1.00802"/>
+                  </svg>
+                  <!-- Search for “{{ predictive_search.terms }}” -->
+                </button>
+              </div>
+            </div>
+            <div id="predictive-search" class="overflow-auto h_commom_customScroll flex-1 content-drawer-px" tabindex="-1"></div>
+
+            <!-- <div class="search_btn flex justify-center pt-8 pb-6 content-drawer-px">
+              <a href="/search" class="primary-btn btn_full_width max-w-[462px] md:min-h-[58px]">                    
+                {{ 'general.search.search_button' | t }}
+              </a>    
+            </div> -->                
+              <div class="search_btn flex justify-center pt-8 pb-6 content-drawer-px hidden search_result_more_btn">
+                <a href="/search" class="primary-btn btn_full_width max-w-[462px] md:min-h-[58px]">                    
+                  {{ 'general.search.search_button' | t }}
+                </a>    
+              </div>                
+          </form>
+        </predictive-search>
+      </div>
+    </div>        
+  </div>
+</div>
+

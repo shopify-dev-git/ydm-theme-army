@@ -1,0 +1,764 @@
+{%- assign href = 'product-banner.css' | asset_url -%}
+{% render 'link', href: href %}
+{{ 'review.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'selling-plan.js' | asset_url }}" defer="defer"></script>
+{%- assign featured_points = section.blocks | where: 'type', 'featured_points' -%}
+{%- assign trust_icon = section.blocks | where: 'type', 'trust_icon' -%}
+{%- assign accordions_items = section.blocks | where: 'type', 'accordions' -%}
+{%- assign count_featured_points = 0 -%}
+{%- assign count_icons = 0 -%} 
+{%- assign count_accordions = 0 -%}
+<div class="main-product-banner overflow-hidden pt-[29px] pb-[57px] section-{{section.id}}">    
+    <div class="container-custom">
+        <div class="breadcrumb mb-[36px] mt-[30px]">
+            <a href="{{routes.root_url}}"><span>Home</span></a>
+            {%- if collection.url -%}
+            <span>/</span>
+            <a href="{{collection.url}}"><span>{{ collection.title }}</span></a>
+            {%- endif -%}
+            <span>/</span>
+            <span class="active">{{ product.title }}</span>
+        </div>
+    </div>
+    {%- if trust_icon.size > 0 -%}
+        {%- capture icons -%}
+        {{icons}}
+        <div class="icon-list-pdp grid grid-cols-2 gap-[25px] pt-[68px] sm:flex items-start justify-between">
+            {% for block in trust_icon %}
+                {% if block.settings.image != blank and block.settings.text != blank %}
+                    <div class="icon-list-col flex flex-col justify-center items-center">
+                        {% if block.settings.image != blank %}
+                            <img class="lazyload" data-src="{{ block.settings.image | img_url: '150x' }}" alt="{{block.settings.image.alt}}">
+                        {% endif %}
+                        {% if block.settings.text != blank %}
+                        <h4 class="pt-[15px] text-blackesh-100 font-medium text-font16 font-inter">
+                            {{ block.settings.text }}
+                        </h4>
+                        {% endif %}
+                    </div>
+                {%- endif -%}
+            {% endfor %}
+        </div>
+        {%- endcapture -%}
+    {%- endif -%}
+    {%- if featured_points.size > 0 -%}
+        {%- capture points -%}
+        {{points}}
+            <div class="list-content">
+                <ul>
+                {% for block in featured_points %}
+                        <li>{{ block.settings.text }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {%- endcapture -%}
+    {%- endif -%}
+    {%- capture unqiue_accordions -%}
+    {{unqiue_accordions}}
+    {%- if section.settings.accordion_1 != blank and section.settings.content_1 != blank -%}
+        {%- for i in (1..3) -%}
+            {% assign title = 'accordion_' | append: forloop.index %}
+            {% assign text = 'content_' | append: forloop.index %}
+            {%- if section.settings[title] != blank and section.settings[text] != blank -%}
+            <div class="pdp-question-inr">
+                <input class="absolute opacity-0 pdp-question" id="question---{{forloop.index}}" type="radio" name="pdp-question-item">
+                <label for="question---{{forloop.index}}" class="pdp-title-question">
+                    {{ section.settings[title] }}
+                    <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.7092 0.215701L7.50072 6.22921L1.29226 0.214977C0.996259 -0.0716591 0.517439 -0.0716591 0.221439 0.214977C-0.0738131 0.501614 -0.0738131 0.96601 0.221439 1.25265L6.96496 7.78502C7.26022 8.07166 7.73978 8.07166 8.03504 7.78502L14.7786 1.25271C15.0738 0.966071 15.0738 0.50095 14.7786 0.214314C14.4841 -0.0709351 14.0044 -0.0709352 13.7092 0.215701Z" fill="#4B3B4C"/>
+                    </svg>                                                
+                </label>
+                <div class="pdp-ans-content body_para">
+                    {{ section.settings[text] }}
+                </div>
+            </div>
+        {%- endif -%}
+        {%- endfor -%}
+        {%- endif -%}
+    {%- endcapture -%}
+    {%- if accordions_items.size > 0 -%}
+        {%- capture accordions_items -%}
+            <div class="pdp-faq-block mt-[31px]">
+                {{unqiue_accordions}}
+                {%- for item in accordions_items -%}
+                {%- if item.settings.title != blank and item.settings.text -%}
+                <div class="pdp-question-inr">
+                    <input class="absolute opacity-0 pdp-question" id="question-{{forloop.index}}" type="radio" name="pdp-question-item">
+                    <label for="question-{{forloop.index}}" class="pdp-title-question">
+                        {{ item.settings.title }}
+                        <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.7092 0.215701L7.50072 6.22921L1.29226 0.214977C0.996259 -0.0716591 0.517439 -0.0716591 0.221439 0.214977C-0.0738131 0.501614 -0.0738131 0.96601 0.221439 1.25265L6.96496 7.78502C7.26022 8.07166 7.73978 8.07166 8.03504 7.78502L14.7786 1.25271C15.0738 0.966071 15.0738 0.50095 14.7786 0.214314C14.4841 -0.0709351 14.0044 -0.0709352 13.7092 0.215701Z" fill="#4B3B4C"/>
+                        </svg>                                                
+                    </label>
+                    <div class="pdp-ans-content body_para">
+                        {{ item.settings.text }}
+                    </div>
+                </div>
+            {%- endif -%}
+            {%- endfor -%}
+            </div>
+        {%- endcapture -%}
+    {%- endif -%}
+    <div class="product-banner-row flex flex-col lg:items-start md:max-w-[800px] md:mx-auto">
+        <div class="product-banner-left w-full screen_11 relative md:max-w-[700px] mx-auto">
+            {% render 'product-gallery' %}
+        </div>
+        <div class="product-banner-right screen_11 px-5 md:px-[30px] lg:px-[50px] 4xl:px-[65px] mt-[50px]">                
+            <product-form class="product-details-right relative lg:w-1/2" main-product>            
+                {%- assign form_id = 'product-form-' | append: product.id -%}
+                {%- assign current_variant = product.selected_or_first_available_variant -%}                                
+                {% form 'product', product, id: form_id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}
+                    <input type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">
+                    {%- for block in section.blocks -%}
+                        {%- case block.type -%}
+                            {%- when 'title' -%}
+                                <div class="product-banner-title pb-[30px]" {{ block.shopify_attributes }}>
+                                    <h2> {{product.title}} </h2>
+                                </div>
+                            {% when 'description' %}
+                            <div class="product-description pb-[26px]">
+                                {{ product.description }}                                
+                            </div>                                
+                            {% when 'random_watching' %}
+                                <div class="pdp-stock-message  pdp-stock-sec text-font14 md:text-font15 font-inter text-blackesh-300 font-medium flex items-center pb-[26px]">
+                                    <span class="mr-3 lg:mr-4 sm:mt-0"></span>
+                                    <random-watching class="block" data-text="RANDOM people are currently looking at this product" data-number="268-319">
+                                        {{ section.settings.people_count }} {{ section.settings.people_text }}
+                                    </random-watching>
+                                </div>
+                            {% when 'price' %}
+                                <h3 class="price text-font18 lg:text-font19 xl:text-font20 w-full pb-[25px] lg:w-auto order-1 lg:order-3 lg:pb-0 font-semibold text-blackesh-100 font-inter capitalize lg:flex items-center" data-price {{ block.shopify_attributes }}>
+                                    <div class="hidden lg:block h-[30px] bg-gray-1000 w-[1px] mr-4"></div>
+                                    {% render 'price', product: product, use_variant: true %} 
+                                </h3>
+                            </div>
+                            
+                            {%- when 'variant_picker' -%}
+                                <div class="flex flex-wrap pb-[25px] lg:items-center lg:border-t lg:border-b lg:border-gray-1000 lg:py-0 lg:mb-[25px] lg:px-5">                                    
+                                {%- unless product.has_only_default_variant -%}
+                                    {%- for option in product.options_with_values -%}
+                                        {%- capture variant_select_box_option -%}
+                                            <div class="product-variant w-1/2 lg:w-[92px] order-2 lg:order-1 pr-[15px] lg:pr-0 lg:flex items-center">
+                                                <label class="text-font14 font-inter font-normal pb-[8px] lg:hidden text-puce-400 block" for="Option{{ option.position }}{{section.id}}">{{ option.name }}:</label>
+                                                {%- if downcase_name contains 'size' -%}
+                                                    {%- if section.settings.title != blank -%}
+                                                        <h3 class="ml-auto">
+                                                            <a class="size-chart-popup" href="#" onclick="toggleSidebar()"> {{section.settings.title}}</a>
+                                                        </h3>
+                                                    {%- endif -%}
+                                                {%- endif -%}
+                                                {% if option.values.size == 1 %}
+                                                    <label>{{option.values[0]}}</label>
+                                                {% else %}
+                                                <select class="{{option___name}} default--options select_box" id="Option{{ option.position }}{{section.id}}" name="options[{{ option.name | escape }}]">
+                                                    {%- for value in option.values -%}
+                                                        <option data-target-select="{{option___name}}" value="{{ value | escape }}" data-option-index="Option--{{ option.position }}-{{option.name | handleize }}{{value | handleize }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                                            {{- value -}}
+                                                        </option>
+                                                    {%- endfor -%}
+                                                </select>
+                                                {% endif %}
+                                                <div class="hidden lg:block h-[30px] bg-gray-1000 w-[1px] ml-auto relative -right-4"></div>                                                      
+                                            </div>
+                                        {%- endcapture -%} 
+                                        {{variant_select_box_option}}
+                                    {%- endfor -%}
+                                {%- endunless -%}
+                            {% when 'quantity_picker' %}
+                                <div class="quantityBox w-1/2 lg:w-auto order-3 lg:order-2 pl-[15px] lg:pl-0 lg:flex items-center lg:flex-1 lg:justify-center">                                    
+                                    <label for="" class="text-font14 font-inter font-normal pb-[8px] text-puce-400 block lg:p-0 lg:text-font20 lg:capitalize lg:mr-[25px]">
+                                        {{ 'products.product.quantity.label' | t }}
+                                    </label>
+                                    <quantity-input class="quantity">
+                                        <button name="minus" type="button">
+                                            <span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                                            <svg width="12" height="1" viewBox="0 0 12 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 1H0V-1.49012e-08H12V1Z" fill="#4B3B4C"/>
+                                            </svg>                                            
+                                        </button>
+                                        <input type="number"
+                                            name="quantity"
+                                            id="Quantity-{{ section.id }}"
+                                            min="1"
+                                            value="01"
+                                        >
+                                        <button name="plus" type="button">
+                                            <span class="sr-only">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M6.46875 6.46875V12H5.53125V6.46875H0V5.53125H5.53125V0H6.46875V5.53125H12V6.46875H6.46875Z" fill="#4B3B4C"/>
+                                            </svg>                                            
+                                        </button>
+                                    </quantity-input>                                        
+                                </div>                                                                                                   
+                            {% when 'availability' %}
+                            {% assign current_id = current_variant.id %}
+                            {%- for variant in product.variants -%}
+                                  <span
+                                    class="{% if variant.id != current_id %} hidden{% endif %}"
+                                    data-id="{{variant.id}}"
+                                    data-availability-box>
+                                    <div class="availibility pb-[25px]">
+                                      <div class="font-inter text-blackesh-100 pb-[15px]">Availibility</div>
+                                      {% assign qty = variant.inventory_quantity | plus: 0 %}
+                                      {% assign min_value = 10 | plus: 0 %}
+                                      {% if qty > 10 %}
+                                        {% assign progess = '100' %}
+                                        {% assign hide_threshold = true %}
+                                      {% else %}
+                                        {% assign hide_threshold = false %}
+                                        {% assign progess = qty | times: 100 %}
+                                        {% assign progess = progess | divided_by: min_value %}
+                                      {% endif %}
+                                      {% if qty < 0 or qty == 0 %}
+                                        {% if variant.available %}
+                                          {% assign hide_threshold = true %}
+                                          {% assign progess = '100' %}
+                                        {% else %}
+                                          {% assign hide_threshold = true %}
+                                        {% endif %}
+                                      {% endif %}
+                                      {% if progess < 0 %}
+                                        {%- assign progess = 0 -%}
+                                      {% endif %}
+                                      <p class="text-puce-100 font-inter text-font14 pb-[15px] block availablity{% if hide_threshold %} hidden {% endif %} {% if qty > 10 %} hidden{% endif %} ">
+                                      Only {{ qty }} left. Order soon!
+                                    </p>
+                                    </div>
+                                    <div class="bg-puce-400 h-[7px] w-full relative">
+                                      <div class="w-[30%] absolute top-0 bottom-0 left-0 bg-puce-100" style="width: {{progess}}%"></div>
+                                    </div>
+                                  </span>
+                                {%- endfor -%}
+                            {%- when '@app' -%}
+                                {% render block %}
+                            {%- when 'subscription' -%}
+                                {%- if product.selling_plan_groups.size > 0 -%}
+                                    <div class="" {{ block.shopify_attributes }}>                                        
+                                        <div class="text-font17 lg:text-font18 font-bold text-blackesh-100 pb-2 md:pb-3 xl:pb-p15">Purchase Options</div>
+                                        {% include 'subscriptions' %}
+                                    </div>
+                                {%- endif -%} 
+                            {% comment %} {%- when 'variant_picker' -%}                                     
+                                {%- unless product.has_only_default_variant -%}
+                                    <div class="pdp-variant " {{ block.shopify_attributes }}>
+                                        {%- for option in product.options_with_values -%}
+                                            {% assign option___name = option.name | downcase | handleize | append: '-' | append: forloop.index %}
+                                            {%- assign downcase_name = option.name | downcase -%}                                                
+                                            {%- capture variant_color_option -%}                                                    
+                                                <color-option class="color-variant pdp-variant-item">
+                                                    <label class="pb-2 block" for="">{{option.name}}: <span class="selected">{{option.selected_value}}</span></label>
+                                                    <div class="select-color">
+                                                        {%- for value in option.values -%}
+                                                            {%- assign bg_color = 'black' -%}
+                                                            {% comment %} {%- if product.metafields.custom.variants_option_color_pdp != blank -%}
+                                                                {%- for option_color_pdp in product.metafields.custom.variants_option_color_pdp.value -%}
+                                                                    {%- assign color = option_color_pdp | split: ':' -%}
+                                                                    {%- if color.size == 2 and color.first == value -%}
+                                                                        {%- assign bg_color = color.last -%}                     
+                                                                    {%- endif -%}                                                        
+                                                                {%- endfor -%}                                                    
+                                                            {%- endif -%} {% endcomment %}
+
+                                                            {%- for option_color_pdp  in product.metafields.custom.testinfo.value -%}
+                                                                {%- assign color = option_color_pdp | split: ':' -%}
+                                                                {{ color }}
+                                                            {%- endfor -%}
+                                                                                                                                                            
+                                                        <input class="changeable-option " 
+                                                            data-option-index="Option--{{ option.position }}-{{option.name | handleize }} {{value | handleize }}" type="radio" name="options[{{ option.name | escape }}]" 
+                                                            id="Option{{ option.position }}-{{option.name}}{{value}}-{{section.id}}" 
+                                                            value="{{ value | escape }}"{% if option.selected_value == value %} 
+                                                            checked="checked"{% endif %}>
+                                                        <label 
+                                                            class="color-item cursor-pointer Option--{{ option.position }}-{{option.name | handleize }} {{value | handleize }}" style="background:{{value | handleize }};" 
+                                                            for="Option{{ option.position }}-{{option.name}}{{value}}-{{section.id}}">
+                                                            <span class="sr-only">
+                                                                {{- value -}}
+                                                            </span>
+                                                        </label>
+                                                    {%- endfor -%}
+                                                    </div>
+                                                </color-option>                                                    
+                                                {{ variant_color_option }}
+                                            {%- endcapture -%}                                                
+                                            {%- capture variant_select_box_option -%}
+                                                <div class="size-select-box pdp-variant-item">
+                                                    <div class="flex justify-between">
+                                                    <label class="pb-4" for="Option{{ option.position }}{{section.id}}">{{ option.name }}:</label>
+                                                    {%- if downcase_name contains 'size' -%}
+                                                        {%- if section.settings.title != blank -%}
+                                                            <h3 class="ml-auto">
+                                                                <a class="size-chart-popup" href="#" onclick="toggleSidebar()"> {{section.settings.title}}</a>
+                                                            </h3>
+                                                        {%- endif -%}
+                                                    {%- endif -%}
+                                                    </div>
+                                                    {% if option.values.size == 1 %}
+                                                        <label>{{option.values[0]}}</label>
+                                                    {% else %}
+                                                    <select class="{{option___name}} default--options " id="Option{{ option.position }}{{section.id}}" name="options[{{ option.name | escape }}]">
+                                                        {%- for value in option.values -%}
+                                                            <option data-target-select="{{option___name}}" value="{{ value | escape }}" data-option-index="Option--{{ option.position }}-{{option.name | handleize }}{{value | handleize }}" {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                                                {{- value -}}
+                                                            </option>
+                                                        {%- endfor -%}
+                                                    </select>
+                                                    {% endif %}
+                                                </div>
+                                                {{ variant_select_box_option }}
+                                            {%- endcapture -%}                                                
+                                            {%- if downcase_name contains 'color' and block.settings.enable_swatch -%}
+                                                {{ variant_color_option }}                                                   
+                                            {%- else -%}
+                                                {{ variant_select_box_option }}                                                   
+                                            {%- endif -%}                                                
+                                        {%- endfor -%}
+                                    </div>
+                                {%- endunless -%}  {% endcomment %}
+                            {%- when 'buy_buttons' -%}
+                                <div class="quantity-cart-btn" {{ block.shopify_attributes }}>
+                                    <button type="submit" class="{% if block.settings.enable_checkout %}secondary-button{% else %}primary-btn{% endif %} uppercase w__full__btn" x-data @click="$store.cartopen = !$store.cartopen" {% unless current_variant.available %} disabled="disabled"{% endunless %}>                                            
+                                        {%- if current_variant.available -%}
+                                            <span class="flex">
+                                                <span class="btn-text">
+                                                {{ 'products.product.add_to_cart' | t }}
+                                                </span>
+                                                {% include 'button-arrow' %}                                                
+                                            </span>
+                                            {%- else -%}
+                                            <span class="btn-text">
+                                            {{ 'products.product.sold_out' | t }}
+                                            </span>
+                                        {%- endif -%}                                            
+                                    </button>
+                                     {%- if block.settings.enable_checkout -%}
+                                        {{ form | payment_button }}
+                                    {%- endif -%}
+                                </div>                                  
+                            {%- when 'featured_points' -%}
+                                {% assign count_featured_points = count_featured_points | plus: 1 %}
+                                {%- if count_featured_points == 1 -%}
+                                    {{points}}
+                                {%- endif -%}
+                            {%- when 'trust_icon' -%}
+                                {% assign count_icons = count_icons | plus: 1 %}
+                                {%- if count_icons == 1 -%}
+                                    {{icons}}
+                                {%- endif -%}
+                            {% when 'accordions' %}
+                                {% assign count_accordions = count_accordions | plus: 1 %}
+                                {% if count_accordions == 1 %}
+                                    {{accordions_items}}
+                                {% endif %}
+                        {%- endcase -%}
+                    {%- endfor -%}
+                {% endform %}    
+            </product-form>
+            {% assign main_price = current_variant.price %}
+            {%- if product.metafields.custom.bundle_product != blank and product.metafields.custom.bundle_title != blank -%}
+                {%- assign bundle = all_products[product.metafields.custom.bundle_product] -%}
+                {%- assign current_variant_bundle = bundle.selected_or_first_available_variant -%}                                
+            <product-form bundle-product>
+                {%- assign form_id = 'bundle-form-' | append: bundle.id -%}
+                {% form 'product', bundle, id: form_id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: bundle.handle %}
+                    <input type="hidden" name="id" value="{{current_variant_bundle.id}}">
+                    <div class="bundle-save-box mt-[57px] px-5 md:px-[30px] -mx-5 md:-mx-[30px] py-[30px] lg:pb-[0] lg:px-0 lg:mx-0 bg-puce-300">
+                        <div class="flex flex-col lg:flex-row justify-center items-center lg:justify-between gap-[26px] lg:px-[30px]">
+                            <h2 class="md:text-font22 xl:text-fon25">{{product.metafields.custom.bundle_title}}</h2>
+                            {%- if product.metafields.custom.bundle_product_featured_badge -%}
+                            <div class="rating-sec border border-[#4B3B4C] bg-white flex items-center justify-center font-inter font-medium text-font14 rounded-full px-[20px] py-[11px]">
+                                <svg class="mr-[14px]" width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.841 4.1923L9.1223 0.027665C9.04501 -0.00922167 8.95499 -0.00922167 8.87773 0.027665L0.158984 4.1923C0.0617707 4.23872 0 4.33613 0 4.44293V14.557C0 14.6638 0.0617707 14.7613 0.158984 14.8077L8.8777 18.9723C8.91633 18.9908 8.95818 19 9 19C9.04182 19 9.08364 18.9908 9.1223 18.9723L17.841 14.8077C17.9382 14.7613 18 14.6638 18 14.557V4.44297C18 4.3361 17.9382 4.23876 17.841 4.1923ZM9 0.587385L17.0717 4.44293L14.7319 5.56059C14.7171 5.54942 14.7014 5.53911 14.6843 5.53091L6.66738 1.70159L9 0.587385ZM6.03212 2.01628L14.0921 5.86623L12.4413 6.65476L4.38467 2.80638L6.03212 2.01628ZM14.2807 6.39422V9.30901L12.7387 10.0456V7.13076L14.2807 6.39422ZM17.4374 14.3824L9.28129 18.2782V8.78224L11.2268 7.85295C11.3667 7.78612 11.4253 7.61975 11.3578 7.4813C11.2902 7.34292 11.1221 7.28481 10.9822 7.35168L9 8.29852L8.22005 7.92594C8.08011 7.85903 7.91198 7.91715 7.84443 8.05557C7.77689 8.19398 7.83555 8.36038 7.97544 8.42722L8.71871 8.78224V18.2782L0.562575 14.3823V4.88635L6.7734 7.85306C6.81282 7.87191 6.85449 7.88082 6.89548 7.88082C7.00005 7.88082 7.10048 7.82285 7.14898 7.72344C7.21652 7.58502 7.15787 7.41862 7.01797 7.35179L0.928286 4.44293L3.7226 3.10819L12.1722 7.14431C12.1735 7.14602 12.1749 7.14754 12.1761 7.14921V10.489C12.1761 10.5848 12.2259 10.6738 12.3079 10.7248C12.3534 10.753 12.4054 10.7673 12.4575 10.7673C12.4992 10.7673 12.541 10.7582 12.5797 10.7396L14.6843 9.73439C14.7815 9.68797 14.8432 9.59059 14.8432 9.48376V6.12555L17.4374 4.88639V14.3824Z" fill="#4B3B4C"/>
+                                    <path d="M2.88391 13.3029L1.60443 12.6918C1.46446 12.6249 1.29636 12.683 1.22881 12.8214C1.16127 12.9598 1.21993 13.1262 1.35982 13.1931L2.6393 13.8042C2.67872 13.8231 2.72039 13.832 2.76138 13.832C2.86594 13.832 2.96638 13.774 3.01488 13.6746C3.08246 13.5361 3.0238 13.3698 2.88391 13.3029Z" fill="#4B3B4C"/>
+                                    <path d="M4.06145 12.5445L1.60619 11.3717C1.46626 11.3049 1.29812 11.3629 1.23058 11.5014C1.16307 11.6398 1.22173 11.8062 1.36162 11.873L3.81688 13.0458C3.8563 13.0647 3.89797 13.0736 3.93896 13.0736C4.04353 13.0736 4.14397 13.0156 4.19246 12.9162C4.26001 12.7777 4.20135 12.6113 4.06145 12.5445Z" fill="#4B3B4C"/>
+                                </svg>                                            
+                                <span class="font-inter font-normal text-font14 text-blackesh-100">
+                                    {{product.metafields.custom.bundle_product_featured_badge}}
+                                </span>                                        
+                            </div>
+                            {%- endif -%}
+                        </div>
+                        <div class="flex bg-white mt-[26px] bundle-card lg:mx-[30px]">
+                            <div class="bundle-img">
+                                <img
+                                    class="lazyload hidden w-full h-full object-cover lg:block"
+                                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                    data-srcset="{{ bundle | image_url: width: 350, format: 'png' }} 1x, {{ bundle | image_url: width: 650, format: 'png' }} 2x"
+                                    alt="{{ bundle.title }} image">
+                            </div>
+                            <div class="bundle-content-block flex items-center flex-1 p-[15px]">
+                                <div class="">
+                                    <div class="flex flex-col lg:flex-row-reverse gap-[10px] lg:items-start">
+                                        <div class="flex items-center text-font11 text-blackesh-100 font-medium">
+                                            <svg class="mr-[3px]" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M9.73462 3.57428L6.66046 3.104L5.28255 0.16462C5.17963 -0.0548734 4.82005 -0.0548734 4.71713 0.16462L3.33964 3.104L0.265478 3.57428C0.0129788 3.61309 -0.0878543 3.92063 0.0892286 4.10215L2.32256 6.39473L1.79464 9.63581C1.75256 9.89327 2.02714 10.0865 2.25422 9.96004L5.00005 8.44028L7.74587 9.96046C7.97087 10.0856 8.24796 9.89619 8.20546 9.63622L7.67754 6.39515L9.91087 4.10257C10.088 3.92063 9.9867 3.61309 9.73462 3.57428Z" fill="#FFB800"/>
+                                            </svg> 
+                                            <!-- Stamped - Begin Star Rating Badge -->
+                                            <span 
+                                                class="stamped-product-reviews-badge stamped-main-badge" 
+                                                data-id="{{ bundle.id }}" 
+                                                data-product-sku="{{ bundle.handle }}" 
+                                                data-product-title="{{bundle.title}}" 
+                                                data-product-type="{{bundle.type}}" 
+                                                >
+                                                {{bundle.metafields.stamped.badge | append: '.0' }}
+                                                </span>
+                                            <!-- Stamped - End Star Rating Badge -->                                                       
+                                        </div>
+                                        <h2 class="font-inter font-medium text-font16 lg:text-font17 2xl:text-fon18 flex-1">
+                                            {{bundle.title}}
+                                        </h2>
+                                    </div>
+                                    <div class="flex flex-col lg:items-center lg:justify-between lg:flex-row mt-[15px] gap-[15px]">
+                                        <div class="flex-1">
+                                            <p class="text-font12 font-normal">
+                                                {{ product.description | strip_html | truncatewords: 10}}
+                                            </p>
+                                        </div>
+                                        <div class="capitalize text-font16 font-semibold gap-[20px] text-blackesh-100">
+                                            {% render 'price', product: bundle, use_variant: true %} 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-[26px] text-blackesh-100 text-fon14 font-medium font-inter mb-[18px] lg:px-[30px]">
+                            {{ product.metafields.custom.discount_text }}
+                        </div>
+                        {% assign main_value = main_price | plus: current_variant_bundle.price %}
+                        <button type="submit" class="primary-btn w__full__btn bundle-btn text-white" x-data @click="$store.cartopen = !$store.cartopen" {% unless current_variant_bundle.available %} disabled="disabled"{% endunless %}>
+                            {%- assign discount_percent = product.metafields.custom.bundle_discount_ | remove: '%' -%}
+                            {% assign discount_percent = discount_percent | plus: 0 %}
+                            {% assign discounted_price = main_value | times: discount_percent %}
+                            {% assign discounted_price = discounted_price | divided_by: 100 %}
+                            ADD BUNDLE TO CART | {{ main_value | minus: discounted_price | money}} <span> {{ main_value | money }}</span>
+                        </button>
+                    </div>
+                {% endform %}    
+            </product-form>
+            {%- endif -%}
+        </div>
+    </div>    
+</div>
+<div class="bg-gray-900 h-[50px] w-full hidden lg:block"></div>
+<!-- ATC bar -->
+<style>
+    .stamped-badge-caption[data-reviews][data-label][data-version="2"]>span{display: none !important;}
+    .stamped-badge-starrating .stamped-fa{display: none !important;}
+    .stamped-badge{ display:inline;}
+</style>
+<script>
+    var myRadios = document.getElementsByName('pdp-question-item');
+    var setCheck;
+    var x = 0;
+    for(x = 0; x < myRadios.length; x++){
+        myRadios[x].onclick = function(){
+            if(setCheck != this){
+                 setCheck = this;
+            }else{
+                this.checked = false;
+                setCheck = null;
+        }
+        };
+    }
+</script>
+<script>
+    function docReady(fn){
+        if (document.readyState === "complete" || document.readyState === "interactive"){
+            setTimeout(fn, 1);
+        } else {
+            document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+    docReady(function(){
+        function stickyATC(){
+            let stickyATC = document.querySelector('.shopify-product-sticky-atc');
+            if (stickyATC) {
+                let observer = new IntersectionObserver((entries, observer) => { 
+                    entries.forEach(entry => {
+                        stickyATC.classList.toggle('sticky', !(entry.boundingClientRect.top > -400))
+                    });
+                }, {
+                    root: null,
+                    rootMargin: "-50% -50%",
+                    threshold: 0,
+                });
+                observer.observe(document.querySelector('.section-{{section.id}}'));
+            }
+        }
+        window.addEventListener('scroll', stickyATC)
+    });
+</script>
+
+<script>
+    function docReady(fn){
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive"){
+        // call on next available tick
+        setTimeout(fn, 1);
+        } else {
+        document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+    docReady(function(){
+        var swiper = new Swiper(".mySwiper", {                                    
+            slidesPerView: 5,
+            spaceBetween: 15,        
+        });
+        var swiper2 = new Swiper(".mySwiper2", {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next-pdp",
+                prevEl: ".swiper-button-prev-pdp",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1.3,
+                    spaceBetween: 10,
+                },                
+                600: {
+                    slidesPerView: 1.8,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                1023: {
+                    slidesPerView: 1,
+                },
+            },
+            thumbs: {
+                swiper: swiper,
+            },
+        });
+        var swiper3 = new Swiper(".zoomSwiper", {
+            spaceBetween: 10,
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: ".swiper-pagination-zoom",
+                type: "fraction",
+            },
+            navigation: {
+                nextEl: ".swiper-button-next-zoom",
+                prevEl: ".swiper-button-prev-zoom",
+            },            
+            thumbs: {
+                swiper: swiper,
+            },
+        });        
+    });
+</script>
+
+
+
+
+{% schema %}
+{   
+    "name": "Product Information",
+    "tag": "section",
+    "settings": [              
+        {
+            "type": "header",
+            "content": "Accordion Content",
+            "info": "For more accordions add block items"
+        },
+        {
+            "type": "text",
+            "id": "accordion_1",
+            "label": "Accordion Title 1"
+        },
+        {
+            "type": "richtext",
+            "id": "content_1",
+            "label": "Accordion Body 1"
+        },
+        {
+            "type": "text",
+            "id": "accordion_2",
+            "label": "Accordion Title 2"
+        },
+        {
+            "type": "richtext",
+            "id": "content_2",
+            "label": "Accordion Body 2"
+        },
+        {
+            "type": "text",
+            "id": "accordion_3",
+            "label": "Accordion Title 3"
+        },
+        {
+            "type": "richtext",
+            "id": "content_3",
+            "label": "Accordion Body 3"
+        },
+        {
+            "type": "header",
+            "content": "People Headline"
+        },
+        {
+            "type": "text",
+            "id": "people_count",
+            "label": "People Number",
+            "default": "235 people"
+        },
+        {
+            "type": "text",
+            "id": "people_text",
+            "label": "People Text",
+            "default": "are checking out now"
+        }        
+    ],
+    "blocks": [
+        {
+            "type": "title",
+            "name": "Title",
+            "limit": 1
+        },
+        {
+            "type": "price",
+            "name": "Price",
+            "limit": 1
+        },
+        {
+            "type": "availability",
+            "name": "Availability",
+            "limit": 1
+        },
+        {
+            "type": "random_watching",
+            "name": "Random Watching",
+            "limit": 1
+        },
+        {
+            "type": "quantity_picker",
+            "name": "Quantity Picker",
+            "limit": 1
+        },
+        {
+            "type": "description",
+            "name": "Description",
+            "limit": 1
+        },
+        {
+            "type": "variant_picker",
+            "name": "Variant Picker",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "enable_swatch",
+                    "label": "Enable swatches",
+                    "default": true,
+                    "info":"(In the product, the name of the variant option will have color and if the check box is on then the color picker will appear if the variant name will have size, etc and the checkbox will be on then it will drop down will appear and if the checkbox is not checked then drop down will appear.)"
+                }
+            ]                        
+        },
+        {
+            "type": "subscription",
+            "name": "Subscription",
+            "limit": 1 
+        },
+        {
+            "type": "buy_buttons",
+            "name": "Buy Buttons",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "enable_quantity",
+                    "label": "Show quantity selector",
+                    "default": true                    
+                },
+                {
+                    "type": "checkbox",
+                    "id": "enable_checkout",
+                    "label": "Show dynamic checkout button",
+                    "default": true,
+                    "info":"Each customer will see their preferred payment method from those available on your store, such as PayPal or Apple Pay."
+                }                
+            ] 
+        },
+        {
+            "type": "featured_points",
+            "name": "Featured Points",
+            "settings": [
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text"
+                }
+            ] 
+        },
+        {
+            "type": "trust_icon",
+            "name": "Trust Icon",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "text",
+                    "label": "Text"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ] 
+        },
+        {
+            "type": "accordions",
+            "name": "Accordion",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Accordion Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Accordion Body"
+                }
+            ] 
+        },
+        {
+            "type": "divider",
+            "name": "Divider"            
+        },
+        {
+            "type": "@app"
+        }        
+    ],
+    "presets": [
+        {
+          "name": "t:sections.main-product.name",
+          "blocks": [
+            {
+              "type": "title"
+            },
+            {
+              "type": "price"
+            },
+            {
+              "type": "description"
+            },
+            {
+              "type": "variant_picker"
+            },
+            {
+                "type": "subscription"
+            },
+            {
+              "type": "buy_buttons"
+            },
+            {
+                "type": "divider"
+            }            
+          ]
+        }
+      ]  
+}
+{% endschema %}
+

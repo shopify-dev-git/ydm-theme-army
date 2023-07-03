@@ -1,0 +1,399 @@
+{%- assign href = 'home-our-best-sellers.css' | asset_url -%}
+{% render 'link', href: href %}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+
+
+{% comment %} {%- if section.settings.collection != blank -%}
+{%- assign collection = section.settings.collection -%}
+<div class="featured_collection_section py-14 md:py-24">
+    <div class="container">
+        <div class="flex items-center gap-4 mb-9 justify-between flex-wrap">
+            <h2>{{ section.settings.title }}</h2>
+            <a href="{{collection.url}}" class="primary-btn">{{ section.settings.btn_text }}</a>
+        </div>
+
+        {%- if section.settings.slider-layout -%}
+            <div class="swiper mySwiper overflow-hidden relative">
+                <div class="swiper-wrapper">
+                    {%- if collection.products_count > 0 -%}
+                        {%- for product in collection.products limit: section.settings.products_to_show -%}
+                        {%- assign current_variant = product.selected_or_first_available_variant -%}
+                            <div class="swiper-slide product-column flex flex-col">
+                                <div class="product-img">
+                                    <a href="{{product.url | within: collection }}" class="product-img-sec-new block w-full relative p-5">
+                                        <img class="lazyload absolute top-0 left-0 w-full h-full object-cover" src="{{ product | image_url }}" alt="{{ product.title }} image">
+                                    </a>
+                                </div>
+                                <div class="text-center p-5 product-block-section flex-1 flex flex-col">
+                                    <product-form class="product-content-box-new block h-full" data-type="select">
+                                        {%- assign id = 'product-card-' | append: product.id -%}
+                                        {% form 'product', product, id: id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}
+                                        <a href="{{product.url | within: collection }}" class="mb-3">
+                                            <h3 class="text-font30 font-bold">{{ product.title }}</h3>
+                                        </a>
+                                        {%- if product.excerpt.size > 0 -%}
+                                            <p class="pb-4">{{ product.excerpt }}</p>
+                                        {%- else -%}
+                                            <p class="pb-4">{{ product.content | strip_html | truncate: 150 }}</p>
+                                        {%- endif -%}
+                                        {%- unless product.has_only_default_variant -%}
+                                            <div class="relative mt-auto{% unless current_variant.available %} hidden{% endunless %}">
+                                                <label for="variants-{{product.id}}" class="primary-btn btn_full_width cursor-pointer text-center flex items-center justify-center relative z-10 pointer-events-none">
+                                                    <span>
+                                                        {%- if current_variant.available -%}            
+                                                            Add To cart            
+                                                        {%- else -%}
+                                                            Sold Out
+                                                        {%- endif -%}
+                                                    </span>
+                                                </label>
+                                                <select name="id" id="variants-{{product.id}}" class="absolute cursor-pointer top-0 left-0 w-full h-full outline-none rounded-full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                    <option value="" disabled="disabled" selected="selected">
+                                                        {%- if product.available -%}            
+                                                            Add To cart            
+                                                        {%- else -%}
+                                                                Sold Out
+                                                        {%- endif -%}
+                                                    </option>
+                                                    {%- for variant in product.variants -%}
+                                                    <option value="{{ variant.id }}">
+                                                        {{- variant.title }} | {{ variant.price | money -}}
+                                                    </option>
+                                                    {%- endfor -%}
+                                                </select>
+                                            </div>
+                                            <button type="submit" {% unless current_variant.available %} class="primary-btn btn_full_width flex items-center justify-center mt-auto" disabled="disabled"{% else %} class="sr-only"{% endunless %}>
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </button>
+                                        {%- else -%}
+                                            <input type="hidden" name="id" value="{{current_variant.id}}">
+                                            <button type="submit" class="primary-btn btn_full_width flex items-center justify-center mt-auto"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </button>
+                                        {%- endunless -%}
+                                        {% endform %}
+                                    </product-form>
+                                </div>
+                            </div>
+                        {%- endfor -%}
+                    {%- endif -%}
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            {%- else -%}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {%- if collection.products_count > 0 -%}
+                    {%- for product in collection.products limit: section.settings.products_to_show -%}
+                    {%- assign current_variant = product.selected_or_first_available_variant -%}
+                        <div class="product-column flex flex-col">
+                            <div class="product-img">
+                                <a href="{{product.url | within: collection }}" class="product-img-sec-new block w-full relative p-5">
+                                    <img class="lazyload absolute top-0 left-0 w-full h-full object-cover" src="{{ product | image_url }}" alt="{{ product.title }} image">
+                                </a>
+                            </div>
+                            <div class="text-center p-5 product-block-section flex-1 flex flex-col">
+                                <product-form class="product-content-box-new block h-full" data-type="select">
+                                    {%- assign id = 'product-card-' | append: product.id -%}
+                                    {% form 'product', product, id: id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}
+                                    <a href="{{product.url | within: collection }}" class="mb-3">
+                                        <h3 class="text-font30 font-bold">{{ product.title }}</h3>
+                                    </a>
+                                    {%- if product.excerpt.size > 0 -%}
+                                        <p class="pb-4">{{ product.excerpt }}</p>
+                                    {%- else -%}
+                                        <p class="pb-4">{{ product.content | strip_html | truncate: 150 }}</p>
+                                    {%- endif -%}
+                                    {%- unless product.has_only_default_variant -%}
+                                        <div class="relative mt-auto{% unless current_variant.available %} hidden{% endunless %}">
+                                            <label for="variants-{{product.id}}" class="primary-btn btn_full_width cursor-pointer text-center flex items-center justify-center relative z-10 pointer-events-none">
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </label>
+                                            <select name="id" id="variants-{{product.id}}" class="absolute cursor-pointer top-0 left-0 w-full h-full outline-none rounded-full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                <option value="" disabled="disabled" selected="selected">
+                                                    {%- if product.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                            Sold Out
+                                                    {%- endif -%}
+                                                </option>
+                                                {%- for variant in product.variants -%}
+                                                <option value="{{ variant.id }}">
+                                                    {{- variant.title }} | {{ variant.price | money -}}
+                                                </option>
+                                                {%- endfor -%}
+                                            </select>
+                                        </div>
+                                        <button type="submit" {% unless current_variant.available %} class="primary-btn btn_full_width flex items-center justify-center mt-auto" disabled="disabled"{% else %} class="sr-only"{% endunless %}>
+                                            <span>
+                                                {%- if current_variant.available -%}            
+                                                    Add To cart            
+                                                {%- else -%}
+                                                    Sold Out
+                                                {%- endif -%}
+                                            </span>
+                                        </button>
+                                    {%- else -%}
+                                        <input type="hidden" name="id" value="{{current_variant.id}}">
+                                        <button type="submit" class="primary-btn btn_full_width flex items-center justify-center mt-auto"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                            <span>
+                                                {%- if current_variant.available -%}            
+                                                    Add To cart            
+                                                {%- else -%}
+                                                    Sold Out
+                                                {%- endif -%}
+                                            </span>
+                                        </button>
+                                    {%- endunless -%}
+                                    {% endform %}
+                                </product-form>
+                            </div>
+                        </div>
+                    {%- endfor -%}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+    </div>
+</div>
+{%- endif -%} {% endcomment %}
+
+<div class="product_randlist py-12 md:py-24 lg:py-32">         
+    <div class="container">            
+        <div class="flex items-center gap-4 mb-9 justify-between flex-wrap">
+            <h2>{{ section.settings.title }}</h2>
+            <a href="{{collection.url}}" class="primary-btn">{{ section.settings.btn_text }}</a>
+        </div>
+
+        {% assign randLimit = 3 %}
+        {% assign min = 0 %}
+        {% assign max = 5 %}
+        {% assign randString = ""  %}
+
+        {% for i in (1..randLimit) %}
+            {% assign diff = max | minus: min %}
+            {% assign randomNumber = "now" | date: "%N" | modulo: diff | plus: min %}
+            {% if forloop.last %}
+                {% assign randString = randString | append: randomNumber %}
+            {% else %}
+                {% assign randString = randString | append: randomNumber | append:"," %}
+            {% endif %}
+        {% endfor %}
+
+        {% assign randArray = randString | split: "," %}
+        {%- assign collection = section.settings.collection -%}
+        <div class="product_item_list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {% for product in collection.products %}        
+                {% assign parentForLoop = forloop.index0 %}            
+                    {% for ra in randArray %}
+                        {% assign parentForLoop = parentForLoop | append: '' %}
+                        {% assign ra = ra | append: '' %}                  
+                        {% if ra == parentForLoop %}                        
+                            <div class="product-column flex flex-col">
+                                <div class="product-img">
+                                    <a href="{{product.url | within: collection }}" class="product-img-sec-new block w-full relative p-5">
+                                        <img class="lazyload absolute top-0 left-0 w-full h-full object-cover" src="{{ product | image_url }}" alt="{{ product.title }} image">
+                                    </a>
+                                </div>
+                                <div class="text-center p-5 product-block-section flex-1 flex flex-col">
+                                    <product-form class="product-content-box-new block h-full" data-type="select">
+                                        {%- assign id = 'product-card-' | append: product.id -%}
+                                        {% form 'product', product, id: id, class: 'w-full h-full flex flex-col', data-product-form: '', data-product-handle: product.handle %}
+                                        <a href="{{product.url | within: collection }}" class="mb-3">
+                                            <h3 class="text-font30 font-bold">{{ product.title }}</h3>
+                                        </a>
+                                        {%- if product.excerpt.size > 0 -%}
+                                            <p class="pb-4">{{ product.excerpt }}</p>
+                                        {%- else -%}
+                                            <p class="pb-4">{{ product.content | strip_html | truncate: 150 }}</p>
+                                        {%- endif -%}
+                                        {%- unless product.has_only_default_variant -%}
+                                            <div class="relative mt-auto{% unless current_variant.available %} hidden{% endunless %}">
+                                                <label for="variants-{{product.id}}" class="primary-btn btn_full_width cursor-pointer text-center flex items-center justify-center relative z-10 pointer-events-none">
+                                                    <span>
+                                                        {%- if current_variant.available -%}            
+                                                            Add To cart            
+                                                        {%- else -%}
+                                                            Sold Out
+                                                        {%- endif -%}
+                                                    </span>
+                                                </label>
+                                                <select name="id" id="variants-{{product.id}}" class="absolute cursor-pointer top-0 left-0 w-full h-full outline-none rounded-full"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                    <option value="" disabled="disabled" selected="selected">
+                                                        {%- if product.available -%}            
+                                                            Add To cart            
+                                                        {%- else -%}
+                                                                Sold Out
+                                                        {%- endif -%}
+                                                    </option>
+                                                    {%- for variant in product.variants -%}
+                                                    <option value="{{ variant.id }}">
+                                                        {{- variant.title }} | {{ variant.price | money -}}
+                                                    </option>
+                                                    {%- endfor -%}
+                                                </select>
+                                            </div>
+                                            <button type="submit" {% unless current_variant.available %} class="primary-btn btn_full_width flex items-center justify-center mt-auto" disabled="disabled"{% else %} class="sr-only"{% endunless %}>
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </button>
+                                        {%- else -%}
+                                            <input type="hidden" name="id" value="{{current_variant.id}}">
+                                            <button type="submit" class="primary-btn btn_full_width flex items-center justify-center mt-auto"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                                                <span>
+                                                    {%- if current_variant.available -%}            
+                                                        Add To cart            
+                                                    {%- else -%}
+                                                        Sold Out
+                                                    {%- endif -%}
+                                                </span>
+                                            </button>
+                                        {%- endunless -%}
+                                        {% endform %}
+                                    </product-form>
+                                </div>
+                            </div>                        
+                        {% endif %}
+                    {% endfor %}            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function docReady(fn){
+        // see if DOM is already available
+        if (document.readyState === "complete" || document.readyState === "interactive"){
+        // call on next available tick
+        setTimeout(fn, 1);
+        } else {
+        document.addEventListener("DOMContentLoaded", fn);
+        }
+    }
+    docReady(function(){
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    });
+  </script>
+
+
+{% schema %}
+{
+    "name": "Product List",
+    "settings": [
+        {
+            "type": "collection",
+            "id": "collection",
+            "label": "Featured Collection"
+        },
+        {
+            "type": "range",
+            "id": "products_to_show",
+            "label": "Products to show",
+            "min": 3,
+            "max": 20,
+            "step": 1,
+            "default": 6
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "info": "If empty, will use collection's title."
+        },
+        {
+            "type": "checkbox",
+            "id": "slider-layout",
+            "label": "Slider Layout",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Text",
+            "default": "SHOP ALL PRODUCTS"
+        },
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#847486",
+            "label": "Custom Text Color"
+          },
+          {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#4B3B4C",
+            "label": "Custom Heading Color"
+          },
+          {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
+
+
+

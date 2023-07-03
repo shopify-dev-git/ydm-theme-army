@@ -1,0 +1,75 @@
+{%- if section.settings.enable_bar -%}
+  {%- unless section.settings.home_page_only and template != 'index' -%}
+    <section id="section-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="announcement-bar">
+      <div class="announcement-bar text-center py-[11px]">
+        <div class="flex flex-row">
+            <div class="w-full text-center">                  
+                {%- if section.settings.link -%}
+                    <p class="announcement-bar__message text-center text-font12 tracking-wider font-semibold"><a href="{{ section.settings.link }}">{{ section.settings.content | escape }}</a></p>
+                {%- else -%}
+                    <p class="announcement-bar__message text-center text-font12 tracking-wider font-semibold">{{ section.settings.content | escape }}</p>
+                {%- endif -%}
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      #section-{{ section.id }} {
+        background: {{ section.settings.background }};        
+        color: {{ section.settings.text_color }};
+      }
+      #section-{{ section.id }} p {
+        color: {{ section.settings.text_color }};
+      }
+    </style>
+
+    <script>
+      document.documentElement.style.setProperty('--announcement-bar-height', document.getElementById('shopify-section-announcement').offsetHeight + 'px');
+    </script>
+  {%- endunless -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "shopify-section-announcement",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_bar",
+      "label": "Enable bar",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "home_page_only",
+      "label": "Home page only",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f57f29"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "content",
+      "label": "Text",
+      "default": "Announce something here"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ]
+}
+{% endschema %}

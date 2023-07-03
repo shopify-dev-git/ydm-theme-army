@@ -1,0 +1,185 @@
+<!doctype html>
+<html  lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+  <meta name="theme-color" content="{{ settings.accent_color }}">
+
+  {%- capture seo_page_title -%}
+    {%- if request.page_type == 'search' and search.terms != blank -%}
+      {{ search.terms | split: ' AND ' | last | split: 'product_type:' | last }} - {{ shop.name }}
+    {%- else -%}
+      {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'templates.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'templates.meta.page' | t: page: current_page }}{% endif %}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  <title>{{- seo_page_title -}}</title>
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+  <link rel="canonical" href="{{ canonical_url }}">
+  
+  {%- if settings.favicon -%}
+    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '96x96' }}" type="image/png">
+  {%- endif -%}
+  {{ content_for_header }}
+  <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" rel="preload" as="style"  onload="this.onload=null;this.rel='stylesheet'" >
+  <noscript><link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" ></noscript>
+  {%- capture fonts -%}
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-Bold.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-Bold.woff' | asset_url }}") format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-Black.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-Black.woff' | asset_url }}") format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-Thin.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-Thin.woff' | asset_url }}") format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-ExtraBold.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-ExtraBold.woff' | asset_url }}") format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-ExtraLight.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-ExtraLight.woff' | asset_url }}") format('woff');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-Light.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-Light.woff' | asset_url }}") format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-Medium.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-Medium.woff' | asset_url }}") format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-SemiBold.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-SemiBold.woff' | asset_url }}") format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url("{{ 'Inter-Regular.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'Inter-Regular.woff' | asset_url }}") format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Serif Display';
+    src: url("{{ 'DMSerifDisplay-Italic.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'DMSerifDisplay-Italic.woff' | asset_url }}") format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Serif Display';
+    src: url("{{ 'DMSerifDisplay-Regular.woff2' | asset_url }}") format('woff2'),
+        url("{{ 'DMSerifDisplay-Regular.woff' | asset_url }}") format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+{%- endcapture -%}
+<style>{{fonts}}</style>
+<script>
+  {%- if template == 'cart' -%}
+      window.location.href = '{{ routes.root_url }}'.concat('?open-cart=true');
+  {%- endif -%}
+</script>
+  {% render 'styles' %}
+</head> 
+<body>
+  <!-- <a class="skip-to-content-link button sr-only" href="#MainContent">
+    {{ "templates.accessibility.skip_to_text" | t }}
+  </a> -->
+  {%- assign customers_pages = 'customers/login customers/register' | split: ' ' -%}
+  {% section 'announcement' %}
+  {%- unless customers_pages contains template -%}
+    {%- comment -%} move section header here if account page design does not have header {%- endcomment -%}
+  {%- endunless -%}
+  {% section 'header' %}
+  {% section 'cart-drawer' %}
+  <main id="MainContent" class="" role="main" tabindex="-1">
+    {%- capture content -%}
+      {{ content_for_layout }}
+      {%- endcapture -%}
+      {%- if request.page_type == 'policy' -%}
+          {% include 'policies-layout', content: content %}
+      {%- else -%}
+          {{ content }}
+      {%- endif -%}
+  </main>
+  {%- if template == 'product' and product.id -%}
+    {% section 'product-sticky-atc' %}
+    {%- endif -%}
+  {%- unless customers_pages contains template -%}
+  {%- comment -%} move section footer here if account page design does not have footer {%- endcomment -%}
+  {%- endunless -%}
+  {% section 'footer' %}
+  {% section 'subscribe-modal' %}
+
+  {% render 'scripts' %}
+  
+  {%- assign customers_pages = 'customers/login customers/register customers/addresses customers/addresses' | split: ' ' -%}
+  {%- if customers_pages contains template -%}    
+    {{ "shopify_common.js" | shopify_asset_url | script_tag }}
+    <script src="{{ 'customers.js' | asset_url}}"></script>
+  {%- endif -%}
+  {% include 'microdata-schema' %}
+
+  {{ shop.metafields.loox["global_html_body"] }}
+
+  <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>
+
+
+
+

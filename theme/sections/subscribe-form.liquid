@@ -1,0 +1,30 @@
+{{ 'subscribe-section.css' | asset_url | stylesheet_tag }}
+
+
+<section class="newsletter_section bg-slate-300 py-11 md:py-14 lg:py-20">
+  <div class="container">
+    <div class="newsletter_section_row">
+      <div class="max-w-xl mx-auto">
+        {% include 'newsletter' %}
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "subscribe form",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "subscribe form"
+    }
+  ]
+}
+{% endschema %}
+
+
+
+

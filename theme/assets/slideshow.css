@@ -1,0 +1,17 @@
+.Slide-caption {
+  padding: 5% 0;
+  min-height: 75vh;
+}
+.Slide-caption h2 {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.Slide-caption p {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.Slide-caption .dbl_btn {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+}

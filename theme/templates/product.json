@@ -1,0 +1,251 @@
+{
+  "sections": {
+    "product-details": {
+      "type": "product-details",
+      "blocks": {
+        "464ed74c-4038-461b-8fd4-1cf3f21bdd76": {
+          "type": "title",
+          "settings": {}
+        },
+        "f35a0955-b7d2-4d86-89d3-5a4f9fbf7158": {
+          "type": "description",
+          "settings": {}
+        },
+        "09afb105-b6a5-4a86-a38e-fbc2f5b0d851": {
+          "type": "random_watching",
+          "settings": {}
+        },
+        "933c88aa-65b3-4827-8ce1-a1983cc17bb3": {
+          "type": "availability",
+          "settings": {}
+        },
+        "dcf63252-ad29-40d3-bbf4-7257b42c9331": {
+          "type": "variant_picker",
+          "settings": {
+            "enable_swatch": true
+          }
+        },
+        "30346820-4626-44a2-92db-b20cb526d9c7": {
+          "type": "quantity_picker",
+          "settings": {}
+        },
+        "feb29eb2-56cb-4995-bd7c-d19c9257a9a7": {
+          "type": "price",
+          "settings": {}
+        },
+        "f6062df5-1d0c-4763-b6c9-71d4061d859f": {
+          "type": "subscription",
+          "settings": {}
+        },
+        "769a1ea0-89ed-4ce1-a6e0-4141bf5e72c1": {
+          "type": "buy_buttons",
+          "settings": {
+            "enable_quantity": true,
+            "enable_checkout": true
+          }
+        },
+        "c69faf10-7962-48bb-8820-7a0b9fe50a55": {
+          "type": "featured_points",
+          "settings": {
+            "text": "<p>Winner of \"Best moisturizer for aging skin\" and delivered to you in \"Best sustainable packaging\" -Marie Claire 2021 Skin Awards<\/p>"
+          }
+        },
+        "b7d30e69-69b9-4faf-bf3c-7831e7bf35f7": {
+          "type": "featured_points",
+          "settings": {
+            "text": "<p>Hydrates, smoothes, and soothes<\/p>"
+          }
+        },
+        "a591dbe5-ae7d-4240-b34e-0ad7608fdbec": {
+          "type": "featured_points",
+          "settings": {
+            "text": "<p>Beautiful primer-like consistency<\/p>"
+          }
+        },
+        "935b0588-7ef0-44a9-97b8-9e18d7916c68": {
+          "type": "featured_points",
+          "settings": {
+            "text": "<p>Supports collagen and elastin production<\/p>"
+          }
+        },
+        "e1d04457-3d59-42d8-b48e-9b4578a0071a": {
+          "type": "trust_icon",
+          "settings": {
+            "text": "Cruelty free",
+            "image": "shopify:\/\/shop_images\/icon-1_1.png"
+          }
+        },
+        "51a98e4a-fbc8-40cd-8ec2-f123d333a6ea": {
+          "type": "trust_icon",
+          "settings": {
+            "text": "Vegan",
+            "image": "shopify:\/\/shop_images\/icon-1_1.png"
+          }
+        },
+        "d4f740bd-8f37-4f01-9a43-839bd448414f": {
+          "type": "trust_icon",
+          "settings": {
+            "text": "NON-GMO",
+            "image": "shopify:\/\/shop_images\/icon-1_1.png"
+          }
+        },
+        "e630900b-3e2f-4937-a568-23d4e331e15c": {
+          "type": "trust_icon",
+          "settings": {
+            "text": "Gluten Free",
+            "image": "shopify:\/\/shop_images\/icon-1_1.png"
+          }
+        },
+        "c3be9436-619f-4ccb-a25a-a327fd69e848": {
+          "type": "accordions",
+          "settings": {
+            "title": "Shipping & Return",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl. Praesent mollis id purus ac vulputate. Maecenas sed eros in nibh mattis eleifend et vel ligula.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "464ed74c-4038-461b-8fd4-1cf3f21bdd76",
+        "f35a0955-b7d2-4d86-89d3-5a4f9fbf7158",
+        "09afb105-b6a5-4a86-a38e-fbc2f5b0d851",
+        "933c88aa-65b3-4827-8ce1-a1983cc17bb3",
+        "dcf63252-ad29-40d3-bbf4-7257b42c9331",
+        "30346820-4626-44a2-92db-b20cb526d9c7",
+        "feb29eb2-56cb-4995-bd7c-d19c9257a9a7",
+        "f6062df5-1d0c-4763-b6c9-71d4061d859f",
+        "769a1ea0-89ed-4ce1-a6e0-4141bf5e72c1",
+        "c69faf10-7962-48bb-8820-7a0b9fe50a55",
+        "b7d30e69-69b9-4faf-bf3c-7831e7bf35f7",
+        "a591dbe5-ae7d-4240-b34e-0ad7608fdbec",
+        "935b0588-7ef0-44a9-97b8-9e18d7916c68",
+        "e1d04457-3d59-42d8-b48e-9b4578a0071a",
+        "51a98e4a-fbc8-40cd-8ec2-f123d333a6ea",
+        "d4f740bd-8f37-4f01-9a43-839bd448414f",
+        "e630900b-3e2f-4937-a568-23d4e331e15c",
+        "c3be9436-619f-4ccb-a25a-a327fd69e848"
+      ],
+      "settings": {
+        "accordion_1": "HOW TO USE",
+        "content_1": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl.<\/p>",
+        "accordion_2": "INGREDIENTS",
+        "content_2": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl.<\/p>",
+        "accordion_3": "Description",
+        "content_3": "<p>Test<\/p>",
+        "people_count": "235 people",
+        "people_text": "are checking out now"
+      }
+    },
+    "6365e82d-7f53-4372-a8c7-0f244bc3d696": {
+      "type": "pdp-navigation-section",
+      "settings": {}
+    },
+    "b3941551-d109-407e-a6e4-881e3fa911f9": {
+      "type": "pdp-details-section",
+      "settings": {}
+    },
+    "33468cdc-8982-4a95-bbc9-d6dc5f875b36": {
+      "type": "our-promise",
+      "settings": {}
+    },
+    "de7079d7-906e-45ce-a273-e4108373cfe3": {
+      "type": "real-sults",
+      "settings": {}
+    },
+    "30b5675e-b96c-4afc-823b-469759a609c0": {
+      "type": "pdp-faq-section",
+      "blocks": {
+        "e38424ed-3838-4b46-aa45-1ca1e08c18ef": {
+          "type": "faq",
+          "settings": {
+            "title": "Supports Optimal Nerve Health",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl.<\/p>"
+          }
+        },
+        "470bea47-c02f-480a-8dce-21426066c94e": {
+          "type": "faq",
+          "settings": {
+            "title": "Eases Nerve Pain",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl.<\/p>"
+          }
+        },
+        "12665bc8-4dfc-4674-a493-7ced73030b76": {
+          "type": "faq",
+          "settings": {
+            "title": "Helps You With Nerve Renew",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl.<\/p>"
+          }
+        },
+        "7a73cb1b-f499-47d8-a6d7-4e9bd1566f22": {
+          "type": "faq",
+          "settings": {
+            "title": "Trusted Supplement That Works",
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet convallis ipsum, eu scelerisque nisl.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "e38424ed-3838-4b46-aa45-1ca1e08c18ef",
+        "470bea47-c02f-480a-8dce-21426066c94e",
+        "12665bc8-4dfc-4674-a493-7ced73030b76",
+        "7a73cb1b-f499-47d8-a6d7-4e9bd1566f22"
+      ],
+      "settings": {
+        "title": "Frequently asked questions",
+        "image": "shopify:\/\/shop_images\/faq_1.jpg"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "title": "You may also like"
+      }
+    },
+    "2c2ea416-73a9-4e09-9fd2-d9f8cdfe4bdf": {
+      "type": "pdp-review-section",
+      "blocks": {
+        "6e80313e-c0fb-4f1e-a300-addb789d7cf2": {
+          "type": "shopify:\/\/apps\/stamped-product-reviews-ugc\/blocks\/main-widget\/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": true,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": true,
+            "use_metafields": true,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "6e80313e-c0fb-4f1e-a300-addb789d7cf2"
+      ],
+      "settings": {}
+    },
+    "1673621549ef77a524": {
+      "type": "apps",
+      "blocks": {
+        "04dadb47-565f-476d-82ec-57846ae28324": {
+          "type": "shopify:\/\/apps\/bundle-bear-volume-discounts\/blocks\/offer-widget\/8301eac6-7eb6-487c-92f6-ccde92f1db50",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "04dadb47-565f-476d-82ec-57846ae28324"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "product-details",
+    "6365e82d-7f53-4372-a8c7-0f244bc3d696",
+    "b3941551-d109-407e-a6e4-881e3fa911f9",
+    "33468cdc-8982-4a95-bbc9-d6dc5f875b36",
+    "de7079d7-906e-45ce-a273-e4108373cfe3",
+    "30b5675e-b96c-4afc-823b-469759a609c0",
+    "product-recommendations",
+    "2c2ea416-73a9-4e09-9fd2-d9f8cdfe4bdf",
+    "1673621549ef77a524"
+  ]
+}

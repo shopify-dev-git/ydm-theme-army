@@ -1,0 +1,127 @@
+<div class="w-full">
+    <div class="md:grid md:grid-cols-2">
+        <div class="left_img_sec hidden md:block">
+            <div class="img_wrapper relative h-full">
+                {%- if template == 'customers/register' -%}
+                    {% if section.settings.register_image != blank %}
+                    <img class="lazyload object-cover absolute top-0 bottoms-0 left-0 right-0 w-full h-full" 
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+                    data-src="{{ section.settings.register_image | img_url: '1000x' }}" alt="{{ section.settings.register_image.alt }}">
+                    {% endif %}
+                {%- endif -%}
+            </div>
+        </div>
+
+        <div class="login-create-box px-6 md:pl-[9%] lg:pl-[8%] xl:pl-[14%] py-[64px] bg-white sm:py-8 md:py-14 2xl:py-20 4xl:py-28 flex items-center">
+            <div class="w-full signup__sec">
+                <div class="account-login-title pb-3 lg:pb-5 text-center md:text-left">
+                    <h2 class="lg:text-font40 4xl:text-font50 pb-4 md:pb-6 lg:pb-4">{{ 'customer.register.title' | t }}</h2>
+                    <p>
+                        {{ 'customer.register.description' | t }}
+                    </p>
+                </div>
+
+                {%- form 'create_customer' -%}
+                {%- if form.errors -%}
+                <h2 class="form__message text-red-600 font-inter font-medium text-font18 outline-none pb-1 mt-[10px] text-left" tabindex="-1">
+                    {{ 'templates.contact.form.error_heading' | t }} 
+                </h2>
+                <ul class="mb-[10px]"> 
+                    {%- for field in form.errors -%}
+                    <li class="text-red-600">
+                        {%- if field == 'form' -%}
+                        {{ form.errors.messages[field] }}
+                        {%- else -%}
+                        <a class="text-red-600 font-inter font-normal text-font16" href="#RegisterForm-{{ field }}">
+                            {{ form.errors.translated_fields[field] | capitalize }}
+                            {{ form.errors.messages[field] }}
+                        </a>
+                        {%- endif -%}
+                    </li>
+                    {%- endfor -%}
+                </ul>
+                {%- endif -%}
+
+                <div class="account-login-box">
+                    <div class="input-box">
+                        <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'customer.register.first_name' | t }}</label>
+                        <input
+                        class=""
+                        type="text"
+                        name="customer[first_name]"
+                        id="RegisterForm-FirstName"
+                        {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+                        autocomplete="given-name"
+                        placeholder=""
+                        required
+                    />
+                    </div>
+                    <div class="input-box">
+                        <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'customer.register.last_name' | t }}</label>
+                        <input
+                        class=""
+                        type="text"
+                        name="customer[last_name]"
+                        id="RegisterForm-LastName"
+                        {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+                        autocomplete="family-name"
+                        placeholder=""
+                        required
+                    />
+                    </div>
+                    <div class="input-box">
+                        <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'customer.register.email' | t }}</label>
+                        <input
+                        class=""
+                        type="email"
+                        name="customer[email]"
+                        id="RegisterForm-email"
+                        {% if form.email %} value="{{ form.email }}"{% endif %}
+                        spellcheck="false"
+                        autocapitalize="off"
+                        autocomplete="email"
+                        aria-required="true"
+                        {% if form.errors contains 'email' %}
+                        aria-invalid="true"
+                        aria-describedby="RegisterForm-email-error"
+                        {% endif %}
+                        placeholder=""
+                        required
+                    />
+                    </div>
+                    <div class="input-box">
+                        <label for="CustomerEmail" class="w-full block text-left mb-[9px] font-inter text-font16 font-normal text-puce-400">{{ 'customer.register.password' | t }}</label>
+                        <input
+                        class=""
+                        type="password"
+                        name="customer[password]"
+                        id="RegisterForm-password"
+                        aria-required="true"
+                        {% if form.errors contains 'password' %}
+                        aria-invalid="true"
+                        aria-describedby="RegisterForm-password-error"
+                        {% endif %}
+                        placeholder=""
+                        required
+                    />
+                    </div>
+                    <div class="input-box">
+                        <button type="submit" class="primary-btn btn_full_width mt-1">
+                            {{ 'customer.register.submit' | t }}
+                            {% include 'button-arrow' %}
+                        </button>
+                    </div>
+                    <div class="flex justify-center items-center pt-4">
+                        <p class="font-inter text-puce-400 text-font16 font-normal">
+                            {{ 'customer.register.already_have_account' | t }} 
+                            <a  class="font-inter text-puce-100 text-font16 font-normal hover:text-puce-400 underline" href="{{ routes.account_login_url }}">
+                                {{ 'customer.register.login' | t }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                {%- endform -%}
+            </div>
+        </div>
+    </div>
+</div>

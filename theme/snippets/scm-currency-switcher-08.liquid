@@ -1,0 +1,41 @@
+<script src="{{ 'classie.js' | asset_url }}" defer></script>
+                {{ "cs-skin-elastic.css" | asset_url | stylesheet_tag }}                <script src="{{ 'selectFx.js' | asset_url }}" defer></script>
+                    
+    <style>
+        {% for currency in shop.enabled_currencies %}
+        .cs-skin-elastic .cs-options li.flag-{{ currency.iso_code }} span {
+                                                                          background-image: url(https://d3f0kqa8h3si01.cloudfront.net/assets/img/flags/{{ currency.iso_code | downcase }}.png);
+                                                                      }
+        .cs-skin-elastic span.flag-{{ currency.iso_code }} {
+            background-image: url(https://d3f0kqa8h3si01.cloudfront.net/assets/img/flags/{{ currency.iso_code | downcase }}.png);
+        }
+        {% endfor %}
+        .cs-placeholder {
+            background-position: 10px 50% !important;
+            background-repeat: no-repeat !important;
+            background-size: 2em auto !important;
+            padding: 9px 0 8px 43px !important;
+            font-size: 12px !important;
+            line-height: 18px;
+        }
+        .cs-skin-elastic .cs-options li.flag-{{ cart.currency.iso_code }}{
+            display: none;
+        }
+    </style>
+
+    <div class="sca-body-currency" {% if template.name == 'page' %}data-type='redirect-form'{% endif %}>
+        <div class="sca-currency-style">
+        {% form 'currency', class: "currency-selector scm-form-language" %}
+        <input type='hidden' name='currency' value='{{ cart.currency.iso_code }}' />
+        <select id="currencies" name="currencies" class="cs-select cs-skin-elastic" style="display: none;">
+            <option value="{{ cart.currency.iso_code }}" data-class="flag-{{ cart.currency.iso_code }}" selected="selected">{{ cart.currency.iso_code }}</option>
+            {% for currency in shop.enabled_currencies %}
+            {% if currency != cart.currency %}
+            <option value="{{ currency.iso_code  }}" data-class="flag-{{ currency.iso_code  }}" data-symbol="{{currencySymbol}}">{{ currency.iso_code  }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        {% endform %}
+    </div>
+    <div class="clear-both"></div>
+    </div>

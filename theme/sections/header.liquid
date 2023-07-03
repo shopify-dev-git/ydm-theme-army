@@ -1,0 +1,356 @@
+{%- comment -%} Structured data {%- endcomment -%}
+<script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "name": "{{ shop.name }}",
+      {% if section.settings.logo %}
+        {% assign image_size = section.settings.logo.width | append:'x' %}
+        "logo": "https:{{ section.settings.logo | img_url: image_size }}",
+      {% endif %}
+      "sameAs": [
+        "{{ settings.social_twitter_link }}",
+        "{{ settings.social_facebook_link }}",
+        "{{ settings.social_pinterest_link }}",
+        "{{ settings.social_instagram_link }}",
+        "{{ settings.social_tumblr_link }}",
+        "{{ settings.social_snapchat_link }}",
+        "{{ settings.social_youtube_link }}",
+        "{{ settings.social_vimeo_link }}"
+      ],
+      "url": "{{ shop.url }}{{ page.url }}"
+    }
+</script>
+
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<style>
+    :root {
+        --header-color:{{ settings.header_text }};
+    }
+/* Text colors */
+    header .head-row .main-menu ul li a, .right-panel a {
+        color:var(--header-color) !important;
+    }
+    .right-panel a svg path {
+        fill: var(--header-color) !important;
+    }       
+</style>
+
+<header class="py-4 relative " style="background-color:{{ settings.header_background }};" id="header">
+    <div class="container-custom">
+        <div class="head-row flex items-center justify-between" x-data="{open: false, hidden: false}">
+            <div class="main-menu">
+                {% include 'main-menu' %}                                                
+            </div>
+            <button class="hamburger mr-auto lg:hidden"  x-on:click="open = true; scrollbaradd();">
+                <svg class="menu_icon" width="19" height="13" viewBox="0 0 19 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.75 0.928571C4.75 0.415753 5.17535 0 5.7 0H18.05C18.5747 0 19 0.415753 19 0.928571C19 1.44139 18.5747 1.85714 18.05 1.85714H5.7C5.17535 1.85714 4.75 1.44135 4.75 0.928571ZM18.05 5.57143H0.95C0.425348 5.57143 0 5.98722 0 6.5C0 7.01282 0.425348 7.42857 0.95 7.42857H18.05C18.5747 7.42857 19 7.01282 19 6.5C19 5.98722 18.5747 5.57143 18.05 5.57143ZM18.05 11.1429H9.5C8.97538 11.1429 8.55 11.5586 8.55 12.0714C8.55 12.5842 8.97538 13 9.5 13H18.05C18.5747 13 19 12.5842 19 12.0714C19 11.5586 18.5747 11.1429 18.05 11.1429Z" fill="currentColor"></path>
+                </svg>
+            </button>
+            <div class="site-logo">
+                <a href="{{ routes.root_url }}">
+                    <img src="{{ section.settings.logo | image_url }}" alt="{{ shop.name }}">
+                </a>
+            </div>            
+            <div class="right-panel flex items-center space-x-3 md:space-x-6 lg:space-x-5 justify-end xl:space-x-8">                                    
+                <div class="hidden lg:flex items-center md:space-x-6 justify-end lg:space-x-1 xl:space-x-8 xl:pr-5 right_menu_item">
+                    {% for link in linklists[section.settings.navigation_menu_2].links %}
+                    {% if link.links != blank %}
+                        <div class="relative hidden lg:inline-block text-left dropdown__sec">
+                            <a href="#" id="" class="flex px-2 py-5 lg:py-p26 font-semibold text-font14 tracking-widest transition ease-in-out duration-500 items-center focus:outline-none  focus:ring-0 focus:ring-transparent grou uppercase" id="menu-button" aria-expanded="true" aria-haspopup="true">
+                                {{ link.title }}
+                                <span class="ml-2">
+                                    <svg class="w-10 h-h5" width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.59642 0.161776L5.2505 4.67191L0.904581 0.161233C0.697381 -0.0537443 0.362207 -0.0537443 0.155007 0.161233C-0.0516692 0.37621 -0.0516692 0.724508 0.155007 0.939485L4.87547 5.83877C5.08215 6.05374 5.41785 6.05374 5.62453 5.83877L10.345 0.93953C10.5517 0.724553 10.5517 0.375713 10.345 0.160735C10.1388 -0.0532013 9.8031 -0.0532014 9.59642 0.161776Z" fill="black"/>
+                                    </svg>
+                                </span>                     
+                            </a>                  
+                            <!--
+                            Dropdown menu, show/hide based on menu state.
+                        
+                            Entering: "transition ease-out duration-100"
+                                From: "transform opacity-0 scale-95"
+                                To: "transform opacity-100 scale-100"
+                            Leaving: "transition ease-in duration-75"
+                                From: "transform opacity-100 scale-100"
+                                To: "transform opacity-0 scale-95"
+                            -->
+                            <div class="absolute -right-8 z-10 origin-top-right border border-black bg-white ring-0 ring-transparent ring-opacity-5 focus:outline-none dropdown_menu w-163 hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                            <div class="py-3 space-y-1" role="none">
+                                <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+                                {% for childlink in link.links %}
+                                <a href="{{childlink.url}}" class="text-black text-font12 font-semibold tracking-widest uppercase block px-4 py-1 hover:text-black/70 transition ease-in-out duration-500 active" role="menuitem" tabindex="-1" id="menu-item-0">
+                                    {{childlink.title}}
+                                </a>
+                                {% endfor %}
+                            </div>
+                            </div>
+                        </div> 
+                    {% else %}
+                        <a href="{{link.url}}" id="" class="hidden lg:inline-block px-2 font-semibold text-font10 tracking-widest transition ease-in-out duration-500 py-5 lg:py-p26">
+                            {{ link.title }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                </div>                                                                           
+                <div class="search-box">
+                    <button x-data @click="$store.searchopen = !$store.searchopen" aria-controls="desktop-search" class="btn-search no-underline h-full flex items-center text-purple-100 transition ease-in-out duration-500 hover:text-blue-100 hover:transition hover:ease-in-out hover:duration-500 user-menu font-semibold uppercase md:text-font14 xl:text-font15">
+                        <!-- <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.92682 0C3.55609 0 0 3.55609 0 7.92682C0 12.2978 3.55609 15.8536 7.92682 15.8536C12.2978 15.8536 15.8536 12.2978 15.8536 7.92682C15.8536 3.55609 12.2978 0 7.92682 0ZM7.92682 14.3903C4.36292 14.3903 1.46341 11.4908 1.46341 7.92686C1.46341 4.36296 4.36292 1.46341 7.92682 1.46341C11.4907 1.46341 14.3902 4.36293 14.3902 7.92682C14.3902 11.4907 11.4907 14.3903 7.92682 14.3903Z" fill="currentColor"/>
+                            <path d="M17.7856 16.751L13.5905 12.5558C13.3046 12.27 12.8417 12.27 12.5558 12.5558C12.27 12.8415 12.27 13.3049 12.5558 13.5905L16.751 17.7856C16.8939 17.9285 17.081 18 17.2683 18C17.4554 18 17.6427 17.9285 17.7856 17.7856C18.0715 17.5 18.0715 17.0366 17.7856 16.751Z" fill="currentColor"/>
+                        </svg>                                                     -->
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.92682 0C3.55609 0 0 3.55609 0 7.92682C0 12.2978 3.55609 15.8536 7.92682 15.8536C12.2978 15.8536 15.8536 12.2978 15.8536 7.92682C15.8536 3.55609 12.2978 0 7.92682 0ZM7.92682 14.3903C4.36292 14.3903 1.46341 11.4908 1.46341 7.92686C1.46341 4.36296 4.36292 1.46341 7.92682 1.46341C11.4907 1.46341 14.3902 4.36293 14.3902 7.92682C14.3902 11.4907 11.4907 14.3903 7.92682 14.3903Z" fill="#453847"/>
+                            <path d="M17.7856 16.751L13.5905 12.5558C13.3046 12.27 12.8417 12.27 12.5558 12.5558C12.27 12.8415 12.27 13.3049 12.5558 13.5905L16.751 17.7856C16.8939 17.9285 17.081 18 17.2683 18C17.4554 18 17.6427 17.9285 17.7856 17.7856C18.0715 17.5 18.0715 17.0366 17.7856 16.751Z" fill="#453847"/>
+                        </svg>                            
+                    </button>							
+                </div>
+                {% if shop.customer_accounts_enabled %}
+                    {% if customer %}
+                      {% assign account_link = routes.account_url %}
+                    {% else %}
+                      {% assign account_link = routes.account_login_url %}
+                    {% endif %}
+                    <li class="flex md:pl-2">
+                        <a href="{{ account_link }}" class="">
+                            <svg class="" width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.587891 18.1364C0.587891 18.6133 0.974165 19 1.45153 19C1.92889 19 2.31516 18.6133 2.31516 18.1364C2.31516 15.0888 4.06964 12.3907 6.8044 11.1148C7.75084 11.7298 8.87678 12.0909 10.087 12.0909C11.3019 12.0909 12.4322 11.7274 13.3808 11.108C14.1972 11.4934 14.9538 12.0119 15.5835 12.6412C17.0518 14.11 17.8606 16.0616 17.8606 18.1364C17.8606 18.6133 18.2469 19 18.7243 19C19.2016 19 19.5879 18.6133 19.5879 18.1364C19.5879 15.6003 18.5994 13.2152 16.8047 11.42C16.2041 10.8191 15.5062 10.3039 14.7573 9.87916C15.616 8.83509 16.1325 7.49957 16.1325 6.04545C16.1325 2.71194 13.4201 0 10.087 0C6.75395 0 4.04159 2.71194 4.04159 6.04545C4.04159 7.49604 4.55601 8.82829 5.41084 9.87125C2.44615 11.5404 0.587891 14.6592 0.587891 18.1364ZM10.087 1.72727C12.468 1.72727 14.4052 3.66455 14.4052 6.04545C14.4052 8.42636 12.468 10.3636 10.087 10.3636C7.70614 10.3636 5.76887 8.42636 5.76887 6.04545C5.76887 3.66455 7.70614 1.72727 10.087 1.72727Z" fill="currentColor"/>
+                            </svg>
+                        </a>
+                    </li>
+                  {% endif %}
+                <button class="" type="button" class="cart-icon font-bold" id="cart-icon-bubble" x-data @click="$store.cartopen = !$store.cartopen">
+                    <svg width="26" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.6296 7.09779C20.3576 6.74056 19.9497 6.53561 19.5102 6.53561H15.5442L13.3936 1.37911C13.2602 1.0594 12.9046 0.913294 12.5992 1.053C12.2939 1.19261 12.1544 1.56505 12.2878 1.88481L14.2275 6.53566H7.04961L8.9893 1.88481C9.12264 1.56505 8.98323 1.19266 8.67787 1.053C8.37254 0.913294 8.01686 1.05931 7.88353 1.37911L5.73291 6.53566H1.76689C1.32743 6.53566 0.919463 6.74055 0.647524 7.09783C0.380573 7.44858 0.28207 7.89949 0.377275 8.33506L2.49523 18.022C2.64312 18.6984 3.21455 19.1707 3.88485 19.1707H17.3923C18.0625 19.1707 18.634 18.6984 18.7819 18.022L20.8998 8.33502C20.995 7.89945 20.8965 7.44854 20.6296 7.09779ZM17.3923 17.9072H3.88485C3.7824 17.9072 3.69267 17.8369 3.67147 17.7399L1.55352 8.05309C1.53691 7.97707 1.56478 7.91987 1.59117 7.88529C1.61562 7.85312 1.67101 7.79917 1.76689 7.79917H5.20597L5.04794 8.17809C4.9146 8.49784 5.05401 8.87024 5.35937 9.0099C5.43797 9.04587 5.51986 9.06289 5.6005 9.06289C5.83307 9.06289 6.05469 8.92125 6.15371 8.68383L6.52267 7.79925H14.7545L15.1235 8.68383C15.2225 8.92129 15.4441 9.06289 15.6767 9.06289C15.7573 9.06289 15.8392 9.04587 15.9178 9.0099C16.2232 8.87028 16.3626 8.49784 16.2292 8.17809L16.0712 7.79917H19.5103C19.6062 7.79917 19.6616 7.85312 19.686 7.88529C19.7124 7.91991 19.7403 7.97711 19.7237 8.05305L17.6057 17.7399C17.5845 17.8369 17.4947 17.9072 17.3923 17.9072Z" fill="currentColor"/>
+                        <path d="M7.0186 10.5367C6.6854 10.5367 6.41527 10.8196 6.41527 11.1685V15.8013C6.41527 16.1502 6.6854 16.4331 7.0186 16.4331C7.3518 16.4331 7.62192 16.1502 7.62192 15.8013V11.1685C7.62192 10.8196 7.35184 10.5367 7.0186 10.5367Z" fill="currentColor"/>
+                        <path d="M10.6386 10.5367C10.3054 10.5367 10.0352 10.8196 10.0352 11.1685V15.8013C10.0352 16.1502 10.3054 16.4331 10.6386 16.4331C10.9717 16.4331 11.2419 16.1502 11.2419 15.8013V11.1685C11.2419 10.8196 10.9717 10.5367 10.6386 10.5367Z" fill="currentColor"/>
+                        <path d="M14.2585 10.5367C13.9253 10.5367 13.6552 10.8196 13.6552 11.1685V15.8013C13.6552 16.1502 13.9253 16.4331 14.2585 16.4331C14.5917 16.4331 14.8618 16.1502 14.8618 15.8013V11.1685C14.8618 10.8196 14.5917 10.5367 14.2585 10.5367Z" fill="currentColor"/>
+                        <circle class="{% if cart.item_count < 1 %} hidden {%- endif -%}" cx="20" cy="6" r="5" fill="#CA8685" stroke="white" stroke-width="2"/>
+                    </svg>                        
+                </button>                 
+            </div>
+        </div>
+    </div>
+    
+    <!-- <button x-data @click="$store.cartopen = !$store.cartopen">Toggle</button>
+
+    <div x-data>        
+        <span x-show="$store.cartopen" 
+            x-transition:enter="ease-out duration-300"
+            x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+            x-transition:leave="ease-in duration-200"
+            x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+            x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        >
+        <span x-data @click="$store.cartopen = !$store.cartopen">remove btn</span>
+            Hello 👋
+        </span>
+    </div> -->
+
+</header>
+
+{% include 'search-drawer' %}
+
+<!-- <div class="search-section fixed top-0 bottom-0 right-0 bg-gray-300 hidden z-[99]">
+    <div class="h-full z-50 p-5 lg:p-p52 search_sidebar relative">
+        <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
+        <predictive-search>
+            <button class="search_close_icon">
+                <svg class="" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.74761 7.50012L14.7413 1.50637C15.0862 1.16137 15.0862 0.603743 14.7413 0.258747C14.3963 -0.086249 13.8386 -0.086249 13.4937 0.258747L7.50001 6.2525L1.50634 0.258747C1.16135 -0.086249 0.603732 -0.086249 0.258742 0.258747C-0.0862475 0.603743 -0.0862475 1.16137 0.258742 1.50637L6.25239 7.50012L0.258742 13.4939C-0.0862475 13.8389 -0.0862475 14.3965 0.258742 14.7415C0.430798 14.9135 0.65667 15 0.882542 15C1.10841 15 1.33429 14.9135 1.50634 14.7415L7.49998 8.74774L13.4936 14.7415C13.6657 14.9135 13.8916 15 14.1174 15C14.3433 15 14.5692 14.9135 14.7412 14.7415C15.0862 14.3965 15.0862 13.8389 14.7412 13.4939L8.74761 7.50012Z" fill="black"></path>
+                </svg>
+            </button>
+            <form action="{{ routes.search_url }}" class="head_search_box" method="get" role="search">
+                <label for="Search" class="block mb-3 text-font20 md:text-font28 lg:text-font40 text-black font-bold">Search</label>
+                <input
+                id="Search"
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"            
+                    role="combobox"
+                    aria-expanded="false"
+                    aria-owns="predictive-search-results-list"
+                    aria-controls="predictive-search-results-list"
+                    aria-haspopup="listbox"
+                    aria-autocomplete="list"
+                    autocorrect="off"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                >
+                <input name="options[prefix]" type="hidden" value="last">
+                <div id="predictive-search" tabindex="-1"></div>
+                {% comment %} <button type="submit" class="search__button field__button primary-btn mt-5" aria-label="{{ 'general.search.search' | t }}">
+                    Search Button
+                </button> {% endcomment %}
+            </form>
+        </predictive-search>
+    </div>
+    <div class="backdrop_showed fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50"></div>
+</div> -->
+
+
+
+
+<script>
+    document.addEventListener('alpine:init', () => {
+    Alpine.store('open', false)
+    });
+
+    document.querySelector('.btn-search').addEventListener('click', function(event) {
+		event.preventDefault();
+		document.body.classList.add('search_open')
+	});
+
+    document.querySelector('.search_close_icon').addEventListener('click', function(event) {
+		event.preventDefault();
+		document.body.classList.remove('search_open')
+	});    
+</script>
+
+<script>
+	(function(){
+    var _TotalOffsetTop = function (e) {
+      var offset = 0;
+      do 
+          offset += e.offsetTop;
+      while (e = e.offsetParent);
+      return offset;
+    }
+    var timer = null;
+    var reposition_bar = function(){
+        var header = document.querySelector('header');
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          document.body.parentElement.classList.toggle('condensed-header', (document.documentElement.scrollTop > 120));
+        },10);
+    };
+    document.addEventListener("DOMContentLoaded", function(){
+      setTimeout(function(){
+        var header = document.querySelector('header');
+        window.addEventListener('scroll', reposition_bar );
+        window.addEventListener('resize', reposition_bar );
+        reposition_bar();
+      },1000);
+    });
+  })()
+</script>
+
+
+
+{% schema %}
+{
+    "name": "Header",
+    "class": "shopify-section-header sticky top-0 z-50",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Logo"
+        },
+        {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Image"
+        },
+        {
+            "type": "header",
+            "content": "Navigation"
+        },
+        {
+            "type": "link_list",
+            "id": "navigation_menu",
+            "label": "Menu",
+            "default": "main-menu"
+        },
+        {
+            "type": "link_list",
+            "id": "navigation_menu_2",
+            "label": "Menu Right",
+            "info": "For Desktop only",
+            "default": "main-menu"
+        }
+    ],
+    "blocks": [
+    {
+        "type": "mega_menu",
+        "name": "Mega Menu",
+        "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Menu Title",
+                    "info": "Add same title of main menu in which you need to show this mega menu"
+                },
+                {
+                    "type": "link_list",
+                    "id": "link_list_1",
+                    "label": "Menu List 1"
+                },
+                {
+                    "type": "text",
+                    "id": "view_all_1",
+                    "label": "View All Text Menu 1"
+                },
+                {
+                    "type": "url",
+                    "id": "view_all_link_1",
+                    "label": "View All Link Menu 1"
+                },
+                {
+                    "type": "link_list",
+                    "id": "link_list_2",
+                    "label": "Menu List 2"
+                },
+                {
+                    "type": "text",
+                    "id": "view_all_2",
+                    "label": "View All Text Menu 2"
+                },
+                {
+                    "type": "url",
+                    "id": "view_all_link_2",
+                    "label": "View All Link Menu 2"
+                },
+                {
+                    "type": "link_list",
+                    "id": "link_list_3",
+                    "label": "Menu List 3"
+                },
+                {
+                    "type": "text",
+                    "id": "view_all_3",
+                    "label": "View All Text Menu 3"
+                },
+                {
+                    "type": "url",
+                    "id": "view_all_link_3",
+                    "label": "View All Link Menu 3"
+                },                
+                {
+                    "type": "header",
+                    "content": "Product List"
+                },
+                {
+                    "type": "product_list",
+                    "id": "product_list",
+                    "label": "Products",
+                    "limit": 2
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+

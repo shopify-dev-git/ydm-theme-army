@@ -1,0 +1,18 @@
+.product-column {
+    box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    border-radius: 10px;
+    @apply bg-white;    
+}
+.product-img-sec-new {
+    padding-top: 100%;
+    @apply relative w-full;
+    img {
+        @apply top-0 left-0 w-full h-full object-cover absolute ;
+        border-radius: 10px 10px 0 0;
+    }
+}
+
+
+
+
+

@@ -1,0 +1,22 @@
+.product-column {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.product-img-sec-new {
+  padding-top: 100%;
+  position: relative;
+  width: 100%;
+}
+.product-img-sec-new img {
+  border-radius: 10px 10px 0 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}

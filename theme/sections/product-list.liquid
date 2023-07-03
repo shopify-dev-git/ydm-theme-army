@@ -1,0 +1,252 @@
+{{ 'featured-product-list.css' | asset_url | stylesheet_tag }}
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+    h3 {
+      color: var(--theme-sub-heading);
+    }
+</style>
+
+<div class="home-product-list relative section-{{section.id}} color-{{ section.settings.color_scheme }} bg-gray-900">
+    <div class="max-w-[2100px] flex flex-col lg:flex-row">
+        <div class="home-product-left relative w-full lg:w-[50%] mb-[50px] xl:mb-0">
+            {%- if section.settings.main_image != blank -%}                       
+                <img class="lazyload w-full h-full object-cover" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-src="{{ section.settings.main_image | img_url:'1000x' }}" alt="{{ section.settings.main_image.alt }}">   
+            {%- endif -%}
+            <div class="swiper-pagination-product"></div>
+        </div>
+        <div class="home-product-right lg:w-[50%] lg:flex items-center lg:flex-col lg:py-[40px]">
+            <h2 class="text-center pb-[32px] 2xl:pb-[50px]">{{ section.settings.main_title }}</h2>  
+            <div class="home-product-block relative max-w-[474px] mx-auto px-[25px]">                
+                <div class="swiper-button-prev-product swiperArrow">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.265505 8.82189L8.43292 0.280477C8.7913 -0.0934923 9.37193 -0.0934923 9.73121 0.280477C10.0896 0.654446 10.0896 1.26187 9.73121 1.63584L2.21163 9.49953L9.73031 17.3632C10.0887 17.7372 10.0887 18.3446 9.73031 18.7195C9.37193 19.0935 8.79039 19.0935 8.43201 18.7195L0.2646 10.1781C-0.0883503 9.80801 -0.0883503 9.19104 0.265505 8.82189Z" fill="#4B3B4C"/>
+                </svg>            
+              </div>
+                <div class="swiper productSwiper">                                                                       
+                    <div class="swiper-wrapper">
+                        {% comment %} {%- for block in featured_product_list  -%}
+                            <div class="swiper-slide">
+                                <a href="{{ block.settings.product.url }}" class="featured-product-card">
+                                    <div class="featured-product-img">
+                                        <img class="lazyload " src="{{ block.settings.product.featured_media.preview_image | img_url }}" alt="">
+                                    </div>                                        
+                                    <div class="featured-product-content">
+                                        <h3>{{ block.settings.product.title }}</h3>
+                                        <p>{{ block.settings.product.description | strip_html | truncatewords: 50}} </p>
+                                        <div class="price-box">
+                                            <h3 class="price text-font28 lg:text-font30 xl:text-font33 product-block">
+                                                <strong> 
+                                                    {% render 'price', product: product %} 
+                                                </strong>
+                                            </h3>                                                                            
+                                        </div>                                            
+                                        <div class="inline-block pb-5 md:pb-6">
+                                            <button type="button" class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}">
+                                                {{ 'general.shop_product' | t }}
+                                            </button>
+                                        </div>                                            
+                                    </div>
+                                </a>                                  
+                            </div>
+                        {%- endfor -%}                             {% endcomment %}
+                        {%- for product in section.settings.product_list -%}
+                            <div class="swiper-slide overflow-hidden">
+                                <a href="{{ product.url }}" class="featured-product-card">
+                                    <div class="featured-product-img relative pt-[100%] md:pt[70%] lg:max-w-[300px] lg:pt-[70%] max-w-[433px] w-full lg:mx-auto xl:max-w-[433px] xl:pt-[100%]">                                        
+                                        <img class="lazyload absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                         data-src="{{ product.featured_media.preview_image | img_url:'433x' }}" alt="">
+                                    </div>                                        
+                                    <div class="featured-product-content text-center flex flex-col justify-center items-center pt-5 md:pt-[25px] 2xl:pt-[40px]">
+                                        <h3 class="font-inter text-font18 md:text-font20 lg:text-font21 xl:text-font22 2xl:text-font23 font-semibold capitalize">{{ product.title }}</h3>
+                                        <p class="text-font14 md:text-font15 lg:text-font16 pb-[15px]">{{ product.description | strip_html | truncatewords: 10}} </p>
+                                        <div class="price-box flex items-center justify-center pb-[15px]">
+                                            <h3 class="price text-font16 font-inter lg:text-font20 font-semibold capitalize">
+                                                <strong> 
+                                                    {% render 'price', product: product %} 
+                                                    {% comment %} {{ product.price | money }} {% endcomment %}
+                                                </strong>
+                                            </h3>
+                                            {%- assign current_variant = product.selected_or_first_available_variant -%}
+                                            {%- unless product.has_only_default_variant -%}
+                                            <span class="text-font11 sm:text-font15 lg:text-font16 text-[#4B3B4C] bg-[#4B3B4C] w-[1px] md:w-[1.5px]
+                                              h-[15px] md:h-[22px] mx-[6px] md:mx-[10px]"></span>                                                                     
+                                            <span class="font-inter text-font16 xl:text-font18 text-[#4B3B4C] font-semibold">
+                                              {{ current_variant.title | replace: '/', ' - ' }}
+                                            </span>
+                                            {% endunless %}        
+                                        </div>                                            
+                                        <div class="inline-block pb-[30px] md:pb-6">
+                                            <button type="button" class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}">
+                                                {{ 'general.shop_product' | t }}
+                                                {% include 'button-arrow' %}
+                                            </button>
+                                        </div>                                            
+                                    </div>
+                                </a>                                  
+                            </div>
+                        {%- endfor -%}
+                    </div>                                                            
+                </div>                
+                <div class="swiper-button-next-product swiperArrow">
+                    <svg width="10" height="19" viewBox="0 0 10 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M9.7345 8.82189L1.56708 0.280477C1.2087 -0.0934923 0.628071 -0.0934923 0.268785 0.280477C-0.0895951 0.654446 -0.0895951 1.26187 0.268785 1.63584L7.78837 9.49953L0.26969 17.3632C-0.08869 17.7372 -0.08869 18.3446 0.26969 18.7195C0.628071 19.0935 1.20961 19.0935 1.56799 18.7195L9.7354 10.1781C10.0884 9.80801 10.0884 9.19104 9.7345 8.82189Z" fill="#4B3B4C"/>
+                    </svg>            
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>  
+
+<script>
+    function docReady(fn){
+      if (document.readyState === "complete" || document.readyState === "interactive"){
+        setTimeout(fn, 1);
+      } else {
+        document.addEventListener("DOMContentLoaded", fn);
+      }
+    }
+    docReady(function(){
+        var swiper = new Swiper(".productSwiper", {
+            loop: false,                        
+            navigation: {
+                nextEl: ".swiper-button-prev-product",
+                prevEl: ".swiper-button-next-product",
+            },            
+            pagination: {
+              el: ".swiper-pagination-product",
+              clickable: true,
+            },
+            slidesPerView: 1,
+            spaceBetween: 0,            
+        });
+    })
+</script>
+
+
+{% schema %}
+{
+    "name": "Product List",
+    "settings": [        
+        {
+            "type": "image_picker",
+            "id": "main_image",
+            "label": "Image"
+        },                
+        {
+            "type": "text",
+            "id": "main_title",
+            "label": "Heading",
+            "default":"For a Hydrated Winter"
+        },
+        {
+            "type": "header",
+            "content": "Product List"
+        },
+        {
+            "type": "product_list",
+            "id": "product_list",
+            "label": "Products",
+            "limit": 5
+        },        
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+          },
+          {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Heading Color"
+          },
+          {
+            "type": "color",
+            "id": "section_links_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Link Color"
+          },   
+          {
+            "type": "color",
+            "id": "section_sub_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Link Color"
+          },             
+          {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "sub heading Color"
+          },
+          {
+            "type": "header",
+            "content": "Button style"
+          },
+          {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "primary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+        }
+    ],    
+    "presets": [
+        {
+            "name": "Product List"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+{% comment %}  {% endcomment %}

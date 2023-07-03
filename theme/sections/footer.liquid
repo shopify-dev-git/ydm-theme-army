@@ -1,0 +1,513 @@
+{%- assign href = 'footer.css' | asset_url -%}
+{% render 'link', href: href %}
+
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+</style>
+
+{%- capture products_menu -%}
+    {{ products_menu }}
+    {%- if section.settings.products_menu != blank -%}
+    {%- assign products_menu = linklists[section.settings.products_menu] -%}
+        {%- for link in products_menu.links -%}             
+            <li>
+                <a href="{{ link.url }}" 
+                    aria-haspopup="menu" 
+                    aria-controls="menu-{{ link.title | handleize }}-{{forloop.index}}" 
+                    aria-expanded="false" 
+                    {%- if link.current %} class="menu_item_active"{% endif %} >                   
+                    {{ link.title }}
+                </a>
+                
+            </li>
+        {%- endfor -%}
+    {% endif %}
+{%- endcapture -%}
+
+{%- capture about_menu -%}
+    {{ about_menu }}
+    {%- if section.settings.navigation_menu != blank -%}
+    {%- assign navigation_menu = linklists[section.settings.navigation_menu] -%}
+        {%- for link in navigation_menu.links -%}             
+            <li>
+                <a href="{{ link.url }}" 
+                    aria-haspopup="menu" 
+                    aria-controls="menu-{{ link.title | handleize }}-{{forloop.index}}" 
+                    aria-expanded="false" 
+                    {%- if link.current %} class="menu_item_active"{% endif %} >                   
+                    {{ link.title }}
+                </a>
+                
+            </li>
+        {%- endfor -%}
+    {% endif %}
+{%- endcapture -%}
+
+{%- capture help_menu -%}
+    {{ help_menu }}
+    {%- if section.settings.help_menu != blank -%}
+    {%- assign help_menu = linklists[section.settings.help_menu] -%}
+        {%- for link in help_menu.links -%}             
+            <li>
+                <a href="{{ link.url }}" 
+                    aria-haspopup="menu" 
+                    aria-controls="menu-{{ link.title | handleize }}-{{forloop.index}}" 
+                    aria-expanded="false" 
+                    {%- if link.current %} class="menu_item_active"{% endif %} >                   
+                    {{ link.title }}
+                </a>
+                
+            </li>
+        {%- endfor -%}
+    {% endif %}
+{%- endcapture -%}
+
+<footer class="bg-white pt-16 lg:pt-0 section-{{section.id}} color-{{ section.settings.color_scheme }}" data-section-type="footer-section"  data-section-id="{{ section.id }}">    
+    <div class="container grid">
+        <div class="footer-row flex flex-col lg:flex-row">
+            <div class="footer-left-subscribe lg:w-[40%] lg:pr-[40px] lg:border-r lg:border-bordercolor-200 lg:mr-[40px] max-w-[500px] xl:pr-[60px] xl:mr-[60px] 4xl:pr-[100px] 4xl:mr-[80px] lg:py-[40px] xl:py-[50px] 2xl:py-[60px] 4xl:pt-[90px]">
+                {%- if section.settings.Show-newsletter-sign-up -%}                
+                    <div class="subscribe-title">
+                        <h3 class="font-normal text-font27 lg:text-font28 xl:text-font24 2xl:text-font30 font-dmserif pb-[27px] xl:pb-[35px] 2xl:pb-[39px]">
+                            {{ section.settings.subscribe-title }}
+                        </h3>                        
+                    </div>
+                    {% include 'newsletter' %}
+                {%- endif -%}                                
+                <div class="follows-row-sec sm:flex sm:items-center sm:justify-between">
+                    <div class="follows_us flex items-center justify-between sm:flex-col">                        
+                        <div class="social-media flex items-center space-x-6">
+                            <!-- {% for block in section.blocks %}
+                                <a class="" href="{{ block.settings.social-media-item-url }}">  	
+                                    <img src="{{ block.settings.social-media-item | img_url }}">
+                                </a>
+                            {% endfor %} -->
+                            {% if settings.social_facebook_link != blank %}
+                                <a href="{{ settings.social_facebook_link }}" class="social-media-icon">
+                                    <svg width="11" height="21" viewBox="0 0 11 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.14053 21V11.4216H10.3824L10.8688 7.68764H7.14053V5.30404C7.14053 4.22331 7.44202 3.4868 9.00711 3.4868L11 3.48599V0.146191C10.6554 0.101793 9.47233 0 8.0954 0C5.22015 0 3.2517 1.73981 3.2517 4.93423V7.68764H0V11.4216H3.2517V21H7.14053Z" fill="white"/>
+                                    </svg>                                        
+                                </a>
+                            {% endif %}
+                                {% if settings.social_instagram_link != blank %}
+                                <a href="{{ settings.social_instagram_link }}" class="social-media-icon">
+                                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20.9466 6.17408C20.8974 5.05826 20.7169 4.29115 20.4584 3.62644C20.1917 2.92086 19.7814 2.28916 19.2438 1.76402C18.7186 1.23071 18.0826 0.816309 17.3851 0.553821C16.7164 0.295339 15.9531 0.114899 14.8371 0.0657021C13.7127 0.0123392 13.3558 0 10.5041 0C7.65239 0 7.29545 0.0123392 6.17525 0.0615356C5.05923 0.110732 4.29197 0.291333 3.62729 0.549654C2.92142 0.816309 2.28959 1.22655 1.76436 1.76402C1.23095 2.28916 0.816625 2.92503 0.553926 3.62243C0.295395 4.29115 0.11492 5.0541 0.0657146 6.16991C0.0123415 7.29406 0 7.65093 0 10.5021C0 13.3532 0.0123415 13.7101 0.0615474 14.8301C0.110753 15.9459 0.291388 16.713 0.549919 17.3777C0.816625 18.0833 1.23095 18.715 1.76436 19.2401C2.28959 19.7735 2.92558 20.1879 3.62312 20.4503C4.29197 20.7088 5.05506 20.8893 6.17125 20.9385C7.29128 20.9878 7.64838 21 10.5001 21C13.3518 21 13.7087 20.9878 14.8289 20.9385C15.9449 20.8893 16.7122 20.7088 17.3769 20.4503C18.7885 19.9047 19.9045 18.7889 20.4502 17.3777C20.7086 16.709 20.8892 15.9459 20.9385 14.8301C20.9877 13.7101 21 13.3532 21 10.5021C21 7.65093 20.9958 7.29406 20.9466 6.17408ZM19.0552 14.748C19.01 15.7736 18.8377 16.3275 18.6941 16.6967C18.3411 17.6115 17.6149 18.3376 16.6999 18.6905C16.3306 18.8341 15.7726 19.0063 14.7509 19.0514C13.643 19.1007 13.3107 19.1129 10.5083 19.1129C7.70576 19.1129 7.36934 19.1007 6.26549 19.0514C5.2397 19.0063 4.68578 18.8341 4.31649 18.6905C3.86114 18.5222 3.44665 18.2556 3.11023 17.9069C2.76146 17.5663 2.49475 17.1561 2.32646 16.7008C2.18285 16.3316 2.01055 15.7736 1.96551 14.7522C1.91614 13.6446 1.90396 13.3122 1.90396 10.5103C1.90396 7.7083 1.91614 7.37194 1.96551 6.26846C2.01055 5.24287 2.18285 4.68905 2.32646 4.31983C2.49475 3.86441 2.76146 3.45016 3.11439 3.11364C3.45483 2.76494 3.86514 2.49828 4.32066 2.33018C4.68994 2.1866 5.24804 2.01433 6.26966 1.96914C7.37751 1.91994 7.70993 1.90761 10.5123 1.90761C13.3189 1.90761 13.6512 1.91994 14.755 1.96914C15.7808 2.01433 16.3347 2.1866 16.704 2.33018C17.1594 2.49828 17.5739 2.76494 17.9103 3.11364C18.2591 3.45417 18.5258 3.86441 18.6941 4.31983C18.8377 4.68905 19.01 5.24688 19.0552 6.26846C19.1044 7.37611 19.1167 7.7083 19.1167 10.5103C19.1167 13.3122 19.1044 13.6404 19.0552 14.748Z" fill="white"/>
+                                        <path d="M10.504 5.1077C7.52525 5.1077 5.1084 7.52394 5.1084 10.5023C5.1084 13.4807 7.52525 15.897 10.504 15.897C13.483 15.897 15.8997 13.4807 15.8997 10.5023C15.8997 7.52394 13.483 5.1077 10.504 5.1077ZM10.504 14.0017C8.57155 14.0017 7.00402 12.4346 7.00402 10.5023C7.00402 8.57005 8.57155 7.00297 10.504 7.00297C12.4367 7.00297 14.004 8.57005 14.004 10.5023C14.004 12.4346 12.4367 14.0017 10.504 14.0017Z" fill="white"/>
+                                        <path d="M17.3728 4.89413C17.3728 5.5896 16.8088 6.15351 16.1131 6.15351C15.4175 6.15351 14.8534 5.5896 14.8534 4.89413C14.8534 4.19849 15.4175 3.63474 16.1131 3.63474C16.8088 3.63474 17.3728 4.19849 17.3728 4.89413Z" fill="white"/>
+                                    </svg>
+                                </a>
+                                {% endif %}
+                                {% if settings.social_youtube_link != blank %}
+                                    <a href="{{ settings.social_youtube_link }}" class="social-media-icon">
+                                        <svg width="28" height="20" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M27.4231 3.12952C27.1004 1.90578 26.1547 0.941123 24.9553 0.611608C22.7642 0 13.9997 0 13.9997 0C13.9997 0 5.23548 0 3.04439 0.58842C1.86809 0.917586 0.899269 1.90596 0.576612 3.12952C0 5.36465 0 10 0 10C0 10 0 14.6587 0.576612 16.8705C0.899611 18.094 1.84502 19.0587 3.04456 19.3882C5.25855 20 14 20 14 20C14 20 22.7642 20 24.9553 19.4116C26.1549 19.0822 27.1004 18.1176 27.4234 16.894C27.9999 14.6587 27.9999 10.0235 27.9999 10.0235C27.9999 10.0235 28.023 5.36465 27.4231 3.12952ZM11.2093 14.2823V5.7177L18.4974 10L11.2093 14.2823Z" fill="white"/>
+                                        </svg>                                            
+                                    </a>
+                                {% endif %}
+                        </div>
+                    </div>
+                    <div class="currency_picker">
+                        {% if localization.available_countries.size > 1 %}
+                                <localization-form>
+                                {% form 'localization' %}
+                                    <div class="disclosure relative">
+                                    <button type="button" class="disclosure__button px-[10px] min-h-[40px] min-w-[190px] bg-blackesh-600 text-font14 text-white py-[5px] flex items-center font-inter justify-center" aria-expanded="false" aria-controls="CountryList">
+                                        <img src="https://cdn.shopify.com/static/images/flags/{{ localization.country.iso_code | downcase }}.svg" alt="{{ localization.country.iso_code | downcase }}">                                           
+                                        <span class="mx-[5px]">                                            
+                                            {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})                                            
+                                        </span>                            
+                                        <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.8433 0.170556C11.6267 -0.0487102 11.2644 -0.0568752 11.0358 0.149283L5.99971 4.70297L0.964161 0.149305C0.73558 -0.0574119 0.373854 -0.048688 0.156711 0.170579C-0.0604327 0.389286 -0.0507298 0.734538 0.178437 0.941792L5.60714 5.85055C5.71685 5.94983 5.85857 6 5.99971 6C6.14084 6 6.28313 5.94983 6.39286 5.85055L11.8216 0.941792C12.0507 0.734515 12.0604 0.389286 11.8433 0.170556Z" fill="white"/>
+                                        </svg>                                            
+                                    </button>                            
+                                    <ul id="CountryList" role="list" class="disclosure__list h_commom_customScroll" hidden>
+                                        {% for country in localization.available_countries %}
+                                            <li class="disclosure__item" tabindex="-1">
+                                                <a href="#"{% if country.iso_code == localization.country.iso_code %} aria-current="true"{% endif %} 
+                                                data-value="{{ country.iso_code }}">                                                                  
+                                                <img src="https://cdn.shopify.com/static/images/flags/{{ country.iso_code | downcase }}.svg" alt="{{ country.iso_code | downcase }}">
+                                                {{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>                            
+                                    <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+                                    </div>
+                                {% endform %}
+                                </localization-form>
+                            {% endif %}
+                            {% if localization.available_languages.size > 1 %}
+                                <localization-form>
+                                {% form 'localization' %}
+                                    <div class="disclosure">
+                                    <button type="button" class="disclosure__button" aria-expanded="false" aria-controls="LanguageList">
+                                        {{ localization.language.endonym_name | capitalize }}
+                            
+                                        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-caret" viewBox="0 0 10 6">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor">
+                                        </svg>
+                                    </button>
+                            
+                                    <ul id="LanguageList" role="list" class="disclosure__list" hidden>
+                                        {% for language in localization.available_languages %}
+                                        <li class="disclosure__item" tabindex="-1">
+                                            <a href="#"{% if language.iso_code == localization.language.iso_code %} aria-current="true"{% endif %} hreflang="{{ language.iso_code }}" lang="{{ language.iso_code }}" data-value="{{ language.iso_code }}">
+                                            {{ language.endonym_name | capitalize }}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                            
+                                    <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+                                    </div>
+                                {% endform %}
+                                </localization-form>
+                            {% endif %}
+                    </div>    
+                </div>
+            </div>
+            <div class="footer-right flex-1 lg:py-[40px] xl:py-[50px] 2xl:py-[60px]">
+                <div class="footer-menu-row sm:flex lg:max-w-[742px] lg:ml-auto">
+                    <div class="menu-footer about-menu border-t border-bordercolor-200">
+                        <h3 class="">
+                            {{ section.settings.product_title }}
+                        </h3>
+                        <ul>
+                            {{ products_menu }}
+                        </ul>
+                    </div>
+                    <div class="menu-footer quick-links ">
+                        <h3 class="">
+                            {{ section.settings.about_heading }}
+                        </h3>
+                        <ul>
+                            {{ about_menu }}
+                        </ul>
+                    </div>
+                    <div class="menu-footer quick-links ">
+                        <h3 class="">
+                            {{ section.settings.help_heading }}
+                        </h3>
+                        <ul>
+                            {{ help_menu }}
+                        </ul>
+                    </div>
+                </div>                                
+            </div>
+        </div>        
+    </div>
+    <div class="copy_right_footer-container lg:border-t lg:border-bordercolor-200">
+        <div class="container">
+            <div class="copy-right-sec flex flex-col sm:flex-row sm:items-center sm:justify-between py-[30px]">
+                <div class="copyright-left-sec">
+                    <p>
+                        {{ section.settings.Copy_right_text }}
+                    </p>
+                    <div class="line-copy"></div>
+                    <p>
+                        {{ section.settings.Copy_right_text_sub }}
+                        <a href="https://yourdigitalmedia.com.au/?utm_source=referral&utm_medium=client-website&utm_campaign={{ shop.name }}">
+                            {{ section.settings.your_digital_media_text }}
+                        </a>
+                    </p>
+                </div>
+                <ul class="paymnt_img flex items-center space-x-2" role="list">
+                    <li class="list-payment__item">
+                      <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2zm-13.4-.3l.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2M5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2z" fill="#142688"></path></svg>
+                    </li>
+                    <li class="list-payment__item">
+                      <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-master"><title id="pi-master">Mastercard</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><circle fill="#EB001B" cx="15" cy="12" r="7"></circle><circle fill="#F79E1B" cx="23" cy="12" r="7"></circle><path fill="#FF5F00" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"></path></svg>
+                    </li>
+                    <li class="list-payment__item">
+                      <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-american_express"><title id="pi-american_express">American Express</title><g fill="none"><path fill="#000" d="M35,0 L3,0 C1.3,0 0,1.3 0,3 L0,21 C0,22.7 1.4,24 3,24 L35,24 C36.7,24 38,22.7 38,21 L38,3 C38,1.3 36.6,0 35,0 Z" opacity=".07"></path><path fill="#006FCF" d="M35,1 C36.1,1 37,1.9 37,3 L37,21 C37,22.1 36.1,23 35,23 L3,23 C1.9,23 1,22.1 1,21 L1,3 C1,1.9 1.9,1 3,1 L35,1"></path><path fill="#FFF" d="M8.971,10.268 L9.745,12.144 L8.203,12.144 L8.971,10.268 Z M25.046,10.346 L22.069,10.346 L22.069,11.173 L24.998,11.173 L24.998,12.412 L22.075,12.412 L22.075,13.334 L25.052,13.334 L25.052,14.073 L27.129,11.828 L25.052,9.488 L25.046,10.346 L25.046,10.346 Z M10.983,8.006 L14.978,8.006 L15.865,9.941 L16.687,8 L27.057,8 L28.135,9.19 L29.25,8 L34.013,8 L30.494,11.852 L33.977,15.68 L29.143,15.68 L28.065,14.49 L26.94,15.68 L10.03,15.68 L9.536,14.49 L8.406,14.49 L7.911,15.68 L4,15.68 L7.286,8 L10.716,8 L10.983,8.006 Z M19.646,9.084 L17.407,9.084 L15.907,12.62 L14.282,9.084 L12.06,9.084 L12.06,13.894 L10,9.084 L8.007,9.084 L5.625,14.596 L7.18,14.596 L7.674,13.406 L10.27,13.406 L10.764,14.596 L13.484,14.596 L13.484,10.661 L15.235,14.602 L16.425,14.602 L18.165,10.673 L18.165,14.603 L19.623,14.603 L19.647,9.083 L19.646,9.084 Z M28.986,11.852 L31.517,9.084 L29.695,9.084 L28.094,10.81 L26.546,9.084 L20.652,9.084 L20.652,14.602 L26.462,14.602 L28.076,12.864 L29.624,14.602 L31.499,14.602 L28.987,11.852 L28.986,11.852 Z"></path></g></svg>
+    
+                    </li>
+                    <li class="list-payment__item">
+                      <svg class="icon icon--full-color" viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-discover" fill="none" xmlns="http://www.w3.org/2000/svg"><title id="pi-discover">Discover</title><path fill="#000" opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32z" fill="#fff"></path><path d="M3.57 7.16H2v5.5h1.57c.83 0 1.43-.2 1.96-.63.63-.52 1-1.3 1-2.11-.01-1.63-1.22-2.76-2.96-2.76zm1.26 4.14c-.34.3-.77.44-1.47.44h-.29V8.1h.29c.69 0 1.11.12 1.47.44.37.33.59.84.59 1.37 0 .53-.22 1.06-.59 1.39zm2.19-4.14h1.07v5.5H7.02v-5.5zm3.69 2.11c-.64-.24-.83-.4-.83-.69 0-.35.34-.61.8-.61.32 0 .59.13.86.45l.56-.73c-.46-.4-1.01-.61-1.62-.61-.97 0-1.72.68-1.72 1.58 0 .76.35 1.15 1.35 1.51.42.15.63.25.74.31.21.14.32.34.32.57 0 .45-.35.78-.83.78-.51 0-.92-.26-1.17-.73l-.69.67c.49.73 1.09 1.05 1.9 1.05 1.11 0 1.9-.74 1.9-1.81.02-.89-.35-1.29-1.57-1.74zm1.92.65c0 1.62 1.27 2.87 2.9 2.87.46 0 .86-.09 1.34-.32v-1.26c-.43.43-.81.6-1.29.6-1.08 0-1.85-.78-1.85-1.9 0-1.06.79-1.89 1.8-1.89.51 0 .9.18 1.34.62V7.38c-.47-.24-.86-.34-1.32-.34-1.61 0-2.92 1.28-2.92 2.88zm12.76.94l-1.47-3.7h-1.17l2.33 5.64h.58l2.37-5.64h-1.16l-1.48 3.7zm3.13 1.8h3.04v-.93h-1.97v-1.48h1.9v-.93h-1.9V8.1h1.97v-.94h-3.04v5.5zm7.29-3.87c0-1.03-.71-1.62-1.95-1.62h-1.59v5.5h1.07v-2.21h.14l1.48 2.21h1.32l-1.73-2.32c.81-.17 1.26-.72 1.26-1.56zm-2.16.91h-.31V8.03h.33c.67 0 1.03.28 1.03.82 0 .55-.36.85-1.05.85z" fill="#231F20"></path><path d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pi-paint0_linear)"></path><path opacity=".65" d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pi-paint1_linear)"></path><path d="M36.57 7.506c0-.1-.07-.15-.18-.15h-.16v.48h.12v-.19l.14.19h.14l-.16-.2c.06-.01.1-.06.1-.13zm-.2.07h-.02v-.13h.02c.06 0 .09.02.09.06 0 .05-.03.07-.09.07z" fill="#231F20"></path><path d="M36.41 7.176c-.23 0-.42.19-.42.42 0 .23.19.42.42.42.23 0 .42-.19.42-.42 0-.23-.19-.42-.42-.42zm0 .77c-.18 0-.34-.15-.34-.35 0-.19.15-.35.34-.35.18 0 .33.16.33.35 0 .19-.15.35-.33.35z" fill="#231F20"></path><path d="M37 12.984S27.09 19.873 8.976 23h26.023a2 2 0 002-1.984l.024-3.02L37 12.985z" fill="#F48120"></path><defs><linearGradient id="pi-paint0_linear" x1="21.657" y1="12.275" x2="19.632" y2="9.104" gradientUnits="userSpaceOnUse"><stop stop-color="#F89F20"></stop><stop offset=".25" stop-color="#F79A20"></stop><stop offset=".533" stop-color="#F68D20"></stop><stop offset=".62" stop-color="#F58720"></stop><stop offset=".723" stop-color="#F48120"></stop><stop offset="1" stop-color="#F37521"></stop></linearGradient><linearGradient id="pi-paint1_linear" x1="21.338" y1="12.232" x2="18.378" y2="6.446" gradientUnits="userSpaceOnUse"><stop stop-color="#F58720"></stop><stop offset=".359" stop-color="#E16F27"></stop><stop offset=".703" stop-color="#D4602C"></stop><stop offset=".982" stop-color="#D05B2E"></stop></linearGradient></defs></svg>
+                    </li>
+                    <li class="list-payment__item">
+                      <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-paypal"><title id="pi-paypal">PayPal</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"></path><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"></path><path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z"></path><path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4v-.1l.4-2.4v-.1c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.1-3.2.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.5-.8z"></path><path fill="#012169" d="M23.3 8.1c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3-.1-.3-.1-.7-.1-1.1-.1h-3c-.1 0-.2 0-.2.1-.2.1-.3.2-.3.4l-.7 4.4v.1c0-.3.3-.5.6-.5h1.3c2.5 0 4.1-1 4.6-3.8v-.2c-.1-.1-.3-.2-.5-.2h-.1z"></path></svg>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <button onclick="scrollToTop()" class="back-to-top hidden w-[45px] h-[45px] p-[10px] lg:flex items-center justify-center right-[15px] bottom-[22%] z-[11] xl:w-[55px] xl:h-[55px] 4xl:right-[4%] absolute" style="background: rgba(255, 255, 255, 0.22);">
+        <svg width="23" height="25" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.2955 2.53303L3.05055 9.77811C2.86201 9.97331 2.75769 10.2348 2.76005 10.5061C2.76241 10.7775 2.87126 11.0371 3.06315 11.229C3.25505 11.4209 3.51464 11.5298 3.78602 11.5321C4.05739 11.5345 4.31883 11.4301 4.51404 11.2416L9.99229 5.7633L9.99229 23.965C9.99229 24.2395 10.1013 24.5028 10.2954 24.6969C10.4895 24.891 10.7528 25 11.0273 25C11.3018 25 11.565 24.891 11.7591 24.6969C11.9532 24.5028 12.0623 24.2395 12.0623 23.965L12.0623 5.7633L17.5405 11.2416C17.636 11.3405 17.7502 11.4193 17.8765 11.4736C18.0028 11.5278 18.1386 11.5564 18.276 11.5575C18.4134 11.5587 18.5497 11.5326 18.6769 11.4805C18.8041 11.4285 18.9197 11.3516 19.0169 11.2544C19.114 11.1573 19.1909 11.0417 19.2429 10.9145C19.295 10.7873 19.3212 10.651 19.32 10.5136C19.3188 10.3762 19.2902 10.2403 19.236 10.1141C19.1817 9.98779 19.1029 9.87358 19.004 9.77811L11.759 2.53303C11.5649 2.339 11.3017 2.23 11.0273 2.23C10.7528 2.23 10.4896 2.339 10.2955 2.53303Z" fill="white"/>
+            <line x1="0.92" y1="1.08" x2="21.16" y2="1.08" stroke="white" stroke-width="1.84" stroke-linecap="round"/>
+        </svg>            
+    </button>
+</footer>
+
+<script>
+    // window.onscroll = () => {
+    //     toggleTopButton();
+    // }
+    function scrollToTop(){
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    // function toggleTopButton() {
+    //     if (document.body.scrollTop > 100 ||
+    //         document.documentElement.scrollTop > 100) {
+    //         document.getElementById('back-to-up').classList.remove('hidden');
+    //     } else {
+    //         document.getElementById('back-to-up').classList.add('hidden');
+    //     }
+    // }
+</script> 
+
+<script>
+    class LocalizationForm extends HTMLElement {
+    constructor() {
+        super();
+        this.elements = {
+        input: this.querySelector('input[name="language_code"], input[name="country_code"]'),
+        button: this.querySelector('button'),
+        panel: this.querySelector('ul'),
+        };
+        this.elements.button.addEventListener('click', this.openSelector.bind(this));
+        this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
+        this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
+
+        this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
+    }
+
+    hidePanel() {
+        this.elements.button.setAttribute('aria-expanded', 'false');
+        this.elements.panel.setAttribute('hidden', true);
+    }
+
+    onContainerKeyUp(event) {
+        if (event.code.toUpperCase() !== 'ESCAPE') return;
+
+        this.hidePanel();
+        this.elements.button.focus();
+    }
+
+    onItemClick(event) {
+        event.preventDefault();
+        const form = this.querySelector('form');
+        this.elements.input.value = event.currentTarget.dataset.value;
+        if (form) form.submit();
+    }
+
+    openSelector() {
+        this.elements.button.focus();
+        this.elements.panel.toggleAttribute('hidden');
+        this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
+    }
+
+    closeSelector(event) {
+        const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
+        if (event.relatedTarget === null || shouldClose) {
+        this.hidePanel();
+        }
+    }
+    }
+
+    customElements.define('localization-form', LocalizationForm);
+</script>
+
+
+
+{% schema %}
+    {
+        "name": "Footer",
+        "settings": [
+            {
+                "type": "header",
+                "content": "NEWSLETTER"
+            },
+            {
+                "type": "checkbox",
+                "id": "Show-newsletter-sign-up",
+                "label": "Show newsletter sign-up",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "subscribe-title",
+                "label": "Heading",
+                "default": "Sign up for restock updates, exclusive drops and much more"
+            },            
+            {
+                "type": "header",
+                "content": "Menu"
+            },
+            {
+                "type": "header",
+                "content": "Product Menu"
+            },
+            {
+                "type": "text",
+                "id": "product_title",
+                "label": "SubHeading",
+                "default": "Products"
+            },
+            {
+                "type": "link_list",
+                "id": "products_menu",
+                "label": "Menu"
+            },
+            {
+                "type": "header",
+                "content": "About Menu"
+            },
+            {
+                "type": "text",
+                "id": "about_heading",
+                "label": "SubHeading",
+                "default": "About"
+            },
+            {
+                "type": "link_list",
+                "id": "navigation_menu",
+                "label": "Menu"
+            },
+            {
+                "type": "header",
+                "content":"Help Menu"
+            },
+            {
+                "type": "text",
+                "id": "help_heading",
+                "label": "SubHeading",
+                "default": "HELP"
+            },
+            {
+                "type": "link_list",
+                "id": "help_menu",
+                "label": "Menu"
+            },                        
+            {
+                "type": "header",
+                "content": "Social Media"
+            },            
+            {
+                "type": "header",
+                "content":"Copy right Text"
+            },
+            {
+                "type": "text",
+                "id": "Copy_right_text",
+                "label": "Copy right Text",
+                "default": "Copyright © 2022 Katoura"
+            },
+            {
+                "type": "text",
+                "id": "Copy_right_text_sub",
+                "label": "Copy right Text subtext",
+                "default": "Designed by"
+            },
+            {
+                "type": "url",
+                "id": "your_digital_media_url",
+                "label": "your digital media url"
+            },
+            {
+                "type": "text",
+                "id": "your_digital_media_text",
+                "label": "Designed by Your Digital Media Text",
+                "default": "Your Digital Media "
+            },
+            {
+                "type": "header",
+                "content": "Style"
+            },
+            {
+                "type": "select",
+                "id": "color_scheme",
+                "label":"Color scheme",
+                "default": "default",
+                "options": [
+                  {
+                    "value": "default",
+                    "label": "Default"
+                  },
+                  {
+                    "value": "scheme-1",
+                    "label": "scheme 1"
+                  },
+                  {
+                    "value": "scheme-2",
+                    "label": "scheme 2"
+                  },
+                  {
+                    "value": "custom",
+                    "label": "custom (Set below)"
+                  }
+                ]
+            },
+            {
+                "type": "color",
+                "id": "section_text_color_scheme",
+                "default": "#847486",
+                "label": "Custom Text Color"
+            },
+            {
+                "type": "color",
+                "id": "section_heading_color_scheme",
+                "default": "#4B3B4C",
+                "label": "Custom Heading Color"
+            },
+            {
+                "type": "color",
+                "id": "section_sub_heading_color_scheme",
+                "default": "#ffffff",
+                "label": "Custom Sub Heading Color"
+            },
+            {
+                "type": "color",
+                "id": "section_links_color_scheme",
+                "default": "#4B3B4C",
+                "label": "Custom Link Color"
+            },        
+            {
+                "type": "color",
+                "id": "section_background_color_scheme",
+                "default": "#E8E9F2",
+                "label": "Custom Background Color"
+            }            
+        ],
+        "blocks": [
+    		{
+    			"type": "image",
+    			"name": "Social-Media",
+    			"settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "social-media-item",
+                        "label": "Social Media"
+                    },
+                    {
+                        "type": "url",
+                        "id": "social-media-item-url",
+                        "label": "Social Media"
+                    }
+    			]
+    		}
+	    ]   
+    }
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+
+
+

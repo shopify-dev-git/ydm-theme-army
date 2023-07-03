@@ -1,0 +1,231 @@
+
+{%- assign href = 'ingredients-features.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<style>
+    :root .color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+</style>
+
+<section class="ingredients-features-block section-{{section.id}} color-{{ section.settings.color_scheme }}" id="shopify-{{ section.id }}">
+    <div class="">
+        <div class="image_text_row lg:flex flex--col {{ section.settings.image__position }}">
+            <div class="image_panel lg:w-1/2">
+                {%- if section.settings.url-image != blank -%}
+                    <img class="lazyload w-full h-full object-cover" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     data-src="{{ section.settings.url-image | img_url:'1000x' }}" alt="{{ section.settings.url-image.alt }}">
+                {%- endif -%}
+            </div>
+            <div class="text-black-box flex items-center pt-6 pb-12 px-5 md:px-14 md:pb-16 md:pt-12 lg:p-12 xl:p-p70 lg:flex-1">
+                <div class="text-{{ section.settings.align__text }} w-full">
+                    {%- assign multi-column = section.blocks | where: 'type', 'card' -%}
+                    {%- if multi-column.size > 0 -%}
+                        <div class="multi-column-row lg:space-y-8 2xl:space-y-9 4xl:space-y-10 grid grid-cols-2 lg:grid-cols-1 md:gap-10 lg:gap-0  mx-w-[587.46px] mx-auto">
+                            {%- for block in multi-column  -%}
+                                <div class="multi-column">                
+                                    <div class="multi-column-card flex flex-wrap flex-col lg:flex-row items-center">
+                                        <!-- {%- if block.settings.card-img != blank -%}
+                                            <div class="multi-column-img rounded-full bg-[#FFF3EE] border border-[#CA8685] p-3 w-[66px] h-[66px] xl:w-[85.38px] xl:h-[85.38px] flex items-center justify-center">        
+                                                <img class="w-full h-full object-contain" src="{{ block.settings.card-img | image_url }}" alt="{{ block.settings.card-img.alt }}">
+                                            </div>    
+                                        {%- endif -%} -->
+                                        <div class="multi-column-img rounded-full bg-[#FFF3EE] border border-[#CA8685] p-3 w-[66px] h-[66px] xl:w-[85.38px] xl:h-[85.38px] flex items-center justify-center mb-3 lg:mb-0">  
+                                            {%- if block.settings.svg_icon != blank -%}
+                                                <span class="inline-block icon_sec w-[40px] h-[40px]">{{ block.settings.svg_icon }}</span>
+                                                {%- elsif block.settings.card-img != blank -%}
+                                                <img class="lazyload w-[40px] h-[40px] object-contain" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                                 data-src="{{ block.settings.card-img | img_url:'40x' }}" alt="{{ block.settings.card-img.alt }}">
+                                            {%- endif -%}
+                                        </div>
+                                        
+                                        
+                                        <div class="content__right flex-1 lg:ml-7 2xl:ml-[43px] max-w-[459px]">
+                                            <div class="multi-column-content md:text-{{ section.settings.align__text }} md:mb-[12px] 2xl:mb-[16px]">
+                                                <h3 class="font-dmserif font-normal text-blackesh-100 text-font18 md:text-font22 xl:text-font25 2xl:text-font30">{{ block.settings.sub_title }}</h3>
+                                            </div>
+                                            
+                                            <div class="multi-column-content hidden md:block md:text-{{ section.settings.align__text }}">
+                                                {{ block.settings.content_description }}
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                    {%- endif -%}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+    .ingredients-features-block.flex--col {
+        flex-direction: column !important;
+    }
+    @media (min-width: 1024px) {
+        .ingredients-features-block.flex--row {
+            flex-direction: row !important;
+        }
+        .ingredients-features-block.flex-row-reverse {
+            flex-direction: row-reverse !important;
+        }
+    }
+</style>
+
+
+{% schema %}
+{
+    "name": "Ingredients features",
+    "blocks": [
+    {
+            "type": "card",
+            "name": "Multi-column",
+            "limit": 4,
+            "settings": [
+                {
+                    "type": "html",
+                    "id": "svg_icon",
+                    "label": "SVG markup",
+                    "info": "Use SVG instead of icon image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "card-img",
+                    "label": "Image"                    
+                },
+                {
+                    "type": "text",
+                    "id": "sub_title",
+                    "label": "Heading",
+                    "default":"Column"
+                },
+                {
+                    "type": "richtext",
+                    "id": "content_description",
+                    "label": "Text"
+                }
+            ]
+        }
+    ], 
+    "settings": [
+        {
+            "type": "select",
+            "id": "align__text",
+            "label": "Text alignment Desktop",
+            "default": "left",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+
+        {
+            "type": "header",
+            "content": "Image"
+        },
+        {
+            "type": "select",
+            "id": "image__position",
+            "label": "Image position (desktop)",
+            "default": "flex--row",
+            "options": [
+                {
+                    "value": "flex--row",
+                    "label": "Left"
+                },
+                {
+                    "value": "flex-row-reverse",
+                    "label": "Right"
+                }
+            ]
+        },
+
+        {
+            "type": "image_picker",
+            "id": "url-image",
+            "label": "image"
+        },
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#847486",
+            "label": "Custom Text Color"
+        },
+        {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#4B3B4C",
+            "label": "Custom Heading Color"
+        },
+        {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#FFF3EE",
+            "label": "Custom Background Color"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Ingredients features"
+        }
+    ]
+}
+{% endschema %}
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+<div class="subscribe-form w-full">
+    {%- assign formId = section.id | prepend: 'ContactForm' -%}
+    {% form 'contact', id: formId, class: 'contact-form' %}        
+        <div class="subscribe-input relative">
+            <input 
+                type="email" 
+                name="contact[email]" 
+                id="subscribe-email--{{ section.id }}" 
+                value="{{ form.email }}"
+                placeholder="{{ 'subscribe.email' | t }}"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="{{ formId }}-email-error"
+                {% else %}
+                {%- endif -%}
+                required/>
+        </div>                            
+        <button type="submit" value="{{ 'subscribe.button_label' | t }}" class="absolute right-[23px] top-0 bottom-0 flex items-center justify-between">
+            <svg width="22" height="17" viewBox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21.1487 8.24946L14.5476 1.24946C14.3698 1.0673 14.1316 0.966509 13.8843 0.968788C13.6371 0.971066 13.4005 1.07624 13.2257 1.26164C13.0508 1.44705 12.9517 1.69786 12.9495 1.96006C12.9474 2.22226 13.0424 2.47486 13.2142 2.66346L18.2056 7.95646H1.62173C1.37162 7.95646 1.13176 8.06182 0.954913 8.24935C0.778064 8.43689 0.678711 8.69124 0.678711 8.95646C0.678711 9.22168 0.778064 9.47603 0.954913 9.66357C1.13176 9.8511 1.37162 9.95646 1.62173 9.95646H18.2056L13.2142 15.2495C13.1241 15.3417 13.0523 15.4521 13.0029 15.5741C12.9534 15.6961 12.9274 15.8273 12.9263 15.9601C12.9253 16.0928 12.9491 16.2245 12.9965 16.3474C13.0439 16.4703 13.114 16.582 13.2025 16.6759C13.2911 16.7697 13.3963 16.844 13.5122 16.8943C13.6281 16.9446 13.7523 16.9699 13.8775 16.9687C14.0027 16.9676 14.1265 16.94 14.2415 16.8876C14.3566 16.8352 14.4606 16.759 14.5476 16.6635L21.1487 9.66346C21.3255 9.47593 21.4248 9.22163 21.4248 8.95646C21.4248 8.6913 21.3255 8.43699 21.1487 8.24946Z" fill="#453847"/>
+            </svg>                
+        </button>
+    {% endform %}
+</div>
+
+
+
+
+
+

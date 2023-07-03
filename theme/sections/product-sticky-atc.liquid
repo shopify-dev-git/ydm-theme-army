@@ -1,0 +1,76 @@
+<div class="sticky-atc-sec bg-puce-100">
+    <div class="lg:pl-[30px] 2xl:pl-65px]">
+        <div class="sticky-atc-row flex row items-center justify-between">
+            <div class="sticky-atc-left flex-1 hidden md:flex py-[8px]">
+                <img class="hidden sm:block mb-3 sm:mb-0 lazyload w-[69px] h-[62px]" 
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    data-src="{{ product | image_url: width: 69 }}" alt="{{ product.image.alt }}">
+                <div class="atc-content flex-1 pl-[20px]">
+                    <h4 class="text-font14  text-white sm:text-font16 md:text-font18 lg:text-font20 xl:text-font22 2xl:text-fon25 pb-2 font-dmserif font-normal">
+                        {{ product.title }}
+                    </h4>                 
+                    <div class="atc-rating flex items-center">
+                        <svg class="mr-[4px]"  width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.6815 4.28914L7.99255 3.7248L6.33906 0.197544C6.21556 -0.0658481 5.78406 -0.0658481 5.66056 0.197544L4.00756 3.7248L0.318574 4.28914C0.0155746 4.33571 -0.105425 4.70476 0.107074 4.92258L2.78707 7.67368L2.15357 11.563C2.10307 11.8719 2.43257 12.1038 2.70507 11.952L6.00006 10.1283L9.29505 11.9525C9.56505 12.1028 9.89755 11.8754 9.84655 11.5635L9.21305 7.67418L11.893 4.92308C12.1055 4.70476 11.984 4.33571 11.6815 4.28914Z" fill="#FFB800"/>
+                        </svg>                            
+                        <h5 class="text-font14 text-white font-inter font-medium">4.9</h5>
+                    </div>
+                </div>
+            </div>
+            <product-form class="sticky-atc-right flex-1">
+                {%- assign form_id = 'product-sticky--' | append: product.id -%}
+                {% form 'product', product, id: form_id, class: 'quantity-cart-btn', data-product-form: '', data-product-handle: product.handle %}
+                    <input type="hidden" name="id" value="{{product.selected_or_first_available_variant.id}}">
+                <div class="grid grid-cols-2 lg:flex lg:justify-end max-w-[500px] lg:ml-auto">
+                    <div class="quantityBox flex items-center justify-center w-full text-puce-100"> 
+                        <label for="" class="text-font14 font-inter font-normal pb-[8px] text-white block lg:p-0 lg:text-font20 lg:capitalize mr-[15px]">
+                            {{ 'products.product.quantity.label' | t }}
+                        </label>
+                        <quantity-input class="quantity mb-1">
+                            <button name="minus" type="button">
+                                <span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}</span>
+                                <svg width="14" height="1" viewBox="0 0 14 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 1H0V9.96275e-09H14V1Z" fill="#ffffff"/>
+                                </svg>
+                            </button>
+                            <input type="number"
+                                name="quantity"
+                                id="Quantity-{{ section.id }}-sticky"
+                                min="1"
+                                value="01"
+                            >
+                            <button name="plus" type="button">
+                                <span class="sr-only">{{ 'products.product.quantity.increase' | t: product: product.title | escape }}</span>
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7.54688 7.54688V14H6.45312V7.54688H0V6.45312H6.45312V0H7.54688V6.45312H14V7.54688H7.54688Z" fill="#ffffff"/>
+                                </svg>
+                            </button>
+                        </quantity-input>
+                    </div>
+                    <div class="flex">
+                        {% assign current_variant = product.selected_or_first_available_variant %}
+                        <button type="submit" x-data @click="$store.cartopen = !$store.cartopen" class="ml-auto primary-btn uppercase sharp standard"{% unless current_variant.available %} disabled="disabled"{% endunless %}>
+                            {%- if current_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                            {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                            {%- endif -%}
+                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21.7072 7.28071L14.7071 0.280712C14.5185 0.0985542 14.2659 -0.00224062 14.0037 3.78025e-05C13.7415 0.00231622 13.4907 0.107485 13.3053 0.292894C13.1199 0.478302 13.0147 0.729114 13.0125 0.991311C13.0102 1.25351 13.111 1.50611 13.2931 1.69471L18.5862 6.98771H1.00001C0.734791 6.98771 0.480434 7.09307 0.292896 7.28061C0.105358 7.46814 0 7.7225 0 7.98771C0 8.25293 0.105358 8.50728 0.292896 8.69482C0.480434 8.88236 0.734791 8.98771 1.00001 8.98771H18.5862L13.2931 14.2807C13.1976 14.373 13.1214 14.4833 13.069 14.6053C13.0166 14.7273 12.989 14.8585 12.9879 14.9913C12.9867 15.1241 13.012 15.2558 13.0623 15.3787C13.1126 15.5016 13.1868 15.6132 13.2807 15.7071C13.3746 15.801 13.4863 15.8753 13.6092 15.9255C13.7321 15.9758 13.8638 16.0011 13.9965 16C14.1293 15.9988 14.2605 15.9712 14.3825 15.9188C14.5045 15.8664 14.6149 15.7902 14.7071 15.6947L21.7072 8.69471C21.8947 8.50718 22 8.25288 22 7.98771C22 7.72255 21.8947 7.46824 21.7072 7.28071Z" fill="#4B3B4C"/>
+                            </svg>                            
+                        </button>
+                    </div>
+                </div>
+                {% endform %}
+            </product-form>
+        </div>
+    </div>
+</div>
+{% schema %}
+    {
+        "name": "Sticky Add to Cart",
+        "class": "shopify-product-sticky-atc bottom-0 z-20",
+        "settings": [
+        ]
+    }
+{% endschema %}

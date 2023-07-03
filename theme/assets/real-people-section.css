@@ -1,0 +1,30 @@
+.information-card-row .information-card .contact-icon {
+    margin-bottom: 24px;
+    display: flex;
+    height: 86px;
+    width: 86px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(202 134 133 / var(--tw-border-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(255 238 231 / var(--tw-bg-opacity))
+}
+.information-card-row .information-card h4 {
+    padding-bottom: 15px;
+    font-family: Inter, sans-serif;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600
+}
+.information-card-row .information-card p {
+    padding-bottom: 20px;
+    font-size: 14px;
+    line-height: 19px
+}
+.information-card-row .information-card .link-btn {
+    font-size: 18px;
+    line-height: 26px
+}

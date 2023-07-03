@@ -1,0 +1,65 @@
+{%- assign href = 'main-review-banner-section.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }    
+</style>
+
+<section class="main-review-banner-section bg-puce-300 relative overflow-hidden py-[45px] sm:py-10 md:py-12 lg:py-0 section-{{section.id}} color-{{ section.settings.color_scheme }}" data-section-type="collection-section" data-section-id="{{ section.id }}">
+   <div class="row grid grid-cols-1 lg:grid-cols-2">
+        <div class="review-banner-left flex justify-center items-center p-[20px] md:px-[30px] lg:p-[50px] 4xl:px-[65px]">
+            {%- assign apps = section.blocks | where: 'type', '@app' -%}
+            {%- for block in apps -%}
+                {%- capture rendered_app -%}
+                    {%- render block -%}
+                {%- endcapture -%}            
+                {{ rendered_app }}                
+            {%- endfor -%}
+        </div>
+        {%- if section.settings.revire_hero_img != blank -%}        
+            <div class="review-img-right hidden lg:block">
+                <img class="lazyload w-full h-full object-cover" 
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+                data-src="{{ section.settings.revire_hero_img | img_url: '1000x' }}" alt="{{ section.settings.revire_hero_img.alt }}">
+            </div>
+        {%- endif -%} 
+   </div>
+</section>
+
+
+
+
+
+
+
+
+
+{% schema %}
+{
+    "name": "Review Banner",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "revire_hero_img",
+            "label": "Review Hero Image"
+        }   
+    ],
+    "blocks": [
+        {
+            "type": "@app"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Review Banner"
+        }
+    ]
+}
+{% endschema %}
+

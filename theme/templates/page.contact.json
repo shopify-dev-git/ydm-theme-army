@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "inner-banner": {
+      "type": "inner-banner",
+      "settings": {
+        "image_position": "flex-row",
+        "url-image": "shopify:\/\/shop_images\/Rectangle_621_4.png",
+        "main_title": "Contact us",
+        "content_description": "<p>Questions? Comments? Let your customers get in touch with you by filling out the email form below.<\/p>",
+        "align__text": "left",
+        "align__text__mobile": "left",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    },
+    "contact-form": {
+      "type": "contact-us",
+      "settings": {
+        "btn_text": "SUBMIT",
+        "contact_info": "<p>This site is protected by reCAPTCHA and the Google <a href=\"\/policies\/privacy-policy\" title=\"Privacy Policy\">Privacy Policy<\/a> and <a href=\"\/policies\/privacy-policy\" title=\"Privacy Policy\">Terms of Service<\/a> apply.<\/p><p><\/p>",
+        "svg_icon": "<svg width=\"30\" height=\"22\" viewbox=\"0 0 30 22\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M19.4388 12.2987L16.9263 14.928C15.9074 15.9944 14.1146 16.0174 13.0737 14.928L10.5611 12.2987L1.53668 21.7413C1.8726 21.9033 2.24297 22 2.63672 22H27.3633C27.757 22 28.1273 21.9034 28.4631 21.7414L19.4388 12.2987Z\" fill=\"#CA8685\"><\/path>\n<path d=\"M27.3633 0H2.63672C2.24297 0 1.8726 0.0966779 1.5368 0.258683L11.18 10.3495C11.1806 10.3502 11.1814 10.3503 11.182 10.351C11.1827 10.3517 11.1828 10.3526 11.1828 10.3526L14.3183 13.6336C14.6514 13.981 15.3487 13.981 15.6818 13.6336L18.8167 10.3531C18.8167 10.3531 18.8174 10.3517 18.8181 10.351C18.8181 10.351 18.8195 10.3502 18.8201 10.3495L28.4631 0.258622C28.1273 0.0965557 27.757 0 27.3633 0Z\" fill=\"#CA8685\"><\/path>\n<path d=\"M0.28043 1.54073C0.106641 1.90728 0 2.31416 0 2.75V19.25C0 19.6858 0.106523 20.0927 0.280371 20.4593L9.32039 11.0003L0.28043 1.54073Z\" fill=\"#CA8685\"><\/path>\n<path d=\"M29.7196 1.54061L20.6797 11.0003L29.7196 20.4594C29.8934 20.0928 30 19.686 30 19.25V2.75C30 2.31403 29.8934 1.90716 29.7196 1.54061Z\" fill=\"#CA8685\"><\/path>\n<\/svg>",
+        "emailHeading": "EMAIL US",
+        "email": "info@gmail.com",
+        "content_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus<\/p>",
+        "svg__icon": "<svg width=\"30\" height=\"30\" viewbox=\"0 0 30 30\" fill=\"none\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\">\n<path d=\"M29.2133 22.0169L25.0179 17.8304C23.5196 16.3352 20.9724 16.9333 20.373 18.877C19.9235 20.2228 18.4251 20.9704 17.0766 20.6713C14.0799 19.9237 10.0344 16.0361 9.28518 12.8962C8.83567 11.5504 9.73468 10.0552 11.0832 9.60672C13.0311 9.00863 13.6304 6.46678 12.1321 4.97157L7.93666 0.784985C6.73797 -0.261662 4.93994 -0.261662 3.89109 0.784985L1.04422 3.62588C-1.80266 6.6163 1.34389 14.5409 8.38616 21.5684C15.4284 28.5959 23.3697 31.8854 26.3664 28.8949L29.2133 26.054C30.2622 24.8578 30.2622 23.0636 29.2133 22.0169Z\" fill=\"#CA8685\"><\/path>\n<\/svg>",
+        "phoneHeading": "PHONE",
+        "phone": "0120427741",
+        "content_description2": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse rhoncus<\/p>",
+        "button_color_scheme": "secondary-btn"
+      }
+    }
+  },
+  "order": [
+    "inner-banner",
+    "contact-form"
+  ]
+}

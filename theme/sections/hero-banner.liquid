@@ -1,0 +1,201 @@
+{{ 'hero-banner.css' | asset_url | stylesheet_tag }}
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+
+    
+    @media (max-width: 769px){
+      .hero-banner {
+        background-color: #fff !important;
+      }
+    }
+</style>
+
+<div class="hero-banner relative section-{{section.id}} color-{{ section.settings.color_scheme }} bg-gray-900">
+    <div class="container-custom container-p-0">
+        <div class="banner-row flex flex-col lg:flex-row-reverse items-center lg:items-stretch">
+            <div class="banner-img w-full lg:w-1/2 relative -mb-[146px] lg:m-0">
+                {%- if section.settings.url-image-desktop != blank -%}           
+                    <!-- Desktop Img -->
+                    <img class="lazyload w-full h-full object-cover hidden sm:block" 
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" 
+                    data-src="{{ section.settings.url-image-desktop | img_url: '1000x' }}" alt="{{ section.settings.url-image-desktop.alt }}">  
+                {%- endif -%}
+                {%- if section.settings.url-image-mobile != blank -%}           
+                        <!-- Mobile Image -->
+                        <img class="lazyload w-full h-full object-cover sm:hidden" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ section.settings.url-image-mobile | img_url: '500x' }}" 
+                        alt="{{ section.settings.url-image-mobile.alt }}">                                                    
+                {%- endif -%}  
+                <div class="absolute left-0 right-0 bottom-0 h-[234px] z-[1] lg:hidden" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%);"></div>
+            </div>
+            <div class="banner-content bg-puce-200 lg:bg-transparent mx-[30px] py-[30px] w-[85%] lg:w-1/2 relative z-[5] flex flex-col justify-center text-center items-center max-w-[450px] md:w-full lg:items-start lg:text-left lg:m-0 lg:max-w-[650px] lg:px-[50px] lg:mx-auto xl:px-[65px] lg:py-9">                
+                <h2 class="pb-8 order-2 lg:order-1 lg:pb-7 2xl:pb-10">
+                    {{ section.settings.main_title }}
+                </h2>
+                <div class="pb-5 md:pb-6 hidden lg:block lg:order-2 lg:pb-7 2xl:pb-10">
+                    {{ section.settings.content_description }}
+                </div>                                
+                <div class="order-3 lg:pb-7 2xl:pb-8">
+                    {%- if section.settings.btn_link != blank -%}                    
+                        <a {% if section.settings.btn_link == blank %} role="link" aria-disabled="true"{% else %} 
+                            href="{{ section.settings.btn_link }}"{% endif %} 
+                            class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}" {{ block.shopify_attributes }}>
+                            {{ section.settings.btn_text | escape }}
+                            {% include 'button-arrow' %}
+                        </a>                    
+                    {%- endif -%}        
+                </div>        
+                <div class="stamp_rating_img order-1 mb-8 flex flex-col justify-center items-center lg:items-start lg:mb-0 lg:order-4">                 
+                    {%- if section.settings.stamp_rating != blank -%}                               
+                        <img class="lazyload w-[140px] lg:w-[160px] 4xl:w-auto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ section.settings.stamp_rating | img_url: '205x' }}" alt="{{ section.settings.stamp_rating.alt }}">           
+                    {%- endif -%} 
+                </div>
+            </div>
+        </div>              
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Hero Banner",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "url-image-desktop",
+            "label": "Banner Image Desktop"
+        },
+        {
+            "type": "image_picker",
+            "id": "url-image-mobile",
+            "label": "Banner Image Mobile"
+        },
+        {
+            "type": "color_background",
+            "id": "background",
+            "label": "IMAGE TINT"
+        },
+        {
+            "type": "header",
+            "content": "text"
+        },
+        {
+            "type": "text",
+            "id": "main_title",
+            "label": "Heading"
+        },
+        {
+            "type": "richtext",
+            "id": "content_description",
+            "label": "Text"
+        },
+        {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Label"
+        },
+        {
+            "type": "image_picker",
+            "id": "stamp_rating",
+            "label": "Stamp Rating Image"
+        },
+        {
+            "type": "header",
+            "content": "Style"
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+          },
+          {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Heading Color"
+          },
+          {
+            "type": "color",
+            "id": "section_links_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Link Color"
+          },        
+          {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+          },
+          {
+            "type": "header",
+            "content": "Button style"
+          },
+          {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "primary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Hero Banner"
+        }
+    ]
+}
+{% endschema %}
+

@@ -1,0 +1,152 @@
+{%- if address != blank -%}
+{%- assign form_classes = 'row form-row custom-form address-form' -%}
+{%- if edit -%}
+{%- assign form_classes = form_classes | append: ' hidden edit-form row form-row custom-form' -%}
+{%- endif -%}
+{% form 'customer_address', address, class: form_classes, id: id, data-address-id: address.id %}
+        <div class="md:flex marginLess">
+            <div class="md:w-1/2 padding_right">
+            <div class="mb-6 pb-1">
+                <label
+                class="block text-blackesh-100 font-semibold text-left font-inter text-font14 md:text-font16 mb-3"
+                for="name"
+              >
+              {{ 'customer.addresses.first_name' | t }}
+              </label>
+                <input type="text" value="{{ form.first_name }}" autocomplete="given-name" name="address[first_name]" placeholder="{{ 'customer.addresses.first_name' | t }}" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" required>
+            </div>
+        </div>
+
+        <div class="md:w-1/2 mb-8">
+            <div class="input-group relative">
+                <label
+                class="block text-blackesh-100 font-semibold text-left font-inter text-font14 md:text-font16 mb-3"
+                for="name"
+              >
+              {{ 'customer.addresses.last_name' | t }}
+              </label>
+                <input type="text" value="{{ form.last_name }}" autocomplete="family-name" name="address[last_name]" placeholder="" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="w-full input-group relative mb-8">
+        <label
+        class="block text-blackesh-100 font-semibold text-left font-inter text-font14 md:text-font16 mb-3"
+        for="name"
+      >
+      {{ 'customer.addresses.company' | t }}
+      </label>
+        <input type="text" value="{{ form.company }}" autocomplete="organization" name="address[company]" placeholder="{{ 'customer.addresses.company' | t }}" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" required>
+    </div>
+
+    <div class="w-full input-group relative mb-8">
+        <label
+        class="block text-blackesh-100 font-semibold text-left font-inter text-font14 md:text-font16 mb-3"
+        for="name"
+      >
+      {{ 'customer.addresses.address1' | t }}
+      </label>
+        <input type="text" value="{{ form.address1 }}" autocomplete="street-address address-line1" name="address[address1]" placeholder="" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" required>
+    </div>
+
+    <div class="w-full input-group relative mb-8">
+        <label
+        class="block text-blackesh-100 font-semibold text-left font-inter text-font14 md:text-font16 mb-3"
+        class="block text-blackesh-100 font-semibold text-left text-infont-inter md:text-font16 mb-3"
+        for="name"
+      >
+      {{ 'customer.addresses.address2' | t }}
+      </label>
+        <input type="text" value="{{ form.address2 }}" autocomplete="street-address address-line2" name="address[address2]" placeholder="" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-6 md:gap-y-4 lg:gap-6 2xl:gap-10">
+        <div class="mb-6 md:mb-8">
+            <div class="input-group relative">
+                <label
+        class="block text-blackesh-100 font-semibold text-left font-inter text-font14 md:text-font16 mb-3"
+        class="block text-blackesh-100 font-semibold text-left text-infont-inter md:text-font16 mb-3"
+        for="name"
+      >
+      {{ 'customer.addresses.city' | t }}
+      </label>
+                <input type="text" value="{{ form.city }}" autocomplete="address-level2" name="address[city]" placeholder="" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" required>
+            </div>
+        </div>
+
+        <div class="mb-6 md:mb-8 hidden" id="AddressProvinceNewWrapper{{address.id}}">
+            <div class="input-group relative">
+                <div class="custome_input_grp relative custom-select-box">
+                <label class=" text-blackesh-100 text-left text-font14 lg:text-font15 font-proximaLt mb-2 hidden md:block">
+                    <span class=" opacity-0"></span>
+                </label>
+                   <div class="relative">
+                        <svg class="absolute pointer-events-none right-6 top-6" width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.49998 9C7.23114 9 6.96235 8.89196 6.75739 8.67633L0.307713 1.88748C-0.102571 1.45562 -0.102571 0.755441 0.307713 0.32376C0.71783 -0.10792 1.3829 -0.10792 1.79322 0.32376L7.49998 6.33091L13.2068 0.32397C13.617 -0.10771 14.2821 -0.10771 14.6921 0.32397C15.1026 0.755651 15.1026 1.45583 14.6921 1.88768L8.24256 8.67654C8.0375 8.8922 7.76871 9 7.49998 9Z" fill="#000"></path>
+                        </svg>
+                    <select id="AddressProvinceNew{{address.id}}" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" name="address[province]" data-default="{{ form.province }}"></select>
+                   </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-6 md:mb-8">
+            <div class="input-group relative">
+                <div class="custome_input_grp relative custom-select-box">
+                    <label
+                    class="block text-blackesh-100 font-semibold text-left text-infont-inter md:text-font16 mb-3"
+                    for="name"
+                  >
+                  {{ 'customer.addresses.country' | t }}
+                
+                </label>
+                <div class="relative">
+                <svg class="absolute pointer-events-none right-6 top-6" width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.49998 9C7.23114 9 6.96235 8.89196 6.75739 8.67633L0.307713 1.88748C-0.102571 1.45562 -0.102571 0.755441 0.307713 0.32376C0.71783 -0.10792 1.3829 -0.10792 1.79322 0.32376L7.49998 6.33091L13.2068 0.32397C13.617 -0.10771 14.2821 -0.10771 14.6921 0.32397C15.1026 0.755651 15.1026 1.45583 14.6921 1.88768L8.24256 8.67654C8.0375 8.8922 7.76871 9 7.49998 9Z" fill="#000"></path>
+                    </svg>
+                   
+                <select id="AddressCountryNew{{address.id}}" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" style="--background-image: url({{'dropdown.png' | asset_url }});" name="address[country]" data-default="{{ form.country }}" autocomplete="country">{{ all_country_option_tags }}</select>
+                 </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="md:flex">
+        <div class="md:w-1/2 mr-0 md:mr-8  mb-8">
+            <div class="input-group relative">
+                <label
+                class="block text-blackesh-100 font-semibold text-left text-infont-inter md:text-font16 mb-3"
+                for="name"
+              >
+              {{ 'customer.addresses.zip' | t }}
+              </label>
+                <input type="text" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code" placeholder="" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52" required>
+            </div>
+        </div>
+
+        <div class="md:w-1/2  mb-8">
+            <div class="input-group relative">
+                <label
+                class="block text-blackesh-100 font-semibold text-left text-infont-inter md:text-font16 mb-3"
+                for="name"
+              >
+              {{ 'customer.addresses.phone' | t }}
+              </label>
+                <input type="text" name="address[phone]" value="{{ form.phone }}" autocomplete="phone" placeholder="" class="custome_input text-font14 lg:text-font15 appearance-none w-full py-2 px-5 xl:px-6 bg-gray-250 border border-gray-1000 focus:shadow-none focus:outline-none h-45 xl:h-52">
+            </div>
+        </div>
+    </div>
+    <div class="w-full input-group relative mb-4">
+        {{ form.set_as_default_checkbox }}
+        <label for="address_default_address_new">{{ 'customer.addresses.set_default' | t }}</label>
+    </div>
+
+    <div class="btn_group mt-6 md:mt-12 mb-8 lg:mb-8 w-full btn-row flex flex-wrap group-section">
+        <button type="submit" class="blue-btn  primary-btn">{{ 'customer.addresses.submit' | t }}</button>
+        <button type="reset" data-target="AddressForm" class="primary-btn blue-btn md:mx-auto px-3 sm:px-5 md:ml-10 w-full md:w-auto mt-2 md:mt-0">{{ 'customer.addresses.cancel' | t }}</button>
+    </div>
+{% endform %}
+{%- endif -%}
+
+
+

@@ -1,0 +1,88 @@
+
+{{- 'product-listing.css' | asset_url | stylesheet_tag -}}
+{%- assign href = 'product-banner.css' | asset_url -%}
+{% render 'link', href: href %}
+{%- assign href = 'quick-view.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'quick-view.js' | asset_url }}" defer="defer"></script>
+
+{%- paginate collection.products by section.settings.products_to_show -%}
+<section class="product-listing-sec pt-10 pb-8 sm:pt-14 sm:pb-12 md:py-16 lg:py-20" id="product-grid">
+    <div class="container-custom">        
+        <div class="product-title border-b border-black">
+            <h2 class="pb-2">{{ collection.title }}</h2>
+            <div class="flex items-center justify-between pb-6 md:pb-7">
+                <h5 class="text-font16 text-blackesh-100 font-medium sm:text-font18 md:text-font20 lg:text-font22 font-dmserif">{{ collection.products_count }} Products</h5>
+                <div class="filter_dropdown_box relative">
+                    <button class="filter-button text-font16 font-dmserif text-blackesh-100 font-medium sm:text-font18 md:text-font20 lg:text-font22 flex items-center">
+                        Sort by
+                        <svg class="ml-2" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6.59405 6.7482L11.7537 1.46785C12.0821 1.13196 12.0821 0.58754 11.7537 0.251815C11.4256 -0.0839379 10.8935 -0.0839379 10.5654 0.251815L5.99998 4.92395L1.43458 0.251815C1.10632 -0.0839379 0.574238 -0.0839379 0.24617 0.251815C-0.0820567 0.587568 -0.0820567 1.13213 0.24617 1.46801L5.40591 6.74836C5.57004 6.91616 5.78492 7 5.99998 7C6.21497 7 6.43 6.91599 6.59405 6.7482Z" fill="#333333"/>
+                        </svg>
+                    </button>
+                    <!-- sort by button on click add "show_filter" <div class="filter_dropdown_row show_filter"> -->
+                    {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                    <div class="filter_dropdown_row">
+                        <div class="filter_dropdown">
+                            {%- for option in collection.sort_options -%}
+                            <div class="filter-item">
+                                <input type="radio" id="sortby-{{option.name | handleize}}" name="sortby-{{section.id}}"{% if option.value == sort_by %} checked{% endif %}>
+                                <label for="sortby-{{option.name | handleize}}"><a href="{{ collection.url | sort_by: option.value }}">{{ option.name }}</a></label>
+                                <div class="check"></div>
+                            </div>
+                            {%- endfor -%}
+                        </div>                                                                 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-listing-row grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[30px]">
+            {%- for product in collection.products-%}
+            {%- assign image_lazy_off = false -%}
+            {%- if forloop.index < 5 -%}
+            {%- assign image_lazy_off = true -%}
+            {%- endif -%}
+            {% include 'product-card', product: product, image_lazy_off: image_lazy_off %}            
+            {%- endfor -%}
+        </div>
+    </div>
+    {% render 'pagination', paginate: paginate, anchor: '#product-grid' %}
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "Listing",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products per page",
+      "min": 1,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    }
+  ],    
+  "blocks": [
+      {
+          "name": "Quick-view USP",
+          "type": "usp",
+          "settings": [
+              {
+                  "type": "image_picker",
+                  "id": "icon",
+                  "label": "Icon"
+              },
+              {
+                  "type": "text",
+                  "id": "text",
+                  "label": "Text"
+              }
+          ]
+      }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,24 @@
+.promo-sec.image_text_section p {
+  font-size: 16px;
+  line-height: 24px
+}
+@media (min-width: 768px) {
+  .promo-sec.image_text_section .flex-row .text-black-box {
+    padding-right: 1.25rem
+  }
+}
+@media (min-width: 1024px) {
+  .promo-sec.image_text_section .flex-row .text-black-box {
+    padding-right: 0px
+  }
+}
+@media (min-width: 1280px) {
+  .promo-sec.image_text_section .flex-row .text-black-box {
+    padding-right: 50px
+  }
+}
+@media (min-width: 1536px) {
+  .promo-sec.image_text_section .flex-row .text-black-box {
+    padding-right: 70px
+  }
+}

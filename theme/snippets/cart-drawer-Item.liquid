@@ -1,0 +1,132 @@
+<cart-drawer-item class="mini-product-item flex items-start border-b border-gray-1000 py-4 sm:py-6">
+    <a href="{{item.url}}" class="mini-product-img  w-[67px] h-[67px] sm:w-24 sm:h-24 mr-4 sm:mr-6">
+        {%- if template == 'cart' -%}
+        <img class="lazyload w-full h-full object-cover" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+         data-src="{{ item.image | img_url: width: 180 }}" alt="{{ item.image.alt | escape }}">
+        {%- else -%}
+        <img class="lazyload w-full h-full object-cover" 
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-src="{{ item.image | img_url: width: 180 }}" alt="{{ item.image.alt | escape }}">
+        {%- endif -%}
+    </a>    
+    <div class="mini-content-part flex-1">
+        <div class="mini-top-title flex items-start justify-between relative">
+            <div class="flex flex-wrap">
+                <h4 class="text-font15 md:text-font16 lg:text-fon17 xl:text-font18 text-blackesh-100 font-normal pr-[23px]">
+                    {{ item.product.title }}                    
+                </h4>
+                {%- if item.variant.inventory_quantity < 0 and item.variant.available -%}
+                {%- elsif item.variant.inventory_quantity < 11 -%}                    
+                    <div class="px-[10px] bg-puce-700 h-[23px] rounded-full text-font11 font-medium text-puce-400 hidden md:flex justify-center items-center font-inter">
+                        {{item.variant.inventory_quantity}} Item in stock                    
+                    </div>
+                {%- endif -%}
+                {% include 'item-subscription' %}                     
+                <div class="hidden md:block pt-[14px] w-full">
+                    <p class="text-font14">
+                        {{ item.product.description | strip_html | truncatewords: 20 }}
+                    </p>
+                </div>   
+            </div>
+            <a href="{{ item.url_to_remove }}" id="Remove-{{ item.index | plus: 1 }}" data-index="{{ item.index | plus: 1 }}" class="delete-icon cart-item-remove flex items-center justify-center rounded-full w-7 h-7 sm:w-11 sm:h-11 bg-puce-700 p-2 mt-[4px] md:mt-[20px] max-h-[33px]">
+                <svg class="w-2.5 sm:w-4" width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.5 1.99219H10.5V1.49414C10.5 0.670272 9.8271 0 9 0H6C5.1729 0 4.5 0.670272 4.5 1.49414V1.99219H1.5C0.6729 1.99219 0 2.66246 0 3.48633V4.48242C0 4.75748 0.223867 4.98047 0.5 4.98047H1.03943L1.919 15.6368L1.91937 15.6411C1.9901 16.4158 2.63233 17 3.4132 17H11.5868C12.3677 17 13.0099 16.4158 13.0806 15.6411L13.081 15.6368L13.9606 4.98047H14.5C14.7761 4.98047 15 4.75748 15 4.48242V3.48633C15 2.66246 14.3271 1.99219 13.5 1.99219ZM5.5 1.49414C5.5 1.21952 5.7243 0.996094 6 0.996094H9C9.2757 0.996094 9.5 1.21952 9.5 1.49414V1.99219H5.5V1.49414ZM12.0846 15.5526C12.0603 15.81 11.8465 16.0039 11.5868 16.0039H3.4132C3.15347 16.0039 2.93973 15.81 2.9154 15.5526L2.0428 4.98047H12.9572L12.0846 15.5526ZM14 3.98438H1V3.48633C1 3.21171 1.2243 2.98828 1.5 2.98828H13.5C13.7757 2.98828 14 3.21171 14 3.48633V3.98438Z" fill="#CA8685"/>
+                    <path d="M7.5 5.97656C7.22387 5.97656 7 6.19955 7 6.47461V13.5137C7 13.7887 7.22387 14.0117 7.5 14.0117C7.77613 14.0117 8 13.7887 8 13.5137V6.47461C8 6.19955 7.77613 5.97656 7.5 5.97656Z" fill="#CA8685"/>
+                    <path d="M10.5 5.97656C10.2239 5.97656 10 6.19955 10 6.47461V13.5137C10 13.7887 10.2239 14.0117 10.5 14.0117C10.7761 14.0117 11 13.7887 11 13.5137V6.47461C11 6.19955 10.7761 5.97656 10.5 5.97656Z" fill="#CA8685"/>
+                    <path d="M4.5 5.97656C4.22387 5.97656 4 6.19955 4 6.47461V13.5137C4 13.7887 4.22387 14.0117 4.5 14.0117C4.77613 14.0117 5 13.7887 5 13.5137V6.47461C5 6.19955 4.77613 5.97656 4.5 5.97656Z" fill="#CA8685"/>
+                </svg>
+            </a>                                   
+        </div>
+        <div class="flex justify-between items-center sm:pt-2 flex-wrap sm:flex-nowrap">
+            <div class="quantity-cart-btn order-1">
+                <quantity-input class="quantity">
+                    <button name="minus" type="button">
+                        <span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+                        <svg width="16" height="1" viewBox="0 0 16 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 1H0V0H16V1Z" fill="#4B3B4C"/>
+                        </svg>                            
+                    </button>
+                    <input type="number"
+                        name="updates[]"
+                        data-index="{{ item.index | plus: 1 }}"
+                        id="Quantity-{{ item.index | plus: 1 }}"
+                        aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                        min="0"
+                        {% if item.quantity < 10 %}
+                        value="0{{ item.quantity }}"
+                        {%- else -%}
+                        value="{{ item.quantity }}"
+                        {% endif %}
+                    >
+                    <button name="plus" type="button">
+                        <span class="sr-only">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.625 8.625V16H7.375V8.625H0V7.375H7.375V0H8.625V7.375H16V8.625H8.625Z" fill="#4B3B4C"/>
+                        </svg>                            
+                    </button>
+                </quantity-input>
+            </div>
+            {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != nil -%}
+                <dl class="flex items-center order-3 w-full sm:w-auto justify-end gap-[8px] sm:order-2">
+                    {%- if item.product.has_only_default_variant == false -%}
+                    {%- for option in item.options_with_values -%}
+                        <div class="flex product-option gap-[2px]">
+                            <dt class="font-semibold text-font10 sm:text-font14">{{ option.name }}: </dt>
+                            <dd class="ml-1 font-medium text-font10 sm:text-font14">{{ option.value }}</dd>
+                        </div>
+                    {%- endfor -%}
+                    {%- endif -%}
+
+                    {%- for property in item.properties -%}
+                    {%- assign property_first_char = property.first | slice: 0 -%}
+                    {%- if property.last != blank and property_first_char != '_' -%}
+                        <div class="flex product-option">
+                        <dt class="font-semibold text-font12 sm:text-font14">{{ property.first }}: </dt>
+                        <dd class="ml-1 font-medium text-font12 sm:text-font14">
+                            {%- if property.last contains '/uploads/' -%}
+                            <a href="{{ property.last }}" class="link" target="_blank">
+                                {{ property.last | split: '/' | last }}
+                            </a>
+                            {%- else -%}
+                            {{ property.last }}
+                            {%- endif -%}
+                        </dd>
+                        </div>
+                    {%- endif -%}
+                    {%- endfor -%}
+                </dl>
+                {%- if item.selling_plan_allocation != blank -%}
+                <div class="flex product-option w-full sm:w-auto sm:order-2">
+                    <dt class="font-semibold text-font12 sm:text-font14">Delivery:</dt>
+                    <dd class="ml-1 font-medium text-font12 sm:text-font14">{{ item.selling_plan_allocation.selling_plan.name }}</dd>
+                </div>
+                {%- endif -%}
+            {%- endif -%}            
+            <div class="min-price text-font14 font-semibold sm:text-font16 text-blackesh-100 order-2 sm:order-3">
+                {%- if item.original_line_price != item.line_price -%}
+                    <div class="cart-item__discounted-prices">
+                      <span class="sr-only">
+                        {{ 'products.product.price.regular_price' | t }}
+                      </span>
+                      <s class="cart-item__old-price product-option text-gray-600 line-through">
+                        {{- item.original_line_price | money -}}
+                      </s>
+                      <span class="sr-only">
+                        {{ 'products.product.price.sale_price' | t }}
+                      </span>
+                      <strong class="cart-item__final-price product-option">
+                        {{ item.line_price | money }}
+                      </strong>
+                    </div>
+                    {%- if item.message != blank -%}
+                      <p class="text-font14 text-pink-100 font-bold">{{ item.message }}</p>
+                    {%- endif -%}
+                  {%- else -%}
+                    <div class="product-option">
+                      {{ item.original_line_price | money }}
+                    </div>
+                  {%- endif -%}
+            </div>
+        </div>
+    </div>
+</cart-drawer-item>

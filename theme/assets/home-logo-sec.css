@@ -1,0 +1,57 @@
+.home-logo-sec .logoSwiper .home-logo {
+  min-height: 67px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-logo-sec .logoSwiper .home-logo img {
+  min-width: 133px;
+}
+
+.home-title-sec .title-caption {
+  max-width: 836px;
+  line-height: 1.5 !important;
+  margin-left: -1.25rem;
+  margin-right: -1.25rem;
+}
+
+@media (min-width: 640px) {
+  .home-title-sec .title-caption {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-title-sec .title-caption {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media (min-width: 1536px) {
+  .home-title-sec .title-caption {
+    max-width: 976px;
+  }
+}
+.home-title-sec .title-caption span {
+  display: inline-block;
+  font-style: italic;
+  line-height: 1 !important;
+  position: relative;
+  font-weight: 700;
+}
+.home-title-sec .title-caption span::after {
+  background: linear-gradient(90deg, #FDA7E4 17.27%, #F93EB5 100%);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: "";
+  height: 3px;
+  display: block;
+  position: absolute;
+}
+@media (min-width: 1280px) {
+  .home-title-sec .title-caption span::after {
+    bottom: 2px;
+  }
+}

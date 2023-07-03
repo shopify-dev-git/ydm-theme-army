@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "bb5ba3e5-f8bf-460d-a0b1-766ee51178d4": {
+      "type": "collection-inner-banner",
+      "settings": {
+        "image_position": "flex-row",
+        "main_title": "",
+        "content_description": "",
+        "align_text": "center",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 5,
+        "enable_filtering": true,
+        "enable_sorting": true,
+        "padding_top": 88,
+        "padding_bottom": 92
+      }
+    },
+    "promo-sec": {
+      "type": "promo-section",
+      "settings": {
+        "url-image1": "shopify:\/\/shop_images\/impressed-surprised-kawaii-asian-girl-orange-hoodie-touching-cheek-awe-smiling-pointing-left-something-amazing-cool-promo-awesome-discount-offer-stand-white-background_1.png",
+        "main-title": "Buy One, Get One 15% Off",
+        "content_description_part": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisi dui, pulvinar non convallis vel, commodo ut velit. Nunc nisi diam, elementum nec metus id<\/p>",
+        "btn__link": "shopify:\/\/collections",
+        "btn_text": "BROWSE PRODUCTS",
+        "button_color_scheme": "primary-btn",
+        "color_scheme": "custom",
+        "section_text_color_scheme": "#847486",
+        "section_heading_color_scheme": "#4b3b4c",
+        "section_background_color_scheme": "#fff3ee"
+      }
+    }
+  },
+  "order": [
+    "bb5ba3e5-f8bf-460d-a0b1-766ee51178d4",
+    "product-grid",
+    "promo-sec"
+  ]
+}

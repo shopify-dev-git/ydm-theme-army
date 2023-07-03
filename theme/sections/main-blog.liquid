@@ -1,0 +1,226 @@
+{{ 'blog-details.css' | asset_url | stylesheet_tag }}
+
+<style>
+  :root .section-{{section.id}}.color-custom {
+    --theme-color:{{ section.settings.section_text_color_scheme }};
+    --theme-heading:{{ section.settings.section_heading_color_scheme }};
+    --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+    --theme-link-color:{{ section.settings.section_links_color_scheme }};
+    --theme-background:{{ section.settings.section_background_color_scheme }};
+  }
+  .section-{{section.id}}.color-custom .blog-date {
+    color:var(--theme-link-color) !important;
+  }
+</style>
+
+<section class="blog-sec py-7 sm:py-9 md:py-12 lg:py-14 xl:py-16 2xl:py-20 4xl:pb-28 section-{{section.id}} color-{{ section.settings.color_scheme }}">
+    <div class="container">
+        <div class="text-center pb-7 sm:pb-8 md:pb-10 xl:pb-12 2xl:pb-16 4xl:pb-20">
+            <h2>{{ blog.title }}</h2>
+        </div>
+        <div class="blog-first-list pb-7 sm:pb-9 md:pb-10 lg:pb-12 xl:pb-14 2xl:pb-16 mb-7 sm:mb-9 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-16">
+          {%- for article in blog.articles -%}
+          {% for tag in article.tags %}
+          {% if tag contains 'featured-' %}
+          {% assign f_article = articles[article.handle] %}
+          {% break %}
+          {% endif %}
+          {% endfor %}
+          {%- endfor -%}
+          {% if f_article %}
+            <div class="blog-first-row flex flex-col lg:flex-row bg-gray-100  overflow-hidden">
+                <div class="blog-first-img lg:w-1/2 xl:w-1/">
+                    {% if f_article.image %}
+                    <img class="lazyload object-cover w-full h-full lazyload" 
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    data-src="{{ f_article.image | img_url: '723x' }}" alt="{{ f_article.image.alt }}"> 
+                    {% endif %}
+                </div>
+                <div class="blog-first-content p-4 sm:p-7 md:p-8 xl:p-14 2xl:p-16 4xl:p-20 lg:flex lg:items-center lg:w-1/2 pr-5">
+                    <div class="text-{{ section.settings.align_text }}">
+                        <div class="blog-date text-font14 pb-[20px] font-semibold lg:text-fon16;">
+                          {{ f_article.published_at |date: "%B %d, %y" }}
+                        </div>
+                        <h4 class="pb-4 sm:pb-6 md:pb-7 lg:pb-8">{{ f_article.title }}</h4>
+                        {%- if f_article.excerpt != blank -%}
+                        <p class="text-font14 md:text-font15 xl:text-font16 mb-[28px] 2xl:mb-[40px]">{{ f_article.excerpt }}</p>
+                        {%- else -%}
+                          <p class="text-font14 md:text-font15 xl:text-font16 mb-[28px] 2xl:mb-[40px]" style="word-break: break-all;">{{ f_article.content | strip_html | truncatewords: 5 }}
+                          </p>
+                        {%- endif -%}
+                        {% if section.settings.readmore != blank %}
+                        <div class="w-full mt-auto">
+                          <div class="inline-block">
+                              <a href="{{ f_article.url }}" class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}">
+                                  {{ section.settings.readmore }}                                
+                              </a>
+                          </div>
+                        </div>
+                        {% endif %}
+                    </div>                    
+                </div>
+            </div> 
+            {% endif %}
+        </div>
+       
+        {%- paginate blog.articles by 2 -%}
+        <div class="blog-listing grid grid-cols-1 md:grid-cols-2 gap-[45px] md:gap-[30px]">
+          {%- for article in blog.articles -%}
+          {% if article.handle != f_article.handle %}
+            <div class="blog-col">
+                <a href="{{ article.url }}" class="blog-card-box">
+                    <div class="blog-img">
+                        {% if article.image %}
+                        <img class="lazyload object-cover lazyload" 
+                        src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                        data-src="{{ article.image | img_url: '550x' }}" alt="{{ article.image.alt }}"> 
+                        {% endif %}
+                    </div>
+                    <div class="blog-list-content text-{{ section.settings.align_text }}">                     
+                        <div class="blog-date">
+                          {{ article.published_at |date: "%B %d, %y" }}
+                        </div>
+                        <h4>{{ article.title }}</h4>
+                        {%- if article.excerpt != blank -%}
+                          <p>{{ article.excerpt  }}</p>
+                          {%- else -%}
+                          <p>{{ article.content | truncatewords: 1 }}</p>
+                        {%- endif -%}
+                        <div class="w-full mt-auto">
+                          {% if section.settings.readmore != blank %}
+                            <div class="inline-block">
+                                <button  class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}">
+                                  {{ section.settings.readmore }}
+                                </button>
+                            </div>
+                          {%- endif -%}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            {%- endfor -%}
+        </div>
+        {%- if paginate.pages > 1 -%}
+          <div class="blog-pagination">
+            {% include 'pagination' %}
+          </div>
+        {%- endif -%}
+        {%- endpaginate -%}
+    </div>
+</section>
+{% schema %}
+  {
+      "name": "Blog Page",
+      "settings": [
+        {
+          "type": "text",
+          "id": "readmore",
+          "label": "Read more button text",
+          "default": "READ MORE"
+        },
+        {
+          "type": "select",
+          "id": "align_text",
+          "label": "Text alignment",
+          "default": "center",
+          "options": [
+              {
+                  "value": "left",
+                  "label": "Left"
+              },
+              {
+                  "value": "center",
+                  "label": "Centered"
+              },
+              {
+                  "value": "right",
+                  "label": "Right"
+              }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "label":"Color scheme",
+          "default": "default",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "scheme-1",
+              "label": "scheme 1"
+            },
+            {
+              "value": "scheme-2",
+              "label": "scheme 2"
+            },
+            {
+              "value": "custom",
+              "label": "custom (Set below)"
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "section_text_color_scheme",
+          "default": "#2536CD",
+          "label": "Custom Text Color"
+        },        
+        {
+          "type": "color",
+          "id": "section_heading_color_scheme",
+          "default": "#2092FB",
+          "label": "Custom Heading Color"
+        },
+        {
+          "type": "color",
+          "id": "section_sub_heading_color_scheme",
+          "default": "#CA8685",
+          "label": "Sub Heading Color"
+        },
+        {
+          "type": "color",
+          "id": "section_links_color_scheme",
+          "default": "#2092FB",
+          "label": "Custom Link Color"
+        },        
+        {
+          "type": "color",
+          "id": "section_background_color_scheme",
+          "default": "#E8E9F2",
+          "label": "Custom Background Color"
+        },
+        {
+          "type": "header",
+          "content": "Button style"
+        },
+        {
+          "type": "select",
+          "id": "button_color_scheme",
+          "label":"Button Style",
+          "default": "primary-btn",
+          "options": [
+            {
+              "value": "primary-btn",
+              "label": "Primary Button"
+            },
+            {
+              "value": "secondary-btn",
+              "label": "Secondary Button"
+            },
+            {
+              "value": "link-btn",
+              "label": "Link"
+            }
+          ]
+        }
+      ]
+  }
+{% endschema %}
+
+
+
+

@@ -1,0 +1,206 @@
+{{ 'blog-details.css' | asset_url | stylesheet_tag }}
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+      --theme-color:{{ section.settings.section_text_color_scheme }};
+      --theme-heading:{{ section.settings.section_heading_color_scheme }};
+      --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+      --theme-link-color:{{ section.settings.section_links_color_scheme }};
+      --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+    .blog-date {
+      color:var(--theme-link-color) !important;
+    }
+</style>
+<section class="related-blogs bg-gray-100 py-8 sm:py-10 md:py-[50px] xl:py-[80px] section-{{section.id}} color-{{ section.settings.color_scheme }}">
+    <div class="container">
+        <div class="text-center pb-4 sm:pb-6 md:pb-8 lg:pb-9 xl:pb-12 2xl:pb-14">
+            <h2>{{ section.settings.title }}</h2>
+            {% if section.settings.title_btn != blank %}
+                <div class="inline-block">
+                    <a {% if section.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.btn_title_url }}"{% endif %}  class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}">
+                      {{section.settings.title_btn}}
+                    </a>
+                </div>
+              {%- endif -%}
+        </div>
+        <div class="blog-listing grid grid-cols-1 md:grid-cols-2 gap-[45px] md:gap-[30px]">
+            {% assign count = 0 %}
+            {% assign current_handle = article.handle %}
+            {%- for article in blog.articles -%}
+            {%- if article.handle != current_handle -%}
+            {% assign count = count | plus: 1 %}
+            <div class="blog-col">
+                <a href="{{ article.url }}" class="blog-card-box">
+                    {% if article.image %}  
+                    <div class="blog-img">
+                        <img class="lazyload object-cover lazyload" data-src="{{ article.image | img_url: '800x' }}" alt="{{ article.image.alt }}"> 
+                    </div>
+                    {% endif %}
+                    <div class="blog-list-content text-{{ section.settings.align_text }}">
+                        <div class="blog-date">
+                            {{ article.published_at |date: "%B %d, %y" }}
+                        </div>
+                        <h4>{{ article.title }}</h4>
+                        {%- if article.excerpt != blank -%}
+                          <p>{{ article.excerpt  }}</p>
+                          {%- else -%}
+                          <p>{{ article.content | truncatewords: 1 }}</p>
+                        {%- endif -%}
+                        <div class="w-full mt-auto">
+                            {% if section.settings.btn != blank %}
+                              <div class="inline-block">
+                                  <button  class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}">
+                                    {{section.settings.btn}}
+                                  </button>
+                              </div>
+                            {%- endif -%}
+                        </div>                        
+                    </div>
+                </a>
+            </div>
+            {% if count == 2 %}
+            {% break %}
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% schema %}
+{
+    "name": "Related Articles",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+           "default": "Related Blogs"
+        },
+        {
+            "type": "url",
+            "id": "btn_title_url",
+            "label": "Button Text"           
+        },
+        {
+            "type": "text",
+            "id": "btn_title",
+            "label": "Button Text",
+           "default": "VIEW ALL POSTS"
+        },
+        {
+            "type": "text",
+            "id": "btn",
+            "label": "Button Text",
+           "default": "READ MORE"
+        },
+        {
+            "type": "header",
+            "content": "style"
+        },
+        {
+            "type": "select",
+            "id": "align_text",
+            "label": "Text alignment",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+          },
+          {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+          },        
+          {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Heading Color"
+          },
+          {
+            "type": "color",
+            "id": "section_sub_heading_color_scheme",
+            "default": "#CA8685",
+            "label": "Sub Heading Color"
+          },
+          {
+            "type": "color",
+            "id": "section_links_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Link Color"
+          },        
+          {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+          },
+          {
+            "type": "header",
+            "content": "Button style"
+          },
+          {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "primary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+          }
+    ],
+    "presets": [
+        {
+            "name": "Related Articles"
+        }
+    ]
+}
+{% endschema %}

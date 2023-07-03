@@ -1,0 +1,38 @@
+{%- if template == 'customers/reset_password' -%}
+    {% include 'customers-reset' %}
+    {%- elsif template == 'customers/activate_account' -%}
+    {% include 'customer-activate' %}
+{% else %}
+{%- comment -%}
+used in login and register templates
+{%- endcomment -%}
+{% include 'customer-login' %}
+{%- endif -%}
+<style>
+    div#rc_login {
+    display: none !important;
+}
+</style>
+
+
+{% schema %}
+{
+    "name": "Image Upload",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Background Images"
+        },
+        {
+            "type": "image_picker",
+            "id": "login_image",
+            "label": "Login Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "register_image",
+            "label": "Register Image"
+        }
+    ]
+}
+{% endschema %}

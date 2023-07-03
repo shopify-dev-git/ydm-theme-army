@@ -1,0 +1,195 @@
+
+
+<style>
+    :root .section-{{section.id}}.color-custom {
+        --theme-color:{{ section.settings.section_text_color_scheme }};
+        --theme-heading:{{ section.settings.section_heading_color_scheme }};
+        --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+        --theme-link-color:{{ section.settings.section_links_color_scheme }};
+        --theme-background:{{ section.settings.section_background_color_scheme }};
+    }
+  </style>
+
+
+<section class="our-story section-{{section.id}} color-{{ section.settings.color_scheme }}">
+    <div class="container-custom container-p-0">
+        <div class="our-story-row flex flex-col lg:flex-row items-center justify-start">
+            <div class="our-story-left lg:w-1/2">
+                {%- if section.settings.our_story_img != blank -%}                           
+                    <img class="lazyload w-full h-full object-cover" 
+                    src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                    data-src="{{ section.settings.our_story_img | img_url:'1000x' }}" alt="{{ section.settings.our_story_img.alt }}">   
+                {%- endif -%}
+            </div>
+            <div class="our-story-right lg:w-1/2 text-{{ section.settings.align_text_mobile }} lg:text-{{ section.settings.align_text }} px-5 py-[50px] md:px-10 max-w-[500px] mx-auto lg:max-w-[740px]">
+                <div class="text-font16 tracking-2 font-medium pb-6 md:pb-9 lg:pb-10 2xl:pb-12 uppercase">{{ section.settings.text }}</div>
+                <h2 class="pb-6 md:pb-9 lg:pb-10 2xl:pb-12 font-medium italic font-inter text-font23 md:text-font30 lg:text-font34 xl:text-font37 2xl:text-font42 4xl:text-font45" style="line-height:1.33">{{ section.settings.title }}</h2>
+                {%- if section.settings.button_label != blank -%}
+                    <div class="inline-block">
+                        <a {% if section.settings.button_link == blank %} role="link" aria-disabled="true"{% else %} href="{{ section.settings.button_link }}"{% endif %} class="{{ section.settings.button_color_scheme }} {{ settings.button_text_scheme }} {{ settings.button_corner_scheme }} {{ settings.button_border_width_scheme }}" {{ section.shopify_attributes }}>
+                            {{ section.settings.button_label | escape }}
+                        </a>
+                    </div>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% schema %}
+{
+    "name": "Home Our Story",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "our_story_img",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "“Beautiful skin is healthy skin, and when you are healthy, you are beautiful.”"
+        },
+        {
+            "type": "text",
+            "id": "text",
+            "label": "Text",
+            "default":"DR. Alexandra"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button URL"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button Label"
+        },              
+        {
+            "type": "header",
+            "content": "Style"
+        },
+        {
+            "type": "select",
+            "id": "align_text",
+            "label": "Text alignment Desktop",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "align_text_mobile",
+            "label": "Text Alignment Mobile",
+            "default": "center",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "center",
+                    "label": "Centered"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "label":"Color scheme",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "scheme-1",
+                "label": "scheme 1"
+              },
+              {
+                "value": "scheme-2",
+                "label": "scheme 2"
+              },
+              {
+                "value": "custom",
+                "label": "custom (Set below)"
+              }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "section_text_color_scheme",
+            "default": "#2536CD",
+            "label": "Custom Text Color"
+        },
+        {
+            "type": "color",
+            "id": "section_heading_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Heading Color"
+        },
+        {
+            "type": "color",
+            "id": "section_links_color_scheme",
+            "default": "#2092FB",
+            "label": "Custom Link Color"
+        },        
+        {
+            "type": "color",
+            "id": "section_background_color_scheme",
+            "default": "#E8E9F2",
+            "label": "Custom Background Color"
+        },
+        {
+            "type": "header",
+            "content": "Button style"
+        },
+        {
+            "type": "select",
+            "id": "button_color_scheme",
+            "label":"Button Style",
+            "default": "primary-btn",
+            "options": [
+              {
+                "value": "primary-btn",
+                "label": "Primary Button"
+              },
+              {
+                "value": "secondary-btn",
+                "label": "Secondary Button"
+              },
+              {
+                "value": "link-btn",
+                "label": "Link"
+              }
+            ]
+        }
+    ],   
+    "presets": [
+        {
+            "name": "Home Our Story"
+        }
+    ]
+}
+{% endschema %}

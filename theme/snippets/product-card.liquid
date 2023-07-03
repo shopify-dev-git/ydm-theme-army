@@ -1,0 +1,414 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<style>
+  :root .section-{{section.id}}.color-custom {
+    --theme-color:{{ section.settings.section_text_color_scheme }};
+    --theme-heading:{{ section.settings.section_heading_color_scheme }};
+    --theme-sub-heading:{{ section.settings.section_sub_heading_color_scheme }};
+    --theme-link-color:{{ section.settings.section_links_color_scheme }};
+    --theme-background:{{ section.settings.section_background_color_scheme }};
+  }
+</style>
+
+<div class="product-card{% unless current_variant.available %} sold-out-card{% endunless %} section-{{ section.id }}  cart-main-list">
+  <product-form class="product-content-box block w-full" data-type="">
+    {%- assign id = 'product-card' | append: product.id -%}
+    {% form 'product', product, id: id, class: 'w-full h-full flex flex-col relative', data-product-form: '', data-product-handle: product.handle %}
+  
+  <div class="relative">
+    <a href="{{product.url | within: collection }}" class="product-img-sec block">
+      <div class="product-head flex items-center justify-between absolute">
+        <div class="rating-sec border border-blackesh-100 bg-white flex items-center justify-center font-inter font-medium text-font13 rounded-full pt-[5px] pb-[4px] md:pt-[8px] md:pb-[7px] pr-[15px] pl-[15px]">
+          {%- if product.tags contains 'Best Seller' -%}
+          <span class="font-inter font-medium text-font10 md:text-font13 border-blackesh-100">
+            Best Seller
+          </span>
+          {%- endif -%}
+          {%- if settings.show_rating  -%}
+            <span class="h-[10px] md:h-[19px] w-[0.9px] block bg-blackesh-100 mx-[6px] md:mx-[10px]">
+            </span>
+            <svg class="w-[10px] h-[10px]" width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.8209 4.02057L7.56233 3.52208L6.10179 0.406426C5.9927 0.173769 5.61155 0.173769 5.50246 0.406426L4.04236 3.52208L0.78384 4.02057C0.516199 4.0617 0.409318 4.38769 0.597021 4.58009L2.96428 7.01016L2.40471 10.4456C2.3601 10.7185 2.65115 10.9233 2.89185 10.7893L5.80234 9.17838L8.71284 10.7897C8.95133 10.9224 9.24503 10.7216 9.19998 10.446L8.64041 7.0106L11.0077 4.58053C11.1954 4.38769 11.0881 4.0617 10.8209 4.02057Z" fill="#FFB800"/>
+            </svg>
+            <span class="font-inter font-medium text-font10 md:text-font13 border-blackesh-100">4.9</span> 
+          {%- endif -%}            
+        </div>
+        {%- comment -%}
+          {%- if product.metafields.loox.avg_rating != blank -%}
+          {%- endif -%}
+        {%- endcomment -%}
+        {%- if product.tags contains 'selling fast' -%}
+          <span class="selling-btn">
+            <svg
+              width="13"
+              height="16"
+              viewBox="0 0 13 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path d="M2.60717 14.5541C1.81464 13.7196 1.02214 12.8517 0.517791 11.8169C0.0134725 10.7153 -0.130633 9.44684 0.121543 8.24512C0.373719 7.04341 0.950074 5.90844 1.77864 4.9404C1.7066 5.77494 2.03081 6.64283 2.6432 7.27708C2.28296 5.67479 2.85934 3.93897 4.01209 2.6705C5.16483 1.40203 6.74989 0.567467 8.40695 0C7.57842 0.801145 7.47035 2.06961 7.79456 3.13783C8.11877 4.20601 8.80323 5.14069 9.41562 6.10873C10.028 7.07677 10.6044 8.0782 10.6404 9.17977C10.9646 8.6123 11.3249 8.04481 11.541 7.41059C11.7572 6.77634 11.8652 6.10873 11.6851 5.47448C12.3336 6.20887 12.6938 6.94323 12.8739 7.87791C13.054 8.81259 13.018 9.78063 12.91 10.7153C12.7658 11.7501 12.4777 12.8183 11.8653 13.6862C11.1448 14.721 9.99204 15.4554 8.73123 15.856C6.49771 16.2232 4.30026 15.9227 2.60717 14.5541Z" fill="#FFD15C" />
+              <path d="M5.34497 15.7892C8.29888 16.8574 11.2168 13.6195 9.59573 11.1159C9.59573 11.0825 9.55969 11.0825 9.55969 11.0491C9.7038 12.4177 9.34355 13.4192 8.65909 13.9867C9.01934 13.1855 8.76716 12.2508 8.33488 11.4497C7.9026 10.6819 7.29021 9.98095 6.82189 9.24655C6.35357 8.4788 5.99336 7.61087 6.2095 6.74298C5.34494 7.34383 4.73255 8.24512 4.48037 9.21316C4.22819 10.1812 4.3723 11.2494 4.84062 12.1507C4.30026 11.7835 3.90402 11.1827 3.86798 10.5484C3.29159 11.1827 2.93138 12.0172 2.96738 12.8517C2.96742 14.1536 4.08412 15.3219 5.34497 15.7892Z" fill="#F37121" />
+            </svg>
+            Selling fast
+          </span>
+        {%- endif -%}
+      </div>
+      
+      <div class="product-img text-center relative flex justify-center">
+        {%- if image_lazy_off == true -%}
+          <img class="w-full lazyload h-full object-cover" src="{{ product | image_url: width: 350, format: 'png' }}"srcset="{{ product | image_url: width: 350, format: 'png' }} 1x, {{ product | image_url: width: 650, format: 'png' }} 2x"alt="{{ product.title }} image">
+        {%- else -%}
+          <img
+            class="lazyload w-full h-full object-cover"
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-srcset="{{ product | image_url: width: 350, format: 'png' }} 1x, {{ product | image_url: width: 650, format: 'png' }} 2x"
+            alt="{{ product.title }} image">
+        {%- endif -%}
+      </div>
+      {%- assign product_image_hover = product.featured_image -%}
+      {%- if product.images[1] != blank -%}
+        {%- assign product_image_hover = product.images[1] -%}
+      {%- endif -%}
+      <div class="absolute left-0 right-0 top-0 bottom-0 product-bg-img">
+        
+        {%- if settings.show_secondary_image  -%}                
+          {%- assign product_image_hover = product.featured_image -%}
+          {%- if product.images[1] != blank -%}
+          {%- assign product_image_hover = product.images[1] -%}
+          {%- endif -%}          
+          <img class="lazyload product-bg-img absolute left-0 right-0 top-0 bottom-0 w-full h-full object-cover" 
+              src="{{product_image_hover | image_url: width: 20, format: 'png' }}" 
+              data-srcset="{{product_image_hover | image_url: width: 350, format: 'png' }} 1x, {{ product_image_hover | image_url: width: 650, format: 'png' }} 2x" 
+              alt="{{product_image_hover.alt }}">
+          {%- endif -%}                            
+        <button
+        type="submit"
+        class="primary-btn uppercase sharp standard mb-1 cart-btn btn_full_width mt-auto absolute p-[20px] max-w-[282px] mx-auto left-0 right-0 bottom-[45px] z-20 hidden lg:flex"
+        x-data
+        @click="$store.cartopen = !$store.cartopen"
+        {% unless current_variant.available %}
+        disabled="disabled"
+        {% endunless %}>
+        {%- if current_variant.available -%}
+          <div class="flex">
+          <span class="">{{ 'products.product.add_to_cart' | t }} </span>
+            <svg class="" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.7072 7.28071L14.7071 0.280712C14.5185 0.0985542 14.2659 -0.00224062 14.0037 3.78025e-05C13.7415 0.00231622 13.4907 0.107485 13.3053 0.292894C13.1199 0.478302 13.0147 0.729114 13.0125 0.991311C13.0102 1.25351 13.111 1.50611 13.2931 1.69471L18.5862 6.98771H1.00001C0.734791 6.98771 0.480434 7.09307 0.292896 7.28061C0.105358 7.46814 0 7.7225 0 7.98771C0 8.25293 0.105358 8.50728 0.292896 8.69482C0.480434 8.88236 0.734791 8.98771 1.00001 8.98771H18.5862L13.2931 14.2807C13.1976 14.373 13.1214 14.4833 13.069 14.6053C13.0166 14.7273 12.989 14.8585 12.9879 14.9913C12.9867 15.1241 13.012 15.2558 13.0623 15.3787C13.1126 15.5016 13.1868 15.6132 13.2807 15.7071C13.3746 15.801 13.4863 15.8753 13.6092 15.9255C13.7321 15.9758 13.8638 16.0011 13.9965 16C14.1293 15.9988 14.2605 15.9712 14.3825 15.9188C14.5045 15.8664 14.6149 15.7902 14.7071 15.6947L21.7072 8.69471C21.8947 8.50718 22 8.25288 22 7.98771C22 7.72255 21.8947 7.46824 21.7072 7.28071Z" fill="white"></path>
+            </svg>
+          </div>
+        {%- else -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- endif -%}
+        </button>
+      
+      </div>
+    </a>
+    <button
+      type="button"
+      class="lg:hidden primary-btn mobile-cart-btn uppercase sharp standard mb-1 cart-btn btn_full_width mt-auto absolute p-[20px] max-w-[282px] mx-auto left-0 right-0 bottom-[45px] z-20">
+        <div class="flex">
+          <svg class="mobile_icon" width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9319 4.76605C10.8949 4.12213 10.399 3.61999 9.79993 3.61999C8.1474 3.61999 3.59369 3.61999 1.94116 3.61999C1.34212 3.61999 0.846167 4.12213 0.809213 4.76605C0.69576 6.71737 0.361233 12.4833 0.241945 14.5436C0.222496 14.8802 0.332708 15.2105 0.547297 15.4564C0.761887 15.7022 1.06076 15.8419 1.37389 15.8419H10.3672C10.6803 15.8419 10.9792 15.7022 11.1938 15.4564C11.4084 15.2105 11.5186 14.8802 11.4991 14.5436L10.9319 4.76605ZM9.96136 4.831L10.5286 14.6085C10.5312 14.6567 10.5157 14.7042 10.4852 14.7391C10.4547 14.774 10.4119 14.7943 10.3672 14.7943H1.37389C1.32916 14.7943 1.28637 14.774 1.2559 14.7391C1.22543 14.7042 1.20987 14.6567 1.21246 14.6085L1.77973 4.831C1.78492 4.73952 1.85558 4.66758 1.94116 4.66758H9.79993C9.88551 4.66758 9.95617 4.73952 9.96136 4.831Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.95316 4.66758H8.78793L8.80867 4.66549C8.90203 4.65291 9.27416 4.57609 9.27416 4.14379C9.27416 2.3119 7.89521 0.826416 6.1947 0.826416C5.97946 0.826416 5.76163 0.826416 5.54639 0.826416C3.84588 0.826416 2.46693 2.3119 2.46693 4.14379C2.46693 4.28277 2.51815 4.41616 2.60956 4.51393C2.70032 4.61241 2.82415 4.66758 2.95316 4.66758ZM8.24529 3.61999H3.4958C3.71492 2.61919 4.54994 1.87401 5.54639 1.87401H6.1947C7.19115 1.87401 8.02617 2.61919 8.24529 3.61999Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M5.38431 7.63575V11.8261C5.38431 12.1153 5.60215 12.3499 5.87054 12.3499C6.13894 12.3499 6.35677 12.1153 6.35677 11.8261V7.63575C6.35677 7.34662 6.13894 7.11196 5.87054 7.11196C5.60215 7.11196 5.38431 7.34662 5.38431 7.63575Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.92562 10.2547H7.81546C8.08386 10.2547 8.30169 10.0201 8.30169 9.73093C8.30169 9.4418 8.08386 9.20714 7.81546 9.20714H3.92562C3.65723 9.20714 3.43939 9.4418 3.43939 9.73093C3.43939 10.0201 3.65723 10.2547 3.92562 10.2547Z" fill="white"/>
+          </svg>
+        </div>
+    </button>
+  </div>
+
+      <div class="pb-[4px] md:pb-[9px] mt-3 md:mt-6 xl:mt-8 lg:px-2">
+        <a class="font-inter text-blackesh-100 font-semibold text-font12 md:text-font18 lg:text-font20 block" href="{{product.url | within: collection }}">{{ product.title }}</a>
+      </div>
+      {%- if product.metafields.descriptors.subtitle != blank -%}
+        <p class="">{{ product.metafields.descriptors.subtitle }}</p>
+      {%- endif -%}
+
+      <p class="font-inter lg:px-2 text-blackesh-200 font-normal text-font15 overflow-hidden text-ellipsis whitespace-nowrap hidden md:block ">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <div class="price-plp lg:px-2 text-font11 sm:text-font15 md:text-font16 text-blackesh-100 pb-2 font-dmserif font-semibold mt-0 sm:pb-3 flex justify-center items-center">
+        {% render 'price', product: product %} 
+        <span class="text-font11 sm:text-font15 lg:text-font16 text-blackesh-100 bg-blackesh-100 w-[1px] md:w-[1.5px]
+        h-[15px] md:h-[22px] mx-[6px] md:mx-[10px]">
+
+        </span>  
+        <span class="font-inter text-font11 sm:text-font15 md:text-font16 2xl:text-font18 text-blackesh-100 font-semibold">200ML</span>
+      </div>
+      <input
+        type="hidden"
+        name="id"
+        value="{{current_variant.id}}">
+
+      {%- unless product.has_only_default_variant -%}
+        <div class="pdp-variant product-block mt-auto hidden lg:grid grid-cols-2 lg:gap-x-4  opacity-0 invisible absolute left-0 right-0 bg-white z-[999px] bottom-[-14%] xl:bottom-[-17%]" {{ block.shopify_attributes }}>
+          {%- for option in product.options_with_values -%}
+            {% assign option___name = option.name | downcase | handleize | append: '-' | append: forloop.index %}
+            {%- assign downcase_name = option.name | downcase -%}
+            {%- capture variant_color_option -%}
+              <color-option class="color-variant pdp-variant-item">
+                <label class="pb-2 block" for="">{{ option.name }}:
+                  <span class="selected">{{ option.selected_value }}</span>
+                </label>
+                <div class="select-color">
+                  {%- for value in option.values -%}
+                    {%- assign bg_color = 'black' -%}
+                    {% comment %} {%- if product.metafields.custom.variants_option_color_pdp != blank -%}
+                      {%- for option_color_pdp in product.metafields.custom.variants_option_color_pdp.value -%}
+                      {%- assign color = option_color_pdp | split: ':' -%}
+                      {%- if color.size == 2 and color.first == value -%}
+                      {%- assign bg_color = color.last -%}                     
+                      {%- endif -%}                                                        
+                      {%- endfor -%}                                                    
+                    {%- endif -%} {% endcomment %}
+
+                    {%- for option_color_pdp in product.metafields.custom.testinfo.value -%}
+                      {%- assign color = option_color_pdp | split: ':' -%}
+                      {{ color }}
+                    {%- endfor -%}
+
+                    <input
+                      class="changeable-option "
+                      data-option-index="Option--{{ option.position }}-{{option.name | handleize }} {{value | handleize }}"
+                      type="radio"
+                      name="options[{{ option.name | escape }}]"
+                      id="Option{{ option.position }}-{{option.name}}{{value}}-{{section.id}}"
+                      value="{{ value | escape }}"
+                      {% if option.selected_value == value %}
+                      checked="checked"
+                      {% endif %}>
+                    <label
+                      class="color-item cursor-pointer Option--{{ option.position }}-{{option.name | handleize }} {{value | handleize }}"
+                      style="background:{{value | handleize }};"
+                      for="Option{{ option.position }}-{{option.name}}{{value}}-{{section.id}}">
+                      <span class="sr-only">
+                        {{- value -}}
+                      </span>
+                    </label>
+                  {%- endfor -%}
+                </div>
+              </color-option>
+              {{ variant_color_option }}
+            {%- endcapture -%}
+            {%- capture variant_select_box_option -%}
+              <div class="size-select-box pdp-variant-item">
+                <div class="flex justify-between">
+                  <label class="pb-1 font-inter font-normal text-font14" for="Option{{ option.position }}{{section.id}}">{{ option.name }}:</label>
+                </div>
+                {% if option.values.size == 1 %}
+                  <label>{{ option.values[0] }}</label>
+                {% else %}
+                  <select
+                    class="{{option___name}} default--options "
+                    id="Option{{ option.position }}{{section.id}}"
+                    name="options[{{ option.name | escape }}]">
+                    {%- for value in option.values -%}
+                      <option
+                        data-target-select="{{option___name}}"
+                        value="{{ value | escape }}"
+                        data-option-index="Option--{{ option.position }}-{{option.name | handleize }}{{value | handleize }}"
+                        {% if option.selected_value == value %}selected="selected"{% endif %}>
+                        {{- value -}}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                {% endif %}
+              </div>
+            {%- endcapture -%}
+            {%- if downcase_name contains 'color' and block.settings.enable_swatch -%}
+              {{ variant_color_option }}
+            {%- else -%}
+              {{ variant_select_box_option }}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endunless -%}
+
+    {% endform %}
+
+
+  </product-form>
+    <!-- Mobile Cart View Popup -->
+    <div class="mobile-cart-popup active h_commom_customScroll lg:hidden">
+      <product-form class="product-content-box block w-full" data-type="">
+        {%- assign id = 'product-card' | append: product.id -%}
+        {% form 'product', product, id: id, class: 'w-full h-full flex flex-col relative', data-product-form: '', data-product-handle: product.handle %}
+      <div class="headding absolute top-0 left-0 right-0 w-full flex items-center justify-between lg:hidden pt-6 pb-3 px-0">
+          <div class="text-font16 text-blackesh-100">
+          </div>
+          <button type="button" class="btn-close-filter btn__close top-3 right-3">
+              <svg class="w-4 h-4" width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.9353 12.5L25.5992 2.24619C26.1336 1.73233 26.1336 0.899219 25.5992 0.385401C25.0648 -0.128467 24.1983 -0.128467 23.664 0.385401L13 10.6392L2.33603 0.385401C1.80161 -0.128467 0.935185 -0.128467 0.400815 0.385401C-0.133554 0.899268 -0.133605 1.73237 0.400815 2.24619L11.0647 12.5L0.400815 22.7538C-0.133605 23.2677 -0.133605 24.1008 0.400815 24.6146C0.935236 25.1285 1.80166 25.1284 2.33603 24.6146L13 14.3608L23.6639 24.6146C24.1983 25.1285 25.0648 25.1284 25.5991 24.6146C26.1335 24.1007 26.1335 23.2676 25.5991 22.7538L14.9353 12.5Z" fill="black"></path>
+              </svg>
+          </button>
+      </div>
+      
+      <div class="product_details_sec w-full pt-[60px]">
+        <div class="w-full mx-auto bg-white flex space-x-5">
+          <div class="shrink-0">
+            {%- if image_lazy_off == true -%}
+              <img class="h-auto lazyload w-[140px] object-cover" src="{{ product | image_url: width: 350, format: 'png' }}"srcset="{{ product | image_url: width: 350, format: 'png' }} 1x, {{ product | image_url: width: 650, format: 'png' }} 2x"alt="{{ product.title }} image">
+            {%- else -%}
+              <img
+                class="lazyload h-auto w-[140px] object-cover"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                data-srcset="{{ product | image_url: width: 350, format: 'png' }} 1x, {{ product | image_url: width: 650, format: 'png' }} 2x"
+                alt="{{ product.title }} image">
+            {%- endif -%}
+          </div>
+  
+          <div class="flex flex-col justify-between py-1 text-left">
+            <div class="">
+              <div class="pb-[4px]">
+                <a class="font-dmserif text-blackesh-100 font-normal text-font18" href="{{ product.url }}">
+                  {{ product.title }}
+                </a>
+              </div>
+              <div class="">
+                {% render 'price', product: product %} 
+              </div>
+            </div>
+  
+            <div class="mt-3">
+              <a href="{{ product.url | within: collection }}" class="font-inter font-semibold text-font14 text-[#CA8685] uppercase tracking-[0.04em] underline hover:text-blackesh-100">
+                VIEW MORE DETAILS
+              </a>
+            </div>
+          </div>
+        </div>
+        <input
+          type="hidden"
+          name="id"
+          value="{{current_variant.id}}">
+          <div class="variable_Sec border-t border-[#C8C6C8] flex flex-row mt-6 pt-4 space-x-4">
+            {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            {% assign option___name = option.name | downcase | handleize | append: '-' | append: forloop.index %}
+            {%- assign downcase_name = option.name | downcase -%}
+            {%- capture variant_option -%}
+          <div class="w-3/6 text-left">
+            <div class="select_sec text-left">
+              <label class="block font-inter font-normal text-font13 text-[#867887] mb-2" for="Option{{ option.position }}{{section.id}}">{{ option.name }}</label>
+  
+              <div class="relative border border-[#867887] w-full">
+                {% if option.values.size == 1 %}
+                  <span>{{ option.values[0] }}</span>
+                {% else %}
+                  <select
+                    class="{{option___name}} h-[42px] block w-full border-none py-1 focus:border-none focus:outline-none focus:ring-none font-inter font-medium text-font13 text-blackesh-100 focus:shadow-none focus:border-0 focus:ring-0 pl-[10px] pb-[6px] pt-[7px] pr-[26px] appearance-none relative z-10 bg-transparent"
+                    id="Option{{ option.position }}{{section.id}}"
+                    name="options[{{ option.name | escape }}]">
+                    {%- for value in option.values -%}
+                      <option
+                        data-target-select="{{option___name}}"
+                        value="{{ value | escape }}"
+                        data-option-index="Option--{{ option.position }}-{{option.name | handleize }}{{value | handleize }}"
+                        {% if option.selected_value == value %}selected="selected"{% endif %}>
+                        {{- value -}}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                {% endif %}
+  
+                  <svg class="absolute right-[10px] -translate-y-2/4 top-2/4 -z-10 mt-[2px]" width="13" height="7" viewBox="0 0 13 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11.1387 0.425257L6.09433 5.31124L1.04996 0.424669C0.80946 0.191777 0.420419 0.191777 0.179919 0.424669C-0.0599731 0.657561 -0.0599731 1.03488 0.179919 1.26778L5.65903 6.57533C5.89893 6.80822 6.28857 6.80822 6.52847 6.57533L12.0076 1.26782C12.2475 1.03493 12.2475 0.657022 12.0076 0.42413C11.7683 0.192365 11.3786 0.192365 11.1387 0.425257Z" fill="#4B3B4C"></path>
+                  </svg>
+              </div>
+                  
+          </div>
+          </div>
+          {%- endcapture -%}
+            {{ variant_option }}
+        {%- endfor -%}
+      {%- endunless -%}
+          <div class="w-3/6 text-left">
+            <label class="block font-inter font-normal text-font13 md:text-font14 text-[#867887] mb-2 text-left">
+              Qty:
+            </label>
+            <div class="quantity-cart-btn border border-[#867887] w-full">
+              <quantity-input class="quantity w-full min-w-full flex justify-center items-center">
+                  <button name="minus" type="button">
+                      <span class="sr-only">{{ 'products.product.quantity.decrease' | t: product: item.product.title | escape }}</span>
+                      <svg width="14" height="1" viewBox="0 0 14 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M14 1H0V9.96275e-09H14V1Z" fill="#4F4F4F"/>
+                      </svg>
+                  </button>
+                  <input type="number"
+                    class="font-inter font-medium text-font14 text-blackesh-100 border-0 border-transparent focus:border-0 focus:shadow-none focus:ring-0 ring-0 ring-transparent"
+                      name="quantity"
+                      aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                      min="1"
+                      value="01"
+                  >
+                  <button name="plus" type="button">
+                      <span class="sr-only">{{ 'products.product.quantity.increase' | t: product: item.product.title | escape }}</span>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7.54688 7.54688V14H6.45312V7.54688H0V6.45312H6.45312V0H7.54688V6.45312H14V7.54688H7.54688Z" fill="#4F4F4F"/>
+                      </svg>
+                  </button>
+              </quantity-input>
+          </div>
+          </div>
+        </div>
+        <div class="progress_sec mt-6">
+          <div class="text-left">
+            <div class="font-inter font-medium text-font16 text-blackesh-100 mb-1 text-left">Availibility</div>
+            {% assign qty = current_variant.inventory_quantity | plus: 0 %}
+            {% assign min_value = 10 | plus: 0 %}
+            {% if qty > 10 %}
+              {% assign progess = '100' %}
+              {% else %}
+              {% assign progess = qty | times: 100 %}
+              {% assign progess = progess | divided_by: min_value %}
+            {% endif %}
+            {% assign hide_threshold = false %}
+            {% if qty <= 0 and current_variant.available %}
+              {% assign hide_threshold = true %}
+              {% assign progess = '100' %}
+            {% endif %}
+            <p class="font-inter font-normal text-font14 text-[#CA8685] availablity{% if hide_threshold %} hidden {% endif %} {% if qty > 10 %} hidden{% endif %}">
+            Only {{qty}} left. Order soon!
+          </p>
+          </div>
+          <div class="w-full progress-bg-box mt-3 h-1 bg-[#E9E9E9]">
+            <div class="progress-bg-box-inr bg-[#CA8685] h-1" style="width: {{progess}}%"></div>
+          </div>
+        </div>
+        <div class="save__sec mt-7">
+          <button
+            type="submit"
+            class="no-js-hidden primary-btn uppercase sharp standard mb-1 cart-btn btn_full_width p-[20px] max-w-full mx-auto z-20 w-full min-w-full"
+            x-data
+            @click="$store.cartopen = !$store.cartopen"
+            {% unless current_variant.available %}
+            disabled="disabled"
+            {% endunless %}>
+            {%- if current_variant.available -%}
+              <div class="flex">
+               <span class="">{{ 'products.product.add_to_cart' | t }} </span>
+               <svg class="" width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21.7072 7.28071L14.7071 0.280712C14.5185 0.0985542 14.2659 -0.00224062 14.0037 3.78025e-05C13.7415 0.00231622 13.4907 0.107485 13.3053 0.292894C13.1199 0.478302 13.0147 0.729114 13.0125 0.991311C13.0102 1.25351 13.111 1.50611 13.2931 1.69471L18.5862 6.98771H1.00001C0.734791 6.98771 0.480434 7.09307 0.292896 7.28061C0.105358 7.46814 0 7.7225 0 7.98771C0 8.25293 0.105358 8.50728 0.292896 8.69482C0.480434 8.88236 0.734791 8.98771 1.00001 8.98771H18.5862L13.2931 14.2807C13.1976 14.373 13.1214 14.4833 13.069 14.6053C13.0166 14.7273 12.989 14.8585 12.9879 14.9913C12.9867 15.1241 13.012 15.2558 13.0623 15.3787C13.1126 15.5016 13.1868 15.6132 13.2807 15.7071C13.3746 15.801 13.4863 15.8753 13.6092 15.9255C13.7321 15.9758 13.8638 16.0011 13.9965 16C14.1293 15.9988 14.2605 15.9712 14.3825 15.9188C14.5045 15.8664 14.6149 15.7902 14.7071 15.6947L21.7072 8.69471C21.8947 8.50718 22 8.25288 22 7.98771C22 7.72255 21.8947 7.46824 21.7072 7.28071Z" fill="white"></path>
+              </svg>
+              </div>
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+            </button>
+        </div>
+      </div>
+    {% endform %}
+  </product-form>
+    </div>
+     <!-- Mobile Cart View Popup End -->
+</div>
+
+<script>
+  document.querySelectorAll('.mobile-cart-btn').forEach(el=>el.addEventListener('click', function(event) {
+  event.preventDefault();
+  let target = event.currentTarget;
+  target.closest('.product-card').querySelector('.mobile-cart-popup').classList.add('show')
+  document.body.classList.add('open_cart_filter')
+}));
+  document.querySelectorAll('.btn__close').forEach(el=>el.addEventListener('click', function(event) {
+  event.preventDefault();
+  document.querySelectorAll('.mobile-cart-popup').forEach(el=>el.classList.remove('show'))
+  document.body.classList.remove('open_cart_filter')
+}));
+</script>

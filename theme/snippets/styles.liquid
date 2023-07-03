@@ -1,0 +1,72 @@
+{% render 'link', href: 'https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css' %}
+{%- assign href = 'theme.css' | asset_url -%}
+{% render 'link', href: href %}
+
+{%- assign href = 'custom.css' | asset_url -%}
+{% render 'link', href: href %}
+
+<style>
+    {% comment %} Header  {% endcomment %}
+    :root {
+        --theme-color:{{ settings.theme_text_color }};
+        --theme-heading:{{ settings.theme_heading_color }};
+        --theme-sub-heading:{{ settings.theme_sub_heading_color }};
+        --theme-link-color:{{ settings.theme_links_color }};
+        --theme-background:{{ settings.theme_background_color }};
+    }
+    :root .color-scheme-1 {
+        --theme-color:{{ settings.theme_text_color_scheme1 }};
+        --theme-heading:{{ settings.theme_heading_color_scheme1 }};
+        --theme-sub-heading:{{ settings.theme_sub_heading_color_scheme1 }};
+        --theme-link-color:{{ settings.theme_links_color_scheme1 }};
+        --theme-background:{{ settings.theme_background_color_scheme1 }};
+    }
+    :root .color-scheme-2 {
+        --theme-color:{{ settings.theme_text_color_scheme2 }};
+        --theme-heading:{{ settings.theme_heading_color_scheme2 }};
+        --theme-sub-heading:{{ settings.theme_sub_heading_color_scheme2 }};
+        --theme-link-color:{{ settings.theme_links_color_scheme2 }};
+        --theme-background:{{ settings.theme_background_color_scheme2 }};
+    }   
+    .color-custom, .color-scheme-2, .color-scheme-1, .color-default  {
+        background:var(--theme-background) !important;
+    }
+    :root .primary-btn {
+        --theme-button-color:{{ settings.theme_primary_button_text }};
+        --theme-button-background:{{ settings.theme_primary_button_background }};
+        --theme-button-border:{{ settings.theme_primary_button_border_color }};
+    }
+    :root .secondary-btn{
+        --theme-button-color:{{ settings.theme_secondary_button_text }};
+        --theme-button-background:{{ settings.theme_secondary_button_background }};
+        --theme-button-border:{{ settings.theme_secondary_button_border_color }};
+    }   
+</style>
+
+
+{%- if settings.button_text_scheme == 'uppercase' -%}
+    {%- assign text_uppercase = 'uppercase' -%}
+{%- elsif settings.button_text_scheme == 'normal' -%}
+    {%- assign text_uppercase = 'lowercase' -%}       
+
+{%- elsif settings.button_corner_scheme == 'sharp' -%}
+    {%- assign border_round = 'sharp' -%}  
+{%- elsif settings.button_corner_scheme == 'slightly-roundded' -%}
+    {%- assign border_round = 'slightly-roundded' -%}  
+{%- elsif settings.button_corner_scheme == 'roundded' -%}
+    {%- assign border_round = 'roundded-full' -%} 
+    
+    
+{%- elsif settings.button_corner_scheme == 'thick' -%}
+    {%- assign border_width = 'thick' -%}  
+{%- elsif settings.button_corner_scheme == 'standard' -%}
+    {%- assign border_width = 'standard' -%}  
+{%- endif -%}    
+
+
+<style>
+    .lazyload {
+      opacity: 0 !important;
+    }
+    .cb_bundles{display:none !important;}
+</style>

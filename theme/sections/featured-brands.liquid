@@ -1,0 +1,121 @@
+<!-- {{ 'home-logo-sec.css' | asset_url | stylesheet_tag }} -->
+
+{%- assign logos = section.blocks | where: 'type', 'logo' -%}
+
+{%- for block in logos -%}
+    {%- capture desktop -%}
+    {{ desktop }}
+    <div class="home-logo">
+        <img class="lazyload" 
+            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            data-src="{{ block.settings.image | img_url:'170x' }}"
+            alt="{{ block.settings.image.alt }}">
+    </div>
+    {%- endcapture -%}
+    {%- capture mobile -%}
+    {{ mobile }}
+    <div class="swiper-slide home-logo">
+        <img class="lazyload"
+        src="{{ block.settings.image | image_url }}"        
+        alt="{{ block.settings.image.alt }}">
+    </div>
+    {%- endcapture -%}
+{%- endfor -%}
+
+<section class="home-logo-sec px-[30px] lg:px-0  lg:py-10 xl:py-[53px]">
+    <div class="max-w-[450px] lg:w-auto bg-gray-900 md:bg-white mx-auto py-[60px] md:max-w-[1000px]">
+        <div class="container">
+            <!-- Dresktop logo -->
+                <div class="hidden md:flex home-logo-row  items-center justify-center gap-7 lg:gap-10 xl:gap-14 2xl:gap-20">
+                    <div class="logo-title uppercase whitespace-nowrap font-semibold text-font18">
+                        {{ section.settings.title }}
+                    </div>
+                    {{ desktop }}
+                </div>
+            <!-- Dresktop logo -->
+
+            <!-- Mobile logo sec -->
+            <div class="home-logo-row md:hidden">
+                <div class="logo-title uppercase text-center font-semibold text-font15 pb-[40px]">
+                    {{ section.settings.title }}
+                </div>
+                <div class="swiper logoSwiper overflow-hidden">
+                    <div class="swiper-wrapper">
+                        {{ mobile }}
+                    </div>
+                    <div class="swiper-pagination pt-9"></div>
+                </div>
+            </div>
+            <!-- Mobile logo sec -->
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    function docReady(fn){
+      if (document.readyState === "complete" || document.readyState === "interactive"){
+        setTimeout(fn, 1);
+      } else {
+        document.addEventListener("DOMContentLoaded", fn);
+      }
+    }
+    docReady(function(){
+        var swiper = new Swiper(".logoSwiper", {
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                },
+                450: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 5,
+                },
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+    })
+</script>
+
+{% schema %}
+{
+    "name": "Featured Brands",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "As seen on"
+        }       
+    ],
+    "blocks": [
+        {
+            "name": "Logo",
+            "type": "logo",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Featured Brands"
+        }
+    ]
+}
+{% endschema %}
